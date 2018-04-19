@@ -3,6 +3,12 @@
 # MTGCards
 Small application to allow the lookup of Magic cards.
 
+<p align="left">
+    <a href="https://swift.org">
+        <img src="http://img.shields.io/badge/swift-4.1-brightgreen.svg" alt="Swift 4">
+    </a>
+</p>
+
 ## TODO
 * Allow addition of cards to collections and decks
 * Save searches
