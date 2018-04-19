@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE151BBE2069D2E20021CC1E /* CardDatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE151BBD2069D2E20021CC1E /* CardDatabaseHelper.swift */; };
+		EE151BE1206D53F10021CC1E /* B8.png in Resources */ = {isa = PBXBuildFile; fileRef = EE151BE0206D53F10021CC1E /* B8.png */; };
+		EE151BE3206D53FB0021CC1E /* R8.png in Resources */ = {isa = PBXBuildFile; fileRef = EE151BE2206D53FB0021CC1E /* R8.png */; };
+		EE151BE5206D54020021CC1E /* U8.png in Resources */ = {isa = PBXBuildFile; fileRef = EE151BE4206D54020021CC1E /* U8.png */; };
+		EE151BE9206D54140021CC1E /* G8.png in Resources */ = {isa = PBXBuildFile; fileRef = EE151BE8206D54130021CC1E /* G8.png */; };
 		EE1B000A204B2386005B13D7 /* MTGCardsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1B0009204B2386005B13D7 /* MTGCardsUITests.swift */; };
+		EE1B0019204B23AE005B13D7 /* MTGSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1B0018204B23AE005B13D7 /* MTGSet.swift */; };
+		EE1B001B204B2F9A005B13D7 /* temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1B001A204B2F9A005B13D7 /* temp.swift */; };
 		EE1BFFE7204B2386005B13D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1BFFE6204B2386005B13D7 /* AppDelegate.swift */; };
 		EE1BFFE9204B2386005B13D7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1BFFE8204B2386005B13D7 /* ViewController.swift */; };
 		EE1BFFEC204B2386005B13D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE1BFFEA204B2386005B13D7 /* Main.storyboard */; };
@@ -15,6 +22,70 @@
 		EE1BFFF1204B2386005B13D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE1BFFF0204B2386005B13D7 /* Assets.xcassets */; };
 		EE1BFFF4204B2386005B13D7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE1BFFF2204B2386005B13D7 /* LaunchScreen.storyboard */; };
 		EE1BFFFF204B2386005B13D7 /* MTGCardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1BFFFE204B2386005B13D7 /* MTGCardsTests.swift */; };
+		EE51896420746B30009037DF /* TypeFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE51896320746B30009037DF /* TypeFilterTableViewController.swift */; };
+		EE5189662076F61B009037DF /* LegalityFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5189652076F61B009037DF /* LegalityFilterTableViewController.swift */; };
+		EE518968207706E8009037DF /* SuperTypeFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE518967207706E8009037DF /* SuperTypeFilterTableViewController.swift */; };
+		EE51896A207706F8009037DF /* SubTypeFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE518969207706F8009037DF /* SubTypeFilterTableViewController.swift */; };
+		EE82B62E20598CB50096C0E4 /* CDCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE82B62A20598CB50096C0E4 /* CDCard+CoreDataClass.swift */; };
+		EE82B62F20598CB50096C0E4 /* CDCard+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE82B62B20598CB50096C0E4 /* CDCard+CoreDataProperties.swift */; };
+		EE82B63020598CB50096C0E4 /* CDMTGSet+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE82B62C20598CB50096C0E4 /* CDMTGSet+CoreDataClass.swift */; };
+		EE82B63120598CB50096C0E4 /* CDMTGSet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE82B62D20598CB50096C0E4 /* CDMTGSet+CoreDataProperties.swift */; };
+		EE82B637205AF2AD0096C0E4 /* CDMTGSet+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE82B636205AF2AD0096C0E4 /* CDMTGSet+Custom.swift */; };
+		EE82B639205AF5500096C0E4 /* CDCard+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE82B638205AF5500096C0E4 /* CDCard+Custom.swift */; };
+		EE82B63B205AF7120096C0E4 /* CDTranslation+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE82B63A205AF7120096C0E4 /* CDTranslation+Custom.swift */; };
+		EE82B63D205B09360096C0E4 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE82B63C205B09360096C0E4 /* CoreDataManager.swift */; };
+		EEA8BBF1206DCBBC007C5834 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8BBF0206DCBBC007C5834 /* Filters.swift */; };
+		EEA8BBF3206E9AA7007C5834 /* CardRulingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEA8BBF2206E9AA7007C5834 /* CardRulingView.xib */; };
+		EEA8BBF5206E9AE6007C5834 /* CardRulingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8BBF4206E9AE6007C5834 /* CardRulingsView.swift */; };
+		EEA8BBF7206EA9F9007C5834 /* CardLegalityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEA8BBF6206EA9F9007C5834 /* CardLegalityView.xib */; };
+		EEA8BBF9206EAA10007C5834 /* CardLegalityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8BBF8206EAA10007C5834 /* CardLegalityView.swift */; };
+		EEA8BC192073E11B007C5834 /* C.png in Resources */ = {isa = PBXBuildFile; fileRef = EEA8BC182073E11B007C5834 /* C.png */; };
+		EEA8BC1B2073E146007C5834 /* FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8BC1A2073E146007C5834 /* FilterTableViewController.swift */; };
+		EEA8BC1E20743897007C5834 /* CDDeck+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8BC1C20743897007C5834 /* CDDeck+CoreDataClass.swift */; };
+		EEA8BC1F20743897007C5834 /* CDDeck+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8BC1D20743897007C5834 /* CDDeck+CoreDataProperties.swift */; };
+		EEA988422065F33E00BD7328 /* CollectionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA988412065F33E00BD7328 /* CollectionsTableViewController.swift */; };
+		EEA9884420695BB400BD7328 /* CardDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9884320695BB400BD7328 /* CardDetailsViewController.swift */; };
+		EEA988462069C40200BD7328 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA988452069C40200BD7328 /* CardTableViewCell.swift */; };
+		EEAC8758205C9C7D00387C9B /* CDColorIdentity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC8756205C9C7D00387C9B /* CDColorIdentity+CoreDataClass.swift */; };
+		EEAC8759205C9C7D00387C9B /* CDColorIdentity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC8757205C9C7D00387C9B /* CDColorIdentity+CoreDataProperties.swift */; };
+		EEAC87722060138300387C9B /* CDType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC875E2060138300387C9B /* CDType+CoreDataClass.swift */; };
+		EEAC87732060138300387C9B /* CDType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC875F2060138300387C9B /* CDType+CoreDataProperties.swift */; };
+		EEAC87742060138300387C9B /* CDForeignName+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC87602060138300387C9B /* CDForeignName+CoreDataClass.swift */; };
+		EEAC87752060138300387C9B /* CDForeignName+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC87612060138300387C9B /* CDForeignName+CoreDataProperties.swift */; };
+		EEAC87762060138300387C9B /* CDPrinting+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC87622060138300387C9B /* CDPrinting+CoreDataClass.swift */; };
+		EEAC87772060138300387C9B /* CDPrinting+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC87632060138300387C9B /* CDPrinting+CoreDataProperties.swift */; };
+		EEAC87782060138300387C9B /* CDSubType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC87642060138300387C9B /* CDSubType+CoreDataClass.swift */; };
+		EEAC87792060138300387C9B /* CDSubType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC87652060138300387C9B /* CDSubType+CoreDataProperties.swift */; };
+		EEAC877A2060138300387C9B /* CDRuling+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC87662060138300387C9B /* CDRuling+CoreDataClass.swift */; };
+		EEAC877B2060138300387C9B /* CDRuling+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC87672060138300387C9B /* CDRuling+CoreDataProperties.swift */; };
+		EEAC877C2060138300387C9B /* CDLegaility+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC87682060138300387C9B /* CDLegaility+CoreDataClass.swift */; };
+		EEAC877D2060138300387C9B /* CDLegaility+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC87692060138300387C9B /* CDLegaility+CoreDataProperties.swift */; };
+		EEAC877E2060138300387C9B /* CDTranslation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC876A2060138300387C9B /* CDTranslation+CoreDataClass.swift */; };
+		EEAC877F2060138300387C9B /* CDTranslation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC876B2060138300387C9B /* CDTranslation+CoreDataProperties.swift */; };
+		EEAC87802060138300387C9B /* CDName+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC876C2060138300387C9B /* CDName+CoreDataClass.swift */; };
+		EEAC87812060138300387C9B /* CDName+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC876D2060138300387C9B /* CDName+CoreDataProperties.swift */; };
+		EEAC87822060138300387C9B /* CDColor+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC876E2060138300387C9B /* CDColor+CoreDataClass.swift */; };
+		EEAC87832060138300387C9B /* CDColor+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC876F2060138300387C9B /* CDColor+CoreDataProperties.swift */; };
+		EEAC87842060138300387C9B /* CDSuperType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC87702060138300387C9B /* CDSuperType+CoreDataClass.swift */; };
+		EEAC87852060138300387C9B /* CDSuperType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC87712060138300387C9B /* CDSuperType+CoreDataProperties.swift */; };
+		EEAC87872060164100387C9B /* CDColorIdentity+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC87862060164100387C9B /* CDColorIdentity+Custom.swift */; };
+		EEAC87892060177C00387C9B /* CDPrinting+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC87882060177C00387C9B /* CDPrinting+Custom.swift */; };
+		EEAC878B206017E600387C9B /* CDRuling+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC878A206017E600387C9B /* CDRuling+Custom.swift */; };
+		EEAC878E2060189400387C9B /* String+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC878D2060189400387C9B /* String+Custom.swift */; };
+		EEAC879020616B4000387C9B /* CDType+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC878F20616B4000387C9B /* CDType+Custom.swift */; };
+		EEAC879220616BD500387C9B /* CDSubType+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC879120616BD500387C9B /* CDSubType+Custom.swift */; };
+		EEAC879420616C5F00387C9B /* CDSuperType+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC879320616C5F00387C9B /* CDSuperType+Custom.swift */; };
+		EEAC879620616CC800387C9B /* CDName+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC879520616CC700387C9B /* CDName+Custom.swift */; };
+		EEAC879820616D3D00387C9B /* CDLegalities+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC879720616D3D00387C9B /* CDLegalities+Custom.swift */; };
+		EEAC879C2061741D00387C9B /* CardsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC879B2061741D00387C9B /* CardsTableViewController.swift */; };
+		EEAC879E2062C4AB00387C9B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAC879D2062C4AB00387C9B /* FilterViewController.swift */; };
+		EEAE2EAA206D6B7600A0DB9D /* W8.png in Resources */ = {isa = PBXBuildFile; fileRef = EEAE2EA9206D6B7500A0DB9D /* W8.png */; };
+		EECE3AAB20810CFA00318DD3 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECE3AAA20810CFA00318DD3 /* SettingsTableViewController.swift */; };
+		EECE3AAD2084FE7400318DD3 /* SetFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECE3AAC2084FE7400318DD3 /* SetFilterTableViewController.swift */; };
+		EECE3ABA20857A4E00318DD3 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = EECE3AB920857A4E00318DD3 /* 1.png */; };
+		EECE3ABC2085828200318DD3 /* G.png in Resources */ = {isa = PBXBuildFile; fileRef = EECE3ABB2085828200318DD3 /* G.png */; };
+		EECE3ABE208584CD00318DD3 /* G8-Light.png in Resources */ = {isa = PBXBuildFile; fileRef = EECE3ABD208584CD00318DD3 /* G8-Light.png */; };
+		EECE3AC02086D47400318DD3 /* MTGSplash.png in Resources */ = {isa = PBXBuildFile; fileRef = EECE3ABF2086D47400318DD3 /* MTGSplash.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,10 +106,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EE151BBD2069D2E20021CC1E /* CardDatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDatabaseHelper.swift; sourceTree = "<group>"; };
+		EE151BE0206D53F10021CC1E /* B8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = B8.png; sourceTree = "<group>"; };
+		EE151BE2206D53FB0021CC1E /* R8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = R8.png; sourceTree = "<group>"; };
+		EE151BE4206D54020021CC1E /* U8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = U8.png; sourceTree = "<group>"; };
+		EE151BE8206D54130021CC1E /* G8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = G8.png; sourceTree = "<group>"; };
 		EE1B0000204B2386005B13D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE1B0005204B2386005B13D7 /* MTGCardsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTGCardsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE1B0009204B2386005B13D7 /* MTGCardsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTGCardsUITests.swift; sourceTree = "<group>"; };
 		EE1B000B204B2386005B13D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE1B0018204B23AE005B13D7 /* MTGSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTGSet.swift; sourceTree = "<group>"; };
+		EE1B001A204B2F9A005B13D7 /* temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temp.swift; sourceTree = "<group>"; };
 		EE1BFFE3204B2386005B13D7 /* MTGCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTGCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE1BFFE6204B2386005B13D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE1BFFE8204B2386005B13D7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +127,70 @@
 		EE1BFFF5204B2386005B13D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE1BFFFA204B2386005B13D7 /* MTGCardsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTGCardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE1BFFFE204B2386005B13D7 /* MTGCardsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTGCardsTests.swift; sourceTree = "<group>"; };
+		EE51896320746B30009037DF /* TypeFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeFilterTableViewController.swift; sourceTree = "<group>"; };
+		EE5189652076F61B009037DF /* LegalityFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalityFilterTableViewController.swift; sourceTree = "<group>"; };
+		EE518967207706E8009037DF /* SuperTypeFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperTypeFilterTableViewController.swift; sourceTree = "<group>"; };
+		EE518969207706F8009037DF /* SubTypeFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTypeFilterTableViewController.swift; sourceTree = "<group>"; };
+		EE82B62A20598CB50096C0E4 /* CDCard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCard+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EE82B62B20598CB50096C0E4 /* CDCard+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCard+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EE82B62C20598CB50096C0E4 /* CDMTGSet+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMTGSet+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EE82B62D20598CB50096C0E4 /* CDMTGSet+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMTGSet+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EE82B636205AF2AD0096C0E4 /* CDMTGSet+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMTGSet+Custom.swift"; sourceTree = "<group>"; };
+		EE82B638205AF5500096C0E4 /* CDCard+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDCard+Custom.swift"; sourceTree = "<group>"; };
+		EE82B63A205AF7120096C0E4 /* CDTranslation+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTranslation+Custom.swift"; sourceTree = "<group>"; };
+		EE82B63C205B09360096C0E4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		EEA8BBF0206DCBBC007C5834 /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
+		EEA8BBF2206E9AA7007C5834 /* CardRulingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardRulingView.xib; sourceTree = "<group>"; };
+		EEA8BBF4206E9AE6007C5834 /* CardRulingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRulingsView.swift; sourceTree = "<group>"; };
+		EEA8BBF6206EA9F9007C5834 /* CardLegalityView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardLegalityView.xib; sourceTree = "<group>"; };
+		EEA8BBF8206EAA10007C5834 /* CardLegalityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLegalityView.swift; sourceTree = "<group>"; };
+		EEA8BC182073E11B007C5834 /* C.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C.png; sourceTree = "<group>"; };
+		EEA8BC1A2073E146007C5834 /* FilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewController.swift; sourceTree = "<group>"; };
+		EEA8BC1C20743897007C5834 /* CDDeck+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDDeck+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EEA8BC1D20743897007C5834 /* CDDeck+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDDeck+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EEA988412065F33E00BD7328 /* CollectionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsTableViewController.swift; sourceTree = "<group>"; };
+		EEA9884320695BB400BD7328 /* CardDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsViewController.swift; sourceTree = "<group>"; };
+		EEA988452069C40200BD7328 /* CardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
+		EEAC8756205C9C7D00387C9B /* CDColorIdentity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDColorIdentity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EEAC8757205C9C7D00387C9B /* CDColorIdentity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDColorIdentity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EEAC875E2060138300387C9B /* CDType+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDType+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EEAC875F2060138300387C9B /* CDType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDType+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EEAC87602060138300387C9B /* CDForeignName+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDForeignName+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EEAC87612060138300387C9B /* CDForeignName+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDForeignName+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EEAC87622060138300387C9B /* CDPrinting+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDPrinting+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EEAC87632060138300387C9B /* CDPrinting+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDPrinting+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EEAC87642060138300387C9B /* CDSubType+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSubType+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EEAC87652060138300387C9B /* CDSubType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSubType+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EEAC87662060138300387C9B /* CDRuling+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDRuling+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EEAC87672060138300387C9B /* CDRuling+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDRuling+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EEAC87682060138300387C9B /* CDLegaility+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDLegaility+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EEAC87692060138300387C9B /* CDLegaility+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDLegaility+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EEAC876A2060138300387C9B /* CDTranslation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTranslation+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EEAC876B2060138300387C9B /* CDTranslation+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTranslation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EEAC876C2060138300387C9B /* CDName+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDName+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EEAC876D2060138300387C9B /* CDName+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDName+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EEAC876E2060138300387C9B /* CDColor+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDColor+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EEAC876F2060138300387C9B /* CDColor+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDColor+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EEAC87702060138300387C9B /* CDSuperType+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSuperType+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EEAC87712060138300387C9B /* CDSuperType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSuperType+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EEAC87862060164100387C9B /* CDColorIdentity+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDColorIdentity+Custom.swift"; sourceTree = "<group>"; };
+		EEAC87882060177C00387C9B /* CDPrinting+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDPrinting+Custom.swift"; sourceTree = "<group>"; };
+		EEAC878A206017E600387C9B /* CDRuling+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDRuling+Custom.swift"; sourceTree = "<group>"; };
+		EEAC878D2060189400387C9B /* String+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Custom.swift"; sourceTree = "<group>"; };
+		EEAC878F20616B4000387C9B /* CDType+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDType+Custom.swift"; sourceTree = "<group>"; };
+		EEAC879120616BD500387C9B /* CDSubType+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSubType+Custom.swift"; sourceTree = "<group>"; };
+		EEAC879320616C5F00387C9B /* CDSuperType+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSuperType+Custom.swift"; sourceTree = "<group>"; };
+		EEAC879520616CC700387C9B /* CDName+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDName+Custom.swift"; sourceTree = "<group>"; };
+		EEAC879720616D3D00387C9B /* CDLegalities+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDLegalities+Custom.swift"; sourceTree = "<group>"; };
+		EEAC879B2061741D00387C9B /* CardsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsTableViewController.swift; sourceTree = "<group>"; };
+		EEAC879D2062C4AB00387C9B /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		EEAE2EA9206D6B7500A0DB9D /* W8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = W8.png; sourceTree = "<group>"; };
+		EECE3AAA20810CFA00318DD3 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		EECE3AAC2084FE7400318DD3 /* SetFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFilterTableViewController.swift; sourceTree = "<group>"; };
+		EECE3AB920857A4E00318DD3 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		EECE3ABB2085828200318DD3 /* G.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = G.png; sourceTree = "<group>"; };
+		EECE3ABD208584CD00318DD3 /* G8-Light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "G8-Light.png"; sourceTree = "<group>"; };
+		EECE3ABF2086D47400318DD3 /* MTGSplash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTGSplash.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +218,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE151BDF206D53BB0021CC1E /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				EECE3ABD208584CD00318DD3 /* G8-Light.png */,
+				EECE3AAE20856D8800318DD3 /* Mana */,
+				EEA8BC182073E11B007C5834 /* C.png */,
+				EE151BE0206D53F10021CC1E /* B8.png */,
+				EE151BE2206D53FB0021CC1E /* R8.png */,
+				EE151BE4206D54020021CC1E /* U8.png */,
+				EE151BE8206D54130021CC1E /* G8.png */,
+				EECE3ABB2085828200318DD3 /* G.png */,
+				EEAE2EA9206D6B7500A0DB9D /* W8.png */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
 		EE1B0008204B2386005B13D7 /* MTGCardsUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -85,9 +243,61 @@
 			path = MTGCardsUITests;
 			sourceTree = "<group>";
 		};
+		EE1B0017204B2393005B13D7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EEA8BC1C20743897007C5834 /* CDDeck+CoreDataClass.swift */,
+				EEA8BC1D20743897007C5834 /* CDDeck+CoreDataProperties.swift */,
+				EEAC875E2060138300387C9B /* CDType+CoreDataClass.swift */,
+				EEAC875F2060138300387C9B /* CDType+CoreDataProperties.swift */,
+				EEAC87602060138300387C9B /* CDForeignName+CoreDataClass.swift */,
+				EEAC87612060138300387C9B /* CDForeignName+CoreDataProperties.swift */,
+				EEAC87622060138300387C9B /* CDPrinting+CoreDataClass.swift */,
+				EEAC87632060138300387C9B /* CDPrinting+CoreDataProperties.swift */,
+				EEAC87642060138300387C9B /* CDSubType+CoreDataClass.swift */,
+				EEAC87652060138300387C9B /* CDSubType+CoreDataProperties.swift */,
+				EEAC87662060138300387C9B /* CDRuling+CoreDataClass.swift */,
+				EEAC87672060138300387C9B /* CDRuling+CoreDataProperties.swift */,
+				EEAC87682060138300387C9B /* CDLegaility+CoreDataClass.swift */,
+				EEAC87692060138300387C9B /* CDLegaility+CoreDataProperties.swift */,
+				EEAC876A2060138300387C9B /* CDTranslation+CoreDataClass.swift */,
+				EEAC876B2060138300387C9B /* CDTranslation+CoreDataProperties.swift */,
+				EEAC876C2060138300387C9B /* CDName+CoreDataClass.swift */,
+				EEAC876D2060138300387C9B /* CDName+CoreDataProperties.swift */,
+				EEAC876E2060138300387C9B /* CDColor+CoreDataClass.swift */,
+				EEAC876F2060138300387C9B /* CDColor+CoreDataProperties.swift */,
+				EEAC87702060138300387C9B /* CDSuperType+CoreDataClass.swift */,
+				EEAC87712060138300387C9B /* CDSuperType+CoreDataProperties.swift */,
+				EEAC8756205C9C7D00387C9B /* CDColorIdentity+CoreDataClass.swift */,
+				EEAC8757205C9C7D00387C9B /* CDColorIdentity+CoreDataProperties.swift */,
+				EE82B62A20598CB50096C0E4 /* CDCard+CoreDataClass.swift */,
+				EE82B62B20598CB50096C0E4 /* CDCard+CoreDataProperties.swift */,
+				EE82B62C20598CB50096C0E4 /* CDMTGSet+CoreDataClass.swift */,
+				EE82B62D20598CB50096C0E4 /* CDMTGSet+CoreDataProperties.swift */,
+				EE1B0018204B23AE005B13D7 /* MTGSet.swift */,
+				EE1B001A204B2F9A005B13D7 /* temp.swift */,
+				EE82B636205AF2AD0096C0E4 /* CDMTGSet+Custom.swift */,
+				EE82B638205AF5500096C0E4 /* CDCard+Custom.swift */,
+				EE82B63A205AF7120096C0E4 /* CDTranslation+Custom.swift */,
+				EEAC87862060164100387C9B /* CDColorIdentity+Custom.swift */,
+				EEAC87882060177C00387C9B /* CDPrinting+Custom.swift */,
+				EEAC878A206017E600387C9B /* CDRuling+Custom.swift */,
+				EEAC878F20616B4000387C9B /* CDType+Custom.swift */,
+				EEAC879120616BD500387C9B /* CDSubType+Custom.swift */,
+				EEAC879320616C5F00387C9B /* CDSuperType+Custom.swift */,
+				EEAC879520616CC700387C9B /* CDName+Custom.swift */,
+				EEAC879720616D3D00387C9B /* CDLegalities+Custom.swift */,
+				EEA8BBF0206DCBBC007C5834 /* Filters.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		EE1BFFDA204B2386005B13D7 = {
 			isa = PBXGroup;
 			children = (
+				EE151BDF206D53BB0021CC1E /* Icons */,
+				EEAC878C2060188000387C9B /* Utilities */,
+				EE1B0017204B2393005B13D7 /* Model */,
 				EE1BFFE5204B2386005B13D7 /* MTGCards */,
 				EE1BFFFD204B2386005B13D7 /* MTGCardsTests */,
 				EE1B0008204B2386005B13D7 /* MTGCardsUITests */,
@@ -108,6 +318,7 @@
 		EE1BFFE5204B2386005B13D7 /* MTGCards */ = {
 			isa = PBXGroup;
 			children = (
+				EECE3ABF2086D47400318DD3 /* MTGSplash.png */,
 				EE1BFFE6204B2386005B13D7 /* AppDelegate.swift */,
 				EE1BFFE8204B2386005B13D7 /* ViewController.swift */,
 				EE1BFFEA204B2386005B13D7 /* Main.storyboard */,
@@ -115,6 +326,23 @@
 				EE1BFFF2204B2386005B13D7 /* LaunchScreen.storyboard */,
 				EE1BFFF5204B2386005B13D7 /* Info.plist */,
 				EE1BFFED204B2386005B13D7 /* MTGCards.xcdatamodeld */,
+				EEAC879B2061741D00387C9B /* CardsTableViewController.swift */,
+				EEAC879D2062C4AB00387C9B /* FilterViewController.swift */,
+				EEA988412065F33E00BD7328 /* CollectionsTableViewController.swift */,
+				EEA9884320695BB400BD7328 /* CardDetailsViewController.swift */,
+				EEA988452069C40200BD7328 /* CardTableViewCell.swift */,
+				EE151BBD2069D2E20021CC1E /* CardDatabaseHelper.swift */,
+				EEA8BBF2206E9AA7007C5834 /* CardRulingView.xib */,
+				EEA8BBF4206E9AE6007C5834 /* CardRulingsView.swift */,
+				EEA8BBF6206EA9F9007C5834 /* CardLegalityView.xib */,
+				EEA8BBF8206EAA10007C5834 /* CardLegalityView.swift */,
+				EEA8BC1A2073E146007C5834 /* FilterTableViewController.swift */,
+				EE51896320746B30009037DF /* TypeFilterTableViewController.swift */,
+				EE5189652076F61B009037DF /* LegalityFilterTableViewController.swift */,
+				EE518967207706E8009037DF /* SuperTypeFilterTableViewController.swift */,
+				EE518969207706F8009037DF /* SubTypeFilterTableViewController.swift */,
+				EECE3AAA20810CFA00318DD3 /* SettingsTableViewController.swift */,
+				EECE3AAC2084FE7400318DD3 /* SetFilterTableViewController.swift */,
 			);
 			path = MTGCards;
 			sourceTree = "<group>";
@@ -126,6 +354,23 @@
 				EE1B0000204B2386005B13D7 /* Info.plist */,
 			);
 			path = MTGCardsTests;
+			sourceTree = "<group>";
+		};
+		EEAC878C2060188000387C9B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EE82B63C205B09360096C0E4 /* CoreDataManager.swift */,
+				EEAC878D2060189400387C9B /* String+Custom.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		EECE3AAE20856D8800318DD3 /* Mana */ = {
+			isa = PBXGroup;
+			children = (
+				EECE3AB920857A4E00318DD3 /* 1.png */,
+			);
+			path = Mana;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,7 +436,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Robotic Snail Software";
 				TargetAttributes = {
 					EE1B0004204B2386005B13D7 = {
@@ -242,9 +487,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEA8BC192073E11B007C5834 /* C.png in Resources */,
+				EECE3AC02086D47400318DD3 /* MTGSplash.png in Resources */,
+				EE151BE9206D54140021CC1E /* G8.png in Resources */,
+				EE151BE5206D54020021CC1E /* U8.png in Resources */,
+				EE151BE3206D53FB0021CC1E /* R8.png in Resources */,
 				EE1BFFF4204B2386005B13D7 /* LaunchScreen.storyboard in Resources */,
+				EEAE2EAA206D6B7600A0DB9D /* W8.png in Resources */,
+				EEA8BBF3206E9AA7007C5834 /* CardRulingView.xib in Resources */,
 				EE1BFFF1204B2386005B13D7 /* Assets.xcassets in Resources */,
+				EEA8BBF7206EA9F9007C5834 /* CardLegalityView.xib in Resources */,
+				EECE3ABA20857A4E00318DD3 /* 1.png in Resources */,
 				EE1BFFEC204B2386005B13D7 /* Main.storyboard in Resources */,
+				EE151BE1206D53F10021CC1E /* B8.png in Resources */,
+				EECE3ABC2085828200318DD3 /* G.png in Resources */,
+				EECE3ABE208584CD00318DD3 /* G8-Light.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,9 +527,68 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEAC879220616BD500387C9B /* CDSubType+Custom.swift in Sources */,
+				EEA8BC1B2073E146007C5834 /* FilterTableViewController.swift in Sources */,
+				EE5189662076F61B009037DF /* LegalityFilterTableViewController.swift in Sources */,
+				EEAC87772060138300387C9B /* CDPrinting+CoreDataProperties.swift in Sources */,
+				EE82B639205AF5500096C0E4 /* CDCard+Custom.swift in Sources */,
+				EEAC877E2060138300387C9B /* CDTranslation+CoreDataClass.swift in Sources */,
+				EEAC87822060138300387C9B /* CDColor+CoreDataClass.swift in Sources */,
+				EE82B62E20598CB50096C0E4 /* CDCard+CoreDataClass.swift in Sources */,
+				EEAC8758205C9C7D00387C9B /* CDColorIdentity+CoreDataClass.swift in Sources */,
+				EEAC87782060138300387C9B /* CDSubType+CoreDataClass.swift in Sources */,
+				EEAC87832060138300387C9B /* CDColor+CoreDataProperties.swift in Sources */,
+				EEAC87802060138300387C9B /* CDName+CoreDataClass.swift in Sources */,
+				EE151BBE2069D2E20021CC1E /* CardDatabaseHelper.swift in Sources */,
 				EE1BFFE9204B2386005B13D7 /* ViewController.swift in Sources */,
+				EE51896420746B30009037DF /* TypeFilterTableViewController.swift in Sources */,
+				EE82B63D205B09360096C0E4 /* CoreDataManager.swift in Sources */,
+				EEAC879820616D3D00387C9B /* CDLegalities+Custom.swift in Sources */,
+				EEA8BC1E20743897007C5834 /* CDDeck+CoreDataClass.swift in Sources */,
+				EE51896A207706F8009037DF /* SubTypeFilterTableViewController.swift in Sources */,
+				EEA8BBF9206EAA10007C5834 /* CardLegalityView.swift in Sources */,
+				EEAC879620616CC800387C9B /* CDName+Custom.swift in Sources */,
+				EEAC877D2060138300387C9B /* CDLegaility+CoreDataProperties.swift in Sources */,
+				EEAC87752060138300387C9B /* CDForeignName+CoreDataProperties.swift in Sources */,
+				EE518968207706E8009037DF /* SuperTypeFilterTableViewController.swift in Sources */,
+				EECE3AAB20810CFA00318DD3 /* SettingsTableViewController.swift in Sources */,
 				EE1BFFEF204B2386005B13D7 /* MTGCards.xcdatamodeld in Sources */,
 				EE1BFFE7204B2386005B13D7 /* AppDelegate.swift in Sources */,
+				EE1B0019204B23AE005B13D7 /* MTGSet.swift in Sources */,
+				EEAC877F2060138300387C9B /* CDTranslation+CoreDataProperties.swift in Sources */,
+				EEA988462069C40200BD7328 /* CardTableViewCell.swift in Sources */,
+				EEAC87812060138300387C9B /* CDName+CoreDataProperties.swift in Sources */,
+				EEAC878B206017E600387C9B /* CDRuling+Custom.swift in Sources */,
+				EEAC879C2061741D00387C9B /* CardsTableViewController.swift in Sources */,
+				EEA8BBF5206E9AE6007C5834 /* CardRulingsView.swift in Sources */,
+				EEAC8759205C9C7D00387C9B /* CDColorIdentity+CoreDataProperties.swift in Sources */,
+				EE1B001B204B2F9A005B13D7 /* temp.swift in Sources */,
+				EEA8BBF1206DCBBC007C5834 /* Filters.swift in Sources */,
+				EEA9884420695BB400BD7328 /* CardDetailsViewController.swift in Sources */,
+				EEAC87842060138300387C9B /* CDSuperType+CoreDataClass.swift in Sources */,
+				EEAC877A2060138300387C9B /* CDRuling+CoreDataClass.swift in Sources */,
+				EEA8BC1F20743897007C5834 /* CDDeck+CoreDataProperties.swift in Sources */,
+				EEAC87742060138300387C9B /* CDForeignName+CoreDataClass.swift in Sources */,
+				EEAC878E2060189400387C9B /* String+Custom.swift in Sources */,
+				EEAC87892060177C00387C9B /* CDPrinting+Custom.swift in Sources */,
+				EECE3AAD2084FE7400318DD3 /* SetFilterTableViewController.swift in Sources */,
+				EEAC879E2062C4AB00387C9B /* FilterViewController.swift in Sources */,
+				EEAC87852060138300387C9B /* CDSuperType+CoreDataProperties.swift in Sources */,
+				EEAC877C2060138300387C9B /* CDLegaility+CoreDataClass.swift in Sources */,
+				EEAC879420616C5F00387C9B /* CDSuperType+Custom.swift in Sources */,
+				EEAC87792060138300387C9B /* CDSubType+CoreDataProperties.swift in Sources */,
+				EE82B63020598CB50096C0E4 /* CDMTGSet+CoreDataClass.swift in Sources */,
+				EE82B62F20598CB50096C0E4 /* CDCard+CoreDataProperties.swift in Sources */,
+				EEAC87732060138300387C9B /* CDType+CoreDataProperties.swift in Sources */,
+				EEAC87872060164100387C9B /* CDColorIdentity+Custom.swift in Sources */,
+				EEA988422065F33E00BD7328 /* CollectionsTableViewController.swift in Sources */,
+				EE82B63B205AF7120096C0E4 /* CDTranslation+Custom.swift in Sources */,
+				EE82B637205AF2AD0096C0E4 /* CDMTGSet+Custom.swift in Sources */,
+				EEAC877B2060138300387C9B /* CDRuling+CoreDataProperties.swift in Sources */,
+				EEAC87722060138300387C9B /* CDType+CoreDataClass.swift in Sources */,
+				EEAC879020616B4000387C9B /* CDType+Custom.swift in Sources */,
+				EE82B63120598CB50096C0E4 /* CDMTGSet+CoreDataProperties.swift in Sources */,
+				EEAC87762060138300387C9B /* CDPrinting+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +649,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -340,6 +657,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -390,6 +708,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -397,6 +716,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -434,7 +754,7 @@
 				DEVELOPMENT_TEAM = JANZDS5D43;
 				INFOPLIST_FILE = MTGCards/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.MTGCards;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -449,7 +769,7 @@
 				DEVELOPMENT_TEAM = JANZDS5D43;
 				INFOPLIST_FILE = MTGCards/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.MTGCards;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

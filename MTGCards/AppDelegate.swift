@@ -10,13 +10,14 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate  {
 
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
         return true
     }
 
@@ -43,6 +44,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
+    // MARK: - Split view
+
+
 
     // MARK: - Core Data stack
 
@@ -87,6 +91,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    func showAlertGlobally(_ alert: UIAlertController) {
+        let alertWindow = UIWindow(frame: UIScreen.main.bounds)
+        alertWindow.windowLevel = UIWindowLevelAlert
+        alertWindow.rootViewController = UIViewController()
+        alertWindow.makeKeyAndVisible()
+        alertWindow.rootViewController?.present(alert, animated: true, completion: nil)
     }
 
 }
