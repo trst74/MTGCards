@@ -11,11 +11,17 @@ import UIKit
 class CardDetailsViewController: UIViewController {
     @IBOutlet weak var cardImage: UIImageView!
     
+    @IBOutlet weak var cardName: UILabel!
     @IBOutlet weak var colorIdentity: UILabel!
     @IBOutlet weak var manaCost: UILabel!
     @IBOutlet weak var power: UILabel!
     @IBOutlet weak var toughness: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var oracle: UILabel!
+    @IBOutlet weak var flavor: UILabel!
+    @IBOutlet weak var artist: UILabel!
+    @IBOutlet weak var pt: UILabel!
+    @IBOutlet weak var type: UILabel!
     
     @IBOutlet weak var rulingsView: UIView!
     @IBOutlet weak var legalitiesView: UIView!
@@ -34,6 +40,17 @@ class CardDetailsViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = currentCard?.name
+        cardName.text = currentCard?.name
+        manaCost.text = currentCard?.manaCost
+        oracle.text = currentCard?.text
+        flavor.text = currentCard?.flavor
+        artist.text = currentCard?.artist
+        if let p = currentCard?.power, let t = currentCard?.toughness {
+                pt.text = "\(p)/\(t)"
+        } else {
+            pt.text = ""
+        }
+        type.text = currentCard?.type
         update(with: nil, Key: "")
         
         if let imagecode = currentCard?.set?.magicCardsInfoCode {
@@ -46,6 +63,31 @@ class CardDetailsViewController: UIViewController {
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressed))
         cardImage.isUserInteractionEnabled = true
         cardImage.addGestureRecognizer(longPressRecognizer)
+//
+//        if cardImage.image == nil {
+//            detailsView.addConstraint(
+//                NSLayoutConstraint(
+//                    item: rulingsView,
+//                    attribute: .top,
+//                    relatedBy: .equal,
+//                    toItem: artist,
+//                    attribute: .bottom,
+//                    multiplier: 1.0,
+//                    constant: 8
+//            ))
+//        } else {
+//            detailsView.addConstraint(
+//                NSLayoutConstraint(
+//                    item: rulingsView,
+//                    attribute: .top,
+//                    relatedBy: .equal,
+//                    toItem: cardImage,
+//                    attribute: .bottom,
+//                    multiplier: 1.0,
+//                    constant: 8
+//            ))
+//        }
+        
         
         if (currentCard?.rulings?.count)! < 1 {
             heightConstraint.constant = 0
@@ -222,9 +264,7 @@ class CardDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @objc func longPressed(sender: UILongPressGestureRecognizer)  {
-        if sender.state != .ended {
-            return
-        }
+        
         share()
     }
     
@@ -256,6 +296,16 @@ class CardDetailsViewController: UIViewController {
         var image = getImage(Key: imagecode+mci)
         if image != nil {
             cardImage.image = image
+            detailsView.addConstraint(
+                NSLayoutConstraint(
+                    item: rulingsView,
+                    attribute: .top,
+                    relatedBy: .equal,
+                    toItem: cardImage,
+                    attribute: .bottom,
+                    multiplier: 1.0,
+                    constant: 8
+            ))
         } else {
             var imageurl = "https://magiccards.info/scans/en/" + imagecode + "/" + mci + ".jpg"
             print(imageurl)
@@ -263,7 +313,7 @@ class CardDetailsViewController: UIViewController {
                 let scryfallUrl = "https://img.scryfall.com/cards/large/en/\(code)/\(mci).jpg"
                 print(scryfallUrl)
             }
-
+            
             let checkedUrl = URL(string: imageurl)
             cardImage.contentMode = .scaleAspectFit
             downloadImage(url: checkedUrl!, Key: imagecode+mci)
@@ -274,12 +324,16 @@ class CardDetailsViewController: UIViewController {
     func downloadImage(url: URL, Key: String) {
         print("Download Started")
         getDataFromUrl(url: url) { (data, response, error)  in
-            guard let data = data, error == nil else { return }
+            guard let data = data, error == nil else {
+                return
+                
+            }
             print("Download Finished")
             DispatchQueue.main.async() { () -> Void in
                 let image = UIImage(data: data)
                 self.cardImage.bounds.origin = CGPoint.zero
                 self.update(with: image, Key: Key)
+        self.spinner.isHidden = true
             }
         }
     }
@@ -292,11 +346,36 @@ class CardDetailsViewController: UIViewController {
     func update(with image: UIImage?, Key: String) {
         if let imageToDisplay = image {
             spinner.stopAnimating()
+            spinner.isHidden = true
             cardImage.image = imageToDisplay
             saveImage(image: imageToDisplay, Key: Key)
-        } else {
+            detailsView.addConstraint(
+                NSLayoutConstraint(
+                    item: rulingsView,
+                    attribute: .top,
+                    relatedBy: .equal,
+                    toItem: cardImage,
+                    attribute: .bottom,
+                    multiplier: 1.0,
+                    constant: 8
+            ))
+        } else if Key == "" {
             spinner.startAnimating()
             cardImage.image = nil
+        } else {
+            spinner.stopAnimating()
+            spinner.isHidden = true
+            cardImage.isHidden = true
+            detailsView.addConstraint(
+                NSLayoutConstraint(
+                    item: rulingsView,
+                    attribute: .top,
+                    relatedBy: .equal,
+                    toItem: artist,
+                    attribute: .bottom,
+                    multiplier: 1.0,
+                    constant: 8
+            ))
         }
     }
     private func getDocumentsDirectory() -> URL {
