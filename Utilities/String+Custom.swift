@@ -15,7 +15,7 @@ extension String
     {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
-        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         return dateFormatter.date(from: self)! as NSDate
     }
     
@@ -36,6 +36,9 @@ extension UIColor
 extension Array where Iterator.Element == String
 {
     func formattedDescription() -> String {
+        if self.count == 0 {
+            return "All"
+        }
         return self.description.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "").replacingOccurrences(of: "\"", with: "")
     }
 }

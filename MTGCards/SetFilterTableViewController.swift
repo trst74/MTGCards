@@ -75,13 +75,28 @@ class SetFilterTableViewController: UITableViewController {
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        let set = sets[indexPath.row]
-        selectedSets.append(set)
-        filterController?.cardListView?.filters.sets.append(set)
-        filterController?.setLabel.text = filterController?.cardListView?.filters.sets.formattedDescription()
-        filterController?.tableView.reloadData()
-        tableView.deselectRow(at: indexPath, animated: true)
+        
+        
+         let set = sets[indexPath.row]
+        
+        if (filterController?.cardListView?.filters.sets.contains(set))! {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+            if let index = filterController?.cardListView?.filters.sets.index(of: set){
+                filterController?.cardListView?.filters.sets.remove(at: index)
+                   filterController?.setLabel.text = filterController?.cardListView?.filters.sets.formattedDescription()
+            }
+        } else {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+            
+            selectedSets.append(set)
+            filterController?.cardListView?.filters.sets.append(set)
+            filterController?.setLabel.text = filterController?.cardListView?.filters.sets.formattedDescription()
+            filterController?.tableView.reloadData()
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        
+        
+ 
     }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -75,13 +75,24 @@ class SubTypeFilterTableViewController: UITableViewController {
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        
         let type = types[indexPath.row]
-        selectedTypes.append(type)
-        filterController?.cardListView?.filters.subTypes.append(type)
-        filterController?.subtypeLabel.text = filterController?.cardListView?.filters.subTypes.formattedDescription()
-        filterController?.tableView.reloadData()
-        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if (filterController?.cardListView?.filters.subTypes.contains(type))! {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+            if let index = filterController?.cardListView?.filters.subTypes.index(of: type){
+                filterController?.cardListView?.filters.subTypes.remove(at: index)
+                filterController?.supertypeLabel.text = filterController?.cardListView?.filters.subTypes.formattedDescription()
+            }
+        } else {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+            
+            selectedTypes.append(type)
+            filterController?.cardListView?.filters.subTypes.append(type)
+            filterController?.supertypeLabel.text = filterController?.cardListView?.filters.subTypes.formattedDescription()
+            filterController?.tableView.reloadData()
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 
     /*

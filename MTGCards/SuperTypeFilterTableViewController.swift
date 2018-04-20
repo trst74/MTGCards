@@ -75,13 +75,25 @@ class SuperTypeFilterTableViewController: UITableViewController {
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        
         let type = types[indexPath.row]
-        selectedTypes.append(type)
-        filterController?.cardListView?.filters.superTypes.append(type)
-        filterController?.supertypeLabel.text = filterController?.cardListView?.filters.superTypes.formattedDescription()
-        filterController?.tableView.reloadData()
-        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if (filterController?.cardListView?.filters.superTypes.contains(type))! {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+            if let index = filterController?.cardListView?.filters.superTypes.index(of: type){
+                filterController?.cardListView?.filters.superTypes.remove(at: index)
+                filterController?.supertypeLabel.text = filterController?.cardListView?.filters.superTypes.formattedDescription()
+            }
+        } else {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+            
+            selectedTypes.append(type)
+            filterController?.cardListView?.filters.superTypes.append(type)
+            filterController?.supertypeLabel.text = filterController?.cardListView?.filters.superTypes.formattedDescription()
+            filterController?.tableView.reloadData()
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        
     }
 
     /*

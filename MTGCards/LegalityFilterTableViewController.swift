@@ -81,13 +81,27 @@ class LegalityFilterTableViewController: UITableViewController {
      }
  
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        let legality = legalities[indexPath.row]
-        selectedLegalities.append(legality)
-        filterController?.cardListView?.filters.legalities.append(legality)
-        filterController?.legalitiesLabel.text = filterController?.cardListView?.filters.legalities.formattedDescription()
-        filterController?.tableView.reloadData()
-        tableView.deselectRow(at: indexPath, animated: true)
+        
+            let legality = legalities[indexPath.row]
+        
+        if (filterController?.cardListView?.filters.legalities.contains(legality))! {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+            if let index = filterController?.cardListView?.filters.legalities.index(of: legality){
+                filterController?.cardListView?.filters.legalities.remove(at: index)
+                 filterController?.legalitiesLabel.text = filterController?.cardListView?.filters.legalities.formattedDescription()
+            }
+        } else {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+
+            selectedLegalities.append(legality)
+            filterController?.cardListView?.filters.legalities.append(legality)
+            filterController?.legalitiesLabel.text = filterController?.cardListView?.filters.legalities.formattedDescription()
+            filterController?.tableView.reloadData()
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        
+        
+
     }
     /*
      // Override to support conditional editing of the table view.
