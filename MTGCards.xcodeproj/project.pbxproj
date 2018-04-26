@@ -86,6 +86,7 @@
 		EECE3ABC2085828200318DD3 /* G.png in Resources */ = {isa = PBXBuildFile; fileRef = EECE3ABB2085828200318DD3 /* G.png */; };
 		EECE3ABE208584CD00318DD3 /* G8-Light.png in Resources */ = {isa = PBXBuildFile; fileRef = EECE3ABD208584CD00318DD3 /* G8-Light.png */; };
 		EECE3AC02086D47400318DD3 /* MTGSplash.png in Resources */ = {isa = PBXBuildFile; fileRef = EECE3ABF2086D47400318DD3 /* MTGSplash.png */; };
+		EECE3AC2209159F400318DD3 /* ChangeLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECE3AC1209159F400318DD3 /* ChangeLogs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -191,6 +192,7 @@
 		EECE3ABB2085828200318DD3 /* G.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = G.png; sourceTree = "<group>"; };
 		EECE3ABD208584CD00318DD3 /* G8-Light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "G8-Light.png"; sourceTree = "<group>"; };
 		EECE3ABF2086D47400318DD3 /* MTGSplash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTGSplash.png; sourceTree = "<group>"; };
+		EECE3AC1209159F400318DD3 /* ChangeLogs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLogs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +290,7 @@
 				EEAC879520616CC700387C9B /* CDName+Custom.swift */,
 				EEAC879720616D3D00387C9B /* CDLegalities+Custom.swift */,
 				EEA8BBF0206DCBBC007C5834 /* Filters.swift */,
+				EECE3AC1209159F400318DD3 /* ChangeLogs.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 				EEAC87872060164100387C9B /* CDColorIdentity+Custom.swift in Sources */,
 				EEA988422065F33E00BD7328 /* CollectionsTableViewController.swift in Sources */,
 				EE82B63B205AF7120096C0E4 /* CDTranslation+Custom.swift in Sources */,
+				EECE3AC2209159F400318DD3 /* ChangeLogs.swift in Sources */,
 				EE82B637205AF2AD0096C0E4 /* CDMTGSet+Custom.swift in Sources */,
 				EEAC877B2060138300387C9B /* CDRuling+CoreDataProperties.swift in Sources */,
 				EEAC87722060138300387C9B /* CDType+CoreDataClass.swift in Sources */,

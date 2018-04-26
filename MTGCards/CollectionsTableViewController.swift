@@ -31,8 +31,9 @@ class CollectionsTableViewController: UITableViewController {
         isfirstload = !defaults.bool(forKey: "hasopenedbefore" )
         print(isfirstload)
         if isfirstload {
-            
             downloadSets()
+        } else{
+            checkForUpdates()
         }
         
         // Uncomment the following line to preserve selection between presentations
@@ -45,6 +46,66 @@ class CollectionsTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    func checkForUpdates() {
+        if var localVersion = defaults.string(forKey: "localVersion"){
+            localVersion = "3.15.1"
+            print("Local Version: \(localVersion)")
+            let url = URL(string: "https://mtgjson.com/json/version.json")
+            let urlRequest = URLRequest(url: url!)
+            let session = URLSession.shared
+            let task = session.dataTask(with: urlRequest){
+                (data, response, error) -> Void in
+                if let data = data{
+                    do {
+                        if let latest = String(data: data, encoding: .utf8){
+                            let latestClean = latest.replacingOccurrences(of: "\"", with: "")
+                            print("Newest Version: \(latestClean)")
+                            if self.compareVersions(version1: localVersion, version2: latestClean) {
+                                print("There is a newer version")
+                                //update
+                                self.updateSets(localVersion: localVersion)
+                            } else {
+                                print("You have the latest version")
+                                //nothing
+                            }
+                        }
+                    }
+                } else if let error = error {
+                    print("Error: \(error)")
+                }
+            }
+            task.resume()
+            
+        }
+    }
+    func updateSets(localVersion: String) {
+        let url = URL(string: "https://mtgjson.com/json/changelog.json")
+        var setsToUpdate: Set<String> = []
+        var newSets: Set<String> = []
+        var setsToDelete: Set<String> = []
+        let urlRequest = URLRequest(url: url!)
+        let session = URLSession.shared
+        let task = session.dataTask(with: urlRequest){
+            (data, response, error) -> Void in
+            if let data = data{
+                do {
+                    var changeLogs = try ChangeLogs.init(data: data)
+                    
+                    let index: Int = changeLogs.index(where: {$0.version == localVersion})!
+                    var updatesToTake = Array(changeLogs[0..<index].reversed())
+                    print("updates")
+                    
+                } catch let error as NSError {
+                    print("error updating sets: \(error)")
+                }
+                
+            } else if let error = error {
+                print("Error: \(error)")
+                
+            }
+        }
+        task.resume()
     }
     func downloadSets() {
         let alert = UIAlertController(title: "Setup", message: "Would you like to download the Card Database?", preferredStyle: UIAlertControllerStyle.alert)
@@ -79,16 +140,13 @@ class CollectionsTableViewController: UITableViewController {
             if let data = data{
                 do {
                     let JSON = try! JSONSerialization.jsonObject(with: data, options: []) as? [String]
-                    
                     if let json = JSON {
                         SetsToDownload = json
                         print(SetsToDownload.count)
                         var setCount = SetsToDownload.count
                         var setDownloadCount = 0
                         for s in SetsToDownload {
-                            
                             DispatchQueue.main.sync {
-                                
                                 self.getCards(setCode: s)
                                 //self.getCards(setCode: s)
                                 setDownloadCount += 1
@@ -98,6 +156,7 @@ class CollectionsTableViewController: UITableViewController {
                                 alert.message = "\(Int(percent*100))%"
                                 if setDownloadCount == setCount {
                                     alert.dismiss(animated: true, completion: nil)
+                                    self.getLatestVersion()
                                 }
                             }
                         }
@@ -109,6 +168,33 @@ class CollectionsTableViewController: UITableViewController {
         }
         task.resume()
         self.present(alert, animated: true, completion: nil)
+    }
+    func getLatestVersion() -> String {
+        let url = URL(string: "https://mtgjson.com/json/version.json")
+        let latest = ""
+        let urlRequest = URLRequest(url: url!)
+        let session = URLSession.shared
+        let task = session.dataTask(with: urlRequest){
+            (data, response, error) -> Void in
+            if let data = data{
+                do {
+                    if let latest = String(data: data, encoding: .utf8){
+                        let latestClean = latest.replacingOccurrences(of: "\"", with: "")
+                        
+                        self.defaults.set(latestClean, forKey: "localVersion")
+                        
+                    }
+                    
+                }
+                
+            } else if let error = error {
+                print("Error: \(error)")
+                
+            }
+        }
+        task.resume()
+        
+        return latest
     }
     func getCards(setCode: String){
         var managedContext: NSManagedObjectContext? = nil
@@ -323,6 +409,20 @@ class CollectionsTableViewController: UITableViewController {
             return cardList
         }
         
+    }
+    func compareVersions(version1: String, version2:String) -> Bool {
+        let v1 = version1.split(separator: ".")
+        let v2 = version2.split(separator: ".")
+        if v2[0] > v1[0] {
+            return true
+        }
+        if v2[0] == v1[0] && v2[1] > v1[1] {
+            return true
+        }
+        if v2[0] == v1[0] && v2[1] == v1[1] && v2[2] > v1[2] {
+            return true
+        }
+        return false
     }
 }
 
