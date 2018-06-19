@@ -308,12 +308,13 @@ class CardDetailsViewController: UIViewController {
             ))
         } else {
             var imageurl = "https://magiccards.info/scans/en/" + imagecode + "/" + mci + ".jpg"
-            print(imageurl)
-            if let code = currentCard?.set?.code {
+//            print(imageurl)
+            if let code = currentCard?.set?.code?.lowercased() {
                 let scryfallUrl = "https://img.scryfall.com/cards/large/en/\(code)/\(mci).jpg"
-                print(scryfallUrl)
+//                print(scryfallUrl)
+                imageurl = scryfallUrl
             }
-            
+            print(imageurl)
             let checkedUrl = URL(string: imageurl)
             cardImage.contentMode = .scaleAspectFit
             downloadImage(url: checkedUrl!, Key: imagecode+mci)

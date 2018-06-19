@@ -25,6 +25,7 @@ class CollectionsTableViewController: UITableViewController {
     fileprivate let coreDataManager = CoreDataManager(modelName: "MTGCards")
     
     var progressBar = UIProgressView(progressViewStyle: UIProgressViewStyle.bar)
+    var updateProgressBar = UIProgressView(progressViewStyle: UIProgressViewStyle.bar)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,13 +48,28 @@ class CollectionsTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func displayUpdateAlert(){
+        let localVersion = defaults.string(forKey: "localVersion")
+        let alert = UIAlertController(title: "Update", message: "Would you like to download Card Database Updates?", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Later", style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Update", style: UIAlertActionStyle.default, handler: { action in
+            self.updateSets(localVersion: localVersion!)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
     func checkForUpdates() {
         if var localVersion = defaults.string(forKey: "localVersion"){
             localVersion = "3.15.1"
             print("Local Version: \(localVersion)")
             let url = URL(string: "https://mtgjson.com/json/version.json")
             let urlRequest = URLRequest(url: url!)
-            let session = URLSession.shared
+            
+            
+            let config = URLSessionConfiguration.default
+            config.requestCachePolicy = .reloadIgnoringLocalCacheData
+            config.urlCache = nil
+            
+            let session = URLSession.init(configuration: config)
             let task = session.dataTask(with: urlRequest){
                 (data, response, error) -> Void in
                 if let data = data{
@@ -64,7 +80,11 @@ class CollectionsTableViewController: UITableViewController {
                             if self.compareVersions(version1: localVersion, version2: latestClean) {
                                 print("There is a newer version")
                                 //update
-                                self.updateSets(localVersion: localVersion)
+                                DispatchQueue.main.async {
+                                     self.displayUpdateAlert()
+                                }
+                               
+                                //self.updateSets(localVersion: localVersion)
                             } else {
                                 print("You have the latest version")
                                 //nothing
@@ -80,33 +100,132 @@ class CollectionsTableViewController: UITableViewController {
         }
     }
     func updateSets(localVersion: String) {
+        let alert = UIAlertController(title: "Download", message: "0%", preferredStyle: UIAlertControllerStyle.alert)
+        
+        updateProgressBar.setProgress(0.0, animated: true)
+        updateProgressBar.frame = CGRect(x: 10, y: 70, width: 250, height: 0)
+        alert.view.addSubview(updateProgressBar)
+        
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+        
+        
         let url = URL(string: "https://mtgjson.com/json/changelog.json")
-        var setsToUpdate: Set<String> = []
-        var newSets: Set<String> = []
-        var setsToDelete: Set<String> = []
         let urlRequest = URLRequest(url: url!)
+        var managedContext: NSManagedObjectContext? = nil
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        managedContext = appDelegate.persistentContainer.viewContext
+        
+//        let config = URLSessionConfiguration.default
+//        config.requestCachePolicy = .reloadIgnoringLocalCacheData
+//        config.urlCache = nil
+        
+//        let session = URLSession.init(configuration: config)
         let session = URLSession.shared
         let task = session.dataTask(with: urlRequest){
             (data, response, error) -> Void in
             if let data = data{
                 do {
                     var changeLogs = try ChangeLogs.init(data: data)
-                    
                     let index: Int = changeLogs.index(where: {$0.version == localVersion})!
-                    var updatesToTake = Array(changeLogs[0..<index].reversed())
-                    print("updates")
+                    var updatesToTake = Array(changeLogs[0..<index])
+                    var setUpdateCount = 0
+                    var setCount = 0
+                    if updatesToTake.count > 0 {
+                        //new
+                        //if CDMTGSet does not exist add cards as normal
+                        //if does exist use update function
+                        for update in updatesToTake {
+                            if (update.updatedSetFiles?.contains("ALL_OF_THEM"))! {
+                                //update all sets
+                                print("Update All")
+                            } else {
+                                if let updates = update.updatedSetFiles {
+                                    setCount += updates.count
+                                    for change in updates {
+                                        //update set
+                                        DispatchQueue.main.async {
+                                            var set = CardDatabaseHelper.getCDMTGSet(setCode: change)
+                                            if set == nil {
+                                                self.getCards(setCode: change)
+                                            } else {
+                                                //update set data
+                                                if let mtgSet = self.getMTGSet(setCode: change) {
+                                                    set?.updateCDSetFromSet(source: mtgSet, inContext: managedContext!)
+                                                }
+                                            }
+                                            setUpdateCount += 1
+                                            let percent = Float(setUpdateCount)/Float(setCount)
+                                            print((Float(setUpdateCount)/Float(setCount))*100)
+                                            self.updateProgressBar.setProgress(percent, animated: true)
+                                            alert.message = "\(Int(percent*100))%"
+                                            if setUpdateCount == setCount {
+                                                alert.dismiss(animated: true, completion: nil)
+                                            }
+                                            print(set?.name)
+                                            print(change)
+                                        }
+                                        
+                                        
+                                    }
+                                }
+                                if let newsets = update.newSetFiles {
+                                    setCount += newsets.count
+                                    for new in newsets {
+                                        //add set
+                                      
+                                    }
+                                }
+                                if let deletes = update.removedSetFiles {
+                                    setCount += deletes.count
+                                    for delete in deletes {
+                                        //delete set?
+                                     
+                                    }
+                                }
+                            }
+                        }
+                    }
                     
+                    print("updates")
+                    if setUpdateCount == setCount {
+                        alert.dismiss(animated: true, completion: nil)
+                    }
                 } catch let error as NSError {
                     print("error updating sets: \(error)")
                 }
-                
+               
             } else if let error = error {
                 print("Error: \(error)")
                 
             }
+           
         }
         task.resume()
+        self.present(alert, animated: true, completion: nil)
     }
+//    private func getSet(setCode: String) -> CDMTGSet?{
+//        var set: CDMTGSet? = nil
+//        let fetchRequest: NSFetchRequest<CDMTGSet> = CDMTGSet.fetchRequest()
+//        let managedContext = appDelegate.persistentContainer.viewContext
+//        let namePredicate = NSPredicate(format: "code = %@", setCode)
+//        fetchRequest.predicate = namePredicate
+//        do {
+//            // Perform Fetch Request
+//            let c = try managedContext.fetch(fetchRequest)
+//            print(c.count)
+//            if c.count >= 1 {
+//                set = c[0]
+//            }
+//
+//            return set
+//        } catch {
+//            print("Unable to Fetch set, (\(error))")
+//            return set
+//        }
+//
+//    }
     func downloadSets() {
         let alert = UIAlertController(title: "Setup", message: "Would you like to download the Card Database?", preferredStyle: UIAlertControllerStyle.alert)
         
@@ -123,6 +242,33 @@ class CollectionsTableViewController: UITableViewController {
         //appDelegate.showAlertGlobally(alert)
         self.present(alert, animated: true, completion: nil)
     }
+//    func showUpdateProgressController(setsToUpdate: [String]) {
+//        let alert = UIAlertController(title: "Update", message: "Progress", preferredStyle: UIAlertControllerStyle.alert)
+//
+//        progressBar.setProgress(0.0, animated: true)
+//        progressBar.frame = CGRect(x: 10, y: 70, width: 250, height: 0)
+//        alert.view.addSubview(progressBar)
+//
+//        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+//        let setCount = setsToUpdate.count
+//        var setDownloadCount = 0
+//        for s in setsToUpdate {
+//            DispatchQueue.main.sync {
+//                self.getCards(setCode: s)
+//                //self.getCards(setCode: s)
+//                setDownloadCount += 1
+//                let percent = Float(setDownloadCount)/Float(setCount)
+//                print((Float(setDownloadCount)/Float(setCount))*100)
+//                self.progressBar.setProgress(percent, animated: true)
+//                alert.message = "\(Int(percent*100))%"
+//                if setDownloadCount == setCount {
+//                    alert.dismiss(animated: true, completion: nil)
+//                    self.getLatestVersion()
+//                }
+//            }
+//        }
+//        self.present(alert, animated: true, completion: nil)
+//    }
     func showDownloadProgressController(){
         let alert = UIAlertController(title: "Download", message: "Progress", preferredStyle: UIAlertControllerStyle.alert)
         
@@ -143,7 +289,7 @@ class CollectionsTableViewController: UITableViewController {
                     if let json = JSON {
                         SetsToDownload = json
                         print(SetsToDownload.count)
-                        var setCount = SetsToDownload.count
+                        let setCount = SetsToDownload.count
                         var setDownloadCount = 0
                         for s in SetsToDownload {
                             DispatchQueue.main.sync {
@@ -156,7 +302,7 @@ class CollectionsTableViewController: UITableViewController {
                                 alert.message = "\(Int(percent*100))%"
                                 if setDownloadCount == setCount {
                                     alert.dismiss(animated: true, completion: nil)
-                                    self.getLatestVersion()
+                                    //self.getLatestVersion()
                                 }
                             }
                         }
@@ -180,16 +326,11 @@ class CollectionsTableViewController: UITableViewController {
                 do {
                     if let latest = String(data: data, encoding: .utf8){
                         let latestClean = latest.replacingOccurrences(of: "\"", with: "")
-                        
                         self.defaults.set(latestClean, forKey: "localVersion")
-                        
                     }
-                    
                 }
-                
             } else if let error = error {
                 print("Error: \(error)")
-                
             }
         }
         task.resume()
@@ -198,9 +339,6 @@ class CollectionsTableViewController: UITableViewController {
     }
     func getCards(setCode: String){
         var managedContext: NSManagedObjectContext? = nil
-        
-        
-        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
@@ -222,6 +360,64 @@ class CollectionsTableViewController: UITableViewController {
         }
         
     }
+    func getMTGSet(setCode: String) -> MTGSet? {
+        let url = URL(string: "https://mtgjson.com/json/"+setCode+"-x.json")
+        do {
+            let set = try MTGSet.init(fromURL: url!)
+            return set
+           
+        } catch let error {
+            print("error getting \(setCode) - \(error)")
+            return nil
+        }
+    }
+    func updateCards(setCode: String) {
+        var managedContext: NSManagedObjectContext? = nil
+        
+        
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        managedContext = appDelegate.persistentContainer.viewContext
+        
+        let url = URL(string: "https://mtgjson.com/json/"+setCode+"-x.json")
+        do {
+            let set = try MTGSet.init(fromURL: url!)
+            if let existingSet = CardDatabaseHelper.getCDMTGSet(setCode: setCode) {
+                existingSet.updateCDSetFromSet(source: set, inContext: managedContext!)
+                do {
+                    try existingSet.managedObjectContext?.save()
+                    
+                    print("Update " + set.code! + ":" + (set.cards?.count.description)!)
+                } catch let error as NSError {
+                    print("error saving \(setCode). \(error)")
+                }
+            }
+        } catch let error {
+            print("error getting \(setCode) - \(error)")
+        }
+    }
+//    func getCard(cardId: String) -> CDCard?{
+//        var card: CDCard? = nil
+//        let fetchRequest: NSFetchRequest<CDCard> = CDCard.fetchRequest()
+//        let managedContext = appDelegate.persistentContainer.viewContext
+//        let namePredicate = NSPredicate(format: "id = %@", cardId)
+//        fetchRequest.predicate = namePredicate
+//        do {
+//            // Perform Fetch Request
+//            let c = try managedContext.fetch(fetchRequest)
+//            print(c.count)
+//            if c.count >= 1 {
+//                card = c[0]
+//            }
+//
+//            return card
+//        } catch {
+//            print("Unable to Fetch card, (\(error))")
+//            return card
+//        }
+//    }
     @IBAction func addNewCollection(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Add", message: "Collection or Deck?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Collection", style: UIAlertActionStyle.default, handler: {action in

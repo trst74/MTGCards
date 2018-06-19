@@ -15,7 +15,7 @@ class CardDatabaseHelper {
     static var CDSets: [CDMTGSet] = []
     static var SetsToDownload : [String] = []
     
-
+    
     fileprivate let coreDataManager = CoreDataManager(modelName: "MTGCards")
     
     static func DownloadDatabase(){
@@ -104,10 +104,49 @@ class CardDatabaseHelper {
             }
         }
         task.resume()
+    }
+    static func getCDMTGSet(setCode: String) -> CDMTGSet?{
+        let appDelegate: AppDelegate = (UIApplication.shared.delegate as? AppDelegate)!
+        var set: CDMTGSet? = nil
+        let fetchRequest: NSFetchRequest<CDMTGSet> = CDMTGSet.fetchRequest()
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let namePredicate = NSPredicate(format: "code = %@", setCode)
+        fetchRequest.predicate = namePredicate
+        do {
+            // Perform Fetch Request
+            let c = try managedContext.fetch(fetchRequest)
+            //print(c.count)
+            if c.count >= 1 {
+                set = c[0]
+            }
+            
+            return set
+        } catch {
+            print("Unable to Fetch set, (\(error))")
+            return set
+        }
         
-        
-        
-        
+    }
+    static func getCard(cardId: String) -> CDCard?{
+        let appDelegate: AppDelegate = (UIApplication.shared.delegate as? AppDelegate)!
+        var card: CDCard? = nil
+        let fetchRequest: NSFetchRequest<CDCard> = CDCard.fetchRequest()
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let namePredicate = NSPredicate(format: "id = %@", cardId)
+        fetchRequest.predicate = namePredicate
+        do {
+            // Perform Fetch Request
+            let c = try managedContext.fetch(fetchRequest)
+            //print(c.count)
+            if c.count >= 1 {
+                card = c[0]
+            }
+            
+            return card
+        } catch {
+            print("Unable to Fetch card, (\(error))")
+            return card
+        }
     }
     
 }
