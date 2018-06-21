@@ -87,6 +87,7 @@
 		EECE3ABE208584CD00318DD3 /* G8-Light.png in Resources */ = {isa = PBXBuildFile; fileRef = EECE3ABD208584CD00318DD3 /* G8-Light.png */; };
 		EECE3AC02086D47400318DD3 /* MTGSplash.png in Resources */ = {isa = PBXBuildFile; fileRef = EECE3ABF2086D47400318DD3 /* MTGSplash.png */; };
 		EECE3AC2209159F400318DD3 /* ChangeLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECE3AC1209159F400318DD3 /* ChangeLogs.swift */; };
+		EEDEBFC920D9D7EF00955146 /* RawDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDEBFC820D9D7EF00955146 /* RawDataViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,6 +194,7 @@
 		EECE3ABD208584CD00318DD3 /* G8-Light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "G8-Light.png"; sourceTree = "<group>"; };
 		EECE3ABF2086D47400318DD3 /* MTGSplash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTGSplash.png; sourceTree = "<group>"; };
 		EECE3AC1209159F400318DD3 /* ChangeLogs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLogs.swift; sourceTree = "<group>"; };
+		EEDEBFC820D9D7EF00955146 /* RawDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawDataViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,6 +348,7 @@
 				EE518969207706F8009037DF /* SubTypeFilterTableViewController.swift */,
 				EECE3AAA20810CFA00318DD3 /* SettingsTableViewController.swift */,
 				EECE3AAC2084FE7400318DD3 /* SetFilterTableViewController.swift */,
+				EEDEBFC820D9D7EF00955146 /* RawDataViewController.swift */,
 			);
 			path = MTGCards;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				EEAC87752060138300387C9B /* CDForeignName+CoreDataProperties.swift in Sources */,
 				EE518968207706E8009037DF /* SuperTypeFilterTableViewController.swift in Sources */,
 				EECE3AAB20810CFA00318DD3 /* SettingsTableViewController.swift in Sources */,
+				EEDEBFC920D9D7EF00955146 /* RawDataViewController.swift in Sources */,
 				EE1BFFEF204B2386005B13D7 /* MTGCards.xcdatamodeld in Sources */,
 				EE1BFFE7204B2386005B13D7 /* AppDelegate.swift in Sources */,
 				EE1B0019204B23AE005B13D7 /* MTGSet.swift in Sources */,

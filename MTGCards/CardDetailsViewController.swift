@@ -46,7 +46,7 @@ class CardDetailsViewController: UIViewController {
         flavor.text = currentCard?.flavor
         artist.text = currentCard?.artist
         if let p = currentCard?.power, let t = currentCard?.toughness {
-                pt.text = "\(p)/\(t)"
+            pt.text = "\(p)/\(t)"
         } else {
             pt.text = ""
         }
@@ -63,30 +63,30 @@ class CardDetailsViewController: UIViewController {
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressed))
         cardImage.isUserInteractionEnabled = true
         cardImage.addGestureRecognizer(longPressRecognizer)
-//
-//        if cardImage.image == nil {
-//            detailsView.addConstraint(
-//                NSLayoutConstraint(
-//                    item: rulingsView,
-//                    attribute: .top,
-//                    relatedBy: .equal,
-//                    toItem: artist,
-//                    attribute: .bottom,
-//                    multiplier: 1.0,
-//                    constant: 8
-//            ))
-//        } else {
-//            detailsView.addConstraint(
-//                NSLayoutConstraint(
-//                    item: rulingsView,
-//                    attribute: .top,
-//                    relatedBy: .equal,
-//                    toItem: cardImage,
-//                    attribute: .bottom,
-//                    multiplier: 1.0,
-//                    constant: 8
-//            ))
-//        }
+        //
+        //        if cardImage.image == nil {
+        //            detailsView.addConstraint(
+        //                NSLayoutConstraint(
+        //                    item: rulingsView,
+        //                    attribute: .top,
+        //                    relatedBy: .equal,
+        //                    toItem: artist,
+        //                    attribute: .bottom,
+        //                    multiplier: 1.0,
+        //                    constant: 8
+        //            ))
+        //        } else {
+        //            detailsView.addConstraint(
+        //                NSLayoutConstraint(
+        //                    item: rulingsView,
+        //                    attribute: .top,
+        //                    relatedBy: .equal,
+        //                    toItem: cardImage,
+        //                    attribute: .bottom,
+        //                    multiplier: 1.0,
+        //                    constant: 8
+        //            ))
+        //        }
         
         
         if (currentCard?.rulings?.count)! < 1 {
@@ -308,10 +308,10 @@ class CardDetailsViewController: UIViewController {
             ))
         } else {
             var imageurl = "https://magiccards.info/scans/en/" + imagecode + "/" + mci + ".jpg"
-//            print(imageurl)
+            //            print(imageurl)
             if let code = currentCard?.set?.code?.lowercased() {
                 let scryfallUrl = "https://img.scryfall.com/cards/large/en/\(code)/\(mci).jpg"
-//                print(scryfallUrl)
+                //                print(scryfallUrl)
                 imageurl = scryfallUrl
             }
             print(imageurl)
@@ -334,7 +334,7 @@ class CardDetailsViewController: UIViewController {
                 let image = UIImage(data: data)
                 self.cardImage.bounds.origin = CGPoint.zero
                 self.update(with: image, Key: Key)
-        self.spinner.isHidden = true
+                self.spinner.isHidden = true
             }
         }
     }
@@ -414,6 +414,15 @@ class CardDetailsViewController: UIViewController {
         
         return endString
     }
-    
+    @IBAction func handleSecretTaps(_ sender: UITapGestureRecognizer) {
+        self.performSegue(withIdentifier: "rawDataSegue", sender: nil)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "rawDataSegue" {
+            if let destination = segue.destination as? RawDataViewController {
+                destination.currentCard = currentCard
+            }
+        }
+    }
 }
 

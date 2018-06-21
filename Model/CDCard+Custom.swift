@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 extension CDCard{
     convenience init(from source: Card, inContext context: NSManagedObjectContext){
@@ -155,4 +156,14 @@ extension CDCard{
         self.watermark = source.watermark
         
     }
+//    func getCardRawData() -> String {
+//        let cardMirror = Mirror(reflecting: self)
+//        var rawdata = ""
+//        for (name, value) in cardMirror.children {
+//            guard let name = name else { continue }
+//            rawdata += "\(name): \(type(of: value)) = '\(value)'"
+//        }
+//    }
+    
+ 
 }
