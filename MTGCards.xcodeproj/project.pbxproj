@@ -1,0 +1,608 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EEBE6D8E21EFE18F00A3464E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6D8D21EFE18F00A3464E /* AppDelegate.swift */; };
+		EEBE6D9021EFE18F00A3464E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6D8F21EFE18F00A3464E /* ViewController.swift */; };
+		EEBE6D9321EFE18F00A3464E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBE6D9121EFE18F00A3464E /* Main.storyboard */; };
+		EEBE6D9621EFE18F00A3464E /* MTGCards.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6D9421EFE18F00A3464E /* MTGCards.xcdatamodeld */; };
+		EEBE6D9821EFE19100A3464E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEBE6D9721EFE19100A3464E /* Assets.xcassets */; };
+		EEBE6D9B21EFE19100A3464E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBE6D9921EFE19100A3464E /* LaunchScreen.storyboard */; };
+		EEBE6DA621EFE19100A3464E /* MTGCardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6DA521EFE19100A3464E /* MTGCardsTests.swift */; };
+		EEBE6DB121EFE19100A3464E /* MTGCardsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6DB021EFE19100A3464E /* MTGCardsUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EEBE6DA221EFE19100A3464E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EEBE6D8221EFE18F00A3464E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EEBE6D8921EFE18F00A3464E;
+			remoteInfo = MTGCards;
+		};
+		EEBE6DAD21EFE19100A3464E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EEBE6D8221EFE18F00A3464E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EEBE6D8921EFE18F00A3464E;
+			remoteInfo = MTGCards;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EEBE6D8A21EFE18F00A3464E /* MTGCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTGCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEBE6D8D21EFE18F00A3464E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EEBE6D8F21EFE18F00A3464E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EEBE6D9221EFE18F00A3464E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EEBE6D9521EFE18F00A3464E /* MTGCards.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MTGCards.xcdatamodel; sourceTree = "<group>"; };
+		EEBE6D9721EFE19100A3464E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EEBE6D9A21EFE19100A3464E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EEBE6D9C21EFE19100A3464E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEBE6DA121EFE19100A3464E /* MTGCardsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTGCardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEBE6DA521EFE19100A3464E /* MTGCardsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTGCardsTests.swift; sourceTree = "<group>"; };
+		EEBE6DA721EFE19100A3464E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEBE6DAC21EFE19100A3464E /* MTGCardsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTGCardsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEBE6DB021EFE19100A3464E /* MTGCardsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTGCardsUITests.swift; sourceTree = "<group>"; };
+		EEBE6DB221EFE19100A3464E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EEBE6D8721EFE18F00A3464E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EEBE6D9E21EFE19100A3464E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EEBE6DA921EFE19100A3464E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EEBE6D8121EFE18F00A3464E = {
+			isa = PBXGroup;
+			children = (
+				EEBE6D8C21EFE18F00A3464E /* MTGCards */,
+				EEBE6DA421EFE19100A3464E /* MTGCardsTests */,
+				EEBE6DAF21EFE19100A3464E /* MTGCardsUITests */,
+				EEBE6D8B21EFE18F00A3464E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EEBE6D8B21EFE18F00A3464E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EEBE6D8A21EFE18F00A3464E /* MTGCards.app */,
+				EEBE6DA121EFE19100A3464E /* MTGCardsTests.xctest */,
+				EEBE6DAC21EFE19100A3464E /* MTGCardsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EEBE6D8C21EFE18F00A3464E /* MTGCards */ = {
+			isa = PBXGroup;
+			children = (
+				EEBE6D8D21EFE18F00A3464E /* AppDelegate.swift */,
+				EEBE6D8F21EFE18F00A3464E /* ViewController.swift */,
+				EEBE6D9121EFE18F00A3464E /* Main.storyboard */,
+				EEBE6D9721EFE19100A3464E /* Assets.xcassets */,
+				EEBE6D9921EFE19100A3464E /* LaunchScreen.storyboard */,
+				EEBE6D9C21EFE19100A3464E /* Info.plist */,
+				EEBE6D9421EFE18F00A3464E /* MTGCards.xcdatamodeld */,
+			);
+			path = MTGCards;
+			sourceTree = "<group>";
+		};
+		EEBE6DA421EFE19100A3464E /* MTGCardsTests */ = {
+			isa = PBXGroup;
+			children = (
+				EEBE6DA521EFE19100A3464E /* MTGCardsTests.swift */,
+				EEBE6DA721EFE19100A3464E /* Info.plist */,
+			);
+			path = MTGCardsTests;
+			sourceTree = "<group>";
+		};
+		EEBE6DAF21EFE19100A3464E /* MTGCardsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EEBE6DB021EFE19100A3464E /* MTGCardsUITests.swift */,
+				EEBE6DB221EFE19100A3464E /* Info.plist */,
+			);
+			path = MTGCardsUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EEBE6D8921EFE18F00A3464E /* MTGCards */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EEBE6DB521EFE19100A3464E /* Build configuration list for PBXNativeTarget "MTGCards" */;
+			buildPhases = (
+				EEBE6D8621EFE18F00A3464E /* Sources */,
+				EEBE6D8721EFE18F00A3464E /* Frameworks */,
+				EEBE6D8821EFE18F00A3464E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MTGCards;
+			productName = MTGCards;
+			productReference = EEBE6D8A21EFE18F00A3464E /* MTGCards.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EEBE6DA021EFE19100A3464E /* MTGCardsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EEBE6DB821EFE19100A3464E /* Build configuration list for PBXNativeTarget "MTGCardsTests" */;
+			buildPhases = (
+				EEBE6D9D21EFE19100A3464E /* Sources */,
+				EEBE6D9E21EFE19100A3464E /* Frameworks */,
+				EEBE6D9F21EFE19100A3464E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EEBE6DA321EFE19100A3464E /* PBXTargetDependency */,
+			);
+			name = MTGCardsTests;
+			productName = MTGCardsTests;
+			productReference = EEBE6DA121EFE19100A3464E /* MTGCardsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EEBE6DAB21EFE19100A3464E /* MTGCardsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EEBE6DBB21EFE19100A3464E /* Build configuration list for PBXNativeTarget "MTGCardsUITests" */;
+			buildPhases = (
+				EEBE6DA821EFE19100A3464E /* Sources */,
+				EEBE6DA921EFE19100A3464E /* Frameworks */,
+				EEBE6DAA21EFE19100A3464E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EEBE6DAE21EFE19100A3464E /* PBXTargetDependency */,
+			);
+			name = MTGCardsUITests;
+			productName = MTGCardsUITests;
+			productReference = EEBE6DAC21EFE19100A3464E /* MTGCardsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EEBE6D8221EFE18F00A3464E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Robotic Snail Software";
+				TargetAttributes = {
+					EEBE6D8921EFE18F00A3464E = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					EEBE6DA021EFE19100A3464E = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = EEBE6D8921EFE18F00A3464E;
+					};
+					EEBE6DAB21EFE19100A3464E = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = EEBE6D8921EFE18F00A3464E;
+					};
+				};
+			};
+			buildConfigurationList = EEBE6D8521EFE18F00A3464E /* Build configuration list for PBXProject "MTGCards" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EEBE6D8121EFE18F00A3464E;
+			productRefGroup = EEBE6D8B21EFE18F00A3464E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EEBE6D8921EFE18F00A3464E /* MTGCards */,
+				EEBE6DA021EFE19100A3464E /* MTGCardsTests */,
+				EEBE6DAB21EFE19100A3464E /* MTGCardsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EEBE6D8821EFE18F00A3464E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEBE6D9B21EFE19100A3464E /* LaunchScreen.storyboard in Resources */,
+				EEBE6D9821EFE19100A3464E /* Assets.xcassets in Resources */,
+				EEBE6D9321EFE18F00A3464E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EEBE6D9F21EFE19100A3464E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EEBE6DAA21EFE19100A3464E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EEBE6D8621EFE18F00A3464E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEBE6D9021EFE18F00A3464E /* ViewController.swift in Sources */,
+				EEBE6D9621EFE18F00A3464E /* MTGCards.xcdatamodeld in Sources */,
+				EEBE6D8E21EFE18F00A3464E /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EEBE6D9D21EFE19100A3464E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEBE6DA621EFE19100A3464E /* MTGCardsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EEBE6DA821EFE19100A3464E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEBE6DB121EFE19100A3464E /* MTGCardsUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EEBE6DA321EFE19100A3464E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EEBE6D8921EFE18F00A3464E /* MTGCards */;
+			targetProxy = EEBE6DA221EFE19100A3464E /* PBXContainerItemProxy */;
+		};
+		EEBE6DAE21EFE19100A3464E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EEBE6D8921EFE18F00A3464E /* MTGCards */;
+			targetProxy = EEBE6DAD21EFE19100A3464E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EEBE6D9121EFE18F00A3464E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EEBE6D9221EFE18F00A3464E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EEBE6D9921EFE19100A3464E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EEBE6D9A21EFE19100A3464E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EEBE6DB321EFE19100A3464E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EEBE6DB421EFE19100A3464E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EEBE6DB621EFE19100A3464E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JANZDS5D43;
+				INFOPLIST_FILE = MTGCards/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.MTGCards;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EEBE6DB721EFE19100A3464E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JANZDS5D43;
+				INFOPLIST_FILE = MTGCards/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.MTGCards;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		EEBE6DB921EFE19100A3464E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JANZDS5D43;
+				INFOPLIST_FILE = MTGCardsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.MTGCardsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MTGCards.app/MTGCards";
+			};
+			name = Debug;
+		};
+		EEBE6DBA21EFE19100A3464E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JANZDS5D43;
+				INFOPLIST_FILE = MTGCardsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.MTGCardsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MTGCards.app/MTGCards";
+			};
+			name = Release;
+		};
+		EEBE6DBC21EFE19100A3464E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JANZDS5D43;
+				INFOPLIST_FILE = MTGCardsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.MTGCardsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MTGCards;
+			};
+			name = Debug;
+		};
+		EEBE6DBD21EFE19100A3464E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JANZDS5D43;
+				INFOPLIST_FILE = MTGCardsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.MTGCardsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MTGCards;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EEBE6D8521EFE18F00A3464E /* Build configuration list for PBXProject "MTGCards" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EEBE6DB321EFE19100A3464E /* Debug */,
+				EEBE6DB421EFE19100A3464E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EEBE6DB521EFE19100A3464E /* Build configuration list for PBXNativeTarget "MTGCards" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EEBE6DB621EFE19100A3464E /* Debug */,
+				EEBE6DB721EFE19100A3464E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EEBE6DB821EFE19100A3464E /* Build configuration list for PBXNativeTarget "MTGCardsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EEBE6DB921EFE19100A3464E /* Debug */,
+				EEBE6DBA21EFE19100A3464E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EEBE6DBB21EFE19100A3464E /* Build configuration list for PBXNativeTarget "MTGCardsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EEBE6DBC21EFE19100A3464E /* Debug */,
+				EEBE6DBD21EFE19100A3464E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EEBE6D9421EFE18F00A3464E /* MTGCards.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EEBE6D9521EFE18F00A3464E /* MTGCards.xcdatamodel */,
+			);
+			currentVersion = EEBE6D9521EFE18F00A3464E /* MTGCards.xcdatamodel */;
+			path = MTGCards.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = EEBE6D8221EFE18F00A3464E /* Project object */;
+}
