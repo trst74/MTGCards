@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE2B78A621EFE39700306990 /* RootViewController+ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78A521EFE39700306990 /* RootViewController+ViewFactory.swift */; };
+		EE2B78A821EFE3DB00306990 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78A721EFE3DB00306990 /* RootViewController.swift */; };
+		EE2B78AB21EFE47600306990 /* UIView+AutolayoutHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */; };
+		EE2B78BA21EFE60E00306990 /* SelectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78B821EFE60E00306990 /* SelectionState.swift */; };
+		EE2B78BB21EFE60E00306990 /* StateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78B921EFE60E00306990 /* StateCoordinator.swift */; };
+		EE2B78BE21EFE68C00306990 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78BD21EFE68C00306990 /* Card.swift */; };
+		EE2B78C121F0075100306990 /* Collections.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2B78C021F0075100306990 /* Collections.storyboard */; };
+		EE2B78C321F0077400306990 /* CollectionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78C221F0077400306990 /* CollectionsTableViewController.swift */; };
+		EE2B78C521F0083E00306990 /* CardList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2B78C421F0083E00306990 /* CardList.storyboard */; };
+		EE2B78C721F0084A00306990 /* Card.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2B78C621F0084A00306990 /* Card.storyboard */; };
+		EE2B78C921F0087200306990 /* CardListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78C821F0087200306990 /* CardListTableViewController.swift */; };
+		EE2B78CB21F0089500306990 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78CA21F0089500306990 /* CardViewController.swift */; };
+		EE2B78CE21F009A600306990 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2B78CC21F009A600306990 /* PlaceholderView.storyboard */; };
+		EE2B78CF21F009A600306990 /* PlaceholderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78CD21F009A600306990 /* PlaceholderViewController.swift */; };
 		EEBE6D8E21EFE18F00A3464E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6D8D21EFE18F00A3464E /* AppDelegate.swift */; };
 		EEBE6D9021EFE18F00A3464E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6D8F21EFE18F00A3464E /* ViewController.swift */; };
 		EEBE6D9321EFE18F00A3464E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBE6D9121EFE18F00A3464E /* Main.storyboard */; };
@@ -35,6 +49,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EE2B78A521EFE39700306990 /* RootViewController+ViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootViewController+ViewFactory.swift"; sourceTree = "<group>"; };
+		EE2B78A721EFE3DB00306990 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AutolayoutHelp.swift"; sourceTree = "<group>"; };
+		EE2B78B821EFE60E00306990 /* SelectionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionState.swift; sourceTree = "<group>"; };
+		EE2B78B921EFE60E00306990 /* StateCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateCoordinator.swift; sourceTree = "<group>"; };
+		EE2B78BD21EFE68C00306990 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		EE2B78C021F0075100306990 /* Collections.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Collections.storyboard; sourceTree = "<group>"; };
+		EE2B78C221F0077400306990 /* CollectionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsTableViewController.swift; sourceTree = "<group>"; };
+		EE2B78C421F0083E00306990 /* CardList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CardList.storyboard; sourceTree = "<group>"; };
+		EE2B78C621F0084A00306990 /* Card.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Card.storyboard; sourceTree = "<group>"; };
+		EE2B78C821F0087200306990 /* CardListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListTableViewController.swift; sourceTree = "<group>"; };
+		EE2B78CA21F0089500306990 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
+		EE2B78CC21F009A600306990 /* PlaceholderView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlaceholderView.storyboard; sourceTree = "<group>"; };
+		EE2B78CD21F009A600306990 /* PlaceholderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderViewController.swift; sourceTree = "<group>"; };
 		EEBE6D8A21EFE18F00A3464E /* MTGCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTGCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBE6D8D21EFE18F00A3464E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEBE6D8F21EFE18F00A3464E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +104,74 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE2B78A321EFE30900306990 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EE2B78BF21F006F900306990 /* Member View Controllers */,
+				EE2B78A421EFE33000306990 /* Root View Controller */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		EE2B78A421EFE33000306990 /* Root View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EE2B78A721EFE3DB00306990 /* RootViewController.swift */,
+				EEBE6D9121EFE18F00A3464E /* Main.storyboard */,
+				EE2B78A521EFE39700306990 /* RootViewController+ViewFactory.swift */,
+			);
+			path = "Root View Controller";
+			sourceTree = "<group>";
+		};
+		EE2B78A921EFE45B00306990 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		EE2B78AC21EFE56200306990 /* Presentation Layer */ = {
+			isa = PBXGroup;
+			children = (
+				EE2B78AD21EFE57500306990 /* View State */,
+				EE2B78A321EFE30900306990 /* View Controllers */,
+			);
+			path = "Presentation Layer";
+			sourceTree = "<group>";
+		};
+		EE2B78AD21EFE57500306990 /* View State */ = {
+			isa = PBXGroup;
+			children = (
+				EE2B78B821EFE60E00306990 /* SelectionState.swift */,
+				EE2B78B921EFE60E00306990 /* StateCoordinator.swift */,
+			);
+			path = "View State";
+			sourceTree = "<group>";
+		};
+		EE2B78BC21EFE67E00306990 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EE2B78BD21EFE68C00306990 /* Card.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EE2B78BF21F006F900306990 /* Member View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EE2B78CC21F009A600306990 /* PlaceholderView.storyboard */,
+				EE2B78CD21F009A600306990 /* PlaceholderViewController.swift */,
+				EE2B78C021F0075100306990 /* Collections.storyboard */,
+				EE2B78C221F0077400306990 /* CollectionsTableViewController.swift */,
+				EE2B78C421F0083E00306990 /* CardList.storyboard */,
+				EE2B78C621F0084A00306990 /* Card.storyboard */,
+				EE2B78C821F0087200306990 /* CardListTableViewController.swift */,
+				EE2B78CA21F0089500306990 /* CardViewController.swift */,
+			);
+			path = "Member View Controllers";
+			sourceTree = "<group>";
+		};
 		EEBE6D8121EFE18F00A3464E = {
 			isa = PBXGroup;
 			children = (
@@ -99,9 +195,11 @@
 		EEBE6D8C21EFE18F00A3464E /* MTGCards */ = {
 			isa = PBXGroup;
 			children = (
+				EE2B78BC21EFE67E00306990 /* Model */,
+				EE2B78AC21EFE56200306990 /* Presentation Layer */,
+				EE2B78A921EFE45B00306990 /* Utilities */,
 				EEBE6D8D21EFE18F00A3464E /* AppDelegate.swift */,
 				EEBE6D8F21EFE18F00A3464E /* ViewController.swift */,
-				EEBE6D9121EFE18F00A3464E /* Main.storyboard */,
 				EEBE6D9721EFE19100A3464E /* Assets.xcassets */,
 				EEBE6D9921EFE19100A3464E /* LaunchScreen.storyboard */,
 				EEBE6D9C21EFE19100A3464E /* Info.plist */,
@@ -232,8 +330,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE2B78C121F0075100306990 /* Collections.storyboard in Resources */,
 				EEBE6D9B21EFE19100A3464E /* LaunchScreen.storyboard in Resources */,
+				EE2B78CE21F009A600306990 /* PlaceholderView.storyboard in Resources */,
+				EE2B78C721F0084A00306990 /* Card.storyboard in Resources */,
 				EEBE6D9821EFE19100A3464E /* Assets.xcassets in Resources */,
+				EE2B78C521F0083E00306990 /* CardList.storyboard in Resources */,
 				EEBE6D9321EFE18F00A3464E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,9 +361,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE2B78C921F0087200306990 /* CardListTableViewController.swift in Sources */,
+				EE2B78CF21F009A600306990 /* PlaceholderViewController.swift in Sources */,
+				EE2B78A821EFE3DB00306990 /* RootViewController.swift in Sources */,
+				EE2B78BE21EFE68C00306990 /* Card.swift in Sources */,
+				EE2B78A621EFE39700306990 /* RootViewController+ViewFactory.swift in Sources */,
+				EE2B78AB21EFE47600306990 /* UIView+AutolayoutHelp.swift in Sources */,
 				EEBE6D9021EFE18F00A3464E /* ViewController.swift in Sources */,
 				EEBE6D9621EFE18F00A3464E /* MTGCards.xcdatamodeld in Sources */,
 				EEBE6D8E21EFE18F00A3464E /* AppDelegate.swift in Sources */,
+				EE2B78CB21F0089500306990 /* CardViewController.swift in Sources */,
+				EE2B78BB21EFE60E00306990 /* StateCoordinator.swift in Sources */,
+				EE2B78BA21EFE60E00306990 /* SelectionState.swift in Sources */,
+				EE2B78C321F0077400306990 /* CollectionsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
