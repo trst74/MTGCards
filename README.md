@@ -5,7 +5,7 @@ Small application to allow the lookup of Magic cards.
 
 <p align="left">
     <a href="https://swift.org">
-        <img src="http://img.shields.io/badge/swift-4.1-brightgreen.svg" alt="Swift 4">
+        <img src="http://img.shields.io/badge/swift-4.2-brightgreen.svg" alt="Swift 4">
     </a>
 </p>
 
@@ -20,9 +20,7 @@ Small application to allow the lookup of Magic cards.
 * iPad optimized layout
 
 ## BUGS
-* Several cards crash the app when selected
-* Color identity filter button sizing
-* Gradient background is not correctly sized on ipad
+
 
 ## CONTACT
 <!-- display the social media buttons in your README -->
