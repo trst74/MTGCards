@@ -29,12 +29,12 @@ class CardViewController: UIViewController {
 
 }
 extension CardViewController {
-    static func refreshCardController(card: Card) -> CardViewController {
+    static func refreshCardController(s: String) -> CardViewController {
         let storyboard = UIStoryboard(name: "Card", bundle: nil)
         guard let filelist = storyboard.instantiateInitialViewController() as? CardViewController else {
             fatalError("Project config error - storyboard doesnt provide a FileListVC")
         }
-        filelist.title = card.name
+        filelist.title = s
         return filelist
     }
 }

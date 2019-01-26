@@ -41,7 +41,7 @@ class RootViewController: UIViewController {
         case foldersFilesEditor = 3
     }
     
-    let rootSplitSmallFraction: CGFloat = 0.25
+    let rootSplitSmallFraction: CGFloat = 0.20
     let rootSplitLargeFraction: CGFloat = 0.33
     
     lazy var rootSplitView: UISplitViewController = {
@@ -52,12 +52,15 @@ class RootViewController: UIViewController {
     }()
     
     //lazy var stateCoordinator: StateCoordinator = StateCoordinator(delegate: self)
-
     
-//    let dataStack = CoreDataStack()
+    
+    //    let dataStack = CoreDataStack()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(DataManager.getLocalVersion())
+        //DataManager.getSetList()
+        
         StateCoordinator.shared.delegate = self
         installRootSplit()
     }
@@ -103,69 +106,69 @@ class RootViewController: UIViewController {
 }
 
 extension RootViewController: StateCoordinatorDelegate {
-    func gotoState(_ nextState: SelectionState, card: Card?) {
-//        if nextState == .folderSelected, let folder = file {
-//            gotoFolderSelected(folder)
-//        } else if nextState == .fileSelected, let file = file {
-//            gotoFileSelected(file)
-//        } else if nextState == .noSelection {
-//            gotoNoSelection(file)
-//        }
-         if var c = card {
-        if nextState == .cardSelected {
-            gotoCardSelected(card: c)
-        }else {
-       
-            gotoCollectionSelected(card: c)
-        }
-        }
+    func gotoState(_ nextState: SelectionState, s: String?) {
+        //        if nextState == .folderSelected, let folder = file {
+        //            gotoFolderSelected(folder)
+        //        } else if nextState == .fileSelected, let file = file {
+        //            gotoFileSelected(file)
+        //        } else if nextState == .noSelection {
+        //            gotoNoSelection(file)
+        //        }
+        if let s = s {
+            if nextState == .cardSelected {
+                gotoCardSelected(s: s)
+            }else {
+                
+                gotoCollectionSelected(s: s)
+            }
     }
-//
-//    //1
-//    func gotoNoSelection(_ folder: File?) {
-//        let navigation = primaryNavigation(rootSplitView)
-//        if navigationStack(navigation, isAt: .foldersOnly) && folder == nil {
-//            showFolderLevelPlaceholder(in: rootSplitView)
-//        } else {
-//            showFileLevelPlaceholder(in: targetSplitForCurrentTraitCollection())
-//        }
-//    }
-//
-//    //2
-//    func gotoFolderSelected(_ folder: File) {
-//        if folder.isFolder {
-//            let cardList = CardListTableViewController.freshCardList()
-//            let title = folder.name ?? "Untitled"
-//            cardList.title = title
-//            installFileList(fileList: cardList)
-//        }
-//    }
-//
-    func gotoCollectionSelected(card: Card)  {
+    }
+    //
+    //    //1
+    //    func gotoNoSelection(_ folder: File?) {
+    //        let navigation = primaryNavigation(rootSplitView)
+    //        if navigationStack(navigation, isAt: .foldersOnly) && folder == nil {
+    //            showFolderLevelPlaceholder(in: rootSplitView)
+    //        } else {
+    //            showFileLevelPlaceholder(in: targetSplitForCurrentTraitCollection())
+    //        }
+    //    }
+    //
+    //    //2
+    //    func gotoFolderSelected(_ folder: File) {
+    //        if folder.isFolder {
+    //            let cardList = CardListTableViewController.freshCardList()
+    //            let title = folder.name ?? "Untitled"
+    //            cardList.title = title
+    //            installFileList(fileList: cardList)
+    //        }
+    //    }
+    //
+    func gotoCollectionSelected(s: String)  {
         let cardList = CardListTableViewController.freshCardList()
-        let title = card.name 
-                    cardList.title = title
-                    installFileList(fileList: cardList)
+       
+        cardList.title = s
+        installFileList(fileList: cardList)
     }
-//    //3
-//    func gotoFileSelected() {
-//
-//            let detail = CardViewController.freshCardController(file: file)
-//            let navigation = freshNavigationController(rootViewController: detail)
-//            targetSplitForCurrentTraitCollection()
-//                .showDetailViewController(navigation, sender: self)
-//
-//    }
-//
-    func gotoCardSelected(card: Card){
-        let cardDetails = CardViewController.refreshCardController(card: card)
+    //    //3
+    //    func gotoFileSelected() {
+    //
+    //            let detail = CardViewController.freshCardController(file: file)
+    //            let navigation = freshNavigationController(rootViewController: detail)
+    //            targetSplitForCurrentTraitCollection()
+    //                .showDetailViewController(navigation, sender: self)
+    //
+    //    }
+    //
+    func gotoCardSelected(s: String){
+        let cardDetails = CardViewController.refreshCardController(s: s)
         let navigation = freshNavigationController(rootViewController: cardDetails)
-                    targetSplitForCurrentTraitCollection()
-                        .showDetailViewController(navigation, sender: self)
+        targetSplitForCurrentTraitCollection()
+            .showDetailViewController(navigation, sender: self)
         
-
+        
     }
-//    //4
+    //    //4
     func freshNavigationController(rootViewController: UIViewController) -> UINavigationController {
         let nav = UINavigationController(rootViewController: rootViewController)
         nav.navigationBar.prefersLargeTitles = true

@@ -30,7 +30,7 @@ import UIKit
 
 // 1
 protocol StateCoordinatorDelegate: class {
-  func gotoState(_ nextState: SelectionState, card: Card?)
+  func gotoState(_ nextState: SelectionState, s: String?)
 }
 
 // 2
@@ -69,17 +69,12 @@ class StateCoordinator: NSObject {
 
 extension  StateCoordinator {
     func didSelectCollection(collection: String){
-        var card = Card()
-        
-        card.name = collection
-        delegate?.gotoState(state, card: card)
+
+        delegate?.gotoState(state, s: collection)
     }
     func didSelectCard(c: String){
-        var card = Card()
-        
-        card.name = c
-        delegate?.gotoState(SelectionState.cardSelected, card: card)
-    
+
+        delegate?.gotoState(SelectionState.cardSelected, s: c)
     }
 //  func didSelectCard(_ card: Card?) {
 //    selectedCard = card

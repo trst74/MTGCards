@@ -71,9 +71,9 @@ extension RootViewController {
 }
 
 extension RootViewController {
-    func rootFileList(_ split: UISplitViewController) -> CollectionsTableViewController? {
+    func rootFileList(_ split: UISplitViewController) -> CardListTableViewController? {
         let navigation = primaryNavigation(split)
-        guard let fileList = navigation.viewControllers.first as? CollectionsTableViewController else {
+        guard let fileList = navigation.viewControllers.first as? CardListTableViewController else {
             assertionFailure("Your split should have a FileListVC in the master nav")
             return nil
         }

@@ -12,14 +12,16 @@ class CollectionsTableViewController: UITableViewController {
   var stateCoordinator: StateCoordinator?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addButton)), animated: true)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    @objc func addButton(){
+        print("add button clicked")
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

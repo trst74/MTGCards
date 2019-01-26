@@ -12,7 +12,6 @@
 		EE2B78AB21EFE47600306990 /* UIView+AutolayoutHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */; };
 		EE2B78BA21EFE60E00306990 /* SelectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78B821EFE60E00306990 /* SelectionState.swift */; };
 		EE2B78BB21EFE60E00306990 /* StateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78B921EFE60E00306990 /* StateCoordinator.swift */; };
-		EE2B78BE21EFE68C00306990 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78BD21EFE68C00306990 /* Card.swift */; };
 		EE2B78C121F0075100306990 /* Collections.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2B78C021F0075100306990 /* Collections.storyboard */; };
 		EE2B78C321F0077400306990 /* CollectionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78C221F0077400306990 /* CollectionsTableViewController.swift */; };
 		EE2B78C521F0083E00306990 /* CardList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2B78C421F0083E00306990 /* CardList.storyboard */; };
@@ -21,6 +20,12 @@
 		EE2B78CB21F0089500306990 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78CA21F0089500306990 /* CardViewController.swift */; };
 		EE2B78CE21F009A600306990 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2B78CC21F009A600306990 /* PlaceholderView.storyboard */; };
 		EE2B78CF21F009A600306990 /* PlaceholderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78CD21F009A600306990 /* PlaceholderViewController.swift */; };
+		EE2B78D121F13ACD00306990 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78D021F13ACD00306990 /* DataManager.swift */; };
+		EE2B78D321F13EAF00306990 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78D221F13EAF00306990 /* Set.swift */; };
+		EE2B78D521F1518E00306990 /* SetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78D421F1518E00306990 /* SetList.swift */; };
+		EE2B821B21FCA8AE00306990 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B821A21FCA8AD00306990 /* CoreDataManager.swift */; };
+		EE2B821D21FCAD5200306990 /* Ruling.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B821C21FCAD5200306990 /* Ruling.swift */; };
+		EE2B821F21FCCA3900306990 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B821E21FCCA3900306990 /* Card.swift */; };
 		EEBE6D8E21EFE18F00A3464E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6D8D21EFE18F00A3464E /* AppDelegate.swift */; };
 		EEBE6D9021EFE18F00A3464E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6D8F21EFE18F00A3464E /* ViewController.swift */; };
 		EEBE6D9321EFE18F00A3464E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBE6D9121EFE18F00A3464E /* Main.storyboard */; };
@@ -54,7 +59,6 @@
 		EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AutolayoutHelp.swift"; sourceTree = "<group>"; };
 		EE2B78B821EFE60E00306990 /* SelectionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionState.swift; sourceTree = "<group>"; };
 		EE2B78B921EFE60E00306990 /* StateCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateCoordinator.swift; sourceTree = "<group>"; };
-		EE2B78BD21EFE68C00306990 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		EE2B78C021F0075100306990 /* Collections.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Collections.storyboard; sourceTree = "<group>"; };
 		EE2B78C221F0077400306990 /* CollectionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsTableViewController.swift; sourceTree = "<group>"; };
 		EE2B78C421F0083E00306990 /* CardList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CardList.storyboard; sourceTree = "<group>"; };
@@ -63,6 +67,12 @@
 		EE2B78CA21F0089500306990 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		EE2B78CC21F009A600306990 /* PlaceholderView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlaceholderView.storyboard; sourceTree = "<group>"; };
 		EE2B78CD21F009A600306990 /* PlaceholderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderViewController.swift; sourceTree = "<group>"; };
+		EE2B78D021F13ACD00306990 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		EE2B78D221F13EAF00306990 /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
+		EE2B78D421F1518E00306990 /* SetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetList.swift; sourceTree = "<group>"; };
+		EE2B821A21FCA8AD00306990 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		EE2B821C21FCAD5200306990 /* Ruling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ruling.swift; sourceTree = "<group>"; };
+		EE2B821E21FCCA3900306990 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		EEBE6D8A21EFE18F00A3464E /* MTGCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTGCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBE6D8D21EFE18F00A3464E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEBE6D8F21EFE18F00A3464E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +136,7 @@
 		EE2B78A921EFE45B00306990 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				EE2B821A21FCA8AD00306990 /* CoreDataManager.swift */,
 				EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */,
 			);
 			path = Utilities;
@@ -152,7 +163,11 @@
 		EE2B78BC21EFE67E00306990 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				EE2B78BD21EFE68C00306990 /* Card.swift */,
+				EE2B78D021F13ACD00306990 /* DataManager.swift */,
+				EE2B78D221F13EAF00306990 /* Set.swift */,
+				EE2B78D421F1518E00306990 /* SetList.swift */,
+				EE2B821C21FCAD5200306990 /* Ruling.swift */,
+				EE2B821E21FCCA3900306990 /* Card.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -362,9 +377,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE2B78C921F0087200306990 /* CardListTableViewController.swift in Sources */,
+				EE2B821F21FCCA3900306990 /* Card.swift in Sources */,
 				EE2B78CF21F009A600306990 /* PlaceholderViewController.swift in Sources */,
+				EE2B78D521F1518E00306990 /* SetList.swift in Sources */,
 				EE2B78A821EFE3DB00306990 /* RootViewController.swift in Sources */,
-				EE2B78BE21EFE68C00306990 /* Card.swift in Sources */,
+				EE2B78D121F13ACD00306990 /* DataManager.swift in Sources */,
+				EE2B78D321F13EAF00306990 /* Set.swift in Sources */,
 				EE2B78A621EFE39700306990 /* RootViewController+ViewFactory.swift in Sources */,
 				EE2B78AB21EFE47600306990 /* UIView+AutolayoutHelp.swift in Sources */,
 				EEBE6D9021EFE18F00A3464E /* ViewController.swift in Sources */,
@@ -373,7 +391,9 @@
 				EE2B78CB21F0089500306990 /* CardViewController.swift in Sources */,
 				EE2B78BB21EFE60E00306990 /* StateCoordinator.swift in Sources */,
 				EE2B78BA21EFE60E00306990 /* SelectionState.swift in Sources */,
+				EE2B821B21FCA8AE00306990 /* CoreDataManager.swift in Sources */,
 				EE2B78C321F0077400306990 /* CollectionsTableViewController.swift in Sources */,
+				EE2B821D21FCAD5200306990 /* Ruling.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
