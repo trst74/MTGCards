@@ -1,10 +1,113 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18C54" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Card" representedClassName=".Card" syncable="YES">
+        <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="borderColor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="colorIdentity" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="colors" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="convertedManaCost" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="faceConvertedManaCost" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="flavorText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="frameVersion" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasFoil" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="hasNonFoil" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="layout" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="loyalty" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="manaCost" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="multiverseID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="names" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="originalText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="originalType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="power" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="printings" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="rarity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="scryfallID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="side" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="starter" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="subtypes" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="supertypes" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="tcgplayerProductID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="tcgplayerPurchaseURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="toughness" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="types" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="variations" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="watermark" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="foreignData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ForeignDatum" syncable="YES"/>
+        <relationship name="legalities" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Legalities" syncable="YES"/>
+        <relationship name="rulings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ruling" syncable="YES"/>
+    </entity>
+    <entity name="ForeignDatum" representedClassName=".ForeignDatum" syncable="YES">
+        <attribute name="flavorText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="language" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="multiverseID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Legalities" representedClassName=".Legalities" syncable="YES">
+        <attribute name="brawl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="commander" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="duel" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="frontier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="future" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="legacy" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="modern" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pauper" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="penny" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="standard" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="the1V1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vintage" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Meta" representedClassName=".Meta" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="version" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Ruling" representedClassName=".Ruling" syncable="YES">
         <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Set" representedClassName=".Set" syncable="YES">
+        <attribute name="baseSetSize" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="block" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mtgoCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="releaseDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tcgplayerGroupID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="totalSetSize" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Card" syncable="YES"/>
+        <relationship name="meta" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Meta" syncable="YES"/>
+        <relationship name="tokens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Token" syncable="YES"/>
+    </entity>
+    <entity name="Token" representedClassName=".Token" syncable="YES">
+        <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="borderColor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="colorIdentity" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="colors" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="power" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reverseRelated" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="scryfallID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="toughness" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="watermark" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
+        <element name="Card" positionX="18" positionY="180" width="128" height="630"/>
+        <element name="ForeignDatum" positionX="-36" positionY="27" width="128" height="135"/>
+        <element name="Legalities" positionX="-18" positionY="81" width="128" height="225"/>
+        <element name="Meta" positionX="-54" positionY="9" width="128" height="75"/>
         <element name="Ruling" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="Set" positionX="36" positionY="189" width="128" height="225"/>
+        <element name="Token" positionX="0" positionY="162" width="128" height="255"/>
     </elements>
 </model>

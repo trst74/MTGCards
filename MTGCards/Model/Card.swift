@@ -7,47 +7,50 @@
 //
 
 import Foundation
+import CoreData
+import UIKit
 
-class Card: Codable {
-    let artist: String?
-    let borderColor: String?
-    let colorIdentity: [String]?
-    let colors: [String]?
-    let convertedManaCost: Int?
-    let flavorText: String?
-    let foreignData: [ForeignDatum]?
-    let frameVersion: String?
-    let hasFoil: Bool?
-    let hasNonFoil: Bool?
-    let layout: String?
-    let legalities: Legalities?
-    let manaCost: String?
-    let multiverseID: Int?
-    let name: String?
-    let number: String?
-    let originalText: String?
-    let originalType: String?
-    let power: String?
-    let printings: [String]?
-    let rarity: String?
-    let rulings: [Ruling]?
-    let scryfallID: String?
-    let subtypes: [String]?
-    let supertypes: [String]?
-    let tcgplayerProductID: Int?
-    let tcgplayerPurchaseURL: String?
-    let text: String?
-    let toughness: String?
-    let type: String?
-    let types: [String]?
-    let uuid: String?
-    let watermark: String?
-    let names: [String]?
-    let loyalty: String?
-    let faceConvertedManaCost: Int?
-    let side: String?
-    let variations: [String]?
-    let starter: Bool?
+
+class Card: NSManagedObject, Codable {
+    @NSManaged var artist: String?
+    @NSManaged var borderColor: String?
+    @NSManaged var colorIdentity: [String]?
+    @NSManaged var colors: [String]?
+    @NSManaged var convertedManaCost: Float
+    @NSManaged var flavorText: String?
+    @NSManaged var foreignData: NSSet
+    @NSManaged var frameVersion: String?
+    @NSManaged var hasFoil: Bool
+    @NSManaged var hasNonFoil: Bool
+    @NSManaged var layout: String?
+    @NSManaged var legalities: Legalities?
+    @NSManaged var manaCost: String?
+    @NSManaged var multiverseID: Int32
+    @NSManaged var name: String?
+    @NSManaged var number: String?
+    @NSManaged var originalText: String?
+    @NSManaged var originalType: String?
+    @NSManaged var power: String?
+    @NSManaged var printings: [String]?
+    @NSManaged var rarity: String?
+    @NSManaged var rulings: NSSet
+    @NSManaged var scryfallID: String?
+    @NSManaged var subtypes: [String]?
+    @NSManaged var supertypes: [String]?
+    @NSManaged var tcgplayerProductID: Int32
+    @NSManaged var tcgplayerPurchaseURL: String?
+    @NSManaged var text: String?
+    @NSManaged var toughness: String?
+    @NSManaged var type: String?
+    @NSManaged var types: [String]?
+    @NSManaged var uuid: String?
+    @NSManaged var watermark: String?
+    @NSManaged var names: [String]?
+    @NSManaged var loyalty: String?
+    @NSManaged var faceConvertedManaCost: Float
+    @NSManaged var side: String?
+    @NSManaged var variations: [String]?
+    @NSManaged var starter: Bool
     
     enum CodingKeys: String, CodingKey {
         case artist = "artist"
@@ -91,148 +94,162 @@ class Card: Codable {
         case starter = "starter"
     }
     
-    init(artist: String?, borderColor: String?, colorIdentity: [String]?, colors: [String]?, convertedManaCost: Int?, flavorText: String?, foreignData: [ForeignDatum]?, frameVersion: String?, hasFoil: Bool?, hasNonFoil: Bool?, layout: String?, legalities: Legalities?, manaCost: String?, multiverseID: Int?, name: String?, number: String?, originalText: String?, originalType: String?, power: String?, printings: [String]?, rarity: String?, rulings: [Ruling]?, scryfallID: String?, subtypes: [String]?, supertypes: [String]?, tcgplayerProductID: Int?, tcgplayerPurchaseURL: String?, text: String?, toughness: String?, type: String?, types: [String]?, uuid: String?, watermark: String?, names: [String]?, loyalty: String?, faceConvertedManaCost: Int?, side: String?, variations: [String]?, starter: Bool?) {
-        self.artist = artist
-        self.borderColor = borderColor
-        self.colorIdentity = colorIdentity
-        self.colors = colors
-        self.convertedManaCost = convertedManaCost
-        self.flavorText = flavorText
-        self.foreignData = foreignData
-        self.frameVersion = frameVersion
-        self.hasFoil = hasFoil
-        self.hasNonFoil = hasNonFoil
-        self.layout = layout
-        self.legalities = legalities
-        self.manaCost = manaCost
-        self.multiverseID = multiverseID
-        self.name = name
-        self.number = number
-        self.originalText = originalText
-        self.originalType = originalType
-        self.power = power
-        self.printings = printings
-        self.rarity = rarity
-        self.rulings = rulings
-        self.scryfallID = scryfallID
-        self.subtypes = subtypes
-        self.supertypes = supertypes
-        self.tcgplayerProductID = tcgplayerProductID
-        self.tcgplayerPurchaseURL = tcgplayerPurchaseURL
-        self.text = text
-        self.toughness = toughness
-        self.type = type
-        self.types = types
-        self.uuid = uuid
-        self.watermark = watermark
-        self.names = names
-        self.loyalty = loyalty
-        self.faceConvertedManaCost = faceConvertedManaCost
-        self.side = side
-        self.variations = variations
-        self.starter = starter
+    required convenience init(from decoder: Decoder) throws {
+        guard let managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext,
+            let entity = NSEntityDescription.entity(forEntityName: "Card", in: managedObjectContext) else {
+                fatalError("Failed to decode Card")
+        }
+        
+        self.init(entity: entity, insertInto: managedObjectContext)
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.artist = try container.decodeIfPresent(String.self, forKey: .artist)
+        self.borderColor = try container.decodeIfPresent(String.self, forKey: .borderColor)
+        self.colorIdentity = try container.decodeIfPresent([String].self, forKey: .colorIdentity)
+        self.colors = try container.decodeIfPresent([String].self, forKey: .colors)
+        if let cmc = try container.decodeIfPresent(Float.self, forKey: .convertedManaCost) {
+                    self.convertedManaCost = cmc
+        }
+        self.flavorText = try container.decodeIfPresent(String.self, forKey: .flavorText)
+        if let fd = try container.decodeIfPresent([ForeignDatum].self, forKey: .foreignData){
+            if fd.count > 0 {
+                self.foreignData.addingObjects(from: fd)
+            }
+        }
+        self.frameVersion = try container.decodeIfPresent(String.self, forKey: .frameVersion)
+        self.hasFoil = try container.decodeIfPresent(Bool.self, forKey: .hasFoil)!
+        self.hasNonFoil = try container.decodeIfPresent(Bool.self, forKey: .hasNonFoil)!
+        self.layout = try container.decodeIfPresent(String.self, forKey: .layout)
+        self.legalities = try container.decodeIfPresent(Legalities.self, forKey: .legalities)
+        self.manaCost = try container.decodeIfPresent(String.self, forKey: .manaCost)
+        if let mvid = try container.decodeIfPresent(Int32.self, forKey: .multiverseID) {
+            self.multiverseID = mvid
+        }
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.number = try container.decodeIfPresent(String.self, forKey: .number)
+        self.originalText = try container.decodeIfPresent(String.self, forKey: .originalText)
+        self.originalType = try container.decodeIfPresent(String.self, forKey: .originalType)
+        self.power = try container.decodeIfPresent(String.self, forKey: .power)
+        self.printings = try container.decodeIfPresent([String].self, forKey: .printings)
+        self.rarity = try container.decodeIfPresent(String.self, forKey: .rarity)
+        if let rulings = try container.decodeIfPresent([Ruling].self, forKey: .rulings) {
+            if rulings.count > 0 {
+                self.rulings.addingObjects(from: rulings)
+            }
+        }
+        self.scryfallID = try container.decodeIfPresent(String.self, forKey: .scryfallID)
+        self.subtypes = try container.decodeIfPresent([String].self, forKey: .subtypes)
+        self.supertypes = try container.decodeIfPresent([String].self, forKey: .supertypes)
+        if let tcgpID = try container.decodeIfPresent(Int32.self, forKey: .tcgplayerProductID) {
+            self.tcgplayerProductID = tcgpID
+        }
+        self.tcgplayerPurchaseURL = try container.decodeIfPresent(String.self, forKey: .tcgplayerPurchaseURL)
+        self.text = try container.decodeIfPresent(String.self, forKey: .text)
+        self.toughness = try container.decodeIfPresent(String.self, forKey: .toughness)
+        self.type = try container.decodeIfPresent(String.self, forKey: .type)
+        self.types = try container.decodeIfPresent([String].self, forKey: .types)
+        self.uuid = try container.decodeIfPresent(String.self, forKey: .uuid)
+        self.watermark = try container.decodeIfPresent(String.self, forKey: .watermark)
+        self.names = try container.decodeIfPresent([String].self, forKey: .names)
+        self.loyalty = try container.decodeIfPresent(String.self, forKey: .loyalty)
+        if let face =  try container.decodeIfPresent(Float.self, forKey: .faceConvertedManaCost) {
+            self.faceConvertedManaCost = face
+        }
+        self.side = try container.decodeIfPresent(String.self, forKey: .side)
+        self.variations = try container.decodeIfPresent([String].self, forKey: .variations)
+        if let starter = try container.decodeIfPresent(Bool.self, forKey: .starter) {
+            self.starter = starter
+        }
+        
     }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(artist, forKey: .artist)
+        try container.encode(borderColor, forKey: .borderColor)
+        try container.encode(colorIdentity, forKey: .colorIdentity)
+        try container.encode(colors, forKey: .colors)
+        try container.encode(convertedManaCost, forKey: .convertedManaCost)
+        try container.encode(flavorText, forKey: .flavorText)
+        //try container.encode(foreignData, forKey: .foreignData)
+        try container.encode(frameVersion, forKey: .frameVersion)
+        try container.encode(hasFoil, forKey: .hasFoil)
+        try container.encode(hasNonFoil, forKey: .hasNonFoil)
+        try container.encode(layout, forKey: .layout)
+        try container.encode(legalities, forKey: .legalities)
+        try container.encode(manaCost, forKey: .manaCost)
+        try container.encode(multiverseID, forKey: .multiverseID)
+        try container.encode(name, forKey: .name)
+        try container.encode(number, forKey: .number)
+        try container.encode(originalText, forKey: .originalText)
+        try container.encode(originalType, forKey: .originalType)
+        try container.encode(power, forKey: .power)
+        try container.encode(printings, forKey: .printings)
+        try container.encode(rarity, forKey: .rarity)
+        //try container.encode(rulings, forKey: .rulings)
+        try container.encode(scryfallID, forKey: .scryfallID)
+        try container.encode(subtypes, forKey: .subtypes)
+        try container.encode(supertypes, forKey: .supertypes)
+        try container.encode(tcgplayerProductID, forKey: .tcgplayerProductID)
+        try container.encode(tcgplayerPurchaseURL, forKey: .tcgplayerPurchaseURL)
+        try container.encode(text, forKey: .text)
+        try container.encode(toughness, forKey: .toughness)
+        try container.encode(type, forKey: .type)
+        try container.encode(types, forKey: .types)
+        try container.encode(uuid, forKey: .uuid)
+        try container.encode(watermark, forKey: .watermark)
+        try container.encode(names, forKey: .names)
+        try container.encode(loyalty, forKey: .loyalty)
+        try container.encode(faceConvertedManaCost, forKey: .faceConvertedManaCost)
+        try container.encode(side, forKey: .side)
+        try container.encode(variations, forKey: .variations)
+        try container.encode(starter, forKey: .starter)
+        
+        
+    }
+    //    init(artist: String?, borderColor: String?, colorIdentity: [String]?, colors: [String]?, convertedManaCost: Int?, flavorText: String?, foreignData: [ForeignDatum]?, frameVersion: String?, hasFoil: Bool?, hasNonFoil: Bool?, layout: String?, legalities: Legalities?, manaCost: String?, multiverseID: Int?, name: String?, number: String?, originalText: String?, originalType: String?, power: String?, printings: [String]?, rarity: String?, rulings: [Ruling]?, scryfallID: String?, subtypes: [String]?, supertypes: [String]?, tcgplayerProductID: Int?, tcgplayerPurchaseURL: String?, text: String?, toughness: String?, type: String?, types: [String]?, uuid: String?, watermark: String?, names: [String]?, loyalty: String?, faceConvertedManaCost: Int?, side: String?, variations: [String]?, starter: Bool?) {
+    //        self.artist = artist
+    //        self.borderColor = borderColor
+    //        self.colorIdentity = colorIdentity
+    //        self.colors = colors
+    //        self.convertedManaCost = convertedManaCost
+    //        self.flavorText = flavorText
+    //        self.foreignData = foreignData
+    //        self.frameVersion = frameVersion
+    //        self.hasFoil = hasFoil
+    //        self.hasNonFoil = hasNonFoil
+    //        self.layout = layout
+    //        self.legalities = legalities
+    //        self.manaCost = manaCost
+    //        self.multiverseID = multiverseID
+    //        self.name = name
+    //        self.number = number
+    //        self.originalText = originalText
+    //        self.originalType = originalType
+    //        self.power = power
+    //        self.printings = printings
+    //        self.rarity = rarity
+    //        self.rulings = rulings
+    //        self.scryfallID = scryfallID
+    //        self.subtypes = subtypes
+    //        self.supertypes = supertypes
+    //        self.tcgplayerProductID = tcgplayerProductID
+    //        self.tcgplayerPurchaseURL = tcgplayerPurchaseURL
+    //        self.text = text
+    //        self.toughness = toughness
+    //        self.type = type
+    //        self.types = types
+    //        self.uuid = uuid
+    //        self.watermark = watermark
+    //        self.names = names
+    //        self.loyalty = loyalty
+    //        self.faceConvertedManaCost = faceConvertedManaCost
+    //        self.side = side
+    //        self.variations = variations
+    //        self.starter = starter
+    //    }
 }
 extension Card {
-    convenience init(data: Data) throws {
-        let me = try newJSONDecoder().decode(Card.self, from: data)
-        self.init(artist: me.artist, borderColor: me.borderColor, colorIdentity: me.colorIdentity, colors: me.colors, convertedManaCost: me.convertedManaCost, flavorText: me.flavorText, foreignData: me.foreignData, frameVersion: me.frameVersion, hasFoil: me.hasFoil, hasNonFoil: me.hasNonFoil, layout: me.layout, legalities: me.legalities, manaCost: me.manaCost, multiverseID: me.multiverseID, name: me.name, number: me.number, originalText: me.originalText, originalType: me.originalType, power: me.power, printings: me.printings, rarity: me.rarity, rulings: me.rulings, scryfallID: me.scryfallID, subtypes: me.subtypes, supertypes: me.supertypes, tcgplayerProductID: me.tcgplayerProductID, tcgplayerPurchaseURL: me.tcgplayerPurchaseURL, text: me.text, toughness: me.toughness, type: me.type, types: me.types, uuid: me.uuid, watermark: me.watermark, names: me.names, loyalty: me.loyalty, faceConvertedManaCost: me.faceConvertedManaCost, side: me.side, variations: me.variations, starter: me.starter)
-    }
-    
-    convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-    
-    convenience init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-    
-    func with(
-        artist: String?? = nil,
-        borderColor: String?? = nil,
-        colorIdentity: [String]?? = nil,
-        colors: [String]?? = nil,
-        convertedManaCost: Int?? = nil,
-        flavorText: String?? = nil,
-        foreignData: [ForeignDatum]?? = nil,
-        frameVersion: String?? = nil,
-        hasFoil: Bool?? = nil,
-        hasNonFoil: Bool?? = nil,
-        layout: String?? = nil,
-        legalities: Legalities?? = nil,
-        manaCost: String?? = nil,
-        multiverseID: Int?? = nil,
-        name: String?? = nil,
-        number: String?? = nil,
-        originalText: String?? = nil,
-        originalType: String?? = nil,
-        power: String?? = nil,
-        printings: [String]?? = nil,
-        rarity: String?? = nil,
-        rulings: [Ruling]?? = nil,
-        scryfallID: String?? = nil,
-        subtypes: [String]?? = nil,
-        supertypes: [String]?? = nil,
-        tcgplayerProductID: Int?? = nil,
-        tcgplayerPurchaseURL: String?? = nil,
-        text: String?? = nil,
-        toughness: String?? = nil,
-        type: String?? = nil,
-        types: [String]?? = nil,
-        uuid: String?? = nil,
-        watermark: String?? = nil,
-        names: [String]?? = nil,
-        loyalty: String?? = nil,
-        faceConvertedManaCost: Int?? = nil,
-        side: String?? = nil,
-        variations: [String]?? = nil,
-        starter: Bool?? = nil
-        ) -> Card {
-        return Card(
-            artist: artist ?? self.artist,
-            borderColor: borderColor ?? self.borderColor,
-            colorIdentity: colorIdentity ?? self.colorIdentity,
-            colors: colors ?? self.colors,
-            convertedManaCost: convertedManaCost ?? self.convertedManaCost,
-            flavorText: flavorText ?? self.flavorText,
-            foreignData: foreignData ?? self.foreignData,
-            frameVersion: frameVersion ?? self.frameVersion,
-            hasFoil: hasFoil ?? self.hasFoil,
-            hasNonFoil: hasNonFoil ?? self.hasNonFoil,
-            layout: layout ?? self.layout,
-            legalities: legalities ?? self.legalities,
-            manaCost: manaCost ?? self.manaCost,
-            multiverseID: multiverseID ?? self.multiverseID,
-            name: name ?? self.name,
-            number: number ?? self.number,
-            originalText: originalText ?? self.originalText,
-            originalType: originalType ?? self.originalType,
-            power: power ?? self.power,
-            printings: printings ?? self.printings,
-            rarity: rarity ?? self.rarity,
-            rulings: rulings ?? self.rulings,
-            scryfallID: scryfallID ?? self.scryfallID,
-            subtypes: subtypes ?? self.subtypes,
-            supertypes: supertypes ?? self.supertypes,
-            tcgplayerProductID: tcgplayerProductID ?? self.tcgplayerProductID,
-            tcgplayerPurchaseURL: tcgplayerPurchaseURL ?? self.tcgplayerPurchaseURL,
-            text: text ?? self.text,
-            toughness: toughness ?? self.toughness,
-            type: type ?? self.type,
-            types: types ?? self.types,
-            uuid: uuid ?? self.uuid,
-            watermark: watermark ?? self.watermark,
-            names: names ?? self.names,
-            loyalty: loyalty ?? self.loyalty,
-            faceConvertedManaCost: faceConvertedManaCost ?? self.faceConvertedManaCost,
-            side: side ?? self.side,
-            variations: variations ?? self.variations,
-            starter: starter ?? self.starter
-        )
-    }
     
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)

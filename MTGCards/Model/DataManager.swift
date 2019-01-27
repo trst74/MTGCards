@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import CoreData
+import UIKit
 
 public class DataManager {
     static func getLocalVersion() -> String {
@@ -14,11 +16,21 @@ public class DataManager {
     }
     static func getSet(setCode: String) -> Set?{
         //https://mtgjson.com/json/RNA.json
+        guard let managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+            else {
+                fatalError("Failed to decode Set")
+        }
+        print(setCode)
         let rnaURL = URL(string: "https://mtgjson.com/json/\(setCode).json")
-        let RNA = try? Set.init(fromURL: rnaURL!)
-        if let rna = RNA {
-            print(rna.name! + ": " + (rna.cards?.count.description)!)
-            return rna
+        let data = try? Data(contentsOf: rnaURL!)
+        if let d = data {
+            do {
+                let RNA = try newJSONDecoder().decode(Set.self, from: d)
+                print(RNA.cards.count)
+            } catch let error {
+                print(error)
+            }
+            (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
         }
         return nil
     }
@@ -35,6 +47,6 @@ public class DataManager {
     static func getRNA() -> Set? {
         var s = getSet(setCode: "RNA")
         
-            return s
+        return s
     }
 }

@@ -1,5 +1,5 @@
 //
-//  Ruling.swift
+//  Meta.swift
 //  MTGCards
 //
 //  Created by Joseph Smith on 1/26/19.
@@ -10,36 +10,35 @@ import Foundation
 import CoreData
 import UIKit
 
-class Ruling: NSManagedObject, Codable {
+class Meta: NSManagedObject, Codable {
     @NSManaged var date: String?
-    @NSManaged var text: String?
+    @NSManaged var version: String?
     
     enum CodingKeys: String, CodingKey {
         case date = "date"
-        case text = "text"
+        case version = "version"
     }
-    
     required convenience init(from decoder: Decoder) throws {
         guard let managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext,
-            let entity = NSEntityDescription.entity(forEntityName: "Ruling", in: managedObjectContext) else {
-                fatalError("Failed to decode Ruling")
+            let entity = NSEntityDescription.entity(forEntityName: "Meta", in: managedObjectContext) else {
+                fatalError("Failed to decode Meta")
         }
         
         self.init(entity: entity, insertInto: managedObjectContext)
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.date = try container.decodeIfPresent(String.self, forKey: .date)
-        self.text = try container.decodeIfPresent(String.self, forKey: .text)
+        self.version = try container.decodeIfPresent(String.self, forKey: .version)
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(date, forKey: .date)
-        try container.encode(text, forKey: .text)
+        try container.encode(version, forKey: .version)
     }
-    
-    //    init(date: String?, text: String?) {
+    //    init(date: String?, version: String?) {
     //        self.date = date
-    //        self.text = text
+    //        self.version = version
     //    }
 }
+
