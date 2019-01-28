@@ -9,13 +9,23 @@
 import UIKit
 import CoreData
 
-class CardListTableViewController: UITableViewController {
+class CardListTableViewController: UITableViewController, UISearchResultsUpdating {
+
+   
+    
     var appDelegate: AppDelegate = (UIApplication.shared.delegate as? AppDelegate)!
     var cardlist: [Card] = []
+    var filteredCardList : [Card] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         //cardlist = DataManager.getRNA()
         cardlist = getSearchCards()
+        
+        let search = UISearchController(searchResultsController: nil)
+        search.obscuresBackgroundDuringPresentation = false
+        search.searchBar.placeholder = "Search"
+        search.searchResultsUpdater = self
+        navigationItem.searchController = search
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -32,13 +42,14 @@ class CardListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return cardlist.count
+        return filteredCardList.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath)
-        cell.textLabel?.text = cardlist[indexPath.row].name
+        cell.textLabel?.text = filteredCardList[indexPath.row].name
+        cell.detailTextLabel?.text = filteredCardList[indexPath.row].set.name
         // Configure the cell...
         
         return cell
@@ -57,6 +68,7 @@ class CardListTableViewController: UITableViewController {
             let c = try managedContext.fetch(fetchRequest)
             print(c.count)
             cardList = c
+            filteredCardList = c
             return cardList
         } catch {
             print("Unable to Fetch Cards, (\(error))")
@@ -110,9 +122,26 @@ class CardListTableViewController: UITableViewController {
      }
      */
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let name = cardlist[indexPath.row].name
-        StateCoordinator.shared.didSelectCard(c: name ?? "")
+        let name = filteredCardList[indexPath.row].name
+        StateCoordinator.shared.didSelectCard(c: filteredCardList[indexPath.row])
     }
+    
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text, text.count > 0 else {
+            filteredCardList = cardlist
+            return
+        }
+        
+        filteredCardList = cardlist.filter(
+            { ($0.name?.contains(text))!
+                
+        })
+        tableView.reloadData()
+        return
+        
+    }
+    
 }
 extension CardListTableViewController {
     static func freshCardList() -> CardListTableViewController {

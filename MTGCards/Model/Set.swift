@@ -50,6 +50,9 @@ class Set: NSManagedObject, Codable {
         }
         self.block = try container.decodeIfPresent(String.self, forKey: .block)
         if let cards = try container.decodeIfPresent([Card].self, forKey: .cards) {
+            for card in cards {
+                card.set = self
+            }
                self.cards.addingObjects(from: cards)
         }
         self.code = try container.decodeIfPresent(String.self, forKey: .code)
@@ -143,6 +146,7 @@ func newJSONEncoder() -> JSONEncoder {
     let encoder = JSONEncoder()
     if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
         encoder.dateEncodingStrategy = .iso8601
+        encoder.outputFormatting = .prettyPrinted
     }
     return encoder
 }

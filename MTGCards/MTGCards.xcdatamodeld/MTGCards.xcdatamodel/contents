@@ -40,6 +40,7 @@
         <relationship name="foreignData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ForeignDatum" syncable="YES"/>
         <relationship name="legalities" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Legalities" syncable="YES"/>
         <relationship name="rulings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ruling" syncable="YES"/>
+        <relationship name="set" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Set" inverseName="cards" inverseEntity="Set" syncable="YES"/>
     </entity>
     <entity name="ForeignDatum" representedClassName=".ForeignDatum" syncable="YES">
         <attribute name="flavorText" optional="YES" attributeType="String" syncable="YES"/>
@@ -81,7 +82,7 @@
         <attribute name="tcgplayerGroupID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="totalSetSize" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Card" syncable="YES"/>
+        <relationship name="cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Card" inverseName="set" inverseEntity="Card" syncable="YES"/>
         <relationship name="meta" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Meta" syncable="YES"/>
         <relationship name="tokens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Token" syncable="YES"/>
     </entity>
@@ -102,7 +103,7 @@
         <attribute name="watermark" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Card" positionX="18" positionY="180" width="128" height="630"/>
+        <element name="Card" positionX="18" positionY="180" width="128" height="645"/>
         <element name="ForeignDatum" positionX="-36" positionY="27" width="128" height="135"/>
         <element name="Legalities" positionX="-18" positionY="81" width="128" height="225"/>
         <element name="Meta" positionX="-54" positionY="9" width="128" height="75"/>

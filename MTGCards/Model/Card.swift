@@ -51,6 +51,7 @@ class Card: NSManagedObject, Codable {
     @NSManaged var side: String?
     @NSManaged var variations: [String]?
     @NSManaged var starter: Bool
+    @NSManaged var set: Set
     
     enum CodingKeys: String, CodingKey {
         case artist = "artist"

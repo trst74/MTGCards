@@ -106,7 +106,7 @@ class RootViewController: UIViewController {
 }
 
 extension RootViewController: StateCoordinatorDelegate {
-    func gotoState(_ nextState: SelectionState, s: String?) {
+    func gotoState(_ nextState: SelectionState, s: Card?) {
         //        if nextState == .folderSelected, let folder = file {
         //            gotoFolderSelected(folder)
         //        } else if nextState == .fileSelected, let file = file {
@@ -119,9 +119,11 @@ extension RootViewController: StateCoordinatorDelegate {
                 gotoCardSelected(s: s)
             }else {
                 
-                gotoCollectionSelected(s: s)
+                
             }
-    }
+        } else {
+            gotoCollectionSelected(s: "Search")
+        }
     }
     //
     //    //1
@@ -160,7 +162,7 @@ extension RootViewController: StateCoordinatorDelegate {
     //
     //    }
     //
-    func gotoCardSelected(s: String){
+    func gotoCardSelected(s: Card){
         let cardDetails = CardViewController.refreshCardController(s: s)
         let navigation = freshNavigationController(rootViewController: cardDetails)
         targetSplitForCurrentTraitCollection()
