@@ -20,13 +20,13 @@ public class DataManager {
             else {
                 fatalError("Failed to decode Set")
         }
-        print(setCode)
+        //print(setCode)
         let rnaURL = URL(string: "https://mtgjson.com/json/\(setCode).json")
         let data = try? Data(contentsOf: rnaURL!)
         if let d = data {
             do {
                 let RNA = try newJSONDecoder().decode(Set.self, from: d)
-                print(RNA.cards.count)
+                print("\(setCode): \(RNA.cards.count)")
             } catch let error {
                 print(error)
             }
@@ -40,7 +40,9 @@ public class DataManager {
         if let sl = setList {
             print(sl.count)
             for s in sl {
+            
                 getSet(setCode: s.code!)
+                
             }
         }
     }

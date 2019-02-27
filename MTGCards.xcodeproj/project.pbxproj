@@ -30,6 +30,9 @@
 		EE2B822321FD258700306990 /* Legalities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B822221FD258700306990 /* Legalities.swift */; };
 		EE2B822521FD25C800306990 /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B822421FD25C800306990 /* Meta.swift */; };
 		EE2B822721FD25FD00306990 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B822621FD25FD00306990 /* Token.swift */; };
+		EEB5D81D2205EA670070FF8B /* CardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */; };
+		EEB5D81F2205EBFF0070FF8B /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */; };
+		EEB5D8212205F0D30070FF8B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D8202205F0D30070FF8B /* GradientView.swift */; };
 		EEBE6D8E21EFE18F00A3464E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6D8D21EFE18F00A3464E /* AppDelegate.swift */; };
 		EEBE6D9021EFE18F00A3464E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6D8F21EFE18F00A3464E /* ViewController.swift */; };
 		EEBE6D9321EFE18F00A3464E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBE6D9121EFE18F00A3464E /* Main.storyboard */; };
@@ -81,6 +84,9 @@
 		EE2B822221FD258700306990 /* Legalities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Legalities.swift; sourceTree = "<group>"; };
 		EE2B822421FD25C800306990 /* Meta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meta.swift; sourceTree = "<group>"; };
 		EE2B822621FD25FD00306990 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListTableViewCell.swift; sourceTree = "<group>"; };
+		EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Custom.swift"; sourceTree = "<group>"; };
+		EEB5D8202205F0D30070FF8B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		EEBE6D8A21EFE18F00A3464E /* MTGCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTGCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBE6D8D21EFE18F00A3464E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEBE6D8F21EFE18F00A3464E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +152,8 @@
 			children = (
 				EE2B821A21FCA8AD00306990 /* CoreDataManager.swift */,
 				EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */,
+				EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */,
+				EEB5D8202205F0D30070FF8B /* GradientView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -195,6 +203,7 @@
 				EE2B78C621F0084A00306990 /* Card.storyboard */,
 				EE2B78C821F0087200306990 /* CardListTableViewController.swift */,
 				EE2B78CA21F0089500306990 /* CardViewController.swift */,
+				EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */,
 			);
 			path = "Member View Controllers";
 			sourceTree = "<group>";
@@ -390,6 +399,7 @@
 			files = (
 				EE2B78C921F0087200306990 /* CardListTableViewController.swift in Sources */,
 				EE2B821F21FCCA3900306990 /* Card.swift in Sources */,
+				EEB5D81F2205EBFF0070FF8B /* UIColor+Custom.swift in Sources */,
 				EE2B78CF21F009A600306990 /* PlaceholderViewController.swift in Sources */,
 				EE2B78D521F1518E00306990 /* SetList.swift in Sources */,
 				EE2B78A821EFE3DB00306990 /* RootViewController.swift in Sources */,
@@ -409,7 +419,9 @@
 				EE2B821B21FCA8AE00306990 /* CoreDataManager.swift in Sources */,
 				EE2B78C321F0077400306990 /* CollectionsTableViewController.swift in Sources */,
 				EE2B822121FD254100306990 /* ForeignDatum.swift in Sources */,
+				EEB5D8212205F0D30070FF8B /* GradientView.swift in Sources */,
 				EE2B821D21FCAD5200306990 /* Ruling.swift in Sources */,
+				EEB5D81D2205EA670070FF8B /* CardListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

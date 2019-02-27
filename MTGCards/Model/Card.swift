@@ -52,6 +52,7 @@ class Card: NSManagedObject, Codable {
     @NSManaged var variations: [String]?
     @NSManaged var starter: Bool
     @NSManaged var set: Set
+    @NSManaged var isReserved: Bool
     
     enum CodingKeys: String, CodingKey {
         case artist = "artist"
@@ -93,6 +94,7 @@ class Card: NSManagedObject, Codable {
         case side = "side"
         case variations = "variations"
         case starter = "starter"
+        case isReserved = "isReserved"
     }
     
     required convenience init(from decoder: Decoder) throws {
@@ -161,7 +163,11 @@ class Card: NSManagedObject, Codable {
         if let starter = try container.decodeIfPresent(Bool.self, forKey: .starter) {
             self.starter = starter
         }
-        
+        if let reserved = try container.decodeIfPresent(Bool.self, forKey: .isReserved){
+            self.isReserved = reserved
+        } else {
+            self.isReserved = false
+        }
     }
     
     public func encode(to encoder: Encoder) throws {

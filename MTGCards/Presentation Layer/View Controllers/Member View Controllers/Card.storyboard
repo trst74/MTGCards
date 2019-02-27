@@ -18,25 +18,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JVM-oq-xdW">
-                                <rect key="frame" x="0.0" y="10" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J82-sV-UWG">
+                                <rect key="frame" x="0.0" y="20" width="375" height="523.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="J82-sV-UWG" secondAttribute="height" multiplier="149 : 208" id="db5-M7-9lS"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="JVM-oq-xdW" firstAttribute="height" secondItem="yeU-fE-uvR" secondAttribute="height" id="KWY-wL-S8c"/>
-                            <constraint firstItem="JVM-oq-xdW" firstAttribute="width" secondItem="yeU-fE-uvR" secondAttribute="width" id="gIS-91-h95"/>
-                            <constraint firstItem="JVM-oq-xdW" firstAttribute="centerY" secondItem="fwu-5A-cAe" secondAttribute="centerY" id="qQz-Vt-dQ5"/>
-                            <constraint firstItem="JVM-oq-xdW" firstAttribute="centerX" secondItem="fwu-5A-cAe" secondAttribute="centerX" id="qvR-Z7-e3x"/>
+                            <constraint firstItem="fwu-5A-cAe" firstAttribute="trailing" secondItem="J82-sV-UWG" secondAttribute="trailing" id="PeV-Xk-nkl"/>
+                            <constraint firstItem="J82-sV-UWG" firstAttribute="top" secondItem="fwu-5A-cAe" secondAttribute="top" id="Skn-Kz-cgp"/>
+                            <constraint firstItem="J82-sV-UWG" firstAttribute="leading" secondItem="fwu-5A-cAe" secondAttribute="leading" id="Tuv-tz-rvT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fwu-5A-cAe"/>
                     </view>
                     <connections>
-                        <outlet property="jsontextarea" destination="JVM-oq-xdW" id="fgm-2N-rVo"/>
+                        <outlet property="cardImage" destination="J82-sV-UWG" id="gYn-66-NQg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zmo-5g-wB3" userLabel="First Responder" sceneMemberID="firstResponder"/>

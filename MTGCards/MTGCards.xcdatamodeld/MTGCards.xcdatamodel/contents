@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18C54" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18D109" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Card" representedClassName=".Card" syncable="YES">
         <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="borderColor" optional="YES" attributeType="String" syncable="YES"/>
@@ -11,6 +11,7 @@
         <attribute name="frameVersion" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hasFoil" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="hasNonFoil" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isReserved" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="layout" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="loyalty" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="manaCost" optional="YES" attributeType="String" syncable="YES"/>
@@ -103,7 +104,7 @@
         <attribute name="watermark" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Card" positionX="18" positionY="180" width="128" height="645"/>
+        <element name="Card" positionX="18" positionY="180" width="128" height="660"/>
         <element name="ForeignDatum" positionX="-36" positionY="27" width="128" height="135"/>
         <element name="Legalities" positionX="-18" positionY="81" width="128" height="225"/>
         <element name="Meta" positionX="-54" positionY="9" width="128" height="75"/>
