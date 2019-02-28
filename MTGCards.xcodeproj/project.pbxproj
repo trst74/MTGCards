@@ -30,6 +30,7 @@
 		EE2B822321FD258700306990 /* Legalities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B822221FD258700306990 /* Legalities.swift */; };
 		EE2B822521FD25C800306990 /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B822421FD25C800306990 /* Meta.swift */; };
 		EE2B822721FD25FD00306990 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B822621FD25FD00306990 /* Token.swift */; };
+		EE843A302228256100B07E09 /* ScryfallCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE843A2F2228256100B07E09 /* ScryfallCard.swift */; };
 		EEB5D81D2205EA670070FF8B /* CardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */; };
 		EEB5D81F2205EBFF0070FF8B /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */; };
 		EEB5D8212205F0D30070FF8B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D8202205F0D30070FF8B /* GradientView.swift */; };
@@ -84,6 +85,7 @@
 		EE2B822221FD258700306990 /* Legalities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Legalities.swift; sourceTree = "<group>"; };
 		EE2B822421FD25C800306990 /* Meta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meta.swift; sourceTree = "<group>"; };
 		EE2B822621FD25FD00306990 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		EE843A2F2228256100B07E09 /* ScryfallCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryfallCard.swift; sourceTree = "<group>"; };
 		EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListTableViewCell.swift; sourceTree = "<group>"; };
 		EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Custom.swift"; sourceTree = "<group>"; };
 		EEB5D8202205F0D30070FF8B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				EE2B822221FD258700306990 /* Legalities.swift */,
 				EE2B822421FD25C800306990 /* Meta.swift */,
 				EE2B822621FD25FD00306990 /* Token.swift */,
+				EE843A2F2228256100B07E09 /* ScryfallCard.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				EE2B78BB21EFE60E00306990 /* StateCoordinator.swift in Sources */,
 				EE2B822321FD258700306990 /* Legalities.swift in Sources */,
 				EE2B78BA21EFE60E00306990 /* SelectionState.swift in Sources */,
+				EE843A302228256100B07E09 /* ScryfallCard.swift in Sources */,
 				EE2B821B21FCA8AE00306990 /* CoreDataManager.swift in Sources */,
 				EE2B78C321F0077400306990 /* CollectionsTableViewController.swift in Sources */,
 				EE2B822121FD254100306990 /* ForeignDatum.swift in Sources */,

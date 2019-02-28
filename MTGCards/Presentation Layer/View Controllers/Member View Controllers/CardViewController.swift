@@ -17,7 +17,7 @@ class CardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadImage()
-        // Do any additional setup after loading the view.
+
     }
     
     
@@ -31,20 +31,20 @@ class CardViewController: UIViewController {
      }
      */
     func loadImage(){
-        print("number: \(card?.number), set: \(card?.set.code)")
-        if let number = card?.number, let code = card?.set.code?.lowercased() {
-            var image = getImage(Key: code+number)
+        if let key = card?.uuid {
+            let image = getImage(Key: key)
             if image != nil {
                 cardImage.image = image
-                
             } else {
-                var imageurl = "https://img.scryfall.com/cards/large/en/\(code)/\(number).jpg"
-                //            print(imageurl)
-                
-                print(imageurl)
-                let checkedUrl = URL(string: imageurl)
-                cardImage.contentMode = .scaleAspectFit
-                downloadImage(url: checkedUrl!, Key: code+number)
+                if let id = card?.scryfallID, let url = URL(string: "https://api.scryfall.com/cards/\(id)") {
+                    print(url)
+                    let sfc = try? ScryfallCard.init(fromURL: url)
+                    if let largestring = sfc?.imageUris.large, let imageURL = URL(string: largestring) {
+                        cardImage.contentMode = .scaleAspectFit
+                        downloadImage(url: imageURL, Key: key)
+                    }
+                }
+   
             }
         }
     }
