@@ -35,13 +35,14 @@
 		EEB5D81F2205EBFF0070FF8B /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */; };
 		EEB5D8212205F0D30070FF8B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D8202205F0D30070FF8B /* GradientView.swift */; };
 		EEBE6D8E21EFE18F00A3464E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6D8D21EFE18F00A3464E /* AppDelegate.swift */; };
-		EEBE6D9021EFE18F00A3464E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6D8F21EFE18F00A3464E /* ViewController.swift */; };
 		EEBE6D9321EFE18F00A3464E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBE6D9121EFE18F00A3464E /* Main.storyboard */; };
 		EEBE6D9621EFE18F00A3464E /* MTGCards.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6D9421EFE18F00A3464E /* MTGCards.xcdatamodeld */; };
 		EEBE6D9821EFE19100A3464E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEBE6D9721EFE19100A3464E /* Assets.xcassets */; };
 		EEBE6D9B21EFE19100A3464E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBE6D9921EFE19100A3464E /* LaunchScreen.storyboard */; };
 		EEBE6DA621EFE19100A3464E /* MTGCardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6DA521EFE19100A3464E /* MTGCardsTests.swift */; };
 		EEBE6DB121EFE19100A3464E /* MTGCardsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6DB021EFE19100A3464E /* MTGCardsUITests.swift */; };
+		EEC9198E223080A0004E52F5 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEC9198D223080A0004E52F5 /* Settings.storyboard */; };
+		EEC91990223080DF004E52F5 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC9198F223080DF004E52F5 /* SettingsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,7 +92,6 @@
 		EEB5D8202205F0D30070FF8B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		EEBE6D8A21EFE18F00A3464E /* MTGCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTGCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBE6D8D21EFE18F00A3464E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EEBE6D8F21EFE18F00A3464E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EEBE6D9221EFE18F00A3464E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EEBE6D9521EFE18F00A3464E /* MTGCards.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MTGCards.xcdatamodel; sourceTree = "<group>"; };
 		EEBE6D9721EFE19100A3464E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,6 +103,8 @@
 		EEBE6DAC21EFE19100A3464E /* MTGCardsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTGCardsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBE6DB021EFE19100A3464E /* MTGCardsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTGCardsUITests.swift; sourceTree = "<group>"; };
 		EEBE6DB221EFE19100A3464E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEC9198D223080A0004E52F5 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		EEC9198F223080DF004E52F5 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,8 +144,8 @@
 		EE2B78A421EFE33000306990 /* Root View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				EE2B78A721EFE3DB00306990 /* RootViewController.swift */,
 				EEBE6D9121EFE18F00A3464E /* Main.storyboard */,
+				EE2B78A721EFE3DB00306990 /* RootViewController.swift */,
 				EE2B78A521EFE39700306990 /* RootViewController+ViewFactory.swift */,
 			);
 			path = "Root View Controller";
@@ -153,9 +155,9 @@
 			isa = PBXGroup;
 			children = (
 				EE2B821A21FCA8AD00306990 /* CoreDataManager.swift */,
-				EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */,
-				EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */,
 				EEB5D8202205F0D30070FF8B /* GradientView.swift */,
+				EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */,
+				EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -181,16 +183,16 @@
 		EE2B78BC21EFE67E00306990 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				EE2B78D021F13ACD00306990 /* DataManager.swift */,
-				EE2B78D221F13EAF00306990 /* Set.swift */,
-				EE2B78D421F1518E00306990 /* SetList.swift */,
-				EE2B821C21FCAD5200306990 /* Ruling.swift */,
 				EE2B821E21FCCA3900306990 /* Card.swift */,
+				EE2B78D021F13ACD00306990 /* DataManager.swift */,
 				EE2B822021FD254100306990 /* ForeignDatum.swift */,
 				EE2B822221FD258700306990 /* Legalities.swift */,
 				EE2B822421FD25C800306990 /* Meta.swift */,
-				EE2B822621FD25FD00306990 /* Token.swift */,
+				EE2B821C21FCAD5200306990 /* Ruling.swift */,
 				EE843A2F2228256100B07E09 /* ScryfallCard.swift */,
+				EE2B78D221F13EAF00306990 /* Set.swift */,
+				EE2B78D421F1518E00306990 /* SetList.swift */,
+				EE2B822621FD25FD00306990 /* Token.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -198,15 +200,17 @@
 		EE2B78BF21F006F900306990 /* Member View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				EE2B78CC21F009A600306990 /* PlaceholderView.storyboard */,
-				EE2B78CD21F009A600306990 /* PlaceholderViewController.swift */,
-				EE2B78C021F0075100306990 /* Collections.storyboard */,
-				EE2B78C221F0077400306990 /* CollectionsTableViewController.swift */,
-				EE2B78C421F0083E00306990 /* CardList.storyboard */,
 				EE2B78C621F0084A00306990 /* Card.storyboard */,
+				EE2B78C421F0083E00306990 /* CardList.storyboard */,
+				EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */,
 				EE2B78C821F0087200306990 /* CardListTableViewController.swift */,
 				EE2B78CA21F0089500306990 /* CardViewController.swift */,
-				EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */,
+				EE2B78C021F0075100306990 /* Collections.storyboard */,
+				EE2B78C221F0077400306990 /* CollectionsTableViewController.swift */,
+				EE2B78CC21F009A600306990 /* PlaceholderView.storyboard */,
+				EE2B78CD21F009A600306990 /* PlaceholderViewController.swift */,
+				EEC9198D223080A0004E52F5 /* Settings.storyboard */,
+				EEC9198F223080DF004E52F5 /* SettingsTableViewController.swift */,
 			);
 			path = "Member View Controllers";
 			sourceTree = "<group>";
@@ -234,15 +238,14 @@
 		EEBE6D8C21EFE18F00A3464E /* MTGCards */ = {
 			isa = PBXGroup;
 			children = (
+				EEBE6D8D21EFE18F00A3464E /* AppDelegate.swift */,
+				EEBE6D9721EFE19100A3464E /* Assets.xcassets */,
+				EEBE6D9C21EFE19100A3464E /* Info.plist */,
+				EEBE6D9921EFE19100A3464E /* LaunchScreen.storyboard */,
 				EE2B78BC21EFE67E00306990 /* Model */,
+				EEBE6D9421EFE18F00A3464E /* MTGCards.xcdatamodeld */,
 				EE2B78AC21EFE56200306990 /* Presentation Layer */,
 				EE2B78A921EFE45B00306990 /* Utilities */,
-				EEBE6D8D21EFE18F00A3464E /* AppDelegate.swift */,
-				EEBE6D8F21EFE18F00A3464E /* ViewController.swift */,
-				EEBE6D9721EFE19100A3464E /* Assets.xcassets */,
-				EEBE6D9921EFE19100A3464E /* LaunchScreen.storyboard */,
-				EEBE6D9C21EFE19100A3464E /* Info.plist */,
-				EEBE6D9421EFE18F00A3464E /* MTGCards.xcdatamodeld */,
 			);
 			path = MTGCards;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				EE2B78C121F0075100306990 /* Collections.storyboard in Resources */,
 				EEBE6D9B21EFE19100A3464E /* LaunchScreen.storyboard in Resources */,
 				EE2B78CE21F009A600306990 /* PlaceholderView.storyboard in Resources */,
+				EEC9198E223080A0004E52F5 /* Settings.storyboard in Resources */,
 				EE2B78C721F0084A00306990 /* Card.storyboard in Resources */,
 				EEBE6D9821EFE19100A3464E /* Assets.xcassets in Resources */,
 				EE2B78C521F0083E00306990 /* CardList.storyboard in Resources */,
@@ -412,9 +416,9 @@
 				EE2B78D321F13EAF00306990 /* Set.swift in Sources */,
 				EE2B78A621EFE39700306990 /* RootViewController+ViewFactory.swift in Sources */,
 				EE2B78AB21EFE47600306990 /* UIView+AutolayoutHelp.swift in Sources */,
-				EEBE6D9021EFE18F00A3464E /* ViewController.swift in Sources */,
 				EEBE6D9621EFE18F00A3464E /* MTGCards.xcdatamodeld in Sources */,
 				EEBE6D8E21EFE18F00A3464E /* AppDelegate.swift in Sources */,
+				EEC91990223080DF004E52F5 /* SettingsTableViewController.swift in Sources */,
 				EE2B78CB21F0089500306990 /* CardViewController.swift in Sources */,
 				EE2B78BB21EFE60E00306990 /* StateCoordinator.swift in Sources */,
 				EE2B822321FD258700306990 /* Legalities.swift in Sources */,

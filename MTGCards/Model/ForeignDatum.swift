@@ -17,7 +17,7 @@ class ForeignDatum: NSManagedObject, Codable {
     @NSManaged var name: String?
     @NSManaged var text: String?
     @NSManaged var type: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case flavorText = "flavorText"
         case language = "language"
@@ -31,9 +31,9 @@ class ForeignDatum: NSManagedObject, Codable {
             let entity = NSEntityDescription.entity(forEntityName: "ForeignDatum", in: managedObjectContext) else {
                 fatalError("Failed to decode ForeignDatum")
         }
-        
+
         self.init(entity: entity, insertInto: managedObjectContext)
-        
+
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.flavorText = try container.decodeIfPresent(String.self, forKey: .flavorText)
         self.language = try container.decodeIfPresent(String.self, forKey: .language)
@@ -44,7 +44,7 @@ class ForeignDatum: NSManagedObject, Codable {
         self.text = try container.decodeIfPresent(String.self, forKey: .text)
         self.type = try container.decodeIfPresent(String.self, forKey: .type)
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(flavorText, forKey: .flavorText)

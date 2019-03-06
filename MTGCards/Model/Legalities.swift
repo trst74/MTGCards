@@ -23,7 +23,7 @@ class Legalities: NSManagedObject, Codable {
     @NSManaged var  brawl: String?
     @NSManaged var  future: String?
     @NSManaged var  standard: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case the1V1 = "1v1"
         case brawl = "brawl"
@@ -43,9 +43,9 @@ class Legalities: NSManagedObject, Codable {
             let entity = NSEntityDescription.entity(forEntityName: "Legalities", in: managedObjectContext) else {
                 fatalError("Failed to decode Legalities")
         }
-        
+
         self.init(entity: entity, insertInto: managedObjectContext)
-        
+
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.the1V1 = try container.decodeIfPresent(String.self, forKey: .the1V1)
         self.commander = try container.decodeIfPresent(String.self, forKey: .commander)
@@ -60,7 +60,7 @@ class Legalities: NSManagedObject, Codable {
         self.future = try container.decodeIfPresent(String.self, forKey: .future)
         self.standard = try container.decodeIfPresent(String.self, forKey: .standard)
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(the1V1, forKey: .the1V1)

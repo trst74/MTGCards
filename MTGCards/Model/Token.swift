@@ -25,7 +25,7 @@ class Token: NSManagedObject, Codable {
     @NSManaged var type: String?
     @NSManaged var uuid: String?
     @NSManaged var watermark: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case artist = "artist"
         case borderColor = "borderColor"
@@ -47,9 +47,9 @@ class Token: NSManagedObject, Codable {
             let entity = NSEntityDescription.entity(forEntityName: "Token", in: managedObjectContext) else {
                 fatalError("Failed to decode Token")
         }
-        
+
         self.init(entity: entity, insertInto: managedObjectContext)
-        
+
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.artist = try container.decodeIfPresent(String.self, forKey: .artist)
         self.borderColor = try container.decodeIfPresent(String.self, forKey: .borderColor)
@@ -66,7 +66,7 @@ class Token: NSManagedObject, Codable {
         self.uuid = try container.decodeIfPresent(String.self, forKey: .uuid)
         self.watermark = try container.decodeIfPresent(String.self, forKey: .watermark)
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(artist, forKey: .artist)

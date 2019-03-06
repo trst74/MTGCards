@@ -9,18 +9,37 @@
 import UIKit
 
 class CardViewController: UIViewController {
-    
+
     @IBOutlet weak var cardImage: UIImageView!
+    @IBOutlet weak var costLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var otherLabel: UILabel!
+    @IBOutlet weak var artistLabel: UILabel!
+    @IBOutlet weak var powerToughnessLabel: UILabel!
     
-    var card: Card? = nil
-    
+    var card: Card?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        costLabel.text = card?.manaCost
+        typeLabel.text = card?.type
+        textLabel.text = card?.text
+        if let reserved = card?.isReserved, reserved {
+            otherLabel.text = "Reserved"
+        } else {
+            otherLabel.text = ""
+        }
+        artistLabel.text = card?.artist
+        if let power = card?.power, let toughness = card?.toughness {
+            powerToughnessLabel.text = "\(power)/\(toughness)"
+        } else {
+              powerToughnessLabel.text = ""
+        }
         loadImage()
-
+        
     }
-    
-    
+
     /*
      // MARK: - Navigation
      
@@ -30,7 +49,7 @@ class CardViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    func loadImage(){
+    func loadImage() {
         if let key = card?.uuid {
             let image = getImage(Key: key)
             if image != nil {
@@ -39,12 +58,18 @@ class CardViewController: UIViewController {
                 if let id = card?.scryfallID, let url = URL(string: "https://api.scryfall.com/cards/\(id)") {
                     print(url)
                     let sfc = try? ScryfallCard.init(fromURL: url)
-                    if let largestring = sfc?.imageUris.large, let imageURL = URL(string: largestring) {
+                    if let largestring = sfc?.imageUris?.large, let imageURL = URL(string: largestring) {
                         cardImage.contentMode = .scaleAspectFit
                         downloadImage(url: imageURL, Key: key)
+                    } else if let faces = sfc?.cardFaces {
+                        let face = faces.first(where: { $0.name == card?.name})
+                        if let largestring = face?.imageUris.large, let imageURL = URL(string: largestring) {
+                            cardImage.contentMode = .scaleAspectFit
+                            downloadImage(url: imageURL, Key: key)
+                        }
                     }
                 }
-   
+
             }
         }
     }
@@ -59,7 +84,7 @@ class CardViewController: UIViewController {
             try? data.write(to: filename)
         }
     }
-    func getImage(Key: String) -> UIImage?{
+    func getImage(Key: String) -> UIImage? {
         let fileManager = FileManager.default
         let filename = getDocumentsDirectory().appendingPathComponent("\(Key).png")
         if fileManager.fileExists(atPath: filename.path) {
@@ -70,13 +95,13 @@ class CardViewController: UIViewController {
     }
     func downloadImage(url: URL, Key: String) {
         print("Download Started")
-        getDataFromUrl(url: url) { (data, response, error)  in
+        getDataFromUrl(url: url) { (data, _, error)  in
             guard let data = data, error == nil else {
                 return
-                
+
             }
             print("Download Finished")
-            DispatchQueue.main.async() { () -> Void in
+            DispatchQueue.main.async { () -> Void in
                 let image = UIImage(data: data)
                 self.cardImage.bounds.origin = CGPoint.zero
                 if let imageToDisplay = image {
@@ -92,6 +117,21 @@ class CardViewController: UIViewController {
             completion(data, response, error)
             }.resume()
     }
+    @IBAction func imageLongPressed(_ sender: UILongPressGestureRecognizer) {
+        let image = self.cardImage.image
+        
+        // set up activity view controller
+        let imageToShare = [ image! ]
+        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        // exclude some activity types from the list (optional)
+  
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+
 }
 extension CardViewController {
     static func refreshCardController(s: Card) -> CardViewController {
@@ -101,7 +141,7 @@ extension CardViewController {
         }
         filelist.title = s.name
         filelist.card = s
-        
+
         return filelist
     }
 }

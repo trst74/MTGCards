@@ -21,7 +21,7 @@ class Set: NSManagedObject, Codable {
     @NSManaged var tokens: NSSet
     @NSManaged var totalSetSize: Int16
     @NSManaged var type: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case baseSetSize = "baseSetSize"
         case block = "block"
@@ -41,9 +41,9 @@ class Set: NSManagedObject, Codable {
             let entity = NSEntityDescription.entity(forEntityName: "Set", in: managedObjectContext) else {
                 fatalError("Failed to decode Set")
         }
-        
+
         self.init(entity: entity, insertInto: managedObjectContext)
-        
+
         let container = try decoder.container(keyedBy: CodingKeys.self)
         if let bss = try container.decodeIfPresent(Int16.self, forKey: .baseSetSize) {
                   self.baseSetSize = bss
@@ -64,16 +64,14 @@ class Set: NSManagedObject, Codable {
                     self.tcgplayerGroupID = tcgpGID
         }
 
-        if let tokens = try container.decodeIfPresent([Token].self, forKey: .tokens){
+        if let tokens = try container.decodeIfPresent([Token].self, forKey: .tokens) {
                     self.tokens.addingObjects(from: tokens)
         }
         self.totalSetSize = try container.decodeIfPresent(Int16.self, forKey: .totalSetSize)!
         self.type = try container.decodeIfPresent(String.self, forKey: .type)
-        
-        
+
     }
-    
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(baseSetSize, forKey: .baseSetSize)
@@ -88,7 +86,7 @@ class Set: NSManagedObject, Codable {
         //try container.encode(tokens, forKey: .tokens)
         try container.encode(totalSetSize, forKey: .totalSetSize)
         try container.encode(type, forKey: .type)
-        
+
     }
     //    init(baseSetSize: Int?, block: String?, cards: [Card]?, code: String?, meta: Meta?, mtgoCode: String?, name: String?, releaseDate: String?, tcgplayerGroupID: Int?, tokens: [Token]?, totalSetSize: Int?, type: String?) {
     //        self.baseSetSize = baseSetSize
@@ -107,28 +105,26 @@ class Set: NSManagedObject, Codable {
 }
 // MARK: Convenience initializers and mutators
 
-
-
 extension Array where Element == Sets.Element {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Sets.self, from: data)
     }
-    
+
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-    
+
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
         return String(data: try self.jsonData(), encoding: encoding)
     }

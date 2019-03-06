@@ -13,7 +13,7 @@ import UIKit
 class Meta: NSManagedObject, Codable {
     @NSManaged var date: String?
     @NSManaged var version: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case date = "date"
         case version = "version"
@@ -23,14 +23,14 @@ class Meta: NSManagedObject, Codable {
             let entity = NSEntityDescription.entity(forEntityName: "Meta", in: managedObjectContext) else {
                 fatalError("Failed to decode Meta")
         }
-        
+
         self.init(entity: entity, insertInto: managedObjectContext)
-        
+
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.date = try container.decodeIfPresent(String.self, forKey: .date)
         self.version = try container.decodeIfPresent(String.self, forKey: .version)
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(date, forKey: .date)
@@ -41,4 +41,3 @@ class Meta: NSManagedObject, Codable {
     //        self.version = version
     //    }
 }
-

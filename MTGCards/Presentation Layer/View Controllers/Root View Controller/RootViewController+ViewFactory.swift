@@ -33,10 +33,12 @@ extension RootViewController {
         let split = UISplitViewController()
         split.preferredDisplayMode = .allVisible
         let navigation = UINavigationController()
+        navigation.navigationBar.prefersLargeTitles = false
+        navigation.navigationItem.largeTitleDisplayMode = .never
         split.viewControllers = [navigation]
         return split
     }
-    
+
 //    func configureFileList(_ fileList: FileListViewController,
 //                           title: String,
 //                           rootFolder: File?) {
@@ -63,7 +65,7 @@ extension RootViewController {
         let placeholder = PlaceholderViewController.freshPlaceholderController(message: "Select Card. Swipe left to delete")
         return placeholder
     }
-    
+
     func freshFolderLevelPlaceholder() -> PlaceholderViewController {
         let placeholder = PlaceholderViewController.freshPlaceholderController(message: "Select Collection or create. Swipe left to delete or swipe right to rename")
         return placeholder
@@ -79,8 +81,7 @@ extension RootViewController {
         }
         return fileList
     }
-    
-    
+
     func activeEditor(_ split: UISplitViewController) -> CardViewController? {
         guard let navigation = split.viewControllers.last as? UINavigationController,
             let editor = navigation.viewControllers.first as? CardViewController else {

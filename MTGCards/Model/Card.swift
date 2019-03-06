@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 import UIKit
 
-
 class Card: NSManagedObject, Codable {
     @NSManaged var artist: String?
     @NSManaged var borderColor: String?
@@ -53,7 +52,7 @@ class Card: NSManagedObject, Codable {
     @NSManaged var starter: Bool
     @NSManaged var set: Set
     @NSManaged var isReserved: Bool
-    
+
     enum CodingKeys: String, CodingKey {
         case artist = "artist"
         case borderColor = "borderColor"
@@ -96,15 +95,15 @@ class Card: NSManagedObject, Codable {
         case starter = "starter"
         case isReserved = "isReserved"
     }
-    
+
     required convenience init(from decoder: Decoder) throws {
         guard let managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext,
             let entity = NSEntityDescription.entity(forEntityName: "Card", in: managedObjectContext) else {
                 fatalError("Failed to decode Card")
         }
-        
+
         self.init(entity: entity, insertInto: managedObjectContext)
-        
+
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.artist = try container.decodeIfPresent(String.self, forKey: .artist)
         self.borderColor = try container.decodeIfPresent(String.self, forKey: .borderColor)
@@ -114,7 +113,7 @@ class Card: NSManagedObject, Codable {
                     self.convertedManaCost = cmc
         }
         self.flavorText = try container.decodeIfPresent(String.self, forKey: .flavorText)
-        if let fd = try container.decodeIfPresent([ForeignDatum].self, forKey: .foreignData){
+        if let fd = try container.decodeIfPresent([ForeignDatum].self, forKey: .foreignData) {
             if fd.count > 0 {
                 self.foreignData.addingObjects(from: fd)
             }
@@ -163,13 +162,13 @@ class Card: NSManagedObject, Codable {
         if let starter = try container.decodeIfPresent(Bool.self, forKey: .starter) {
             self.starter = starter
         }
-        if let reserved = try container.decodeIfPresent(Bool.self, forKey: .isReserved){
+        if let reserved = try container.decodeIfPresent(Bool.self, forKey: .isReserved) {
             self.isReserved = reserved
         } else {
             self.isReserved = false
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(artist, forKey: .artist)
@@ -211,8 +210,7 @@ class Card: NSManagedObject, Codable {
         try container.encode(side, forKey: .side)
         try container.encode(variations, forKey: .variations)
         try container.encode(starter, forKey: .starter)
-        
-        
+
     }
     //    init(artist: String?, borderColor: String?, colorIdentity: [String]?, colors: [String]?, convertedManaCost: Int?, flavorText: String?, foreignData: [ForeignDatum]?, frameVersion: String?, hasFoil: Bool?, hasNonFoil: Bool?, layout: String?, legalities: Legalities?, manaCost: String?, multiverseID: Int?, name: String?, number: String?, originalText: String?, originalType: String?, power: String?, printings: [String]?, rarity: String?, rulings: [Ruling]?, scryfallID: String?, subtypes: [String]?, supertypes: [String]?, tcgplayerProductID: Int?, tcgplayerPurchaseURL: String?, text: String?, toughness: String?, type: String?, types: [String]?, uuid: String?, watermark: String?, names: [String]?, loyalty: String?, faceConvertedManaCost: Int?, side: String?, variations: [String]?, starter: Bool?) {
     //        self.artist = artist
@@ -257,11 +255,11 @@ class Card: NSManagedObject, Codable {
     //    }
 }
 extension Card {
-    
+
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-    
+
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
         return String(data: try self.jsonData(), encoding: encoding)
     }
