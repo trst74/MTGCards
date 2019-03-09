@@ -8,8 +8,8 @@
 
 import UIKit
 
-class CardViewController: UIViewController {
-
+class CardViewController: UIViewController, UIGestureRecognizerDelegate {
+    
     @IBOutlet weak var cardImage: UIImageView!
     @IBOutlet weak var costLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
@@ -17,14 +17,23 @@ class CardViewController: UIViewController {
     @IBOutlet weak var otherLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var powerToughnessLabel: UILabel!
+    @IBOutlet weak var marketPrice: UILabel!
+    @IBOutlet weak var pricesView: UIView!
+    
+    var shareButton: UIBarButtonItem?
     
     var card: Card?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        costLabel.text = card?.manaCost
+        print(card?.legalities?.commander)
+        print(card?.rulings.count)
+        shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(self.share))
+        self.navigationItem.setRightBarButton(shareButton, animated: true)
+        
+        costLabel.attributedText = card?.manaCost?.replaceSymbols()
         typeLabel.text = card?.type
-        textLabel.text = card?.text
+        textLabel.attributedText = card?.text?.replaceSymbols()
         if let reserved = card?.isReserved, reserved {
             otherLabel.text = "Reserved"
         } else {
@@ -34,21 +43,69 @@ class CardViewController: UIViewController {
         if let power = card?.power, let toughness = card?.toughness {
             powerToughnessLabel.text = "\(power)/\(toughness)"
         } else {
-              powerToughnessLabel.text = ""
+            powerToughnessLabel.text = ""
+        }
+        if let cardid = card?.tcgplayerProductID, cardid > 0 {
+            TcgPlayerApi.handler.getPrices(for: cardid) { prices in
+                var resultString = "Market:"
+                if let market = prices.results.first(where: {$0.subTypeName == "Normal" })?.marketPrice{
+                    resultString += " N - \(market.currencyUS)"
+                }
+                if let fmarket = prices.results.first(where: {$0.subTypeName == "Foil" })?.marketPrice {
+                    resultString += " F - \(fmarket.currencyUS)"
+                }
+                self.marketPrice.text = resultString
+                if resultString == "Market:" {
+                    
+                }
+                
+            }
         }
         loadImage()
-        
+        let taps = UITapGestureRecognizer(target: self, action: #selector(showDebug))
+        taps.numberOfTapsRequired = 10
+        taps.delegate = self
+        cardImage.addGestureRecognizer(taps)
     }
-
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    @objc func showDebug(){
+        print("debug")
+        let storyboard = UIStoryboard(name: "Debug", bundle: nil)
+        guard let debugVC = storyboard.instantiateInitialViewController() as? DebugViewController else {
+            fatalError("Error going to settings")
+        }
+        if let json = try? card?.jsonString() {
+            debugVC.json = json ?? ""
+        //self.navigationController?.pushViewController(settingsVC, animated: true)
+        self.present(debugVC, animated: true, completion: nil)
+        }
+    }
+    @objc func share(){
+        let alert = UIAlertController(title: "Share", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Image", style: .default, handler: { action in
+            self.shareImage()
+        }))
+        if let multiverseid = card?.multiverseID, multiverseid > 0 {
+            alert.addAction(UIAlertAction(title: "Gatherer", style: .default, handler: { action in
+                if let url = URL(string:  "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=\(multiverseid)"){
+                    self.shareUrl(url: url, popupView: self.shareButton)
+                }
+            }))
+        }
+        if let tcg = card?.tcgplayerPurchaseURL {
+            alert.addAction(UIAlertAction(title: "TCGPlayer", style: .default, handler: { action in
+                self.shareText(text: tcg)
+            }))
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            
+            self.dismiss(animated: true, completion: nil)
+        }))
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.barButtonItem = shareButton
+        }
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func loadImage() {
         if let key = card?.uuid {
             let image = getImage(Key: key)
@@ -57,19 +114,24 @@ class CardViewController: UIViewController {
             } else {
                 if let id = card?.scryfallID, let url = URL(string: "https://api.scryfall.com/cards/\(id)") {
                     print(url)
-                    let sfc = try? ScryfallCard.init(fromURL: url)
-                    if let largestring = sfc?.imageUris?.large, let imageURL = URL(string: largestring) {
-                        cardImage.contentMode = .scaleAspectFit
-                        downloadImage(url: imageURL, Key: key)
-                    } else if let faces = sfc?.cardFaces {
-                        let face = faces.first(where: { $0.name == card?.name})
-                        if let largestring = face?.imageUris.large, let imageURL = URL(string: largestring) {
+                    do {
+                        let sfc = try ScryfallCard.init(fromURL: url)
+                        if let largestring = sfc.imageUris?.large, let imageURL = URL(string: largestring) {
                             cardImage.contentMode = .scaleAspectFit
                             downloadImage(url: imageURL, Key: key)
+                        } else if let faces = sfc.cardFaces {
+                            let face = faces.first(where: { $0.name == card?.name})
+                            if let largestring = face?.imageUris?.large, let imageURL = URL(string: largestring) {
+                                cardImage.contentMode = .scaleAspectFit
+                                downloadImage(url: imageURL, Key: key)
+                            }
                         }
+                    } catch {
+                        print(error)
                     }
+             
                 }
-
+                
             }
         }
     }
@@ -98,7 +160,7 @@ class CardViewController: UIViewController {
         getDataFromUrl(url: url) { (data, _, error)  in
             guard let data = data, error == nil else {
                 return
-
+                
             }
             print("Download Finished")
             DispatchQueue.main.async { () -> Void in
@@ -118,6 +180,9 @@ class CardViewController: UIViewController {
             }.resume()
     }
     @IBAction func imageLongPressed(_ sender: UILongPressGestureRecognizer) {
+        shareImage()
+    }
+    func shareImage(){
         let image = self.cardImage.image
         
         // set up activity view controller
@@ -126,12 +191,34 @@ class CardViewController: UIViewController {
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         
         // exclude some activity types from the list (optional)
-  
+        
         
         // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
     }
-
+    func shareText(text: String){
+        let activityViewController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        // exclude some activity types from the list (optional)
+        
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    func shareUrl(url: URL, popupView: AnyObject?){
+        let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: [SafariActivity()])
+        if let location = popupView {
+            activityViewController.popoverPresentationController?.sourceView = location.view
+        } else {
+            activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        }
+        // exclude some activity types from the list (optional)
+        
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
+    }
 }
 extension CardViewController {
     static func refreshCardController(s: Card) -> CardViewController {
@@ -141,7 +228,35 @@ extension CardViewController {
         }
         filelist.title = s.name
         filelist.card = s
-
+        
         return filelist
     }
+}
+extension NumberFormatter {
+    convenience init(style: Style, locale: Locale = .current) {
+        self.init()
+        self.locale = locale
+        numberStyle = style
+    }
+}
+extension Formatter {
+    static let currency = NumberFormatter(style: .currency)
+    static let currencyUS = NumberFormatter(style: .currency, locale: .us)
+    static let currencyBR = NumberFormatter(style: .currency, locale: .br)
+}
+extension Numeric {   // for Swift 3 use FloatingPoint or Int
+    var currency: String {
+        return Formatter.currency.string(for: self) ?? ""
+    }
+    var currencyUS: String {
+        return Formatter.currencyUS.string(for: self) ?? ""
+    }
+    var currencyBR: String {
+        return Formatter.currencyBR.string(for: self) ?? ""
+    }
+}
+extension Locale {
+    static let br = Locale(identifier: "pt_BR")
+    static let us = Locale(identifier: "en_US")
+    static let uk = Locale(identifier: "en_UK")
 }

@@ -41,8 +41,8 @@ class RootViewController: UIViewController {
         case foldersFilesEditor = 3
     }
 
-    let rootSplitSmallFraction: CGFloat = 0.20
-    let rootSplitLargeFraction: CGFloat = 0.33
+    let rootSplitSmallFraction: CGFloat = 0.25
+    let rootSplitLargeFraction: CGFloat = 0.40
 
     lazy var rootSplitView: UISplitViewController = {
         let split = freshSplitViewTemplate()
@@ -55,7 +55,9 @@ class RootViewController: UIViewController {
         super.viewDidLoad()
         print(DataManager.getLocalVersion())
         //DataManager.getSetList()
+       
 
+        
         StateCoordinator.shared.delegate = self
         installRootSplit()
     }

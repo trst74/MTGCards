@@ -30,8 +30,8 @@ class CollectionsTableViewController: UITableViewController {
         guard let settingsVC = storyboard.instantiateInitialViewController() as? SettingsTableViewController else {
             fatalError("Error going to settings")
         }
-        self.navigationController?.pushViewController(settingsVC, animated: true)
-        //self.present(settingsVC, animated: true, completion: nil)
+        //self.navigationController?.pushViewController(settingsVC, animated: true)
+        self.present(settingsVC, animated: true, completion: nil)
     }
     // MARK: - Table view data source
 

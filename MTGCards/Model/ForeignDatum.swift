@@ -17,6 +17,7 @@ class ForeignDatum: NSManagedObject, Codable {
     @NSManaged var name: String?
     @NSManaged var text: String?
     @NSManaged var type: String?
+    @NSManaged var card: Card
 
     enum CodingKeys: String, CodingKey {
         case flavorText = "flavorText"

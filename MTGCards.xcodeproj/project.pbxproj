@@ -30,7 +30,14 @@
 		EE2B822321FD258700306990 /* Legalities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B822221FD258700306990 /* Legalities.swift */; };
 		EE2B822521FD25C800306990 /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B822421FD25C800306990 /* Meta.swift */; };
 		EE2B822721FD25FD00306990 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B822621FD25FD00306990 /* Token.swift */; };
+		EE2CAC502231707000D24334 /* TcgPrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CAC4F2231707000D24334 /* TcgPrices.swift */; };
+		EE2CAC522231AAF200D24334 /* SafariActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CAC512231AAF200D24334 /* SafariActivity.swift */; };
+		EE2CAC542231C1AA00D24334 /* String+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CAC532231C1AA00D24334 /* String+Custom.swift */; };
+		EE6F94B022309136001B3378 /* TcgPlayerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F94AF22309136001B3378 /* TcgPlayerApi.swift */; };
+		EE6F94B2223092AD001B3378 /* TcgToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F94B1223092AD001B3378 /* TcgToken.swift */; };
 		EE843A302228256100B07E09 /* ScryfallCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE843A2F2228256100B07E09 /* ScryfallCard.swift */; };
+		EEAA53CB223323D700CB4B72 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAA53CA223323D700CB4B72 /* Debug.storyboard */; };
+		EEAA53CD2233241000CB4B72 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAA53CC2233241000CB4B72 /* DebugViewController.swift */; };
 		EEB5D81D2205EA670070FF8B /* CardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */; };
 		EEB5D81F2205EBFF0070FF8B /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */; };
 		EEB5D8212205F0D30070FF8B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D8202205F0D30070FF8B /* GradientView.swift */; };
@@ -86,7 +93,14 @@
 		EE2B822221FD258700306990 /* Legalities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Legalities.swift; sourceTree = "<group>"; };
 		EE2B822421FD25C800306990 /* Meta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meta.swift; sourceTree = "<group>"; };
 		EE2B822621FD25FD00306990 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		EE2CAC4F2231707000D24334 /* TcgPrices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcgPrices.swift; sourceTree = "<group>"; };
+		EE2CAC512231AAF200D24334 /* SafariActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariActivity.swift; sourceTree = "<group>"; };
+		EE2CAC532231C1AA00D24334 /* String+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Custom.swift"; sourceTree = "<group>"; };
+		EE6F94AF22309136001B3378 /* TcgPlayerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcgPlayerApi.swift; sourceTree = "<group>"; };
+		EE6F94B1223092AD001B3378 /* TcgToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcgToken.swift; sourceTree = "<group>"; };
 		EE843A2F2228256100B07E09 /* ScryfallCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryfallCard.swift; sourceTree = "<group>"; };
+		EEAA53CA223323D700CB4B72 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
+		EEAA53CC2233241000CB4B72 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListTableViewCell.swift; sourceTree = "<group>"; };
 		EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Custom.swift"; sourceTree = "<group>"; };
 		EEB5D8202205F0D30070FF8B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -158,6 +172,9 @@
 				EEB5D8202205F0D30070FF8B /* GradientView.swift */,
 				EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */,
 				EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */,
+				EE6F94AF22309136001B3378 /* TcgPlayerApi.swift */,
+				EE2CAC512231AAF200D24334 /* SafariActivity.swift */,
+				EE2CAC532231C1AA00D24334 /* String+Custom.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -193,6 +210,8 @@
 				EE2B78D221F13EAF00306990 /* Set.swift */,
 				EE2B78D421F1518E00306990 /* SetList.swift */,
 				EE2B822621FD25FD00306990 /* Token.swift */,
+				EE6F94B1223092AD001B3378 /* TcgToken.swift */,
+				EE2CAC4F2231707000D24334 /* TcgPrices.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -211,6 +230,8 @@
 				EE2B78CD21F009A600306990 /* PlaceholderViewController.swift */,
 				EEC9198D223080A0004E52F5 /* Settings.storyboard */,
 				EEC9198F223080DF004E52F5 /* SettingsTableViewController.swift */,
+				EEAA53CA223323D700CB4B72 /* Debug.storyboard */,
+				EEAA53CC2233241000CB4B72 /* DebugViewController.swift */,
 			);
 			path = "Member View Controllers";
 			sourceTree = "<group>";
@@ -372,6 +393,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEAA53CB223323D700CB4B72 /* Debug.storyboard in Resources */,
 				EE2B78C121F0075100306990 /* Collections.storyboard in Resources */,
 				EEBE6D9B21EFE19100A3464E /* LaunchScreen.storyboard in Resources */,
 				EE2B78CE21F009A600306990 /* PlaceholderView.storyboard in Resources */,
@@ -411,10 +433,14 @@
 				EE2B78D521F1518E00306990 /* SetList.swift in Sources */,
 				EE2B78A821EFE3DB00306990 /* RootViewController.swift in Sources */,
 				EE2B822521FD25C800306990 /* Meta.swift in Sources */,
+				EE2CAC542231C1AA00D24334 /* String+Custom.swift in Sources */,
 				EE2B78D121F13ACD00306990 /* DataManager.swift in Sources */,
+				EE6F94B022309136001B3378 /* TcgPlayerApi.swift in Sources */,
 				EE2B822721FD25FD00306990 /* Token.swift in Sources */,
+				EE2CAC522231AAF200D24334 /* SafariActivity.swift in Sources */,
 				EE2B78D321F13EAF00306990 /* Set.swift in Sources */,
 				EE2B78A621EFE39700306990 /* RootViewController+ViewFactory.swift in Sources */,
+				EE6F94B2223092AD001B3378 /* TcgToken.swift in Sources */,
 				EE2B78AB21EFE47600306990 /* UIView+AutolayoutHelp.swift in Sources */,
 				EEBE6D9621EFE18F00A3464E /* MTGCards.xcdatamodeld in Sources */,
 				EEBE6D8E21EFE18F00A3464E /* AppDelegate.swift in Sources */,
@@ -426,7 +452,9 @@
 				EE843A302228256100B07E09 /* ScryfallCard.swift in Sources */,
 				EE2B821B21FCA8AE00306990 /* CoreDataManager.swift in Sources */,
 				EE2B78C321F0077400306990 /* CollectionsTableViewController.swift in Sources */,
+				EEAA53CD2233241000CB4B72 /* DebugViewController.swift in Sources */,
 				EE2B822121FD254100306990 /* ForeignDatum.swift in Sources */,
+				EE2CAC502231707000D24334 /* TcgPrices.swift in Sources */,
 				EEB5D8212205F0D30070FF8B /* GradientView.swift in Sources */,
 				EE2B821D21FCAD5200306990 /* Ruling.swift in Sources */,
 				EEB5D81D2205EA670070FF8B /* CardListTableViewCell.swift in Sources */,

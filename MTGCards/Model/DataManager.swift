@@ -40,10 +40,9 @@ public class DataManager {
         if let sl = setList {
             print(sl.count)
             for s in sl {
-
                 getSet(setCode: s.code!)
-
             }
+            //getSet(setCode: "STH")
         }
     }
     static func getRNA() -> Set? {

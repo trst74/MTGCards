@@ -9,15 +9,18 @@
 import UIKit
 
 class SettingsTableViewController: UITableViewController {
-
+    
     @IBOutlet weak var fileInfoLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateFileInfoLabel()
-     
+        
     }
-
+    @IBAction func close(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func clearImageCache(_ sender: Any) {
         let fileManager = FileManager.default
         do {
@@ -71,5 +74,40 @@ class SettingsTableViewController: UITableViewController {
     private func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            return
+        case 1:
+            return
+        case 2:
+            switch indexPath.row {
+            case 0:
+                if let url = URL(string: "https://www.raywenderlich.com/7212-multiple-uisplitviewcontroller-tutorial"){
+                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
+                }
+            case 1:
+                if let url = URL(string: "https://quicktype.io"){
+                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
+                }
+            case 2:
+                if let url = URL(string: "https://mtgjson.com"){
+                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
+                }
+            case 3:
+                if let url = URL(string: "https://medium.com/@andrea.prearo/working-with-codable-and-core-data-83983e77198e"){
+                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
+                }
+            case 4:
+                if let url = URL(string: "https://medium.com/@sakhabaevegor/create-a-color-gradient-on-the-storyboard-18ccfd8158c2"){
+                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
+                }
+            default:
+                return
+            }
+        default:
+            return
+        }
     }
 }

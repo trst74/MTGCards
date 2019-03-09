@@ -25,6 +25,7 @@ class Token: NSManagedObject, Codable {
     @NSManaged var type: String?
     @NSManaged var uuid: String?
     @NSManaged var watermark: String?
+    @NSManaged var set: Set
 
     enum CodingKeys: String, CodingKey {
         case artist = "artist"

@@ -65,6 +65,9 @@ class Set: NSManagedObject, Codable {
         }
 
         if let tokens = try container.decodeIfPresent([Token].self, forKey: .tokens) {
+            for token in tokens {
+                token.set = self
+            }
                     self.tokens.addingObjects(from: tokens)
         }
         self.totalSetSize = try container.decodeIfPresent(Int16.self, forKey: .totalSetSize)!

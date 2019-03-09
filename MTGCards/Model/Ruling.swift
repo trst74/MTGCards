@@ -13,6 +13,7 @@ import UIKit
 class Ruling: NSManagedObject, Codable {
     @NSManaged var date: String?
     @NSManaged var text: String?
+    @NSManaged var card: Card
 
     enum CodingKeys: String, CodingKey {
         case date = "date"

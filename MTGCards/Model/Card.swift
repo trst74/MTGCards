@@ -52,7 +52,7 @@ class Card: NSManagedObject, Codable {
     @NSManaged var starter: Bool
     @NSManaged var set: Set
     @NSManaged var isReserved: Bool
-
+    
     enum CodingKeys: String, CodingKey {
         case artist = "artist"
         case borderColor = "borderColor"
@@ -95,26 +95,29 @@ class Card: NSManagedObject, Codable {
         case starter = "starter"
         case isReserved = "isReserved"
     }
-
+    
     required convenience init(from decoder: Decoder) throws {
         guard let managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext,
             let entity = NSEntityDescription.entity(forEntityName: "Card", in: managedObjectContext) else {
                 fatalError("Failed to decode Card")
         }
-
+        
         self.init(entity: entity, insertInto: managedObjectContext)
-
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.artist = try container.decodeIfPresent(String.self, forKey: .artist)
         self.borderColor = try container.decodeIfPresent(String.self, forKey: .borderColor)
         self.colorIdentity = try container.decodeIfPresent([String].self, forKey: .colorIdentity)
         self.colors = try container.decodeIfPresent([String].self, forKey: .colors)
         if let cmc = try container.decodeIfPresent(Float.self, forKey: .convertedManaCost) {
-                    self.convertedManaCost = cmc
+            self.convertedManaCost = cmc
         }
         self.flavorText = try container.decodeIfPresent(String.self, forKey: .flavorText)
         if let fd = try container.decodeIfPresent([ForeignDatum].self, forKey: .foreignData) {
             if fd.count > 0 {
+                for datum in fd {
+                    datum.card = self
+                }
                 self.foreignData.addingObjects(from: fd)
             }
         }
@@ -134,9 +137,12 @@ class Card: NSManagedObject, Codable {
         self.power = try container.decodeIfPresent(String.self, forKey: .power)
         self.printings = try container.decodeIfPresent([String].self, forKey: .printings)
         self.rarity = try container.decodeIfPresent(String.self, forKey: .rarity)
-        if let rulings = try container.decodeIfPresent([Ruling].self, forKey: .rulings) {
-            if rulings.count > 0 {
-                self.rulings.addingObjects(from: rulings)
+        if let tempRulings = try container.decodeIfPresent([Ruling].self, forKey: .rulings) {
+            if tempRulings.count > 0 {
+                for ruling in tempRulings {
+                    ruling.card = self
+                }
+                self.rulings.addingObjects(from: tempRulings)
             }
         }
         self.scryfallID = try container.decodeIfPresent(String.self, forKey: .scryfallID)
@@ -168,7 +174,7 @@ class Card: NSManagedObject, Codable {
             self.isReserved = false
         }
     }
-
+    
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(artist, forKey: .artist)
@@ -177,7 +183,9 @@ class Card: NSManagedObject, Codable {
         try container.encode(colors, forKey: .colors)
         try container.encode(convertedManaCost, forKey: .convertedManaCost)
         try container.encode(flavorText, forKey: .flavorText)
-        //try container.encode(foreignData, forKey: .foreignData)
+        if let foreignDataObjects = foreignData.allObjects as? [ForeignDatum] {
+            try container.encode(foreignDataObjects, forKey: .foreignData)
+        }
         try container.encode(frameVersion, forKey: .frameVersion)
         try container.encode(hasFoil, forKey: .hasFoil)
         try container.encode(hasNonFoil, forKey: .hasNonFoil)
@@ -192,7 +200,9 @@ class Card: NSManagedObject, Codable {
         try container.encode(power, forKey: .power)
         try container.encode(printings, forKey: .printings)
         try container.encode(rarity, forKey: .rarity)
-        //try container.encode(rulings, forKey: .rulings)
+        if let rulingObjects = rulings.allObjects as? [Ruling] {
+            try container.encode(rulingObjects, forKey: .rulings)
+        }
         try container.encode(scryfallID, forKey: .scryfallID)
         try container.encode(subtypes, forKey: .subtypes)
         try container.encode(supertypes, forKey: .supertypes)
@@ -210,56 +220,16 @@ class Card: NSManagedObject, Codable {
         try container.encode(side, forKey: .side)
         try container.encode(variations, forKey: .variations)
         try container.encode(starter, forKey: .starter)
-
+        
     }
-    //    init(artist: String?, borderColor: String?, colorIdentity: [String]?, colors: [String]?, convertedManaCost: Int?, flavorText: String?, foreignData: [ForeignDatum]?, frameVersion: String?, hasFoil: Bool?, hasNonFoil: Bool?, layout: String?, legalities: Legalities?, manaCost: String?, multiverseID: Int?, name: String?, number: String?, originalText: String?, originalType: String?, power: String?, printings: [String]?, rarity: String?, rulings: [Ruling]?, scryfallID: String?, subtypes: [String]?, supertypes: [String]?, tcgplayerProductID: Int?, tcgplayerPurchaseURL: String?, text: String?, toughness: String?, type: String?, types: [String]?, uuid: String?, watermark: String?, names: [String]?, loyalty: String?, faceConvertedManaCost: Int?, side: String?, variations: [String]?, starter: Bool?) {
-    //        self.artist = artist
-    //        self.borderColor = borderColor
-    //        self.colorIdentity = colorIdentity
-    //        self.colors = colors
-    //        self.convertedManaCost = convertedManaCost
-    //        self.flavorText = flavorText
-    //        self.foreignData = foreignData
-    //        self.frameVersion = frameVersion
-    //        self.hasFoil = hasFoil
-    //        self.hasNonFoil = hasNonFoil
-    //        self.layout = layout
-    //        self.legalities = legalities
-    //        self.manaCost = manaCost
-    //        self.multiverseID = multiverseID
-    //        self.name = name
-    //        self.number = number
-    //        self.originalText = originalText
-    //        self.originalType = originalType
-    //        self.power = power
-    //        self.printings = printings
-    //        self.rarity = rarity
-    //        self.rulings = rulings
-    //        self.scryfallID = scryfallID
-    //        self.subtypes = subtypes
-    //        self.supertypes = supertypes
-    //        self.tcgplayerProductID = tcgplayerProductID
-    //        self.tcgplayerPurchaseURL = tcgplayerPurchaseURL
-    //        self.text = text
-    //        self.toughness = toughness
-    //        self.type = type
-    //        self.types = types
-    //        self.uuid = uuid
-    //        self.watermark = watermark
-    //        self.names = names
-    //        self.loyalty = loyalty
-    //        self.faceConvertedManaCost = faceConvertedManaCost
-    //        self.side = side
-    //        self.variations = variations
-    //        self.starter = starter
-    //    }
+    
 }
 extension Card {
-
+    
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-
+    
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
         return String(data: try self.jsonData(), encoding: encoding)
     }

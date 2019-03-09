@@ -36,29 +36,32 @@ import Foundation
 class ScryfallCard: Codable {
     let imageUris: ImageUris?
     let cardFaces: [CardFace]?
+    let scryfallUri: String
     
     enum CodingKeys: String, CodingKey {
         case imageUris = "image_uris"
         case cardFaces = "card_faces"
+        case scryfallUri = "scryfall_uri"
     }
     
-    init(imageUris: ImageUris?, cardFaces: [CardFace]?) {
+    init(imageUris: ImageUris?, cardFaces: [CardFace]?, scryfallUri: String) {
         self.imageUris = imageUris
         self.cardFaces = cardFaces
+        self.scryfallUri = scryfallUri
     }
 }
 
 class CardFace: Codable {
-    let artist: String
-    let colors: [String]
+    let artist: String?
+    let colors: [String]?
     let flavorText: String?
-    let illustrationID: String
-    let imageUris: ImageUris
-    let manaCost: String
-    let name: String
-    let object: String
-    let oracleText: String
-    let typeLine: String
+    let illustrationID: String?
+    let imageUris: ImageUris?
+    let manaCost: String?
+    let name: String?
+    let object: String?
+    let oracleText: String?
+    let typeLine: String?
     
     enum CodingKeys: String, CodingKey {
         case artist = "artist"
@@ -73,7 +76,7 @@ class CardFace: Codable {
         case typeLine = "type_line"
     }
     
-    init(artist: String, colors: [String], flavorText: String?, illustrationID: String, imageUris: ImageUris, manaCost: String, name: String, object: String, oracleText: String, typeLine: String) {
+    init(artist: String?, colors: [String]?, flavorText: String?, illustrationID: String?, imageUris: ImageUris?, manaCost: String?, name: String?, object: String?, oracleText: String?, typeLine: String?) {
         self.artist = artist
         self.colors = colors
         self.flavorText = flavorText
@@ -119,7 +122,7 @@ class ImageUris: Codable {
 extension ScryfallCard {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(ScryfallCard.self, from: data)
-        self.init(imageUris: me.imageUris, cardFaces: me.cardFaces)
+        self.init(imageUris: me.imageUris, cardFaces: me.cardFaces, scryfallUri: me.scryfallUri)
     }
     
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -139,7 +142,8 @@ extension ScryfallCard {
         ) -> ScryfallCard {
         return ScryfallCard(
             imageUris: imageUris ?? self.imageUris,
-            cardFaces: cardFaces ?? self.cardFaces
+            cardFaces: cardFaces ?? self.cardFaces,
+            scryfallUri: scryfallUri ?? self.scryfallUri
         )
     }
     

@@ -38,9 +38,9 @@
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="variations" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="watermark" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="foreignData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ForeignDatum" syncable="YES"/>
+        <relationship name="foreignData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ForeignDatum" inverseName="card" inverseEntity="ForeignDatum" syncable="YES"/>
         <relationship name="legalities" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Legalities" syncable="YES"/>
-        <relationship name="rulings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ruling" syncable="YES"/>
+        <relationship name="rulings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ruling" inverseName="card" inverseEntity="Ruling" syncable="YES"/>
         <relationship name="set" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Set" inverseName="cards" inverseEntity="Set" syncable="YES"/>
     </entity>
     <entity name="ForeignDatum" representedClassName=".ForeignDatum" syncable="YES">
@@ -50,6 +50,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="card" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card" inverseName="foreignData" inverseEntity="Card" syncable="YES"/>
     </entity>
     <entity name="Legalities" representedClassName=".Legalities" syncable="YES">
         <attribute name="brawl" optional="YES" attributeType="String" syncable="YES"/>
@@ -72,6 +73,7 @@
     <entity name="Ruling" representedClassName=".Ruling" syncable="YES">
         <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="card" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card" inverseName="rulings" inverseEntity="Card" syncable="YES"/>
     </entity>
     <entity name="Set" representedClassName=".Set" syncable="YES">
         <attribute name="baseSetSize" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -85,7 +87,7 @@
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Card" inverseName="set" inverseEntity="Card" syncable="YES"/>
         <relationship name="meta" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Meta" syncable="YES"/>
-        <relationship name="tokens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Token" syncable="YES"/>
+        <relationship name="tokens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Token" inverseName="set" inverseEntity="Token" syncable="YES"/>
     </entity>
     <entity name="Token" representedClassName=".Token" syncable="YES">
         <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
@@ -102,14 +104,15 @@
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="watermark" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="set" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Set" inverseName="tokens" inverseEntity="Set" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Card" positionX="18" positionY="180" width="128" height="660"/>
-        <element name="ForeignDatum" positionX="-36" positionY="27" width="128" height="135"/>
-        <element name="Legalities" positionX="-18" positionY="81" width="128" height="225"/>
-        <element name="Meta" positionX="-54" positionY="9" width="128" height="75"/>
-        <element name="Ruling" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="Card" positionX="-421.796875" positionY="-320.98828125" width="128" height="660"/>
+        <element name="ForeignDatum" positionX="-277.703125" positionY="-181.94140625" width="128" height="150"/>
+        <element name="Legalities" positionX="14.125" positionY="-305.26953125" width="128" height="225"/>
+        <element name="Meta" positionX="205.7734375" positionY="37.49609375" width="128" height="75"/>
+        <element name="Ruling" positionX="-98.87890625" positionY="-12.99609375" width="128" height="90"/>
         <element name="Set" positionX="36" positionY="189" width="128" height="225"/>
-        <element name="Token" positionX="0" positionY="162" width="128" height="255"/>
+        <element name="Token" positionX="-307.515625" positionY="385.4296875" width="128" height="270"/>
     </elements>
 </model>
