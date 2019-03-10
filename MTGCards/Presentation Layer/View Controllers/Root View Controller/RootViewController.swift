@@ -53,15 +53,25 @@ class RootViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(DataManager.getLocalVersion())
         //DataManager.getSetList()
-       
+     
 
         
         StateCoordinator.shared.delegate = self
         installRootSplit()
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        if !UserDefaultsHandler.isFirstTimeOpening(){
+            //onbarding
+            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+            guard let pageOne = storyboard.instantiateInitialViewController() as? PageOneViewController else {
+                fatalError("Error going to settings")
+            }
+            //self.navigationController?.pushViewController(settingsVC, animated: true)
+            self.present(pageOne, animated: true, completion: nil)
+            UserDefaultsHandler.setHasOpened(opened: true)
+        }
+    }
     func installDoubleSplitWhenHorizontallyRegular() -> UISplitViewController? {
         guard isHorizontallyRegular else {
             return nil

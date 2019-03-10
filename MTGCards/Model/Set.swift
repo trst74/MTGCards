@@ -91,20 +91,6 @@ class Set: NSManagedObject, Codable {
         try container.encode(type, forKey: .type)
 
     }
-    //    init(baseSetSize: Int?, block: String?, cards: [Card]?, code: String?, meta: Meta?, mtgoCode: String?, name: String?, releaseDate: String?, tcgplayerGroupID: Int?, tokens: [Token]?, totalSetSize: Int?, type: String?) {
-    //        self.baseSetSize = baseSetSize
-    //        self.block = block
-    //        self.cards = cards
-    //        self.code = code
-    //        self.meta = meta
-    //        self.mtgoCode = mtgoCode
-    //        self.name = name
-    //        self.releaseDate = releaseDate
-    //        self.tcgplayerGroupID = tcgplayerGroupID
-    //        self.tokens = tokens
-    //        self.totalSetSize = totalSetSize
-    //        self.type = type
-    //    }
 }
 // MARK: Convenience initializers and mutators
 

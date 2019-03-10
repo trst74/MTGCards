@@ -101,7 +101,7 @@ class Card: NSManagedObject, Codable {
             let entity = NSEntityDescription.entity(forEntityName: "Card", in: managedObjectContext) else {
                 fatalError("Failed to decode Card")
         }
-        
+
         self.init(entity: entity, insertInto: managedObjectContext)
         
         let container = try decoder.container(keyedBy: CodingKeys.self)

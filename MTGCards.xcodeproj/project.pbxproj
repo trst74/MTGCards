@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE0F62A922341CD7003D8A8A /* PageTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0F62A822341CD7003D8A8A /* PageTwoViewController.swift */; };
+		EE0F62AB22341DC1003D8A8A /* PageOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0F62AA22341DC1003D8A8A /* PageOneViewController.swift */; };
+		EE2755292234084C006BD083 /* UserDefaultsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2755282234084C006BD083 /* UserDefaultsHandler.swift */; };
+		EE27552B22340F0F006BD083 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE27552A22340F0F006BD083 /* Onboarding.storyboard */; };
+		EE27552D22341B04006BD083 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27552C22341B04006BD083 /* RoundButton.swift */; };
 		EE2B78A621EFE39700306990 /* RootViewController+ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78A521EFE39700306990 /* RootViewController+ViewFactory.swift */; };
 		EE2B78A821EFE3DB00306990 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78A721EFE3DB00306990 /* RootViewController.swift */; };
 		EE2B78AB21EFE47600306990 /* UIView+AutolayoutHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */; };
@@ -70,6 +75,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EE0F62A822341CD7003D8A8A /* PageTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTwoViewController.swift; sourceTree = "<group>"; };
+		EE0F62AA22341DC1003D8A8A /* PageOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageOneViewController.swift; sourceTree = "<group>"; };
+		EE2755282234084C006BD083 /* UserDefaultsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHandler.swift; sourceTree = "<group>"; };
+		EE27552A22340F0F006BD083 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		EE27552C22341B04006BD083 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		EE2B78A521EFE39700306990 /* RootViewController+ViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootViewController+ViewFactory.swift"; sourceTree = "<group>"; };
 		EE2B78A721EFE3DB00306990 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AutolayoutHelp.swift"; sourceTree = "<group>"; };
@@ -175,6 +185,8 @@
 				EE6F94AF22309136001B3378 /* TcgPlayerApi.swift */,
 				EE2CAC512231AAF200D24334 /* SafariActivity.swift */,
 				EE2CAC532231C1AA00D24334 /* String+Custom.swift */,
+				EE2755282234084C006BD083 /* UserDefaultsHandler.swift */,
+				EE27552C22341B04006BD083 /* RoundButton.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -232,6 +244,9 @@
 				EEC9198F223080DF004E52F5 /* SettingsTableViewController.swift */,
 				EEAA53CA223323D700CB4B72 /* Debug.storyboard */,
 				EEAA53CC2233241000CB4B72 /* DebugViewController.swift */,
+				EE27552A22340F0F006BD083 /* Onboarding.storyboard */,
+				EE0F62A822341CD7003D8A8A /* PageTwoViewController.swift */,
+				EE0F62AA22341DC1003D8A8A /* PageOneViewController.swift */,
 			);
 			path = "Member View Controllers";
 			sourceTree = "<group>";
@@ -394,6 +409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEAA53CB223323D700CB4B72 /* Debug.storyboard in Resources */,
+				EE27552B22340F0F006BD083 /* Onboarding.storyboard in Resources */,
 				EE2B78C121F0075100306990 /* Collections.storyboard in Resources */,
 				EEBE6D9B21EFE19100A3464E /* LaunchScreen.storyboard in Resources */,
 				EE2B78CE21F009A600306990 /* PlaceholderView.storyboard in Resources */,
@@ -426,6 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE0F62AB22341DC1003D8A8A /* PageOneViewController.swift in Sources */,
 				EE2B78C921F0087200306990 /* CardListTableViewController.swift in Sources */,
 				EE2B821F21FCCA3900306990 /* Card.swift in Sources */,
 				EEB5D81F2205EBFF0070FF8B /* UIColor+Custom.swift in Sources */,
@@ -440,17 +457,20 @@
 				EE2CAC522231AAF200D24334 /* SafariActivity.swift in Sources */,
 				EE2B78D321F13EAF00306990 /* Set.swift in Sources */,
 				EE2B78A621EFE39700306990 /* RootViewController+ViewFactory.swift in Sources */,
+				EE27552D22341B04006BD083 /* RoundButton.swift in Sources */,
 				EE6F94B2223092AD001B3378 /* TcgToken.swift in Sources */,
 				EE2B78AB21EFE47600306990 /* UIView+AutolayoutHelp.swift in Sources */,
 				EEBE6D9621EFE18F00A3464E /* MTGCards.xcdatamodeld in Sources */,
 				EEBE6D8E21EFE18F00A3464E /* AppDelegate.swift in Sources */,
 				EEC91990223080DF004E52F5 /* SettingsTableViewController.swift in Sources */,
+				EE2755292234084C006BD083 /* UserDefaultsHandler.swift in Sources */,
 				EE2B78CB21F0089500306990 /* CardViewController.swift in Sources */,
 				EE2B78BB21EFE60E00306990 /* StateCoordinator.swift in Sources */,
 				EE2B822321FD258700306990 /* Legalities.swift in Sources */,
 				EE2B78BA21EFE60E00306990 /* SelectionState.swift in Sources */,
 				EE843A302228256100B07E09 /* ScryfallCard.swift in Sources */,
 				EE2B821B21FCA8AE00306990 /* CoreDataManager.swift in Sources */,
+				EE0F62A922341CD7003D8A8A /* PageTwoViewController.swift in Sources */,
 				EE2B78C321F0077400306990 /* CollectionsTableViewController.swift in Sources */,
 				EEAA53CD2233241000CB4B72 /* DebugViewController.swift in Sources */,
 				EE2B822121FD254100306990 /* ForeignDatum.swift in Sources */,

@@ -14,40 +14,31 @@ public class DataManager {
     static func getLocalVersion() -> String {
         return "1.0"
     }
-    static func getSet(setCode: String) -> Set? {
-        //https://mtgjson.com/json/RNA.json
-        guard let managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
-            else {
-                fatalError("Failed to decode Set")
-        }
-        //print(setCode)
-        let rnaURL = URL(string: "https://mtgjson.com/json/\(setCode).json")
-        let data = try? Data(contentsOf: rnaURL!)
+    static func getSet(setCode: String, completion: @escaping (_ success: Bool) -> Void) {
+      
+        let setURL = URL(string: "https://mtgjson.com/json/\(setCode).json")
+        let data = try? Data(contentsOf: setURL!)
         if let d = data {
             do {
-                let RNA = try newJSONDecoder().decode(Set.self, from: d)
-                print("\(setCode): \(RNA.cards.count)")
+                let set = try newJSONDecoder().decode(Set.self, from: d)
+                print("\(setCode): \(set.cards.count)")
+                completion(true)
             } catch let error {
                 print(error)
+                completion(false)
             }
-            (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+            do {
+                try CoreDataManager.init(modelName: "MTGCards").managedObjectContext.save()
+            } catch {
+                print(error)
+            }
+            
         }
-        return nil
     }
-    static func getSetList() {
+    static func getSetList() -> SetList? {
         let setListURL = URL(string: "https://mtgjson.com/json/SetList.json")
         let setList = try? SetList.init(fromURL: setListURL!)
-        if let sl = setList {
-            print(sl.count)
-            for s in sl {
-                getSet(setCode: s.code!)
-            }
-            //getSet(setCode: "STH")
-        }
+        return setList
     }
-    static func getRNA() -> Set? {
-        var s = getSet(setCode: "RNA")
-
-        return s
-    }
+    
 }
