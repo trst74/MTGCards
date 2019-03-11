@@ -33,10 +33,10 @@ class PageTwoViewController: UIViewController {
         }
     }
     func downloadSets(){
-            self.downloadLabel.isHidden = false
-            self.downloadProgress.isHidden = false
-            self.doneButton.isEnabled = false
-            self.downloadButton.isEnabled = false
+        self.downloadLabel.isHidden = false
+        self.downloadProgress.isHidden = false
+        self.doneButton.isEnabled = false
+        self.downloadButton.isEnabled = false
         
         
         let setlist = DataManager.getSetList()
@@ -45,29 +45,27 @@ class PageTwoViewController: UIViewController {
             let setTotal = sl.count
             var completed = 0
             
-            //DispatchQueue.global(qos: .default).async {
+            DispatchQueue.global(qos: .default).async {
                 for s in sl {
                     DataManager.getSet(setCode: s.code!) { success in
-                        //DispatchQueue.main.async {
-                            
+                        DispatchQueue.main.async {
                             if success {
                                 //save
-                                
                                 completed += 1
                                 let percent = Float(completed)/Float(setTotal)
                                 print("\(Int(percent*100))%")
                                 self.downloadProgress.setProgress(percent, animated: true)
                                 self.downloadLabel.text = "\(Int(percent*100))%"
-                                
                                 if completed == setTotal {
                                     self.doneButton.isEnabled = true
-                                    
+                                    self.downloadLabel.text = "Done!"
                                 }
                             }
                         }
                     }
-               // }
-           //}
+               }
+            }
         }
     }
 }
+

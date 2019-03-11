@@ -21,8 +21,8 @@ class Ruling: NSManagedObject, Codable {
     }
 
     required convenience init(from decoder: Decoder) throws {
-        guard let managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext,
-            let entity = NSEntityDescription.entity(forEntityName: "Ruling", in: managedObjectContext) else {
+        let managedObjectContext = CoreDataStack.handler.privateContext
+        guard let entity = NSEntityDescription.entity(forEntityName: "Ruling", in: managedObjectContext) else {
                 fatalError("Failed to decode Ruling")
         }
 

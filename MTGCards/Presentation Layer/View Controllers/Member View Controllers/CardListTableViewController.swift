@@ -44,10 +44,11 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
             let sortDescriptor2 = NSSortDescriptor(key: "set.name", ascending: true)
             request.sortDescriptors = [sortDescriptor, sortDescriptor2]
+            //request.sortDescriptors = [sortDescriptor]
             request.predicate = predicate
             request.fetchBatchSize = 20
             
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: appDelegate.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.handler.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
             fetchedResultsController.delegate = self
         }
         
@@ -174,7 +175,6 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             let random = Int.random(in: 0 ..< total)
             
             let card = fetchedResultsController.object(at: IndexPath(item: random, section: 0))
-            print(card.name)
             StateCoordinator.shared.didSelectCard(c: card)
         }
     }

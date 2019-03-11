@@ -26,8 +26,6 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(card?.legalities?.commander)
-        print(card?.rulings.count)
         shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(self.share))
         self.navigationItem.setRightBarButton(shareButton, animated: true)
         

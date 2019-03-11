@@ -96,9 +96,8 @@ class Card: NSManagedObject, Codable {
         case isReserved = "isReserved"
     }
     
-    required convenience init(from decoder: Decoder) throws {
-        guard let managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext,
-            let entity = NSEntityDescription.entity(forEntityName: "Card", in: managedObjectContext) else {
+    required convenience init(from decoder: Decoder) throws {        let managedObjectContext = CoreDataStack.handler.privateContext
+        guard  let entity = NSEntityDescription.entity(forEntityName: "Card", in: managedObjectContext) else {
                 fatalError("Failed to decode Card")
         }
 

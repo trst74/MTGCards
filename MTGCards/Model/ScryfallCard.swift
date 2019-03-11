@@ -143,7 +143,7 @@ extension ScryfallCard {
         return ScryfallCard(
             imageUris: imageUris ?? self.imageUris,
             cardFaces: cardFaces ?? self.cardFaces,
-            scryfallUri: scryfallUri ?? self.scryfallUri
+            scryfallUri: scryfallUri 
         )
     }
     

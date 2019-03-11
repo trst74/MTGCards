@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		EE0F62A922341CD7003D8A8A /* PageTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0F62A822341CD7003D8A8A /* PageTwoViewController.swift */; };
 		EE0F62AB22341DC1003D8A8A /* PageOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0F62AA22341DC1003D8A8A /* PageOneViewController.swift */; };
+		EE0F62AD22356494003D8A8A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0F62AC22356494003D8A8A /* CoreDataStack.swift */; };
 		EE2755292234084C006BD083 /* UserDefaultsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2755282234084C006BD083 /* UserDefaultsHandler.swift */; };
 		EE27552B22340F0F006BD083 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE27552A22340F0F006BD083 /* Onboarding.storyboard */; };
 		EE27552D22341B04006BD083 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27552C22341B04006BD083 /* RoundButton.swift */; };
@@ -28,7 +29,6 @@
 		EE2B78D121F13ACD00306990 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78D021F13ACD00306990 /* DataManager.swift */; };
 		EE2B78D321F13EAF00306990 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78D221F13EAF00306990 /* Set.swift */; };
 		EE2B78D521F1518E00306990 /* SetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B78D421F1518E00306990 /* SetList.swift */; };
-		EE2B821B21FCA8AE00306990 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B821A21FCA8AD00306990 /* CoreDataManager.swift */; };
 		EE2B821D21FCAD5200306990 /* Ruling.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B821C21FCAD5200306990 /* Ruling.swift */; };
 		EE2B821F21FCCA3900306990 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B821E21FCCA3900306990 /* Card.swift */; };
 		EE2B822121FD254100306990 /* ForeignDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B822021FD254100306990 /* ForeignDatum.swift */; };
@@ -77,6 +77,7 @@
 /* Begin PBXFileReference section */
 		EE0F62A822341CD7003D8A8A /* PageTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTwoViewController.swift; sourceTree = "<group>"; };
 		EE0F62AA22341DC1003D8A8A /* PageOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageOneViewController.swift; sourceTree = "<group>"; };
+		EE0F62AC22356494003D8A8A /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		EE2755282234084C006BD083 /* UserDefaultsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHandler.swift; sourceTree = "<group>"; };
 		EE27552A22340F0F006BD083 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		EE27552C22341B04006BD083 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
@@ -96,7 +97,6 @@
 		EE2B78D021F13ACD00306990 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		EE2B78D221F13EAF00306990 /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		EE2B78D421F1518E00306990 /* SetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetList.swift; sourceTree = "<group>"; };
-		EE2B821A21FCA8AD00306990 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		EE2B821C21FCAD5200306990 /* Ruling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ruling.swift; sourceTree = "<group>"; };
 		EE2B821E21FCCA3900306990 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		EE2B822021FD254100306990 /* ForeignDatum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeignDatum.swift; sourceTree = "<group>"; };
@@ -178,7 +178,6 @@
 		EE2B78A921EFE45B00306990 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				EE2B821A21FCA8AD00306990 /* CoreDataManager.swift */,
 				EEB5D8202205F0D30070FF8B /* GradientView.swift */,
 				EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */,
 				EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */,
@@ -187,6 +186,7 @@
 				EE2CAC532231C1AA00D24334 /* String+Custom.swift */,
 				EE2755282234084C006BD083 /* UserDefaultsHandler.swift */,
 				EE27552C22341B04006BD083 /* RoundButton.swift */,
+				EE0F62AC22356494003D8A8A /* CoreDataStack.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -458,6 +458,7 @@
 				EE2B78D321F13EAF00306990 /* Set.swift in Sources */,
 				EE2B78A621EFE39700306990 /* RootViewController+ViewFactory.swift in Sources */,
 				EE27552D22341B04006BD083 /* RoundButton.swift in Sources */,
+				EE0F62AD22356494003D8A8A /* CoreDataStack.swift in Sources */,
 				EE6F94B2223092AD001B3378 /* TcgToken.swift in Sources */,
 				EE2B78AB21EFE47600306990 /* UIView+AutolayoutHelp.swift in Sources */,
 				EEBE6D9621EFE18F00A3464E /* MTGCards.xcdatamodeld in Sources */,
@@ -469,7 +470,6 @@
 				EE2B822321FD258700306990 /* Legalities.swift in Sources */,
 				EE2B78BA21EFE60E00306990 /* SelectionState.swift in Sources */,
 				EE843A302228256100B07E09 /* ScryfallCard.swift in Sources */,
-				EE2B821B21FCA8AE00306990 /* CoreDataManager.swift in Sources */,
 				EE0F62A922341CD7003D8A8A /* PageTwoViewController.swift in Sources */,
 				EE2B78C321F0077400306990 /* CollectionsTableViewController.swift in Sources */,
 				EEAA53CD2233241000CB4B72 /* DebugViewController.swift in Sources */,

@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAt-NO-XTZ" customClass="RoundButton" customModule="MTGCards" customModuleProvider="target">
-                                <rect key="frame" x="20" y="597" width="335" height="50"/>
+                                <rect key="frame" x="20" y="577" width="335" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="CoL-Ol-gjX"/>
@@ -58,7 +58,7 @@
                             <constraint firstItem="ZAt-NO-XTZ" firstAttribute="trailing" secondItem="ig9-hJ-Lna" secondAttribute="trailing" id="aWN-Zf-NIf"/>
                             <constraint firstItem="ig9-hJ-Lna" firstAttribute="top" secondItem="3SV-0i-ZuR" secondAttribute="bottom" constant="8" id="cT7-Jw-ZKd"/>
                             <constraint firstItem="3SV-0i-ZuR" firstAttribute="centerX" secondItem="JNt-g7-spw" secondAttribute="centerX" id="gf3-St-zXD"/>
-                            <constraint firstAttribute="bottom" secondItem="ZAt-NO-XTZ" secondAttribute="bottom" constant="20" symbolic="YES" id="yMF-ag-hKO"/>
+                            <constraint firstAttribute="bottom" secondItem="ZAt-NO-XTZ" secondAttribute="bottom" constant="40" id="yMF-ag-hKO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JNt-g7-spw"/>
                     </view>
@@ -90,7 +90,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7n-cu-Lip" customClass="RoundButton" customModule="MTGCards" customModuleProvider="target">
-                                <rect key="frame" x="20" y="597" width="335" height="50"/>
+                                <rect key="frame" x="20" y="577" width="335" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="dwg-xe-93s"/>
@@ -152,7 +152,7 @@
                             <constraint firstItem="2h3-Mc-Bw6" firstAttribute="top" secondItem="jvc-bw-hte" secondAttribute="bottom" constant="20" id="JQR-HG-cYc"/>
                             <constraint firstItem="oPH-eJ-YZ0" firstAttribute="centerX" secondItem="9vW-e2-sgJ" secondAttribute="centerX" id="KCy-JL-Bdj"/>
                             <constraint firstItem="2h3-Mc-Bw6" firstAttribute="leading" secondItem="M4S-S1-ocE" secondAttribute="leading" constant="20" id="Law-fT-mSy"/>
-                            <constraint firstAttribute="bottom" secondItem="u7n-cu-Lip" secondAttribute="bottom" constant="20" symbolic="YES" id="Pdr-BI-3ZJ"/>
+                            <constraint firstAttribute="bottom" secondItem="u7n-cu-Lip" secondAttribute="bottom" constant="40" id="Pdr-BI-3ZJ"/>
                             <constraint firstItem="oPH-eJ-YZ0" firstAttribute="leading" secondItem="M4S-S1-ocE" secondAttribute="leading" constant="20" id="Qth-xd-cJ6"/>
                             <constraint firstItem="2h3-Mc-Bw6" firstAttribute="centerY" secondItem="M4S-S1-ocE" secondAttribute="centerY" multiplier="0.9" id="TYw-LX-TXV"/>
                             <constraint firstItem="u7n-cu-Lip" firstAttribute="trailing" secondItem="oPH-eJ-YZ0" secondAttribute="trailing" id="VdQ-fH-hQq"/>
