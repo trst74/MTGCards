@@ -10,6 +10,9 @@
 		EE0F62A922341CD7003D8A8A /* PageTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0F62A822341CD7003D8A8A /* PageTwoViewController.swift */; };
 		EE0F62AB22341DC1003D8A8A /* PageOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0F62AA22341DC1003D8A8A /* PageOneViewController.swift */; };
 		EE0F62AD22356494003D8A8A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0F62AC22356494003D8A8A /* CoreDataStack.swift */; };
+		EE1E1467223AFC6600A54747 /* DeckCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E1465223AFC6600A54747 /* DeckCard+CoreDataClass.swift */; };
+		EE1E1468223AFC6600A54747 /* DeckCard+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E1466223AFC6600A54747 /* DeckCard+CoreDataProperties.swift */; };
+		EE1E146A223AFFEA00A54747 /* DeckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E1469223AFFEA00A54747 /* DeckTableViewCell.swift */; };
 		EE2755292234084C006BD083 /* UserDefaultsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2755282234084C006BD083 /* UserDefaultsHandler.swift */; };
 		EE27552B22340F0F006BD083 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE27552A22340F0F006BD083 /* Onboarding.storyboard */; };
 		EE27552D22341B04006BD083 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27552C22341B04006BD083 /* RoundButton.swift */; };
@@ -38,6 +41,10 @@
 		EE2CAC502231707000D24334 /* TcgPrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CAC4F2231707000D24334 /* TcgPrices.swift */; };
 		EE2CAC522231AAF200D24334 /* SafariActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CAC512231AAF200D24334 /* SafariActivity.swift */; };
 		EE2CAC542231C1AA00D24334 /* String+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CAC532231C1AA00D24334 /* String+Custom.swift */; };
+		EE4FD204223A91BD00E8CDB3 /* Deck+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4FD202223A91BD00E8CDB3 /* Deck+CoreDataClass.swift */; };
+		EE4FD205223A91BD00E8CDB3 /* Deck+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4FD203223A91BD00E8CDB3 /* Deck+CoreDataProperties.swift */; };
+		EE4FD207223AC6CE00E8CDB3 /* Deck.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE4FD206223AC6CE00E8CDB3 /* Deck.storyboard */; };
+		EE4FD209223AC6FE00E8CDB3 /* DeckTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4FD208223AC6FE00E8CDB3 /* DeckTableViewController.swift */; };
 		EE6F94B022309136001B3378 /* TcgPlayerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F94AF22309136001B3378 /* TcgPlayerApi.swift */; };
 		EE6F94B2223092AD001B3378 /* TcgToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F94B1223092AD001B3378 /* TcgToken.swift */; };
 		EE843A302228256100B07E09 /* ScryfallCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE843A2F2228256100B07E09 /* ScryfallCard.swift */; };
@@ -78,6 +85,9 @@
 		EE0F62A822341CD7003D8A8A /* PageTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTwoViewController.swift; sourceTree = "<group>"; };
 		EE0F62AA22341DC1003D8A8A /* PageOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageOneViewController.swift; sourceTree = "<group>"; };
 		EE0F62AC22356494003D8A8A /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		EE1E1465223AFC6600A54747 /* DeckCard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeckCard+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EE1E1466223AFC6600A54747 /* DeckCard+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeckCard+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EE1E1469223AFFEA00A54747 /* DeckTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckTableViewCell.swift; sourceTree = "<group>"; };
 		EE2755282234084C006BD083 /* UserDefaultsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHandler.swift; sourceTree = "<group>"; };
 		EE27552A22340F0F006BD083 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		EE27552C22341B04006BD083 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
@@ -106,6 +116,10 @@
 		EE2CAC4F2231707000D24334 /* TcgPrices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcgPrices.swift; sourceTree = "<group>"; };
 		EE2CAC512231AAF200D24334 /* SafariActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariActivity.swift; sourceTree = "<group>"; };
 		EE2CAC532231C1AA00D24334 /* String+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Custom.swift"; sourceTree = "<group>"; };
+		EE4FD202223A91BD00E8CDB3 /* Deck+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EE4FD203223A91BD00E8CDB3 /* Deck+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EE4FD206223AC6CE00E8CDB3 /* Deck.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Deck.storyboard; sourceTree = "<group>"; };
+		EE4FD208223AC6FE00E8CDB3 /* DeckTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckTableViewController.swift; sourceTree = "<group>"; };
 		EE6F94AF22309136001B3378 /* TcgPlayerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcgPlayerApi.swift; sourceTree = "<group>"; };
 		EE6F94B1223092AD001B3378 /* TcgToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcgToken.swift; sourceTree = "<group>"; };
 		EE843A2F2228256100B07E09 /* ScryfallCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryfallCard.swift; sourceTree = "<group>"; };
@@ -212,6 +226,10 @@
 		EE2B78BC21EFE67E00306990 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EE1E1465223AFC6600A54747 /* DeckCard+CoreDataClass.swift */,
+				EE1E1466223AFC6600A54747 /* DeckCard+CoreDataProperties.swift */,
+				EE4FD202223A91BD00E8CDB3 /* Deck+CoreDataClass.swift */,
+				EE4FD203223A91BD00E8CDB3 /* Deck+CoreDataProperties.swift */,
 				EE2B821E21FCCA3900306990 /* Card.swift */,
 				EE2B78D021F13ACD00306990 /* DataManager.swift */,
 				EE2B822021FD254100306990 /* ForeignDatum.swift */,
@@ -247,6 +265,9 @@
 				EE27552A22340F0F006BD083 /* Onboarding.storyboard */,
 				EE0F62A822341CD7003D8A8A /* PageTwoViewController.swift */,
 				EE0F62AA22341DC1003D8A8A /* PageOneViewController.swift */,
+				EE4FD206223AC6CE00E8CDB3 /* Deck.storyboard */,
+				EE4FD208223AC6FE00E8CDB3 /* DeckTableViewController.swift */,
+				EE1E1469223AFFEA00A54747 /* DeckTableViewCell.swift */,
 			);
 			path = "Member View Controllers";
 			sourceTree = "<group>";
@@ -409,6 +430,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEAA53CB223323D700CB4B72 /* Debug.storyboard in Resources */,
+				EE4FD207223AC6CE00E8CDB3 /* Deck.storyboard in Resources */,
 				EE27552B22340F0F006BD083 /* Onboarding.storyboard in Resources */,
 				EE2B78C121F0075100306990 /* Collections.storyboard in Resources */,
 				EEBE6D9B21EFE19100A3464E /* LaunchScreen.storyboard in Resources */,
@@ -452,15 +474,20 @@
 				EE2B822521FD25C800306990 /* Meta.swift in Sources */,
 				EE2CAC542231C1AA00D24334 /* String+Custom.swift in Sources */,
 				EE2B78D121F13ACD00306990 /* DataManager.swift in Sources */,
+				EE1E1468223AFC6600A54747 /* DeckCard+CoreDataProperties.swift in Sources */,
 				EE6F94B022309136001B3378 /* TcgPlayerApi.swift in Sources */,
 				EE2B822721FD25FD00306990 /* Token.swift in Sources */,
+				EE1E1467223AFC6600A54747 /* DeckCard+CoreDataClass.swift in Sources */,
 				EE2CAC522231AAF200D24334 /* SafariActivity.swift in Sources */,
 				EE2B78D321F13EAF00306990 /* Set.swift in Sources */,
 				EE2B78A621EFE39700306990 /* RootViewController+ViewFactory.swift in Sources */,
 				EE27552D22341B04006BD083 /* RoundButton.swift in Sources */,
+				EE4FD205223A91BD00E8CDB3 /* Deck+CoreDataProperties.swift in Sources */,
 				EE0F62AD22356494003D8A8A /* CoreDataStack.swift in Sources */,
+				EE4FD204223A91BD00E8CDB3 /* Deck+CoreDataClass.swift in Sources */,
 				EE6F94B2223092AD001B3378 /* TcgToken.swift in Sources */,
 				EE2B78AB21EFE47600306990 /* UIView+AutolayoutHelp.swift in Sources */,
+				EE4FD209223AC6FE00E8CDB3 /* DeckTableViewController.swift in Sources */,
 				EEBE6D9621EFE18F00A3464E /* MTGCards.xcdatamodeld in Sources */,
 				EEBE6D8E21EFE18F00A3464E /* AppDelegate.swift in Sources */,
 				EEC91990223080DF004E52F5 /* SettingsTableViewController.swift in Sources */,
@@ -473,6 +500,7 @@
 				EE0F62A922341CD7003D8A8A /* PageTwoViewController.swift in Sources */,
 				EE2B78C321F0077400306990 /* CollectionsTableViewController.swift in Sources */,
 				EEAA53CD2233241000CB4B72 /* DebugViewController.swift in Sources */,
+				EE1E146A223AFFEA00A54747 /* DeckTableViewCell.swift in Sources */,
 				EE2B822121FD254100306990 /* ForeignDatum.swift in Sources */,
 				EE2CAC502231707000D24334 /* TcgPrices.swift in Sources */,
 				EEB5D8212205F0D30070FF8B /* GradientView.swift in Sources */,

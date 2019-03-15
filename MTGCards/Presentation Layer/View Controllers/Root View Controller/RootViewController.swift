@@ -40,22 +40,22 @@ class RootViewController: UIViewController {
         case foldersFiles = 2
         case foldersFilesEditor = 3
     }
-
+    
     let rootSplitSmallFraction: CGFloat = 0.25
     let rootSplitLargeFraction: CGFloat = 0.40
-
+    
     lazy var rootSplitView: UISplitViewController = {
         let split = freshSplitViewTemplate()
         split.preferredPrimaryColumnWidthFraction = rootSplitLargeFraction
         split.delegate = self
         return split
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //DataManager.getSetList()
-     
-
+        
+        
         
         StateCoordinator.shared.delegate = self
         installRootSplit()
@@ -76,19 +76,19 @@ class RootViewController: UIViewController {
         guard isHorizontallyRegular else {
             return nil
         }
-
+        
         if let subSplit = rootSplitView.viewControllers.last
             as? UISplitViewController {
             return subSplit
         }
-
+        
         let split = freshSplitViewTemplate()
         split.delegate = self
         rootSplitView.preferredPrimaryColumnWidthFraction = rootSplitSmallFraction
         rootSplitView.showDetailViewController(split, sender: self)
         return split
     }
-
+    
     func targetSplitForCurrentTraitCollection() -> UISplitViewController {
         if isHorizontallyRegular {
             guard let subSplit = installDoubleSplitWhenHorizontallyRegular() else {
@@ -99,12 +99,12 @@ class RootViewController: UIViewController {
             return rootSplitView
         }
     }
-
+    
     func installRootSplit() {
         view.addSubview(rootSplitView.view)
         view.pinToInside(rootSplitView.view)
         addChild(rootSplitView)
-
+        
         let fileList = CollectionsTableViewController.freshCollectionsList()
         let navigation = primaryNavigation(rootSplitView)
         navigation.viewControllers = [fileList]
@@ -113,29 +113,43 @@ class RootViewController: UIViewController {
 }
 
 extension RootViewController: StateCoordinatorDelegate {
-    func gotoState(_ nextState: SelectionState, s: Card?) {
-
-        if let s = s {
-            if nextState == .cardSelected {
-                gotoCardSelected(s: s)
+    func gotoState(_ nextState: SelectionState, s: AnyObject?) {
+        
+        
+        if nextState == .cardSelected {
+            if let card = s as? Card {
+                gotoCardSelected(s: card)
             }
-        } else {
+        } else if nextState == .deckSelected {
+            if let deck = s as? Deck {
+                gotoDeckSelected(deck: deck)
+            }
+        }
+        else {
             gotoCollectionSelected(s: "Search")
         }
     }
-
+    
+    
     func gotoCollectionSelected(s: String) {
         let cardList = CardListTableViewController.freshCardList()
-
+        
         cardList.title = s
         installFileList(fileList: cardList)
     }
-
+    
     func gotoCardSelected(s: Card) {
         let cardDetails = CardViewController.refreshCardController(s: s)
         let navigation = freshNavigationController(rootViewController: cardDetails)
         targetSplitForCurrentTraitCollection().showDetailViewController(navigation, sender: self)
-
+        
+    }
+    func gotoDeckSelected(deck: Deck) {
+        let decklist = DeckTableViewController.freshDeck(deck: deck)
+        
+        decklist.title = deck.name
+        installDeck(deck: decklist)
+        
     }
     //    //4
     func freshNavigationController(rootViewController: UIViewController) -> UINavigationController {
@@ -153,7 +167,7 @@ extension RootViewController: UISplitViewControllerDelegate {
         //1
         let primaryNav = primaryNavigation(splitViewController)
         var currentStack = primaryNav.viewControllers
-
+        
         //2
         if let secondarySplit = secondaryViewController as? UISplitViewController {
             //2.1
@@ -167,59 +181,59 @@ extension RootViewController: UISplitViewControllerDelegate {
             //2.3
             primaryNav.viewControllers = currentStack
             return true
-
+            
         } else if let folderList = currentStack.first {
             //3
             primaryNav.viewControllers = [folderList]
             return true
-
+            
         }
         return false
     }
-
+    
     func splitViewController(_ splitViewController: UISplitViewController,
                              separateSecondaryFrom primaryViewController: UIViewController)
         -> UIViewController? {
-
+            
             guard let primaryNavigation = primaryViewController as? UINavigationController else {
                 return nil
             }
-
+            
             return decomposeStackForTransitionToRegular(primaryNavigation)
     }
-
+    
     func decomposeStackForTransitionToRegular(_ navigationController: UINavigationController) -> UIViewController? {
         //1
         let controllerStack = navigationController.viewControllers
         guard let folders = controllerStack.first else {
             return nil
         }
-
+        
         //2
         defer {
             navigationController.viewControllers = [folders]
             rootSplitView.preferredPrimaryColumnWidthFraction = rootSplitSmallFraction
         }
-
+        
         //3
         if navigationStack(navigationController, isAt: .foldersOnly) {
             //folder list only was presented  - return a placeholder
             return freshFolderLevelPlaceholder()
-
+            
         } else if navigationStack(navigationController, isAt: .foldersFiles) {
             //folders and file list was presented  - return a split with files + placeholder
             let filesAndPlaceholder = configuredSplit(first: controllerStack[1], second: freshFileLevelPlaceholder())
             return filesAndPlaceholder
-
+            
         } else if navigationStack(navigationController, isAt: .foldersFilesEditor) {
             //folders, files and editor was presented  - return a split with files + editor
             let filesAndEditor = configuredSplit(first: controllerStack[1], second: controllerStack[2])
             return filesAndEditor
         }
-
+        
         return nil
     }
-
+    
     func configuredSplit(first: UIViewController, second: UIViewController)
         -> UIViewController {
             let freshSplit = freshSplitViewTemplate()
@@ -237,14 +251,14 @@ extension RootViewController {
             targetSplit.showDetailViewController(freshFileLevelPlaceholder(), sender: self)
         }
     }
-
+    
     func showFolderLevelPlaceholder(in targetSplit: UISplitViewController) {
         if isHorizontallyRegular {
             rootSplitView.preferredPrimaryColumnWidthFraction = rootSplitLargeFraction
             targetSplit.showDetailViewController(freshFolderLevelPlaceholder(), sender: self)
         }
     }
-
+    
     func installFileList(fileList: CardListTableViewController) {
         if isHorizontallyRegular,
             let subSplit = installDoubleSplitWhenHorizontallyRegular() {
@@ -262,6 +276,23 @@ extension RootViewController {
             navigation.pushViewController(fileList, animated: true)
         }
     }
+    func installDeck(deck: DeckTableViewController) {
+        if isHorizontallyRegular,
+            let subSplit = installDoubleSplitWhenHorizontallyRegular() {
+            //1
+            let navigation = primaryNavigation(subSplit)
+            navigation.viewControllers = [deck]
+            //2
+            subSplit.preferredDisplayMode = .allVisible
+            subSplit.preferredPrimaryColumnWidthFraction = rootSplitLargeFraction
+            rootSplitView.preferredPrimaryColumnWidthFraction = rootSplitSmallFraction
+            //3
+            showFileLevelPlaceholder(in: subSplit)
+        } else {
+            let navigation = primaryNavigation(rootSplitView)
+            navigation.pushViewController(deck, animated: true)
+        }
+    }
 }
 
 extension RootViewController: UINavigationControllerDelegate {
@@ -270,7 +301,7 @@ extension RootViewController: UINavigationControllerDelegate {
             showFolderLevelPlaceholder(in: rootSplitView)
         }
     }
-
+    
     func navigationStack(_ navigation: UINavigationController, isAt state: NavigationStackCompact) -> Bool {
         let count = navigation.viewControllers.count
         if let value = NavigationStackCompact(rawValue: count) {

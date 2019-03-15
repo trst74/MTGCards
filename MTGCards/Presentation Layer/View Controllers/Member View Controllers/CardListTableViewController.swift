@@ -8,11 +8,10 @@
 
 import UIKit
 import CoreData
+import MobileCoreServices
 
-class CardListTableViewController: UITableViewController, UISearchResultsUpdating, NSFetchedResultsControllerDelegate {
-    
+class CardListTableViewController: UITableViewController, UISearchResultsUpdating, NSFetchedResultsControllerDelegate, UITableViewDragDelegate {
     var fetchedResultsController: NSFetchedResultsController<Card>!
-    
     var appDelegate: AppDelegate = (UIApplication.shared.delegate as? AppDelegate)!
     var cardlist: [Card] = []
     var filteredCardList: [Card] = []
@@ -34,7 +33,8 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         navigationItem.searchController = search
         
         self.navigationItem.hidesSearchBarWhenScrolling = false
-        
+        tableView.dragDelegate = self
+        tableView.dragInteractionEnabled = true
     }
     
     func loadSavedData() {
@@ -60,6 +60,23 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         } catch {
             print("Fetch failed")
         }
+    }
+    
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let card = fetchedResultsController.object(at: indexPath)
+        
+        guard let string = card.uuid, let data = string.data(using: .utf8) else { return [] }
+        let itemProvider = NSItemProvider(item: data as NSData, typeIdentifier: kUTTypePlainText as String)
+        
+        return [UIDragItem(itemProvider: itemProvider)]
+    }
+    func tableView(_ tableView: UITableView, itemsForAddingTo session: UIDragSession, at indexPath: IndexPath, point: CGPoint) -> [UIDragItem] {
+        let card = fetchedResultsController.object(at: indexPath)
+        
+        guard let string = card.uuid, let data = string.data(using: .utf8) else { return [] }
+        let itemProvider = NSItemProvider(item: data as NSData, typeIdentifier: kUTTypePlainText as String)
+        
+        return [UIDragItem(itemProvider: itemProvider)]
     }
     // MARK: - Table view data source
     

@@ -32,4 +32,5 @@ enum SelectionState {
   case noSelection
   case folderSelected
   case cardSelected
+    case deckSelected
 }

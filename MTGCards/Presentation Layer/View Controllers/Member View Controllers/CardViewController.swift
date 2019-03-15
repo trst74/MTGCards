@@ -73,8 +73,8 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         if let json = try? card?.jsonString() {
             debugVC.json = json ?? ""
-        //self.navigationController?.pushViewController(settingsVC, animated: true)
-        self.present(debugVC, animated: true, completion: nil)
+            //self.navigationController?.pushViewController(settingsVC, animated: true)
+            self.present(debugVC, animated: true, completion: nil)
         }
     }
     @objc func share(){
@@ -105,31 +105,26 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func loadImage() {
-        if let key = card?.uuid {
+        if var key = card?.uuid {
+            if card?.side == "b" {
+                key += "b"
+            }
             let image = getImage(Key: key)
             if image != nil {
                 cardImage.image = image
             } else {
-                if let id = card?.scryfallID, let url = URL(string: "https://api.scryfall.com/cards/\(id)") {
-                    print(url)
+                if let id = card?.scryfallID {
                     do {
-                        let sfc = try ScryfallCard.init(fromURL: url)
-                        if let largestring = sfc.imageUris?.large, let imageURL = URL(string: largestring) {
+                        var url = "https://api.scryfall.com/cards/\(id)?format=image"
+                        if card?.side == "b" {
+                            url += "&face=back"
+                        }
+                        if  let imageURL = URL(string: url) {
                             cardImage.contentMode = .scaleAspectFit
                             downloadImage(url: imageURL, Key: key)
-                        } else if let faces = sfc.cardFaces {
-                            let face = faces.first(where: { $0.name == card?.name})
-                            if let largestring = face?.imageUris?.large, let imageURL = URL(string: largestring) {
-                                cardImage.contentMode = .scaleAspectFit
-                                downloadImage(url: imageURL, Key: key)
-                            }
                         }
-                    } catch {
-                        print(error)
                     }
-             
                 }
-                
             }
         }
     }

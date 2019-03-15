@@ -1,0 +1,233 @@
+//
+//  DeckTableViewController.swift
+//  MTGCards
+//
+//  Created by Joseph Smith on 3/14/19.
+//  Copyright © 2019 Robotic Snail Software. All rights reserved.
+//
+
+import UIKit
+import CoreData
+import MobileCoreServices
+
+class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
+    var deck: Deck? = nil
+    var deckCards: [DeckCard] {
+        get {
+            if let d = deck {
+                if var dc = d.cards?.allObjects as? [DeckCard] {
+                    
+                    return dc.sorted {
+                        if let n1 = $0.card?.name, let n2 = $1.card?.name {
+                            return n1 < n2
+                        }
+                        return false
+                    }
+                }
+            }
+            return []
+        }
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // share button
+        //        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(self.share))
+        //        self.navigationItem.setRightBarButton(shareButton, animated: true)
+        // import button
+        let importButton = UIBarButtonItem(image: UIImage(named: "import"), style: .plain, target: self, action: #selector(self.importDeck))
+        self.navigationItem.setRightBarButton(importButton, animated: true)
+        let cardTotal = deck?.cards?.reduce(0){
+            if let c2 = $1 as? DeckCard {
+                if let q0 = $0 {
+                    let q2 = Int(c2.quantity)
+                    return q0 + q2
+                }
+            }
+            return 0
+        }
+        if let title = self.title, let total = cardTotal {
+            self.title = title + " (\(total))"
+        }
+    }
+    
+    // MARK: - Table view data source
+    @objc private func share(){
+        print("share")
+    }
+    @objc private func importDeck(){
+        print("import")
+        let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePlainText as String], in: .import)
+        //Call Delegate
+        documentPicker.delegate = self
+        self.present(documentPicker, animated: true)
+    }
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        print(urls)
+        importFile(url: urls[0])
+    }
+    private func importFile(url: URL){
+        do {
+            let contents = try String.init(contentsOf: url)
+            let lines = contents.components(separatedBy: CharacterSet.newlines)
+            print(lines.count)
+            for line in lines {
+                if line != "" {
+                    var parts = line.split(separator: " ")
+                    let quantity = parts[0]
+                    parts.remove(at: 0)
+                    var name = ""
+                    var setCode = ""
+                    for p in parts {
+                        if p.contains("(") {
+                            setCode = String(p)
+                            break
+                        } else {
+                            name += " "+p
+                        }
+                    }
+                    while let range = setCode.range(of: "(") {
+                        setCode.removeSubrange(range.lowerBound..<range.upperBound)
+                    }
+                    while let range = setCode.range(of: ")") {
+                        setCode.removeSubrange(range.lowerBound..<range.upperBound)
+                    }
+                    print("test")
+                    addCard(name: name, setCode: setCode, quantity: Int(quantity) ?? 1)
+                }
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        } catch {
+            print(error)
+        }
+        
+    }
+    private func addCard(name: String, setCode: String, quantity: Int){
+        let card = getCard(name: name, setCode: setCode)
+        if let card = card {
+            guard  let entity = NSEntityDescription.entity(forEntityName: "DeckCard", in:  CoreDataStack.handler.managedObjectContext) else {
+                fatalError("Failed to decode Card")
+            }
+            let deckCard = DeckCard.init(entity: entity, insertInto: CoreDataStack.handler.managedObjectContext)
+            deckCard.card = card
+            deckCard.quantity = Int16(quantity)
+            deck?.addToCards(deckCard)
+            CoreDataStack.handler.saveContext()
+        }
+    }
+    private func getCard(name: String, setCode: String) -> Card? {
+        var card: Card?
+        let request = NSFetchRequest<Card>(entityName: "Card")
+        let predicate1 = NSPredicate(format: "name == %@", name.trimmingCharacters(in: CharacterSet.whitespaces))
+        let predicate2 = NSPredicate(format: "set.code == %@", setCode)
+        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1,predicate2])
+        request.predicate = compound
+        do {
+            let results = try CoreDataStack.handler.managedObjectContext.fetch(request)
+            if results.count > 1 {
+                
+            } else {
+                card = results[0]
+            }
+        } catch {
+            print(error)
+            card = nil
+        }
+        return card
+    }
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return deck?.cards?.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
+    }
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+        return true
+        
+    }
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let card = deckCards[indexPath.row]
+            deck?.removeFromCards(card)
+            CoreDataStack.handler.saveContext()
+            if let id = deck?.objectID {
+                deck = CoreDataStack.handler.managedObjectContext.object(with: id) as? Deck
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                
+            }
+        }
+    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "deckCard", for: indexPath) as! DeckTableViewCell
+        let deckCard = deckCards[indexPath.row]
+        cell.title?.text = deckCard.card?.name
+        cell.subtitle?.text = deckCard.card?.set.name
+        let quantity = deckCard.quantity
+        cell.quantity.text = "\(quantity)"
+        
+        cell.backgroundColor = nil
+        if let identities = deckCard.card?.colorIdentity {
+            
+            var colors: [UIColor] = []
+            
+            if identities.contains("W") {
+                colors.append(UIColor.Identity.Plains)
+            }
+            if identities.contains("U") {
+                colors.append(UIColor.Identity.Islands)
+            }
+            if identities.contains("B") {
+                colors.append(UIColor.Identity.Swamps)
+            }
+            if identities.contains("R") {
+                colors.append(UIColor.Identity.Mountains)
+            }
+            if identities.contains("G") {
+                colors.append(UIColor.Identity.Forests)
+            }
+            
+            if colors.count == 0 {
+                if deckCard.card?.type == "Land" {
+                    colors = [UIColor.Identity.Lands]
+                    
+                } else {
+                    colors = [UIColor.Identity.Artifacts]
+                    
+                }
+            }
+            if colors.count == 1 {
+                colors += colors
+            }
+            cell.gradientView?.colors = colors
+        }
+        return cell
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let card = deckCards[indexPath.row].card {
+            StateCoordinator.shared.didSelectCard(c: card)
+        }
+    }
+    
+    
+}
+extension DeckTableViewController {
+    static func freshDeck(deck: Deck) -> DeckTableViewController {
+        let storyboard = UIStoryboard(name: "Deck", bundle: nil)
+        guard let decklist = storyboard.instantiateInitialViewController() as? DeckTableViewController else {
+            fatalError("Project config error - storyboard doesnt provide a FileListVC")
+        }
+        decklist.deck = deck
+        return decklist
+    }
+}

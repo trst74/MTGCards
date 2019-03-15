@@ -1,7 +1,7 @@
 import UIKit
 
 protocol StateCoordinatorDelegate: class {
-    func gotoState(_ nextState: SelectionState, s: Card?)
+    func gotoState(_ nextState: SelectionState, s: AnyObject?)
 }
 
 class StateCoordinator: NSObject {
@@ -26,6 +26,10 @@ class StateCoordinator: NSObject {
         func didSelectCard(c: Card) {
 
             delegate?.gotoState(SelectionState.cardSelected, s: c)
+        }
+        func didSelectDeck(d: Deck) {
+            
+            delegate?.gotoState(SelectionState.deckSelected, s: d)
         }
 
 }
