@@ -29,8 +29,10 @@
 import Foundation
 
 enum SelectionState {
-  case noSelection
-  case folderSelected
-  case cardSelected
+    case noSelection
+    case folderSelected
+    case cardSelected
     case deckSelected
+    case collectionSelected
+    case toolSelected
 }

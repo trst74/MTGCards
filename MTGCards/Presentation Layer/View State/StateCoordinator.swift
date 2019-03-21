@@ -19,9 +19,9 @@ class StateCoordinator: NSObject {
 
 }
     extension  StateCoordinator {
-        func didSelectCollection(collection: String) {
+        func didSelectCollection(collection: Collection) {
 
-            delegate?.gotoState(state, s: nil)
+            delegate?.gotoState(SelectionState.collectionSelected, s: collection)
         }
         func didSelectCard(c: Card) {
 
@@ -31,5 +31,7 @@ class StateCoordinator: NSObject {
             
             delegate?.gotoState(SelectionState.deckSelected, s: d)
         }
-
+        func didSelectTool(tool: String){
+            delegate?.gotoState(SelectionState.toolSelected, s: tool as AnyObject)
+        }
 }

@@ -15,9 +15,25 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
     var deckCards: [DeckCard] {
         get {
             if let d = deck {
-                if var dc = d.cards?.allObjects as? [DeckCard] {
-                    
-                    return dc.sorted {
+                if let sb = d.cards?.filter({ ($0 as? DeckCard)?.isSideboard == false }) as? [DeckCard]
+                {
+                    return sb.sorted {
+                        if let n1 = $0.card?.name, let n2 = $1.card?.name {
+                            return n1 < n2
+                        }
+                        return false
+                    }
+                }
+            }
+            return []
+        }
+    }
+    var sideboard : [DeckCard] {
+        get {
+            if let d = deck {
+                if let sb = d.cards?.filter({ ($0 as? DeckCard)?.isSideboard == true }) as? [DeckCard]
+                {
+                    return sb.sorted {
                         if let n1 = $0.card?.name, let n2 = $1.card?.name {
                             return n1 < n2
                         }
@@ -36,6 +52,10 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         // import button
         let importButton = UIBarButtonItem(image: UIImage(named: "import"), style: .plain, target: self, action: #selector(self.importDeck))
         self.navigationItem.setRightBarButton(importButton, animated: true)
+        updateTitle()
+    }
+    private func updateTitle(){
+        let name = deck?.name
         let cardTotal = deck?.cards?.reduce(0){
             if let c2 = $1 as? DeckCard {
                 if let q0 = $0 {
@@ -45,11 +65,10 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
             }
             return 0
         }
-        if let title = self.title, let total = cardTotal {
-            self.title = title + " (\(total))"
+        if let total = cardTotal, let n = name {
+            self.title = "\(n) (\(total))"
         }
     }
-    
     // MARK: - Table view data source
     @objc private func share(){
         print("share")
@@ -60,6 +79,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         //Call Delegate
         documentPicker.delegate = self
         self.present(documentPicker, animated: true)
+        updateTitle()
     }
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         print(urls)
@@ -70,6 +90,8 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
             let contents = try String.init(contentsOf: url)
             let lines = contents.components(separatedBy: CharacterSet.newlines)
             print(lines.count)
+            var previousline = ""
+            var isSideboard = false
             for line in lines {
                 if line != "" {
                     var parts = line.split(separator: " ")
@@ -92,18 +114,23 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
                         setCode.removeSubrange(range.lowerBound..<range.upperBound)
                     }
                     print("test")
-                    addCard(name: name, setCode: setCode, quantity: Int(quantity) ?? 1)
+                    addCard(name: name, setCode: setCode, quantity: Int(quantity) ?? 1, isSideboard: isSideboard)
+                } else if previousline == "" {
+                    print("sideboard start")
+                    isSideboard = true
                 }
+                previousline = line
             }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.updateTitle()
             }
         } catch {
             print(error)
         }
         
     }
-    private func addCard(name: String, setCode: String, quantity: Int){
+    private func addCard(name: String, setCode: String, quantity: Int, isSideboard: Bool){
         let card = getCard(name: name, setCode: setCode)
         if let card = card {
             guard  let entity = NSEntityDescription.entity(forEntityName: "DeckCard", in:  CoreDataStack.handler.managedObjectContext) else {
@@ -112,6 +139,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
             let deckCard = DeckCard.init(entity: entity, insertInto: CoreDataStack.handler.managedObjectContext)
             deckCard.card = card
             deckCard.quantity = Int16(quantity)
+            deckCard.isSideboard = isSideboard
             deck?.addToCards(deckCard)
             CoreDataStack.handler.saveContext()
         }
@@ -121,13 +149,18 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         let request = NSFetchRequest<Card>(entityName: "Card")
         let predicate1 = NSPredicate(format: "name == %@", name.trimmingCharacters(in: CharacterSet.whitespaces))
         let predicate2 = NSPredicate(format: "set.code == %@", setCode)
-        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1,predicate2])
+        var predicates = [predicate1]
+        
+        if setCode != "" {
+            predicates.append(predicate2)
+        }
+        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         request.predicate = compound
+        let sortDescriptor = NSSortDescriptor(key: "set.releaseDate", ascending: false)
+        request.sortDescriptors = [sortDescriptor]
         do {
             let results = try CoreDataStack.handler.managedObjectContext.fetch(request)
-            if results.count > 1 {
-                
-            } else {
+            if results.count > 0 {
                 card = results[0]
             }
         } catch {
@@ -138,12 +171,23 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
+    }
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Main Deck"
+        } else {
+            return "Sideboard"
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return deck?.cards?.count ?? 0
+        if section == 0 {
+            return deckCards.count
+        } else {
+            return sideboard.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -156,28 +200,43 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let card = deckCards[indexPath.row]
-            deck?.removeFromCards(card)
-            CoreDataStack.handler.saveContext()
-            if let id = deck?.objectID {
-                deck = CoreDataStack.handler.managedObjectContext.object(with: id) as? Deck
+            var card: DeckCard? = nil
+            if indexPath.section == 1 {
+                card = deckCards[indexPath.row]
+            } else {
+                card = sideboard[indexPath.row]
             }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                
+            //let card = deckCards[indexPath.row]
+            if let card = card {
+                deck?.removeFromCards(card)
+                CoreDataStack.handler.saveContext()
+                if let id = deck?.objectID {
+                    deck = CoreDataStack.handler.managedObjectContext.object(with: id) as? Deck
+                }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    
+                }
             }
         }
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "deckCard", for: indexPath) as! DeckTableViewCell
-        let deckCard = deckCards[indexPath.row]
-        cell.title?.text = deckCard.card?.name
-        cell.subtitle?.text = deckCard.card?.set.name
-        let quantity = deckCard.quantity
+        var deckCard: DeckCard? = nil
+        if indexPath.section == 0 {
+            deckCard = deckCards[indexPath.row]
+        } else {
+            deckCard = sideboard[indexPath.row]
+        }
+        //let deckCard = deckCards[indexPath.row]
+        cell.title?.text = deckCard?.card?.name
+        cell.subtitle?.text = deckCard?.card?.set.name
+        if let quantity = deckCard?.quantity {
         cell.quantity.text = "\(quantity)"
+        }
         
         cell.backgroundColor = nil
-        if let identities = deckCard.card?.colorIdentity {
+        if let identities = deckCard?.card?.colorIdentity {
             
             var colors: [UIColor] = []
             
@@ -198,7 +257,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
             }
             
             if colors.count == 0 {
-                if deckCard.card?.type == "Land" {
+                if deckCard?.card?.type == "Land" {
                     colors = [UIColor.Identity.Lands]
                     
                 } else {

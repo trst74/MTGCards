@@ -116,7 +116,7 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
                 if let id = card?.scryfallID {
                     do {
                         var url = "https://api.scryfall.com/cards/\(id)?format=image"
-                        if card?.side == "b" {
+                        if card?.side == "b" && card?.layout != "split" && card?.layout != "flip" && card?.layout != "meld"{
                             url += "&face=back"
                         }
                         if  let imageURL = URL(string: url) {

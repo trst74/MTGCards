@@ -37,8 +37,7 @@ class PageTwoViewController: UIViewController {
         self.downloadProgress.isHidden = false
         self.doneButton.isEnabled = false
         self.downloadButton.isEnabled = false
-        
-        
+
         let setlist = DataManager.getSetList()
         if let sl = setlist {
             print(sl.count)
@@ -60,7 +59,7 @@ class PageTwoViewController: UIViewController {
                                     self.doneButton.isEnabled = true
                                     self.downloadLabel.text = "Done!"
                                 }
-                            }
+                            } 
                         }
                     }
                }

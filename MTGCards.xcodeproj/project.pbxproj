@@ -13,6 +13,9 @@
 		EE1E1467223AFC6600A54747 /* DeckCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E1465223AFC6600A54747 /* DeckCard+CoreDataClass.swift */; };
 		EE1E1468223AFC6600A54747 /* DeckCard+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E1466223AFC6600A54747 /* DeckCard+CoreDataProperties.swift */; };
 		EE1E146A223AFFEA00A54747 /* DeckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E1469223AFFEA00A54747 /* DeckTableViewCell.swift */; };
+		EE24B104223DB9700057610D /* Collection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE24B103223DB9700057610D /* Collection.storyboard */; };
+		EE24B106223DB9910057610D /* CollectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE24B105223DB9910057610D /* CollectionTableViewController.swift */; };
+		EE24B108223DB9F50057610D /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE24B107223DB9F50057610D /* CollectionTableViewCell.swift */; };
 		EE2755292234084C006BD083 /* UserDefaultsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2755282234084C006BD083 /* UserDefaultsHandler.swift */; };
 		EE27552B22340F0F006BD083 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE27552A22340F0F006BD083 /* Onboarding.storyboard */; };
 		EE27552D22341B04006BD083 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE27552C22341B04006BD083 /* RoundButton.swift */; };
@@ -62,6 +65,10 @@
 		EEBE6DB121EFE19100A3464E /* MTGCardsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBE6DB021EFE19100A3464E /* MTGCardsUITests.swift */; };
 		EEC9198E223080A0004E52F5 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEC9198D223080A0004E52F5 /* Settings.storyboard */; };
 		EEC91990223080DF004E52F5 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC9198F223080DF004E52F5 /* SettingsTableViewController.swift */; };
+		EEF02F22223DAC11008F008B /* Collection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF02F1E223DAC11008F008B /* Collection+CoreDataClass.swift */; };
+		EEF02F23223DAC11008F008B /* Collection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF02F1F223DAC11008F008B /* Collection+CoreDataProperties.swift */; };
+		EEF02F24223DAC11008F008B /* CollectionCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF02F20223DAC11008F008B /* CollectionCard+CoreDataClass.swift */; };
+		EEF02F25223DAC11008F008B /* CollectionCard+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF02F21223DAC11008F008B /* CollectionCard+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +95,9 @@
 		EE1E1465223AFC6600A54747 /* DeckCard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeckCard+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EE1E1466223AFC6600A54747 /* DeckCard+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeckCard+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EE1E1469223AFFEA00A54747 /* DeckTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckTableViewCell.swift; sourceTree = "<group>"; };
+		EE24B103223DB9700057610D /* Collection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Collection.storyboard; sourceTree = "<group>"; };
+		EE24B105223DB9910057610D /* CollectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewController.swift; sourceTree = "<group>"; };
+		EE24B107223DB9F50057610D /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
 		EE2755282234084C006BD083 /* UserDefaultsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHandler.swift; sourceTree = "<group>"; };
 		EE27552A22340F0F006BD083 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		EE27552C22341B04006BD083 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
@@ -143,6 +153,10 @@
 		EEBE6DB221EFE19100A3464E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEC9198D223080A0004E52F5 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		EEC9198F223080DF004E52F5 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		EEF02F1E223DAC11008F008B /* Collection+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EEF02F1F223DAC11008F008B /* Collection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EEF02F20223DAC11008F008B /* CollectionCard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCard+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EEF02F21223DAC11008F008B /* CollectionCard+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCard+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +240,10 @@
 		EE2B78BC21EFE67E00306990 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EEF02F1E223DAC11008F008B /* Collection+CoreDataClass.swift */,
+				EEF02F1F223DAC11008F008B /* Collection+CoreDataProperties.swift */,
+				EEF02F20223DAC11008F008B /* CollectionCard+CoreDataClass.swift */,
+				EEF02F21223DAC11008F008B /* CollectionCard+CoreDataProperties.swift */,
 				EE1E1465223AFC6600A54747 /* DeckCard+CoreDataClass.swift */,
 				EE1E1466223AFC6600A54747 /* DeckCard+CoreDataProperties.swift */,
 				EE4FD202223A91BD00E8CDB3 /* Deck+CoreDataClass.swift */,
@@ -268,6 +286,9 @@
 				EE4FD206223AC6CE00E8CDB3 /* Deck.storyboard */,
 				EE4FD208223AC6FE00E8CDB3 /* DeckTableViewController.swift */,
 				EE1E1469223AFFEA00A54747 /* DeckTableViewCell.swift */,
+				EE24B103223DB9700057610D /* Collection.storyboard */,
+				EE24B105223DB9910057610D /* CollectionTableViewController.swift */,
+				EE24B107223DB9F50057610D /* CollectionTableViewCell.swift */,
 			);
 			path = "Member View Controllers";
 			sourceTree = "<group>";
@@ -429,6 +450,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE24B104223DB9700057610D /* Collection.storyboard in Resources */,
 				EEAA53CB223323D700CB4B72 /* Debug.storyboard in Resources */,
 				EE4FD207223AC6CE00E8CDB3 /* Deck.storyboard in Resources */,
 				EE27552B22340F0F006BD083 /* Onboarding.storyboard in Resources */,
@@ -470,8 +492,11 @@
 				EEB5D81F2205EBFF0070FF8B /* UIColor+Custom.swift in Sources */,
 				EE2B78CF21F009A600306990 /* PlaceholderViewController.swift in Sources */,
 				EE2B78D521F1518E00306990 /* SetList.swift in Sources */,
+				EEF02F22223DAC11008F008B /* Collection+CoreDataClass.swift in Sources */,
+				EE24B108223DB9F50057610D /* CollectionTableViewCell.swift in Sources */,
 				EE2B78A821EFE3DB00306990 /* RootViewController.swift in Sources */,
 				EE2B822521FD25C800306990 /* Meta.swift in Sources */,
+				EEF02F25223DAC11008F008B /* CollectionCard+CoreDataProperties.swift in Sources */,
 				EE2CAC542231C1AA00D24334 /* String+Custom.swift in Sources */,
 				EE2B78D121F13ACD00306990 /* DataManager.swift in Sources */,
 				EE1E1468223AFC6600A54747 /* DeckCard+CoreDataProperties.swift in Sources */,
@@ -488,6 +513,7 @@
 				EE6F94B2223092AD001B3378 /* TcgToken.swift in Sources */,
 				EE2B78AB21EFE47600306990 /* UIView+AutolayoutHelp.swift in Sources */,
 				EE4FD209223AC6FE00E8CDB3 /* DeckTableViewController.swift in Sources */,
+				EEF02F23223DAC11008F008B /* Collection+CoreDataProperties.swift in Sources */,
 				EEBE6D9621EFE18F00A3464E /* MTGCards.xcdatamodeld in Sources */,
 				EEBE6D8E21EFE18F00A3464E /* AppDelegate.swift in Sources */,
 				EEC91990223080DF004E52F5 /* SettingsTableViewController.swift in Sources */,
@@ -504,7 +530,9 @@
 				EE2B822121FD254100306990 /* ForeignDatum.swift in Sources */,
 				EE2CAC502231707000D24334 /* TcgPrices.swift in Sources */,
 				EEB5D8212205F0D30070FF8B /* GradientView.swift in Sources */,
+				EE24B106223DB9910057610D /* CollectionTableViewController.swift in Sources */,
 				EE2B821D21FCAD5200306990 /* Ruling.swift in Sources */,
+				EEF02F24223DAC11008F008B /* CollectionCard+CoreDataClass.swift in Sources */,
 				EEB5D81D2205EA670070FF8B /* CardListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

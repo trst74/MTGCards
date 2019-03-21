@@ -43,13 +43,23 @@
         <relationship name="rulings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ruling" inverseName="card" inverseEntity="Ruling" syncable="YES"/>
         <relationship name="set" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Set" inverseName="cards" inverseEntity="Set" syncable="YES"/>
     </entity>
+    <entity name="Collection" representedClassName="Collection" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CollectionCard" syncable="YES"/>
+    </entity>
+    <entity name="CollectionCard" representedClassName="CollectionCard" syncable="YES">
+        <attribute name="condition" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isFoil" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="card" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card" syncable="YES"/>
+    </entity>
     <entity name="Deck" representedClassName=".Deck" syncable="YES">
         <attribute name="format" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DeckCard" syncable="YES"/>
     </entity>
     <entity name="DeckCard" representedClassName="DeckCard" syncable="YES">
-        <attribute name="condition" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isSideboard" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="card" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card" syncable="YES"/>
     </entity>
@@ -119,12 +129,14 @@
     <elements>
         <element name="Card" positionX="-421.796875" positionY="-320.98828125" width="128" height="660"/>
         <element name="Deck" positionX="-225" positionY="-180" width="128" height="90"/>
+        <element name="DeckCard" positionX="-225" positionY="-180" width="128" height="90"/>
         <element name="ForeignDatum" positionX="-277.703125" positionY="-181.94140625" width="128" height="150"/>
         <element name="Legalities" positionX="14.125" positionY="-305.26953125" width="128" height="225"/>
         <element name="Meta" positionX="205.7734375" positionY="37.49609375" width="128" height="75"/>
         <element name="Ruling" positionX="-98.87890625" positionY="-12.99609375" width="128" height="90"/>
         <element name="Set" positionX="36" positionY="189" width="128" height="225"/>
         <element name="Token" positionX="-307.515625" positionY="385.4296875" width="128" height="270"/>
-        <element name="DeckCard" positionX="-225" positionY="-180" width="128" height="90"/>
+        <element name="CollectionCard" positionX="-225" positionY="-180" width="128" height="105"/>
+        <element name="Collection" positionX="-216" positionY="-171" width="128" height="75"/>
     </elements>
 </model>

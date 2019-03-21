@@ -12,7 +12,8 @@ import CoreData
 class CollectionsTableViewController: UITableViewController, UITableViewDropDelegate {
     
     var stateCoordinator: StateCoordinator?
-    var collections = ["Collections", "Collection", "Wish List"]
+    var collections = ["Collections"]
+    var cdCollections: [Collection] = []
     var decks = ["Decks"]
     var cdDecks: [Deck] = []
     var search = ["Tools", "Search", "Life Counter"]
@@ -28,6 +29,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     }
     override func viewWillAppear(_ animated: Bool) {
         reloadDecksFromCoreData()
+        reloadCollectionsFromCoreData()
     }
     @objc func addButton() {
         let alert = UIAlertController(title: "Deck Name?", message: nil, preferredStyle: .alert)
@@ -91,6 +93,28 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
                         }
                     }
                 }
+            } else if indexPath.section == 0 {
+                coordinator.session.loadObjects(ofClass: NSString.self) { items in
+                    guard let strings = items as? [String] else { return }
+                    for string in strings {
+                        print(string)
+                        let collection = self.cdCollections[indexPath.row]
+                        let card = self.getCard(byUUID: string)
+                        
+                        if let card = card {
+                            guard  let entity = NSEntityDescription.entity(forEntityName: "CollectionCard", in:  CoreDataStack.handler.managedObjectContext) else {
+                                fatalError("Failed to decode Card")
+                            }
+                            let collectionCard = CollectionCard.init(entity: entity, insertInto: CoreDataStack.handler.managedObjectContext)
+                            collectionCard.card = card
+                            collectionCard.quantity = 1
+                            self.cdCollections[indexPath.row].addToCards(collectionCard)
+                            CoreDataStack.handler.saveContext()
+                            
+                        }
+                        //save
+                    }
+                }
                 
             }
         }
@@ -123,6 +147,17 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
             print(error)
         }
     }
+    private func reloadCollectionsFromCoreData(){
+        let request = NSFetchRequest<Collection>(entityName: "Collection")
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        do {
+            let results = try CoreDataStack.handler.managedObjectContext.fetch(request)
+            cdCollections = results
+        } catch {
+            print(error)
+        }
+    }
     @objc func settings(){
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
         guard let settingsVC = storyboard.instantiateInitialViewController() as? SettingsTableViewController else {
@@ -142,6 +177,8 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         // #warning Incomplete implementation, return the number of rows
         if section == 1 {
             return cdDecks.count
+        } else if section == 0 {
+            return cdCollections.count
         } else {
             return sections[section].count - 1
         }
@@ -152,7 +189,9 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "collectionCell", for: indexPath)
-        if indexPath.section == 1 {
+        if indexPath.section == 0 {
+             cell.textLabel?.text = cdCollections[indexPath.row].name
+        } else if indexPath.section == 1 {
             cell.textLabel?.text = cdDecks[indexPath.row].name
         } else {
             cell.textLabel?.text = sections[indexPath.section][indexPath.row + 1]
@@ -164,11 +203,12 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 2 {
-            StateCoordinator.shared.didSelectCollection(collection: "Search")
+            //StateCoordinator.shared.didSelectCollection(collection: "Search")
+            StateCoordinator.shared.didSelectTool(tool: "Search")
         } else if indexPath.section == 1 {
             StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row])
-        } else {
-            
+        } else if indexPath.section == 0 {
+            StateCoordinator.shared.didSelectCollection(collection: cdCollections[indexPath.row])
         }
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

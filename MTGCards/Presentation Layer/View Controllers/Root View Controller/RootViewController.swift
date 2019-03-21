@@ -27,6 +27,7 @@
 /// THE SOFTWARE.
 
 import UIKit
+import CoreData
 
 extension UIViewController {
     var isHorizontallyRegular: Bool {
@@ -69,6 +70,15 @@ class RootViewController: UIViewController {
             }
             //self.navigationController?.pushViewController(settingsVC, animated: true)
             self.present(pageOne, animated: true, completion: nil)
+            //create collection and wish list
+            guard  let entity = NSEntityDescription.entity(forEntityName: "Collection", in:  CoreDataStack.handler.managedObjectContext) else {
+                fatalError("Failed to decode Card")
+            }
+            var collection = Collection.init(entity: entity, insertInto: CoreDataStack.handler.managedObjectContext)
+            collection.name = "Collection"
+            var wishlist = Collection.init(entity: entity, insertInto: CoreDataStack.handler.managedObjectContext)
+            wishlist.name = "Wish List"
+            CoreDataStack.handler.saveContext()
             UserDefaultsHandler.setHasOpened(opened: true)
         }
     }
@@ -124,18 +134,22 @@ extension RootViewController: StateCoordinatorDelegate {
             if let deck = s as? Deck {
                 gotoDeckSelected(deck: deck)
             }
-        }
-        else {
-            gotoCollectionSelected(s: "Search")
+        } else if nextState == .toolSelected {
+            if let tool = s as? String{
+                gotoToolSelected(name: tool)
+            }
+        } else if nextState == .collectionSelected {
+            if let collection = s as? Collection {
+                gotoCollectionSelected(s: collection)
+            }
         }
     }
     
     
-    func gotoCollectionSelected(s: String) {
-        let cardList = CardListTableViewController.freshCardList()
-        
-        cardList.title = s
-        installFileList(fileList: cardList)
+    func gotoCollectionSelected(s: Collection) {
+        let collectionVC = CollectionTableViewController.freshCollection(collection: s)
+        collectionVC.title = s.name
+        installCollection(collection: collectionVC)
     }
     
     func gotoCardSelected(s: Card) {
@@ -150,6 +164,14 @@ extension RootViewController: StateCoordinatorDelegate {
         decklist.title = deck.name
         installDeck(deck: decklist)
         
+    }
+    func gotoToolSelected(name: String) {
+        if name == "Search" {
+            let cardList = CardListTableViewController.freshCardList()
+            
+            cardList.title = name
+            installFileList(fileList: cardList)
+        }
     }
     //    //4
     func freshNavigationController(rootViewController: UIViewController) -> UINavigationController {
@@ -291,6 +313,23 @@ extension RootViewController {
         } else {
             let navigation = primaryNavigation(rootSplitView)
             navigation.pushViewController(deck, animated: true)
+        }
+    }
+    func installCollection(collection: CollectionTableViewController) {
+        if isHorizontallyRegular,
+            let subSplit = installDoubleSplitWhenHorizontallyRegular() {
+            //1
+            let navigation = primaryNavigation(subSplit)
+            navigation.viewControllers = [collection]
+            //2
+            subSplit.preferredDisplayMode = .allVisible
+            subSplit.preferredPrimaryColumnWidthFraction = rootSplitLargeFraction
+            rootSplitView.preferredPrimaryColumnWidthFraction = rootSplitSmallFraction
+            //3
+            showFileLevelPlaceholder(in: subSplit)
+        } else {
+            let navigation = primaryNavigation(rootSplitView)
+            navigation.pushViewController(collection, animated: true)
         }
     }
 }

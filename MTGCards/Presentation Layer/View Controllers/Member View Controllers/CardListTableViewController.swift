@@ -177,11 +177,13 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text, text.count > 0 else {
             predicate = nil
-            loadSavedData()
+            //loadSavedData()
             return
         }
-        predicate = NSPredicate(format: "name contains[c] %@", text)
-        loadSavedData()
+        if text.count > 2 {
+            predicate = NSPredicate(format: "name contains[c] %@", text)
+            loadSavedData()
+        }
         return
         
     }
