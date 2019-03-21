@@ -111,53 +111,7 @@ class SettingsTableViewController: UITableViewController {
             return
         }
     }
-    @IBAction func download(_ sender: Any) {
-        var cardList: [Card] = []
-        let fetchRequest: NSFetchRequest<Card> = NSFetchRequest<Card>(entityName: "Card")
-        let managedContext = CoreDataStack.handler.managedObjectContext
-        fetchRequest.predicate = NSPredicate(format: "set.code == %@", "RNA")
-        let imageTypes = ["small","normal","large","png","art_crop","border_crop"]
-        do {
-            // Perform Fetch Request
-            let c = try managedContext.fetch(fetchRequest)
-       
-            cardList = c
-            for card in c {
-          
-                if let id = card.scryfallID{
-                    var url = "https://api.scryfall.com/cards/\(id)?format=image"
-                    if card.side == "b" {
-                        url += "&face=back"
-                    }
-                    for type in imageTypes {
-                        let imageurl = url+"&version=\(type)"
-                        if let tempurl = URL(string: imageurl) {
-                            getDataFromUrl(url: tempurl) { (data, _, error)  in
-                                guard let data = data, error == nil else {
-                                    return
-                                    
-                                }
-                           
-                                DispatchQueue.main.async { () -> Void in
-                                    let image = UIImage(data: data)
-                                    
-                                    if let imageToDisplay = image {
-                                        if let carduuid = card.uuid, let cardname = card.name{
-                                            let imagename = carduuid + type
-                                            self.saveImage(image: imageToDisplay, Key: imagename,dir: cardname)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        } catch {
-            print("Unable to Fetch Cards, (\(error))")
-        }
-        
-    }
+   
     func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
         URLSession.shared.dataTask(with: url) {
             (data, response, error) in
