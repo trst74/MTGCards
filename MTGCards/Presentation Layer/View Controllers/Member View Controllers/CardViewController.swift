@@ -89,7 +89,7 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         guard let debugVC = storyboard.instantiateInitialViewController() as? DebugViewController else {
             fatalError("Error going to settings")
         }
-        if let json = try? card?.jsonString() {
+        if let json = ((try? card?.jsonString()) as String??) {
             debugVC.json = json ?? ""
             //self.navigationController?.pushViewController(settingsVC, animated: true)
             self.present(debugVC, animated: true, completion: nil)
