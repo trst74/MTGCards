@@ -76,18 +76,48 @@ class Legalities: NSManagedObject, Codable {
         try container.encode(future, forKey: .future)
         try container.encode(standard, forKey: .standard)
     }
-//    init(the1V1: String?, brawl: String?, commander: String?, duel: String?, frontier: String?, future: String?, legacy: String?, modern: String?, pauper: String?, penny: String?, standard: String?, vintage: String?) {
-//        self.the1V1 = the1V1
-//        self.brawl = brawl
-//        self.commander = commander
-//        self.duel = duel
-//        self.frontier = frontier
-//        self.future = future
-//        self.legacy = legacy
-//        self.modern = modern
-//        self.pauper = pauper
-//        self.penny = penny
-//        self.standard = standard
-//        self.vintage = vintage
-//    }
+    public func getLegalitiesCollection() -> [Legality] {
+        var results: [Legality] = []
+        if let the1v1 = the1V1 {
+            results.append(Legality(format: "the1v1", legality: the1v1))
+        }
+        if let commander = commander {
+            results.append(Legality(format: "Commander", legality: commander))
+        }
+        if let duel = duel {
+            results.append(Legality(format: "Duel", legality: duel))
+        }
+        if let legacy = legacy {
+            results.append(Legality(format: "Legacy", legality: legacy))
+        }
+        if let penny = penny {
+            results.append(Legality(format: "Penny", legality: penny))
+        }
+        if let vintage = vintage {
+            results.append(Legality(format: "Vintage", legality: vintage))
+        }
+        if let frontier = frontier {
+            results.append(Legality(format: "Frontier", legality: frontier))
+        }
+        if let modern = modern {
+            results.append(Legality(format: "Modern", legality: modern))
+        }
+        if let pauper = pauper {
+            results.append(Legality(format: "Pauper", legality: pauper))
+        }
+        if let brawl = brawl {
+            results.append(Legality(format: "Brawl", legality: brawl))
+        }
+        if let future = future {
+            results.append(Legality(format: "Future", legality: future))
+        }
+        if let standard = standard {
+            results.append(Legality(format: "Standard", legality: standard))
+        }
+        return results
+    }
+}
+public struct Legality {
+    var format: String
+    var legality: String
 }

@@ -232,7 +232,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         cell.title?.text = deckCard?.card?.name
         cell.subtitle?.text = deckCard?.card?.set.name
         if let quantity = deckCard?.quantity {
-        cell.quantity.text = "\(quantity)"
+            cell.quantity.text = "\(quantity)"
         }
         
         cell.backgroundColor = nil
@@ -273,9 +273,17 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let card = deckCards[indexPath.row].card {
-            StateCoordinator.shared.didSelectCard(c: card)
+        if indexPath.section == 0 {
+            
+            if let card = deckCards[indexPath.row].card {
+                StateCoordinator.shared.didSelectCard(c: card)
+            }
+        } else if indexPath.section == 1 {
+            if let card = sideboard[indexPath.row].card {
+                StateCoordinator.shared.didSelectCard(c: card)
+            }
         }
+        
     }
     
     

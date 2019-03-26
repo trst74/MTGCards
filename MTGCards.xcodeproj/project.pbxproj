@@ -44,10 +44,14 @@
 		EE2CAC502231707000D24334 /* TcgPrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CAC4F2231707000D24334 /* TcgPrices.swift */; };
 		EE2CAC522231AAF200D24334 /* SafariActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CAC512231AAF200D24334 /* SafariActivity.swift */; };
 		EE2CAC542231C1AA00D24334 /* String+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CAC532231C1AA00D24334 /* String+Custom.swift */; };
+		EE4F532522467859003A06CA /* CardRulingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE4F532422467859003A06CA /* CardRulingView.xib */; };
+		EE4F532722467A4D003A06CA /* CardRulingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4F532622467A4D003A06CA /* CardRulingsView.swift */; };
 		EE4FD204223A91BD00E8CDB3 /* Deck+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4FD202223A91BD00E8CDB3 /* Deck+CoreDataClass.swift */; };
 		EE4FD205223A91BD00E8CDB3 /* Deck+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4FD203223A91BD00E8CDB3 /* Deck+CoreDataProperties.swift */; };
 		EE4FD207223AC6CE00E8CDB3 /* Deck.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE4FD206223AC6CE00E8CDB3 /* Deck.storyboard */; };
 		EE4FD209223AC6FE00E8CDB3 /* DeckTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4FD208223AC6FE00E8CDB3 /* DeckTableViewController.swift */; };
+		EE5EDE942246831F00C24C5E /* CardLegalityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE5EDE922246831E00C24C5E /* CardLegalityView.xib */; };
+		EE5EDE952246831F00C24C5E /* CardLegalityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EDE932246831F00C24C5E /* CardLegalityView.swift */; };
 		EE6F94B022309136001B3378 /* TcgPlayerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F94AF22309136001B3378 /* TcgPlayerApi.swift */; };
 		EE6F94B2223092AD001B3378 /* TcgToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F94B1223092AD001B3378 /* TcgToken.swift */; };
 		EE843A302228256100B07E09 /* ScryfallCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE843A2F2228256100B07E09 /* ScryfallCard.swift */; };
@@ -126,10 +130,14 @@
 		EE2CAC4F2231707000D24334 /* TcgPrices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcgPrices.swift; sourceTree = "<group>"; };
 		EE2CAC512231AAF200D24334 /* SafariActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariActivity.swift; sourceTree = "<group>"; };
 		EE2CAC532231C1AA00D24334 /* String+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Custom.swift"; sourceTree = "<group>"; };
+		EE4F532422467859003A06CA /* CardRulingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardRulingView.xib; sourceTree = "<group>"; };
+		EE4F532622467A4D003A06CA /* CardRulingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardRulingsView.swift; sourceTree = "<group>"; };
 		EE4FD202223A91BD00E8CDB3 /* Deck+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EE4FD203223A91BD00E8CDB3 /* Deck+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EE4FD206223AC6CE00E8CDB3 /* Deck.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Deck.storyboard; sourceTree = "<group>"; };
 		EE4FD208223AC6FE00E8CDB3 /* DeckTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckTableViewController.swift; sourceTree = "<group>"; };
+		EE5EDE922246831E00C24C5E /* CardLegalityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardLegalityView.xib; sourceTree = "<group>"; };
+		EE5EDE932246831F00C24C5E /* CardLegalityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardLegalityView.swift; sourceTree = "<group>"; };
 		EE6F94AF22309136001B3378 /* TcgPlayerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcgPlayerApi.swift; sourceTree = "<group>"; };
 		EE6F94B1223092AD001B3378 /* TcgToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcgToken.swift; sourceTree = "<group>"; };
 		EE843A2F2228256100B07E09 /* ScryfallCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryfallCard.swift; sourceTree = "<group>"; };
@@ -267,6 +275,10 @@
 		EE2B78BF21F006F900306990 /* Member View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EE5EDE932246831F00C24C5E /* CardLegalityView.swift */,
+				EE5EDE922246831E00C24C5E /* CardLegalityView.xib */,
+				EE4F532622467A4D003A06CA /* CardRulingsView.swift */,
+				EE4F532422467859003A06CA /* CardRulingView.xib */,
 				EE2B78C621F0084A00306990 /* Card.storyboard */,
 				EE2B78C421F0083E00306990 /* CardList.storyboard */,
 				EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */,
@@ -451,7 +463,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE24B104223DB9700057610D /* Collection.storyboard in Resources */,
+				EE5EDE942246831F00C24C5E /* CardLegalityView.xib in Resources */,
 				EEAA53CB223323D700CB4B72 /* Debug.storyboard in Resources */,
+				EE4F532522467859003A06CA /* CardRulingView.xib in Resources */,
 				EE4FD207223AC6CE00E8CDB3 /* Deck.storyboard in Resources */,
 				EE27552B22340F0F006BD083 /* Onboarding.storyboard in Resources */,
 				EE2B78C121F0075100306990 /* Collections.storyboard in Resources */,
@@ -510,6 +524,7 @@
 				EE4FD205223A91BD00E8CDB3 /* Deck+CoreDataProperties.swift in Sources */,
 				EE0F62AD22356494003D8A8A /* CoreDataStack.swift in Sources */,
 				EE4FD204223A91BD00E8CDB3 /* Deck+CoreDataClass.swift in Sources */,
+				EE4F532722467A4D003A06CA /* CardRulingsView.swift in Sources */,
 				EE6F94B2223092AD001B3378 /* TcgToken.swift in Sources */,
 				EE2B78AB21EFE47600306990 /* UIView+AutolayoutHelp.swift in Sources */,
 				EE4FD209223AC6FE00E8CDB3 /* DeckTableViewController.swift in Sources */,
@@ -520,6 +535,7 @@
 				EE2755292234084C006BD083 /* UserDefaultsHandler.swift in Sources */,
 				EE2B78CB21F0089500306990 /* CardViewController.swift in Sources */,
 				EE2B78BB21EFE60E00306990 /* StateCoordinator.swift in Sources */,
+				EE5EDE952246831F00C24C5E /* CardLegalityView.swift in Sources */,
 				EE2B822321FD258700306990 /* Legalities.swift in Sources */,
 				EE2B78BA21EFE60E00306990 /* SelectionState.swift in Sources */,
 				EE843A302228256100B07E09 /* ScryfallCard.swift in Sources */,

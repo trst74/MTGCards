@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CardRulingsView" customModule="MTGCards">
+            <rect key="frame" x="0.0" y="0.0" width="363" height="63"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Ruling Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OX8-7f-U5w">
+                    <rect key="frame" x="16" y="40.5" width="331" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ruling Text" lineBreakMode="tailTruncation" numberOfLines="13" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGX-vw-AJ4">
+                    <rect key="frame" x="16" y="8" width="331" height="24.5"/>
+                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="rGX-vw-AJ4" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="0t2-RA-03O"/>
+                <constraint firstItem="rGX-vw-AJ4" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="4gp-Ef-cCl"/>
+                <constraint firstItem="OX8-7f-U5w" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="B3w-AC-BPk"/>
+                <constraint firstItem="OX8-7f-U5w" firstAttribute="top" secondItem="rGX-vw-AJ4" secondAttribute="bottom" constant="8" id="MHk-BW-su7"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="OX8-7f-U5w" secondAttribute="trailing" constant="16" id="NJx-dR-THG"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="rGX-vw-AJ4" secondAttribute="trailing" constant="16" id="Xx8-ow-sOD"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="OX8-7f-U5w" secondAttribute="bottom" constant="8" id="sbA-SD-YKW"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="rulingDate" destination="OX8-7f-U5w" id="NNg-d7-Thz"/>
+                <outlet property="rulingText" destination="rGX-vw-AJ4" id="28q-XB-krT"/>
+            </connections>
+            <point key="canvasLocation" x="60.5" y="-206.5"/>
+        </view>
+    </objects>
+</document>
