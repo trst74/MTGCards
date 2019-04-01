@@ -10,7 +10,7 @@ Small application to allow the lookup of Magic cards.
 </p>
 
 ## TODO
-* Allow addition of cards to collections and decks
+* ~~Allow addition of cards to collections and decks~~
 * Save searches
 * ~~TCGPlayer price integration~~
 * Enhance share function to show TCG link or ~~Gatherer~~
