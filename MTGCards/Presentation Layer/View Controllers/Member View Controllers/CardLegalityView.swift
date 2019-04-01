@@ -8,6 +8,7 @@
 
 import UIKit
 
+@IBDesignable
 class CardLegalityView: UIView {
 
     @IBOutlet weak var formatText: UILabel!
@@ -19,5 +20,20 @@ class CardLegalityView: UIView {
         // Drawing code
     }
     */
-
+    public var legality: String = "" {
+        didSet {
+            if legality == "Legal" {
+                self.backgroundColor = UIColor.Identity.Forests
+                
+            } else if legality == "Banned" {
+                self.backgroundColor = UIColor.Identity.Mountains
+            } else if legality == "Restricted" {
+                self.backgroundColor = UIColor.Identity.Islands
+            } else {
+                self.backgroundColor = UIColor.lightGray
+            }
+            legalityText.text = legality
+        }
+   
+    }
 }

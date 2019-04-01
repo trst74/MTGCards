@@ -14,6 +14,7 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var cardImage: UIImageView!
     @IBOutlet weak var costLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var setLabel: UILabel!
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var otherLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
@@ -26,6 +27,19 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var legalitiesView: UIView!
     @IBOutlet weak var legalitiesHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var legalitiesTitle: UILabel!
+    @IBOutlet weak var detailsView: UIView!
+    @IBOutlet weak var pricesRootStack: UIStackView!
+    @IBOutlet weak var pricesErrorMessage: UILabel!
+    
+    @IBOutlet weak var normalStackView: UIStackView!
+    @IBOutlet weak var normalLow: UILabel!
+    @IBOutlet weak var normalMid: UILabel!
+    @IBOutlet weak var normalMarket: UILabel!
+    
+    @IBOutlet weak var foilStackView: UIStackView!
+    @IBOutlet weak var foilLow: UILabel!
+    @IBOutlet weak var foilMid: UILabel!
+    @IBOutlet weak var foilMarket: UILabel!
     
     var shareButton: UIBarButtonItem?
     
@@ -38,6 +52,9 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         
         costLabel.attributedText = card?.manaCost?.replaceSymbols()
         typeLabel.text = card?.type
+        if let setname = card?.set.name, let rarity = card?.rarity?.capitalized {
+            setLabel.text = "\(setname) - \(rarity)"
+        }
         textLabel.attributedText = card?.text?.replaceSymbols()
         if let reserved = card?.isReserved, reserved {
             otherLabel.text = "Reserved"
@@ -52,26 +69,34 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         if let cardid = card?.tcgplayerProductID, cardid > 0 {
             TcgPlayerApi.handler.getPrices(for: cardid) { prices in
-                var resultString = "Market:"
-                if let market = prices.results.first(where: {$0.subTypeName == "Normal" })?.marketPrice{
-                    resultString += " N - \(market.currencyUS)"
+                if let normal = prices.results.first(where: {$0.subTypeName == "Normal" }), let low = normal.lowPrice, let mid = normal.midPrice, let market = normal.marketPrice {
+                    self.normalLow.text = low.currencyUS
+                    self.normalMid.text = mid.currencyUS
+                    self.normalMarket.text = market.currencyUS
+                } else {
+                    self.normalStackView.isHidden = true
                 }
-                if let fmarket = prices.results.first(where: {$0.subTypeName == "Foil" })?.marketPrice {
-                    resultString += " F - \(fmarket.currencyUS)"
+                if let foil = prices.results.first(where: {$0.subTypeName == "Foil" }), let fmarket = foil.marketPrice, let flow = foil.lowPrice, let fmid = foil.midPrice {
+                    self.foilMarket.text = fmarket.currencyUS
+                    self.foilLow.text = flow.currencyUS
+                    self.foilMid.text = fmid.currencyUS
+                } else {
+                    self.foilStackView.isHidden = true
                 }
-                self.marketPrice.text = resultString
-                if resultString == "Market:" {
-                    
-                }
-                
             }
+        } else {
+            self.pricesErrorMessage.isHidden = false
+            self.pricesRootStack.isHidden = true
+            self.pricesView.layoutSubviews()
         }
         loadImage()
-      
+        
         let taps = UITapGestureRecognizer(target: self, action: #selector(showDebug))
         taps.numberOfTapsRequired = 10
         taps.delegate = self
         cardImage.addGestureRecognizer(taps)
+        detailsView.layer.cornerRadius = 10
+        pricesView.layer.cornerRadius = 10
     }
     override func viewDidAppear(_ animated: Bool) {
         loadRulings()
@@ -195,26 +220,14 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     func shareImage(){
         let image = self.cardImage.image
-        
-        // set up activity view controller
         let imageToShare = [ image! ]
         let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-        
-        // exclude some activity types from the list (optional)
-        
-        
-        // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
     }
     func shareText(text: String){
         let activityViewController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-        
-        // exclude some activity types from the list (optional)
-        
-        
-        // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
     }
     func shareUrl(url: URL, popupView: AnyObject?){
@@ -224,94 +237,77 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         } else {
             activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         }
-        // exclude some activity types from the list (optional)
-        
-        
-        // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
     }
     func loadLegalities(){
         if let legalities = card?.legalities
-          {
+        {
             var legalitiesHeight = legalitiesTitle.frame.height
-            if let legalities = card?.legalities?.getLegalitiesCollection(){
-             
-                    
-                    let lgs = legalities.sorted(by: {$0.format < $1.format})
-                    
-                    var firstView: CardLegalityView? = nil
-                    for legality in lgs {
-                        let viewFromNib = Bundle.main.loadNibNamed("CardLegalityView", owner: self, options: nil)?[0] as! CardLegalityView
-                        viewFromNib.formatText.text = legality.format+":"
-                        viewFromNib.legalityText.text = legality.legality
-                        viewFromNib.layer.cornerRadius = 10
-                        viewFromNib.clipsToBounds = true
-                        viewFromNib.translatesAutoresizingMaskIntoConstraints = false
-                        legalitiesView.addSubview(viewFromNib)
-                        if firstView != nil {
-                            legalitiesView.addConstraint(
-                                NSLayoutConstraint(
-                                    item: viewFromNib,
-                                    attribute: .top,
-                                    relatedBy: .equal,
-                                    toItem: firstView,
-                                    attribute: .bottom,
-                                    multiplier: 1.0,
-                                    constant: 8
-                            ))
-                        } else {
-                            legalitiesView.addConstraint(
-                                NSLayoutConstraint(
-                                    item: viewFromNib,
-                                    attribute: .top,
-                                    relatedBy: .equal,
-                                    toItem: legalitiesTitle,
-                                    attribute: .bottom,
-                                    multiplier: 1.0,
-                                    constant: 8
-                            ))
-                            
-                        }
-                        legalitiesView.addConstraint(
-                            NSLayoutConstraint(
-                                item: viewFromNib,
-                                attribute: .leading,
-                                relatedBy: .equal,
-                                toItem: legalitiesView,
-                                attribute: .leading,
-                                multiplier: 1.0,
-                                constant: 8
-                        ))
-                        legalitiesView.addConstraint(
-                            NSLayoutConstraint(
-                                item: viewFromNib,
-                                attribute: .trailing,
-                                relatedBy: .equal,
-                                toItem: legalitiesView,
-                                attribute: .trailing,
-                                multiplier: 1.0,
-                                constant: -8
-                        ))
-                        firstView = viewFromNib
-                        viewFromNib.layoutIfNeeded()
-                        legalitiesHeight += (8 + viewFromNib.frame.height)
-                    }
-                    
-                
+            let legalities = legalities.getLegalitiesCollection()
+            var firstView: CardLegalityView? = nil
+            for legality in legalities {
+                let viewFromNib = Bundle.main.loadNibNamed("CardLegalityView", owner: self, options: nil)?[0] as! CardLegalityView
+                viewFromNib.formatText.text = legality.format+":"
+                //viewFromNib.legalityText.text = legality.legality
+                viewFromNib.legality = legality.legality
+                viewFromNib.layer.cornerRadius = 10
+                viewFromNib.clipsToBounds = true
+                viewFromNib.translatesAutoresizingMaskIntoConstraints = false
+                legalitiesView.addSubview(viewFromNib)
+                if firstView != nil {
+                    legalitiesView.addConstraint(
+                        NSLayoutConstraint(
+                            item: viewFromNib,
+                            attribute: .top,
+                            relatedBy: .equal,
+                            toItem: firstView,
+                            attribute: .bottom,
+                            multiplier: 1.0,
+                            constant: 8
+                    ))
+                } else {
+                    legalitiesView.addConstraint(
+                        NSLayoutConstraint(
+                            item: viewFromNib,
+                            attribute: .top,
+                            relatedBy: .equal,
+                            toItem: legalitiesTitle,
+                            attribute: .bottom,
+                            multiplier: 1.0,
+                            constant: 8
+                    ))
+                }
+                legalitiesView.addConstraint(
+                    NSLayoutConstraint(
+                        item: viewFromNib,
+                        attribute: .leading,
+                        relatedBy: .equal,
+                        toItem: legalitiesView,
+                        attribute: .leading,
+                        multiplier: 1.0,
+                        constant: 0
+                ))
+                legalitiesView.addConstraint(
+                    NSLayoutConstraint(
+                        item: viewFromNib,
+                        attribute: .trailing,
+                        relatedBy: .equal,
+                        toItem: legalitiesView,
+                        attribute: .trailing,
+                        multiplier: 1.0,
+                        constant: 0
+                ))
+                firstView = viewFromNib
+                viewFromNib.layoutIfNeeded()
+                legalitiesHeight += (8 + viewFromNib.frame.height)
             }
-            
             legalitiesView.sizeToFit()
             legalitiesHeightConstraint.constant = legalitiesHeight
-        
+            
         } else {
             legalitiesHeightConstraint.constant = 0
             legalitiesView.isHidden = true
         }
-        
-        
-        
-
-        
     }
     func loadRulings(){
         if card?.rulings.count ?? 0 < 1 {
@@ -338,69 +334,66 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
                         let df = DateFormatter()
                         df.dateStyle = .short
                         if let date = ruling.date?.toDate() {
-                        viewFromNib.rulingDate.text = df.string(from: date)
-                        viewFromNib.rulingText.attributedText = ruling.text?.replaceSymbols()
-                        viewFromNib.layer.cornerRadius = 10
-                        viewFromNib.clipsToBounds = true
-                        viewFromNib.translatesAutoresizingMaskIntoConstraints = false
-                        rulingsView.addSubview(viewFromNib)
-                        if firstView != nil {
+                            viewFromNib.rulingDate.text = df.string(from: date)
+                            viewFromNib.rulingText.attributedText = ruling.text?.replaceSymbols()
+                            viewFromNib.layer.cornerRadius = 10
+                            viewFromNib.clipsToBounds = true
+                            viewFromNib.translatesAutoresizingMaskIntoConstraints = false
+                            rulingsView.addSubview(viewFromNib)
+                            if firstView != nil {
+                                rulingsView.addConstraint(
+                                    NSLayoutConstraint(
+                                        item: viewFromNib,
+                                        attribute: .top,
+                                        relatedBy: .equal,
+                                        toItem: firstView,
+                                        attribute: .bottom,
+                                        multiplier: 1.0,
+                                        constant: 8
+                                ))
+                            } else {
+                                rulingsView.addConstraint(
+                                    NSLayoutConstraint(
+                                        item: viewFromNib,
+                                        attribute: .top,
+                                        relatedBy: .equal,
+                                        toItem: rulingsTitle,
+                                        attribute: .bottom,
+                                        multiplier: 1.0,
+                                        constant: 8
+                                ))
+                                
+                            }
                             rulingsView.addConstraint(
                                 NSLayoutConstraint(
                                     item: viewFromNib,
-                                    attribute: .top,
+                                    attribute: .leading,
                                     relatedBy: .equal,
-                                    toItem: firstView,
-                                    attribute: .bottom,
+                                    toItem: rulingsView,
+                                    attribute: .leading,
                                     multiplier: 1.0,
-                                    constant: 8
+                                    constant: 0
                             ))
-                        } else {
                             rulingsView.addConstraint(
                                 NSLayoutConstraint(
                                     item: viewFromNib,
-                                    attribute: .top,
+                                    attribute: .trailing,
                                     relatedBy: .equal,
-                                    toItem: rulingsTitle,
-                                    attribute: .bottom,
+                                    toItem: rulingsView,
+                                    attribute: .trailing,
                                     multiplier: 1.0,
-                                    constant: 8
+                                    constant: 0
                             ))
-                            
-                        }
-                        rulingsView.addConstraint(
-                            NSLayoutConstraint(
-                                item: viewFromNib,
-                                attribute: .leading,
-                                relatedBy: .equal,
-                                toItem: rulingsView,
-                                attribute: .leading,
-                                multiplier: 1.0,
-                                constant: 8
-                        ))
-                        rulingsView.addConstraint(
-                            NSLayoutConstraint(
-                                item: viewFromNib,
-                                attribute: .trailing,
-                                relatedBy: .equal,
-                                toItem: rulingsView,
-                                attribute: .trailing,
-                                multiplier: 1.0,
-                                constant: -8
-                        ))
-                        firstView = viewFromNib
-                        viewFromNib.layoutIfNeeded()
-                        rulingsHeight += (8 + viewFromNib.frame.height)
+                            firstView = viewFromNib
+                            viewFromNib.layoutIfNeeded()
+                            rulingsHeight += (8 + viewFromNib.frame.height)
                         }
                     }
-                    
-                    
                 }
             }
             rulingsView.sizeToFit()
             rulingsHeightContstraint.constant = rulingsHeight
         }
-
     }
 }
 extension CardViewController {

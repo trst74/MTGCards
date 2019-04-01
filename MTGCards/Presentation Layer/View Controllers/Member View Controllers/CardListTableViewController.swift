@@ -57,6 +57,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         do {
             try fetchedResultsController.performFetch()
             tableView.reloadData()
+            self.title = "Search (\(fetchedResultsController.sections![0].numberOfObjects))"
         } catch {
             print("Fetch failed")
         }

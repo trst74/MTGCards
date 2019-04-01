@@ -78,42 +78,54 @@ class Legalities: NSManagedObject, Codable {
     }
     public func getLegalitiesCollection() -> [Legality] {
         var results: [Legality] = []
-        if let the1v1 = the1V1 {
-            results.append(Legality(format: "the1v1", legality: the1v1))
-        }
-        if let commander = commander {
-            results.append(Legality(format: "Commander", legality: commander))
-        }
-        if let duel = duel {
-            results.append(Legality(format: "Duel", legality: duel))
-        }
-        if let legacy = legacy {
-            results.append(Legality(format: "Legacy", legality: legacy))
-        }
-        if let penny = penny {
-            results.append(Legality(format: "Penny", legality: penny))
-        }
-        if let vintage = vintage {
-            results.append(Legality(format: "Vintage", legality: vintage))
-        }
-        if let frontier = frontier {
-            results.append(Legality(format: "Frontier", legality: frontier))
+        if let standard = standard {
+            results.append(Legality(format: "Standard", legality: standard))
+        } else {
+            results.append(Legality(format: "Standard", legality: "Not Legal"))
         }
         if let modern = modern {
             results.append(Legality(format: "Modern", legality: modern))
+        } else {
+            results.append(Legality(format: "Modern", legality: "Not Legal"))
         }
+        if let legacy = legacy {
+            results.append(Legality(format: "Legacy", legality: legacy))
+        } else {
+            results.append(Legality(format: "Legacy", legality: "Not Legal"))
+        }
+        if let vintage = vintage {
+            results.append(Legality(format: "Vintage", legality: vintage))
+        } else {
+            results.append(Legality(format: "Vintage", legality: "Not Legal"))
+        }
+        if let commander = commander {
+            results.append(Legality(format: "Commander", legality: commander))
+        } else {
+            results.append(Legality(format: "Commander", legality: "Not Legal"))
+        }
+        if let frontier = frontier {
+            results.append(Legality(format: "Frontier", legality: frontier))
+        } else {
+            results.append(Legality(format: "Frontier", legality: "Not Legal"))
+        }
+        
         if let pauper = pauper {
             results.append(Legality(format: "Pauper", legality: pauper))
+        } else {
+            results.append(Legality(format: "Pauper", legality: "Not Legal"))
         }
-        if let brawl = brawl {
-            results.append(Legality(format: "Brawl", legality: brawl))
+        if let penny = penny {
+            results.append(Legality(format: "Penny", legality: penny))
+        } else {
+            results.append(Legality(format: "Penny", legality: "Not Legal"))
         }
-        if let future = future {
-            results.append(Legality(format: "Future", legality: future))
+        if let duel = duel {
+            results.append(Legality(format: "Duel", legality: duel))
+        } else {
+            results.append(Legality(format: "Duel", legality: "Not Legal"))
         }
-        if let standard = standard {
-            results.append(Legality(format: "Standard", legality: standard))
-        }
+
+     
         return results
     }
 }
