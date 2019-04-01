@@ -37,6 +37,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         
         alert.addTextField(configurationHandler: { textField in
             textField.placeholder = "Deck Name"
+            textField.autocapitalizationType = .words
         })
         alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { action in
             if let name = alert.textFields?.first?.text {
@@ -52,7 +53,6 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
                 }
             }
         }))
-        
         self.present(alert, animated: true)
     }
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
@@ -72,12 +72,10 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
                         }
                         if results?.count ?? 0 > 0 {
                             if let found: DeckCard = results?[0] as? DeckCard {
-                                
                                 found.quantity += 1
                                 CoreDataStack.handler.saveContext()
                             }
                         } else {
-                            //add to deck
                             if let card = card {
                                 guard  let entity = NSEntityDescription.entity(forEntityName: "DeckCard", in:  CoreDataStack.handler.managedObjectContext) else {
                                     fatalError("Failed to decode Card")
@@ -87,9 +85,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
                                 deckCard.quantity = 1
                                 self.cdDecks[indexPath.row].addToCards(deckCard)
                                 CoreDataStack.handler.saveContext()
-                                
                             }
-                            //save
                         }
                     }
                 }
@@ -98,7 +94,6 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
                     guard let strings = items as? [String] else { return }
                     for string in strings {
                         print(string)
-                        let collection = self.cdCollections[indexPath.row]
                         let card = self.getCard(byUUID: string)
                         
                         if let card = card {
