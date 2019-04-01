@@ -13,7 +13,7 @@ Small application to allow the lookup of Magic cards.
 * Allow addition of cards to collections and decks
 * Save searches
 * ~~TCGPlayer price integration~~
-* Enhance share function to show ~~TCG link~~ or Gatherer
+* Enhance share function to show TCG link or ~~Gatherer~~
 * Import ~~Deck~~/Collection list
 * Export
 * Search in filters
