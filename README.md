@@ -5,22 +5,23 @@ Small application to allow the lookup of Magic cards.
 
 <p align="left">
     <a href="https://swift.org">
-        <img src="http://img.shields.io/badge/swift-4.2-brightgreen.svg" alt="Swift 4">
+        <img src="http://img.shields.io/badge/swift-5-brightgreen.svg" alt="Swift 4">
     </a>
 </p>
 
 ## TODO
-* Allow addition of cards to collections and decks
+* ~~Allow addition of cards to collections and decks~~
 * Save searches
-* TCGPlayer price integration
-* Enhance share function to show TCG link or Gatherer
-* Import Deck/Collection list
+* ~~TCGPlayer price integration~~
+* Enhance share function to show TCG link or ~~Gatherer~~
+* Import ~~Deck~~/Collection list
 * Export
 * Search in filters
-* iPad optimized layout
+* ~~iPad optimized layout~~
 
 ## BUGS
-
+* Rotating when Search view is on the navigation stack causes fatal error.
+* Several iPad Auto Layout Issues
 
 ## CONTACT
 <!-- display the social media buttons in your README -->
