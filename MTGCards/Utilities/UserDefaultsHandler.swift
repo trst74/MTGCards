@@ -16,7 +16,7 @@ class UserDefaultsHandler {
     
     static func isFirstTimeOpening() -> Bool {
         let result = defaults.bool(forKey: HASOPENED)
-        return result
+        return !result
     }
     static func setHasOpened(opened: Bool){
         defaults.set(opened, forKey: HASOPENED)

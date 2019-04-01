@@ -62,7 +62,7 @@ class RootViewController: UIViewController {
         installRootSplit()
     }
     override func viewDidAppear(_ animated: Bool) {
-        if !UserDefaultsHandler.isFirstTimeOpening(){
+        if UserDefaultsHandler.isFirstTimeOpening(){
             //onbarding
             let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
             guard let pageOne = storyboard.instantiateInitialViewController() as? PageOneViewController else {
@@ -71,14 +71,7 @@ class RootViewController: UIViewController {
             //self.navigationController?.pushViewController(settingsVC, animated: true)
             self.present(pageOne, animated: true, completion: nil)
             //create collection and wish list
-            guard  let entity = NSEntityDescription.entity(forEntityName: "Collection", in:  CoreDataStack.handler.managedObjectContext) else {
-                fatalError("Failed to decode Card")
-            }
-            var collection = Collection.init(entity: entity, insertInto: CoreDataStack.handler.managedObjectContext)
-            collection.name = "Collection"
-            var wishlist = Collection.init(entity: entity, insertInto: CoreDataStack.handler.managedObjectContext)
-            wishlist.name = "Wish List"
-            CoreDataStack.handler.saveContext()
+ 
             UserDefaultsHandler.setHasOpened(opened: true)
         }
     }

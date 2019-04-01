@@ -26,10 +26,21 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         sections = [collections, decks, search]
         tableView.dropDelegate = self
         tableView.dragInteractionEnabled = true
-    }
-    override func viewWillAppear(_ animated: Bool) {
+        if UserDefaultsHandler.isFirstTimeOpening(){
+            firstTimeOpened()
+        }
         reloadDecksFromCoreData()
         reloadCollectionsFromCoreData()
+    }
+    private func firstTimeOpened(){
+        guard  let entity = NSEntityDescription.entity(forEntityName: "Collection", in:  CoreDataStack.handler.managedObjectContext) else {
+            fatalError("Failed to decode Card")
+        }
+        let collection = Collection.init(entity: entity, insertInto: CoreDataStack.handler.managedObjectContext)
+        collection.name = "Collection"
+        let wishlist = Collection.init(entity: entity, insertInto: CoreDataStack.handler.managedObjectContext)
+        wishlist.name = "Wish List"
+        CoreDataStack.handler.saveContext()
     }
     @objc func addButton() {
         let alert = UIAlertController(title: "Deck Name?", message: nil, preferredStyle: .alert)
