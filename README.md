@@ -20,7 +20,8 @@ Small application to allow the lookup of Magic cards.
 * ~~iPad optimized layout~~
 
 ## BUGS
-
+* Rotating when Search view is on the navigation stack causes fatal error.
+* Several iPad Auto Layout Issues
 
 ## CONTACT
 <!-- display the social media buttons in your README -->
