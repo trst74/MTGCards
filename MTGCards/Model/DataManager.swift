@@ -17,12 +17,13 @@ public class DataManager {
     static func getSet(setCode: String, completion: @escaping (_ success: Bool) -> Void) {
         
         let setURL = URL(string: "https://mtgjson.com/json/\(setCode).json")
-        let data = try? Data(contentsOf: setURL!)
-        if let d = data {
+        do {
+            let data = try Data(contentsOf: setURL!)
+            let d = data
             do {
                 let set = try newJSONDecoder().decode(Set.self, from: d)
                 print("\(setCode): \(set.cards.count)")
-            
+                
                 
                 do {
                     try CoreDataStack.handler.privateContext.save()
@@ -35,6 +36,10 @@ public class DataManager {
                 print(error)
                 completion(false)
             }
+            
+        } catch let error {
+            print("Download error: \(error)")
+            completion(false)
         }
     }
     static func getSetList() -> SetList? {
