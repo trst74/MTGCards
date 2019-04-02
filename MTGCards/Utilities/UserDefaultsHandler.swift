@@ -13,6 +13,7 @@ class UserDefaultsHandler {
     
     static let HASOPENED = "hasopenedbefore"
     static let CARDDATADOWNLOADED = "hasdatabeendownloaded"
+    static let SELECTEDCARDIMAGEQUALITY = "selectedcardimagequality"
     
     static func isFirstTimeOpening() -> Bool {
         let result = defaults.bool(forKey: HASOPENED)
@@ -27,5 +28,12 @@ class UserDefaultsHandler {
     }
     static func setCardDataDownloaded(hasDownloaded: Bool){
           defaults.set(hasDownloaded, forKey: CARDDATADOWNLOADED)
+    }
+    static func selectedCardImageQuality() -> String {
+        
+        return defaults.string(forKey: SELECTEDCARDIMAGEQUALITY) ?? "high"
+    }
+    static func setSelectedCardImageQuality( quality: String){
+        defaults.set(quality, forKey: SELECTEDCARDIMAGEQUALITY)
     }
 }

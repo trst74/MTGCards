@@ -26,6 +26,7 @@
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="J82-sV-UWG" secondAttribute="height" multiplier="207:289" id="3uh-DW-XaF"/>
+                                            <constraint firstAttribute="height" priority="999" id="wef-RN-Y2M"/>
                                         </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="uRu-bV-xk2" appends="YES" id="lPy-gq-hfN"/>
@@ -490,6 +491,8 @@
                     <connections>
                         <outlet property="artistLabel" destination="nCa-Nz-83Q" id="6m1-nO-xJF"/>
                         <outlet property="cardImage" destination="J82-sV-UWG" id="gYn-66-NQg"/>
+                        <outlet property="cardImageAspect" destination="3uh-DW-XaF" id="rZi-zu-g7c"/>
+                        <outlet property="cardImageHeight" destination="wef-RN-Y2M" id="Tjt-oX-INP"/>
                         <outlet property="costLabel" destination="aFR-hm-GrY" id="XQl-l9-2Ui"/>
                         <outlet property="detailsView" destination="fXh-QE-IzL" id="z8d-Eg-YJ3"/>
                         <outlet property="foilLow" destination="MPe-Uv-TvL" id="R9c-Np-vac"/>

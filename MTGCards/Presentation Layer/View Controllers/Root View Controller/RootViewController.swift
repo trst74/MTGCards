@@ -71,7 +71,7 @@ class RootViewController: UIViewController {
             //self.navigationController?.pushViewController(settingsVC, animated: true)
             self.present(pageOne, animated: true, completion: nil)
             //create collection and wish list
- 
+            UserDefaultsHandler.setSelectedCardImageQuality(quality: "high")
             UserDefaultsHandler.setHasOpened(opened: true)
         }
     }

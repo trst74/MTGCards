@@ -12,6 +12,8 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var scrollview: UIScrollView!
     
     @IBOutlet weak var cardImage: UIImageView!
+    @IBOutlet weak var cardImageAspect: NSLayoutConstraint!
+    @IBOutlet weak var cardImageHeight: NSLayoutConstraint!
     @IBOutlet weak var costLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var setLabel: UILabel!
@@ -158,13 +160,20 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
             } else {
                 if let id = card?.scryfallID {
                     do {
-                        var url = "https://api.scryfall.com/cards/\(id)?format=image"
-                        if card?.side == "b" && card?.layout != "split" && card?.layout != "flip" && card?.layout != "meld"{
-                            url += "&face=back"
-                        }
-                        if  let imageURL = URL(string: url) {
-                            cardImage.contentMode = .scaleAspectFit
-                            downloadImage(url: imageURL, Key: key)
+                        let version = UserDefaultsHandler.selectedCardImageQuality()
+                        if version != "none" {
+                            var url = "https://api.scryfall.com/cards/\(id)?format=image&version=\(version)"
+                            if card?.side == "b" && card?.layout != "split" && card?.layout != "flip" && card?.layout != "meld"{
+                                url += "&face=back"
+                            }
+                            if  let imageURL = URL(string: url) {
+                                cardImage.contentMode = .scaleAspectFit
+                                downloadImage(url: imageURL, Key: key)
+                            }
+                        } else {
+                            cardImage.isHidden = true
+                            cardImageAspect.isActive = false
+                
                         }
                     }
                 }

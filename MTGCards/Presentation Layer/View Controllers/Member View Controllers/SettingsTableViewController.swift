@@ -12,11 +12,15 @@ import CoreData
 class SettingsTableViewController: UITableViewController {
     
     @IBOutlet weak var fileInfoLabel: UILabel!
+    @IBOutlet weak var noImageSwitch: UISwitch!
+    @IBOutlet weak var lowQualitySwitch: UISwitch!
+    @IBOutlet weak var normalQualitySwitch: UISwitch!
+    @IBOutlet weak var highQualitySwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateFileInfoLabel()
-        
+        setImageQuality(quality: UserDefaultsHandler.selectedCardImageQuality())
     }
     @IBAction func close(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -126,6 +130,65 @@ class SettingsTableViewController: UITableViewController {
             let filename = getDocumentsDirectory().appendingPathComponent("\(dir)/\(Key).png")
             print(filename)
             try? data.write(to: filename)
+        }
+    }
+    @IBAction func noImagesChanged(_ sender: UISwitch) {
+        if sender.isOn {
+            lowQualitySwitch.isOn = false
+            normalQualitySwitch.isOn = false
+            highQualitySwitch.isOn = false
+            UserDefaultsHandler.setSelectedCardImageQuality(quality: "none")
+        } else {
+            checkIfASwitchIsOnAndDefault()
+        }
+    }
+    @IBAction func lowQualityChanged(_ sender: UISwitch) {
+        if sender.isOn {
+            noImageSwitch.isOn = false
+            normalQualitySwitch.isOn = false
+            highQualitySwitch.isOn = false
+            UserDefaultsHandler.setSelectedCardImageQuality(quality: "small")
+        } else {
+            checkIfASwitchIsOnAndDefault()
+        }
+    }
+    @IBAction func normalQualityChanged(_ sender: UISwitch) {
+        if sender.isOn {
+            noImageSwitch.isOn = false
+            lowQualitySwitch.isOn = false
+            highQualitySwitch.isOn = false
+            UserDefaultsHandler.setSelectedCardImageQuality(quality: "normal")
+        } else {
+            checkIfASwitchIsOnAndDefault()
+        }
+    }
+    @IBAction func highQualityChanged(_ sender: UISwitch) {
+        if sender.isOn {
+            noImageSwitch.isOn = false
+            normalQualitySwitch.isOn = false
+            lowQualitySwitch.isOn = false
+            UserDefaultsHandler.setSelectedCardImageQuality(quality: "large")
+        } else {
+            checkIfASwitchIsOnAndDefault()
+        }
+    }
+    func checkIfASwitchIsOnAndDefault(){
+        if !noImageSwitch.isOn && !lowQualitySwitch.isOn && !normalQualitySwitch.isOn && !highQualitySwitch.isOn {
+            highQualitySwitch.isOn = true
+        }
+    }
+    func setImageQuality(quality: String){
+        switch quality {
+        case "none":
+            noImageSwitch.isOn = true
+        case "small":
+            lowQualitySwitch.isOn = true
+        case "normal":
+            normalQualitySwitch.isOn = true
+        case "large":
+            highQualitySwitch.isOn = true
+        default:
+            highQualitySwitch.isOn = true
         }
     }
 }
