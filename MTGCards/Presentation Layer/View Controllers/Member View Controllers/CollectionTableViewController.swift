@@ -103,7 +103,22 @@ class CollectionTableViewController: UITableViewController {
             StateCoordinator.shared.didSelectCard(c: card)
         }
     }
-
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let card: CollectionCard? = collectionCards[indexPath.row]
+            if let card = card {
+                collection?.removeFromCards(card)
+                CoreDataStack.handler.saveContext()
+                if let id = collection?.objectID {
+                    collection = CoreDataStack.handler.managedObjectContext.object(with: id) as? Collection
+                }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    
+                }
+            }
+        }
+    }
 }
 extension CollectionTableViewController {
     static func freshCollection(collection: Collection) -> CollectionTableViewController {
