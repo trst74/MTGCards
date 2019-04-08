@@ -236,10 +236,9 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         }
         
         cell.backgroundColor = nil
-        if let identities = deckCard?.card?.colorIdentity {
-            
+        if let colorIdentities = deckCard?.card?.colorIdentity?.allObjects as? [ColorIdentity] {
+            let identities: [String?] = colorIdentities.map ({ $0.color })
             var colors: [UIColor] = []
-            
             if identities.contains("W") {
                 colors.append(UIColor.Identity.Plains)
             }
@@ -255,14 +254,12 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
             if identities.contains("G") {
                 colors.append(UIColor.Identity.Forests)
             }
-            
             if colors.count == 0 {
                 if deckCard?.card?.type == "Land" {
                     colors = [UIColor.Identity.Lands]
                     
                 } else {
                     colors = [UIColor.Identity.Artifacts]
-                    
                 }
             }
             if colors.count == 1 {
@@ -270,6 +267,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
             }
             cell.gradientView?.colors = colors
         }
+        
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -285,8 +283,6 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         }
         
     }
-    
-    
 }
 extension DeckTableViewController {
     static func freshDeck(deck: Deck) -> DeckTableViewController {

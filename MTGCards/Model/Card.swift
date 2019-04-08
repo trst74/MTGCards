@@ -13,7 +13,7 @@ import UIKit
 class Card: NSManagedObject, Codable {
     @NSManaged var artist: String?
     @NSManaged var borderColor: String?
-    @NSManaged var colorIdentity: [String]?
+    private var stringColorIdentity: [String]?
     @NSManaged var colors: [String]?
     @NSManaged var convertedManaCost: Float
     @NSManaged var flavorText: String?
@@ -34,14 +34,14 @@ class Card: NSManagedObject, Codable {
     @NSManaged var rarity: String?
     @NSManaged var rulings: NSSet
     @NSManaged var scryfallID: String?
-    @NSManaged var subtypes: [String]?
-    @NSManaged var supertypes: [String]?
+    private var stringsubtypes: [String]?
+    @NSManaged var stringsupertypes: [String]?
     @NSManaged var tcgplayerProductID: Int32
     @NSManaged var tcgplayerPurchaseURL: String?
     @NSManaged var text: String?
     @NSManaged var toughness: String?
     @NSManaged var type: String?
-    @NSManaged var types: [String]?
+    private var stringTypes: [String]?
     @NSManaged var uuid: String?
     @NSManaged var watermark: String?
     @NSManaged var names: [String]?
@@ -50,13 +50,17 @@ class Card: NSManagedObject, Codable {
     @NSManaged var side: String?
     @NSManaged var variations: [String]?
     @NSManaged var starter: Bool
-    @NSManaged var set: Set
+    @NSManaged var set: MTGSet
     @NSManaged var isReserved: Bool
+    @NSManaged var types: NSSet?
+    @NSManaged var colorIdentity: NSSet?
+    @NSManaged var cardsubtypes: NSSet?
+    @NSManaged public var cardsupertypes: NSSet?
     
     enum CodingKeys: String, CodingKey {
         case artist = "artist"
         case borderColor = "borderColor"
-        case colorIdentity = "colorIdentity"
+        case stringColorIdentity = "colorIdentity"
         case colors = "colors"
         case convertedManaCost = "convertedManaCost"
         case flavorText = "flavorText"
@@ -77,14 +81,14 @@ class Card: NSManagedObject, Codable {
         case rarity = "rarity"
         case rulings = "rulings"
         case scryfallID = "scryfallId"
-        case subtypes = "subtypes"
-        case supertypes = "supertypes"
+        case stringsubtypes = "subtypes"
+        case stringsupertypes = "supertypes"
         case tcgplayerProductID = "tcgplayerProductId"
         case tcgplayerPurchaseURL = "tcgplayerPurchaseUrl"
         case text = "text"
         case toughness = "toughness"
         case type = "type"
-        case types = "types"
+        case stringTypes = "types"
         case uuid = "uuid"
         case watermark = "watermark"
         case names = "names"
@@ -96,17 +100,27 @@ class Card: NSManagedObject, Codable {
         case isReserved = "isReserved"
     }
     
-    required convenience init(from decoder: Decoder) throws {        let managedObjectContext = CoreDataStack.handler.privateContext
+    required convenience init(from decoder: Decoder) throws {
+        let managedObjectContext = CoreDataStack.handler.privateContext
         guard  let entity = NSEntityDescription.entity(forEntityName: "Card", in: managedObjectContext) else {
-                fatalError("Failed to decode Card")
+            fatalError("Failed to decode Card")
         }
-
+        
         self.init(entity: entity, insertInto: managedObjectContext)
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.artist = try container.decodeIfPresent(String.self, forKey: .artist)
         self.borderColor = try container.decodeIfPresent(String.self, forKey: .borderColor)
-        self.colorIdentity = try container.decodeIfPresent([String].self, forKey: .colorIdentity)
+        self.stringColorIdentity = try container.decodeIfPresent([String].self, forKey: .stringColorIdentity)
+        for i in self.stringColorIdentity ?? []{
+            guard  let entity = NSEntityDescription.entity(forEntityName: "ColorIdentity", in: managedObjectContext) else {
+                fatalError("Failed to decode Card")
+            }
+            let tempColor = ColorIdentity.init(entity: entity, insertInto: managedObjectContext)
+            tempColor.color = i
+            tempColor.card = self
+            self.addToColorIdentity(tempColor)
+        }
         self.colors = try container.decodeIfPresent([String].self, forKey: .colors)
         if let cmc = try container.decodeIfPresent(Float.self, forKey: .convertedManaCost) {
             self.convertedManaCost = cmc
@@ -145,8 +159,26 @@ class Card: NSManagedObject, Codable {
             }
         }
         self.scryfallID = try container.decodeIfPresent(String.self, forKey: .scryfallID)
-        self.subtypes = try container.decodeIfPresent([String].self, forKey: .subtypes)
-        self.supertypes = try container.decodeIfPresent([String].self, forKey: .supertypes)
+        self.stringsubtypes = try container.decodeIfPresent([String].self, forKey: .stringsubtypes)
+        for sub in stringsubtypes ?? [] {
+            guard  let entity = NSEntityDescription.entity(forEntityName: "CardSubtype", in: managedObjectContext) else {
+                fatalError("Failed to decode Card")
+            }
+            let tempsub = CardSubtype.init(entity: entity, insertInto: managedObjectContext)
+            tempsub.subtype = sub
+            tempsub.card = self
+            self.addToCardsubtypes(tempsub)
+        }
+        self.stringsupertypes = try container.decodeIfPresent([String].self, forKey: .stringsupertypes)
+        for sub in stringsupertypes ?? [] {
+            guard  let entity = NSEntityDescription.entity(forEntityName: "CardSupertype", in: managedObjectContext) else {
+                fatalError("Failed to decode Card")
+            }
+            let tempsub = CardSupertype.init(entity: entity, insertInto: managedObjectContext)
+            tempsub.supertype = sub
+            tempsub.card = self
+            self.addToCardsupertypes(tempsub)
+        }
         if let tcgpID = try container.decodeIfPresent(Int32.self, forKey: .tcgplayerProductID) {
             self.tcgplayerProductID = tcgpID
         }
@@ -154,7 +186,16 @@ class Card: NSManagedObject, Codable {
         self.text = try container.decodeIfPresent(String.self, forKey: .text)
         self.toughness = try container.decodeIfPresent(String.self, forKey: .toughness)
         self.type = try container.decodeIfPresent(String.self, forKey: .type)
-        self.types = try container.decodeIfPresent([String].self, forKey: .types)
+        self.stringTypes = try container.decodeIfPresent([String].self, forKey: .stringTypes)
+        for t in self.stringTypes ?? []{
+            guard  let entity = NSEntityDescription.entity(forEntityName: "CardType", in: managedObjectContext) else {
+                fatalError("Failed to decode Card")
+            }
+            let tempType = CardType.init(entity: entity, insertInto: managedObjectContext)
+            tempType.type = t
+            tempType.card = self
+            self.addToTypes(tempType)
+        }
         self.uuid = try container.decodeIfPresent(String.self, forKey: .uuid)
         self.watermark = try container.decodeIfPresent(String.self, forKey: .watermark)
         self.names = try container.decodeIfPresent([String].self, forKey: .names)
@@ -178,7 +219,7 @@ class Card: NSManagedObject, Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(artist, forKey: .artist)
         try container.encode(borderColor, forKey: .borderColor)
-        try container.encode(colorIdentity, forKey: .colorIdentity)
+        try container.encode(stringColorIdentity, forKey: .stringColorIdentity)
         try container.encode(colors, forKey: .colors)
         try container.encode(convertedManaCost, forKey: .convertedManaCost)
         try container.encode(flavorText, forKey: .flavorText)
@@ -203,14 +244,14 @@ class Card: NSManagedObject, Codable {
             try container.encode(rulingObjects, forKey: .rulings)
         }
         try container.encode(scryfallID, forKey: .scryfallID)
-        try container.encode(subtypes, forKey: .subtypes)
-        try container.encode(supertypes, forKey: .supertypes)
+        try container.encode(stringsubtypes, forKey: .stringsubtypes)
+        try container.encode(stringsupertypes, forKey: .stringsupertypes)
         try container.encode(tcgplayerProductID, forKey: .tcgplayerProductID)
         try container.encode(tcgplayerPurchaseURL, forKey: .tcgplayerPurchaseURL)
         try container.encode(text, forKey: .text)
         try container.encode(toughness, forKey: .toughness)
         try container.encode(type, forKey: .type)
-        try container.encode(types, forKey: .types)
+        try container.encode(stringTypes, forKey: .stringTypes)
         try container.encode(uuid, forKey: .uuid)
         try container.encode(watermark, forKey: .watermark)
         try container.encode(names, forKey: .names)
@@ -232,4 +273,55 @@ extension Card {
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
         return String(data: try self.jsonData(), encoding: encoding)
     }
+
+}
+extension Card {
+    
+    @objc(addTypesObject:)
+    @NSManaged public func addToTypes(_ value: CardType)
+    
+    @objc(removeTypesObject:)
+    @NSManaged public func removeFromTypes(_ value: CardType)
+    
+    @objc(addTypes:)
+    @NSManaged public func addToTypes(_ values: NSSet)
+    
+    @objc(removeTypes:)
+    @NSManaged public func removeFromTypes(_ values: NSSet)
+    
+    @objc(addColorIdentityObject:)
+    @NSManaged public func addToColorIdentity(_ value: ColorIdentity)
+    
+    @objc(removeColorIdentityObject:)
+    @NSManaged public func removeFromColorIdentity(_ value: ColorIdentity)
+    
+    @objc(addColorIdentity:)
+    @NSManaged public func addToColorIdentity(_ values: NSSet)
+    
+    @objc(removeColorIdentity:)
+    @NSManaged public func removeFromColorIdentity(_ values: NSSet)
+
+    @objc(addCardsubtypesObject:)
+    @NSManaged public func addToCardsubtypes(_ value: CardSubtype)
+    
+    @objc(removeCardsubtypesObject:)
+    @NSManaged public func removeFromCardsubtypes(_ value: CardSubtype)
+    
+    @objc(addCardsubtypes:)
+    @NSManaged public func addToCardsubtypes(_ values: NSSet)
+    
+    @objc(removeCardsubtypes:)
+    @NSManaged public func removeFromCardsubtypes(_ values: NSSet)
+
+    @objc(addCardsupertypesObject:)
+    @NSManaged public func addToCardsupertypes(_ value: CardSupertype)
+    
+    @objc(removeCardsupertypesObject:)
+    @NSManaged public func removeFromCardsupertypes(_ value: CardSupertype)
+    
+    @objc(addCardsupertypes:)
+    @NSManaged public func addToCardsupertypes(_ values: NSSet)
+    
+    @objc(removeCardsupertypes:)
+    @NSManaged public func removeFromCardsupertypes(_ values: NSSet)
 }

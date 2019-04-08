@@ -20,6 +20,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.keyboardDismissMode = .onDrag
         //cardlist = DataManager.getRNA()
         //cardlist = getSearchCards()
@@ -35,9 +36,25 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         self.navigationItem.hidesSearchBarWhenScrolling = false
         tableView.dragDelegate = self
         tableView.dragInteractionEnabled = true
+        
+        let filterButton = UIBarButtonItem(image: UIImage(named: "filter"), style: .plain, target: self, action: #selector(self.filter))
+        self.navigationItem.setRightBarButton(filterButton, animated: true)
     }
-    
+    @objc func filter(){
+        let storyboard = UIStoryboard(name: "Filters", bundle: nil)
+        guard let filtersVC = storyboard.instantiateInitialViewController() as? FiltersTableViewController else {
+            fatalError("Error going to settings")
+        }
+        filtersVC.searchTableViewController = self
+        self.navigationController?.pushViewController(filtersVC, animated: true)
+        //self.present(filtersVC, animated: true, completion: nil)
+    }
     func loadSavedData() {
+        var filterPredicates = Filters.current.getPredicates()
+        if let predicate = predicate {
+            filterPredicates.append(predicate)
+        }
+        let compountPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: filterPredicates)
         if fetchedResultsController == nil {
             let request = createFetchRequest()
             
@@ -45,24 +62,31 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             let sortDescriptor2 = NSSortDescriptor(key: "set.name", ascending: true)
             request.sortDescriptors = [sortDescriptor, sortDescriptor2]
             //request.sortDescriptors = [sortDescriptor]
-            request.predicate = predicate
+            
+            
+            request.predicate = compountPredicate
             request.fetchBatchSize = 20
             
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.handler.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
             fetchedResultsController.delegate = self
         }
         
-        fetchedResultsController.fetchRequest.predicate = predicate
+        fetchedResultsController.fetchRequest.predicate = compountPredicate
         
         do {
             try fetchedResultsController.performFetch()
             tableView.reloadData()
+            if tableView.numberOfSections > 0 && tableView.numberOfRows(inSection: 0) > 0 {
+                tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            }
             self.title = "Search (\(fetchedResultsController.sections![0].numberOfObjects))"
         } catch {
             print("Fetch failed")
         }
     }
-    
+    func updateTitle(){
+        self.title = "Search (\(fetchedResultsController.sections![0].numberOfObjects))"
+    }
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         let card = fetchedResultsController.object(at: indexPath)
         
@@ -100,10 +124,9 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         cell.title?.text = card.name
         cell.subtitle?.text = card.set.name
         cell.backgroundColor = nil
-        if let identities = card.colorIdentity {
-            
+        if let colorIdentities = card.colorIdentity?.allObjects as? [ColorIdentity] {
+            let identities: [String?] = colorIdentities.map ({ $0.color })
             var colors: [UIColor] = []
-            
             if identities.contains("W") {
                 colors.append(UIColor.Identity.Plains)
             }
@@ -119,14 +142,12 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             if identities.contains("G") {
                 colors.append(UIColor.Identity.Forests)
             }
-            
             if colors.count == 0 {
                 if card.type == "Land" {
                     colors = [UIColor.Identity.Lands]
                     
                 } else {
                     colors = [UIColor.Identity.Artifacts]
-                    
                 }
             }
             if colors.count == 1 {
@@ -134,6 +155,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             }
             cell.gradientView?.colors = colors
         }
+        
         return cell
     }
     

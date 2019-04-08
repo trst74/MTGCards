@@ -29,42 +29,28 @@ class CollectionTableViewController: UITableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
-    // MARK: - Table view data source
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 55
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return collectionCards.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "collectionCard", for: indexPath) as! CollectionTableViewCell
-        var collectionCard: CollectionCard = collectionCards[indexPath.row]
-        
-        //let deckCard = deckCards[indexPath.row]
+        let collectionCard: CollectionCard = collectionCards[indexPath.row]
         cell.title?.text = collectionCard.card?.name
         cell.subtitle?.text = collectionCard.card?.set.name
-
-        
         cell.backgroundColor = nil
-        if let identities = collectionCard.card?.colorIdentity {
-            
+        if let colorIdentities = collectionCard.card?.colorIdentity?.allObjects as? [ColorIdentity] {
+            let identities: [String?] = colorIdentities.map ({ $0.color })
             var colors: [UIColor] = []
-            
             if identities.contains("W") {
                 colors.append(UIColor.Identity.Plains)
             }
@@ -80,14 +66,12 @@ class CollectionTableViewController: UITableViewController {
             if identities.contains("G") {
                 colors.append(UIColor.Identity.Forests)
             }
-            
             if colors.count == 0 {
                 if collectionCard.card?.type == "Land" {
                     colors = [UIColor.Identity.Lands]
                     
                 } else {
                     colors = [UIColor.Identity.Artifacts]
-                    
                 }
             }
             if colors.count == 1 {
@@ -95,6 +79,7 @@ class CollectionTableViewController: UITableViewController {
             }
             cell.gradientView?.colors = colors
         }
+        
         return cell
     }
 

@@ -6,9 +6,9 @@ import Foundation
 import CoreData
 import UIKit
 
-typealias Sets = [Set]
+typealias Sets = [MTGSet]
 
-class Set: NSManagedObject, Codable {
+class MTGSet: NSManagedObject, Codable {
     @NSManaged var baseSetSize: Int16
     @NSManaged var block: String?
     @NSManaged var cards: NSSet
@@ -38,7 +38,7 @@ class Set: NSManagedObject, Codable {
     }
     required convenience init(from decoder: Decoder) throws {
         let managedObjectContext = CoreDataStack.handler.privateContext
-        guard let entity = NSEntityDescription.entity(forEntityName: "Set", in: managedObjectContext) else {
+        guard let entity = NSEntityDescription.entity(forEntityName: "MTGSet", in: managedObjectContext) else {
                 fatalError("Failed to decode Set")
         }
 

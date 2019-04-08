@@ -21,7 +21,7 @@ public class DataManager {
             let data = try Data(contentsOf: setURL!)
             let d = data
             do {
-                let set = try newJSONDecoder().decode(Set.self, from: d)
+                let set = try newJSONDecoder().decode(MTGSet.self, from: d)
                 print("\(setCode): \(set.cards.count)")
                 
                 
