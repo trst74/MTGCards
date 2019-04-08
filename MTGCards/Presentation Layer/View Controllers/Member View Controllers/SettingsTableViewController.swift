@@ -111,6 +111,24 @@ class SettingsTableViewController: UITableViewController {
             default:
                 return
             }
+        case 3:
+            switch indexPath.row {
+            case 0:
+                if let url = URL(string: "http://www.mymtg.app/privacy"){
+                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
+                }
+            case 1:
+                if let url = URL(string: "http://www.mymtg.app"){
+                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
+                }
+            case 2:
+                if let url = URL(string: "https://www.roboticsnailsoftware.com"){
+                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
+                }
+                
+            default:
+                return
+            }
         default:
             return
         }
