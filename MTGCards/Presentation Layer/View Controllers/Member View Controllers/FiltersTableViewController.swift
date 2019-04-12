@@ -20,6 +20,7 @@ class FiltersTableViewController: UITableViewController {
     @IBOutlet weak var superTypeLabel: UILabel!
     @IBOutlet weak var subTypeLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var isPromo: UISwitch!
     
     var searchTableViewController: CardListTableViewController? = nil
     
@@ -82,6 +83,8 @@ class FiltersTableViewController: UITableViewController {
         superTypeLabel.text = Filters.current.getSelectedSuperTypesDescription()
         legalityLabel.text = Filters.current.getSelectedLegalitiesDescription()
         setLabel.text = Filters.current.getSelectedSetsDescription()
+        
+        isPromo.isOn = Filters.current.isPromoSelected()
         
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -191,6 +194,9 @@ class FiltersTableViewController: UITableViewController {
             sender.setImage(UIImage(named: color), for: .normal);
             Filters.current.selectColorIdentity(color: color)
         }
+    }
+    @IBAction func isPromoToggled(_ sender: UISwitch) {
+        Filters.current.toggleIsPromo()
     }
 }
 extension UIImage {

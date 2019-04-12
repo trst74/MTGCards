@@ -219,6 +219,38 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Advanced" id="ogB-Ij-GRZ">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Zl7-cm-wy7">
+                                        <rect key="frame" x="0.0" y="655.5" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zl7-cm-wy7" id="Es3-FP-W1y">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ews-ea-I5b">
+                                                    <rect key="frame" x="345" y="6" width="49" height="31"/>
+                                                    <connections>
+                                                        <action selector="isPromoToggled:" destination="9hx-eA-rja" eventType="valueChanged" id="tdK-Gl-bvm"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is Promo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFr-9I-0fZ">
+                                                    <rect key="frame" x="20" y="11.5" width="68" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Ews-ea-I5b" firstAttribute="centerY" secondItem="Es3-FP-W1y" secondAttribute="centerY" id="L6G-Bx-pAO"/>
+                                                <constraint firstItem="KFr-9I-0fZ" firstAttribute="centerY" secondItem="Es3-FP-W1y" secondAttribute="centerY" id="Pi2-ig-nBt"/>
+                                                <constraint firstItem="KFr-9I-0fZ" firstAttribute="leading" secondItem="Es3-FP-W1y" secondAttribute="leading" constant="20" id="aiA-tq-L89"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ews-ea-I5b" secondAttribute="trailing" constant="22" id="dSD-WY-Buw"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="9hx-eA-rja" id="44z-DU-8mN"/>
@@ -229,6 +261,7 @@
                         <outlet property="bButton" destination="2o1-nG-Tjf" id="LGt-54-gHk"/>
                         <outlet property="cButton" destination="IUD-E4-HRo" id="QKH-Nb-8cV"/>
                         <outlet property="gButton" destination="nPS-5i-NHk" id="KDy-jR-OKX"/>
+                        <outlet property="isPromo" destination="Ews-ea-I5b" id="T32-XQ-wxQ"/>
                         <outlet property="legalityLabel" destination="Aol-L5-jSJ" id="dHI-YX-hhe"/>
                         <outlet property="rButton" destination="XJS-iD-cr9" id="FEO-sp-J8g"/>
                         <outlet property="setLabel" destination="Emd-tK-tdZ" id="VKH-5M-Ube"/>
@@ -248,7 +281,7 @@
                     </items>
                 </toolbar>
             </objects>
-            <point key="canvasLocation" x="3842" y="-1041"/>
+            <point key="canvasLocation" x="3840.579710144928" y="-1041.2946428571429"/>
         </scene>
         <!--Type Filter Table View Controller-->
         <scene sceneID="CQt-wh-CED">

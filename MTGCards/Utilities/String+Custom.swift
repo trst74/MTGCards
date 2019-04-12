@@ -11,7 +11,7 @@ import UIKit
 
 extension String {
     mutating func replaceSymbols() -> NSAttributedString {
-        let result = NSMutableAttributedString()
+        var result = NSMutableAttributedString()
         let parts = self.components(separatedBy: "{")
         for part in parts {
             if part.contains("}") {
@@ -38,11 +38,28 @@ extension String {
                     }
                 }
             } else {
-                result.append(NSAttributedString(string: part))
+                let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+                let matches = detector.matches(in: part, options: [], range: NSRange(location: 0, length: part.utf16.count))
+                if matches.count > 0 {
+                    for match in matches {
+                        guard let range = Range(match.range, in: part) else { continue }
+                        let url = part[range]
+                        let attributedString = NSMutableAttributedString(string: part)
+                        attributedString.addAttribute(.link, value: url, range: nsRange(from: range))
+                        print(url)
+                        result.append(attributedString)
+                    }
+                } else {
+                    result.append(NSAttributedString(string: part))
+                }
+                
             }
+        
         }
+        
         return result
     }
+
     mutating func toDate() -> Date? {
         
         let formatter = DateFormatter()
@@ -51,5 +68,11 @@ extension String {
             return date
         }
         return nil
+    }
+}
+
+extension StringProtocol where Index == String.Index {
+    func nsRange(from range: Range<Index>) -> NSRange {
+        return NSRange(range, in: self)
     }
 }

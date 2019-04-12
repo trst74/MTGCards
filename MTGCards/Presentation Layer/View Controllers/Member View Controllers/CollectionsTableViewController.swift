@@ -16,7 +16,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     var cdCollections: [Collection] = []
     var decks = ["Decks"]
     var cdDecks: [Deck] = []
-    var search = ["Tools", "Search", "Life Counter"]
+    var search = ["Tools", "Search", "Life Counter", "Rules"]
     var sections: [[String]] = []
     override func viewDidLoad() {
         super.viewDidLoad()

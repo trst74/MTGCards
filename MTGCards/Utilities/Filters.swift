@@ -17,6 +17,7 @@ class Filters {
     private var selectedSuperTypes: [String] = []
     private var selectedLegalities: [String] = []
     private var selectedColorIdentities: [String] = []
+    private var isPromo: Bool = false
     
     func selectSet(setCode: String) {
         if !isSetSelected(setCode: setCode){
@@ -127,6 +128,13 @@ class Filters {
         return selectedColorIdentities.contains(color)
     }
     
+    func toggleIsPromo() {
+        isPromo = !isPromo
+    }
+    func isPromoSelected() -> Bool {
+        return isPromo
+    }
+    
     func getPredicates() -> [NSPredicate] {
         var predicates: [NSPredicate] = []
         if selectedSets.count > 0 {
@@ -166,6 +174,10 @@ class Filters {
                     predicates.append(colorIdentitisPredicate)
                 }
             
+        }
+        if isPromoSelected() {
+            let promoPredicate = NSPredicate(format: "set.type == %@", "promo")
+            predicates.append(promoPredicate)
         }
         return predicates
     }
