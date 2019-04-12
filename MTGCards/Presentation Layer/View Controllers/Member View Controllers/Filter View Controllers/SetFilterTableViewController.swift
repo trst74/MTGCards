@@ -25,6 +25,7 @@ class SetFilterTableViewController: UITableViewController {
         let request = NSFetchRequest<MTGSet>(entityName: "MTGSet")
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sortDescriptor]
+        request.predicate = NSPredicate(format: "cards.@count > 0")
         do {
             let results = try CoreDataStack.handler.managedObjectContext.fetch(request)
             sets = results
