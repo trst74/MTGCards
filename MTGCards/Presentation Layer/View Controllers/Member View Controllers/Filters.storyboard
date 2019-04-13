@@ -228,8 +228,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ews-ea-I5b">
-                                                    <rect key="frame" x="345" y="6" width="49" height="31"/>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ews-ea-I5b">
+                                                    <rect key="frame" x="343" y="6.5" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="isPromoToggled:" destination="9hx-eA-rja" eventType="valueChanged" id="tdK-Gl-bvm"/>
                                                     </connections>

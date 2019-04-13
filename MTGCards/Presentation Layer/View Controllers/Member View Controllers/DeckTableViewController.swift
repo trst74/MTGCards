@@ -172,6 +172,10 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         if setCode != "" {
             predicates.append(predicate2)
         }
+        if UserDefaultsHandler.areOnlineOnlyCardsExcluded() {
+            let onlineOnlyPredicate = NSPredicate(format: "set.isOnlineOnly == false")
+            predicates.append(onlineOnlyPredicate)
+        }
         let compound = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         request.predicate = compound
         let sortDescriptor = NSSortDescriptor(key: "set.releaseDate", ascending: false)
