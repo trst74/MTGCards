@@ -14,6 +14,7 @@ class UserDefaultsHandler {
     static let HASOPENED = "hasopenedbefore"
     static let CARDDATADOWNLOADED = "hasdatabeendownloaded"
     static let SELECTEDCARDIMAGEQUALITY = "selectedcardimagequality"
+    static let EXCLUDEONLINEONLYCARDS = "excludeonlineonly"
     
     static func isFirstTimeOpening() -> Bool {
         let result = defaults.bool(forKey: HASOPENED)
@@ -30,10 +31,15 @@ class UserDefaultsHandler {
           defaults.set(hasDownloaded, forKey: CARDDATADOWNLOADED)
     }
     static func selectedCardImageQuality() -> String {
-        
         return defaults.string(forKey: SELECTEDCARDIMAGEQUALITY) ?? "high"
     }
     static func setSelectedCardImageQuality( quality: String){
         defaults.set(quality, forKey: SELECTEDCARDIMAGEQUALITY)
+    }
+    static func setExcludeOnlineOnly(exclude: Bool){
+        defaults.set(exclude, forKey: EXCLUDEONLINEONLYCARDS)
+    }
+    static func areOnlineOnlyCardsExcluded() -> Bool {
+        return defaults.bool(forKey: EXCLUDEONLINEONLYCARDS)
     }
 }

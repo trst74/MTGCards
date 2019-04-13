@@ -25,7 +25,14 @@ class SetFilterTableViewController: UITableViewController {
         let request = NSFetchRequest<MTGSet>(entityName: "MTGSet")
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sortDescriptor]
-        request.predicate = NSPredicate(format: "cards.@count > 0")
+        
+        let cardCountPredicate = NSPredicate(format: "cards.@count > 0")
+        var predicates = [cardCountPredicate]
+        if UserDefaultsHandler.areOnlineOnlyCardsExcluded() {
+            let onlineOnlyPredicate = NSPredicate(format: "isOnlineOnly == false")
+            predicates.append(onlineOnlyPredicate)
+        }
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         do {
             let results = try CoreDataStack.handler.managedObjectContext.fetch(request)
             sets = results

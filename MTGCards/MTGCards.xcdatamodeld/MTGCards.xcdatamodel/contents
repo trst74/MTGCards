@@ -111,6 +111,8 @@
         <attribute name="baseSetSize" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="block" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isFoilOnly" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isOnlineOnly" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="mtgoCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="releaseDate" optional="YES" attributeType="String" syncable="YES"/>
@@ -153,7 +155,7 @@
         <element name="ForeignDatum" positionX="-277.703125" positionY="-181.94140625" width="128" height="150"/>
         <element name="Legalities" positionX="14.125" positionY="-305.26953125" width="128" height="225"/>
         <element name="Meta" positionX="205.7734375" positionY="37.49609375" width="128" height="75"/>
-        <element name="MTGSet" positionX="36" positionY="189" width="128" height="225"/>
+        <element name="MTGSet" positionX="36" positionY="189" width="128" height="255"/>
         <element name="Ruling" positionX="-98.87890625" positionY="-12.99609375" width="128" height="90"/>
         <element name="Token" positionX="-307.515625" positionY="385.4296875" width="128" height="270"/>
         <element name="ColorIdentity" positionX="-225" positionY="-180" width="128" height="75"/>
