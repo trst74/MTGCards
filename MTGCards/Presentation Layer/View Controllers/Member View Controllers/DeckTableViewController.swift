@@ -54,6 +54,24 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         self.navigationItem.setRightBarButton(importButton, animated: true)
         updateTitle()
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        if let nav = self.navigationController {
+            nav.setToolbarHidden(true, animated: true)
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+//        let resetButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(resetFilters))
+//        let flexiableItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(applyFilters))
+        let deckStatsButton = UIBarButtonItem(image: UIImage(named: "stats"), style: .plain, target: self, action: #selector(showDeckStats))
+        if let nav = self.navigationController {
+            nav.setToolbarHidden(false, animated: true)
+            toolbarItems = [deckStatsButton]
+        }
+    }
+    @objc func showDeckStats(){
+        
+    }
     private func updateTitle(){
         let name = deck?.name
         let cardTotal = deck?.cards?.reduce(0){

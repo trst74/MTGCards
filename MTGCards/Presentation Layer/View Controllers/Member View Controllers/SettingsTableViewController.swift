@@ -16,11 +16,13 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var lowQualitySwitch: UISwitch!
     @IBOutlet weak var normalQualitySwitch: UISwitch!
     @IBOutlet weak var highQualitySwitch: UISwitch!
+    @IBOutlet weak var excludeOnlineSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateFileInfoLabel()
         setImageQuality(quality: UserDefaultsHandler.selectedCardImageQuality())
+        excludeOnlineSwitch.isOn = UserDefaultsHandler.areOnlineOnlyCardsExcluded()
     }
     @IBAction func close(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -208,5 +210,8 @@ class SettingsTableViewController: UITableViewController {
         default:
             highQualitySwitch.isOn = true
         }
+    }
+    @IBAction func excludeSwitchChanged(_ sender: UISwitch) {
+        UserDefaultsHandler.setExcludeOnlineOnly(exclude: sender.isOn)
     }
 }

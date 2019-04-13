@@ -21,7 +21,9 @@ class MTGSet: NSManagedObject, Codable {
     @NSManaged var tokens: NSSet
     @NSManaged var totalSetSize: Int16
     @NSManaged var type: String?
-
+    @NSManaged var isFoilOnly: Bool
+    @NSManaged var isOnlineOnly: Bool
+    
     enum CodingKeys: String, CodingKey {
         case baseSetSize = "baseSetSize"
         case block = "block"
@@ -35,25 +37,27 @@ class MTGSet: NSManagedObject, Codable {
         case tokens = "tokens"
         case totalSetSize = "totalSetSize"
         case type = "type"
+        case isFoilOnly = "isFoilOnly"
+        case isOnlineOnly = "isOnlineOnly"
     }
     required convenience init(from decoder: Decoder) throws {
         let managedObjectContext = CoreDataStack.handler.privateContext
         guard let entity = NSEntityDescription.entity(forEntityName: "MTGSet", in: managedObjectContext) else {
-                fatalError("Failed to decode Set")
+            fatalError("Failed to decode Set")
         }
-
+        
         self.init(entity: entity, insertInto: managedObjectContext)
-
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         if let bss = try container.decodeIfPresent(Int16.self, forKey: .baseSetSize) {
-                  self.baseSetSize = bss
+            self.baseSetSize = bss
         }
         self.block = try container.decodeIfPresent(String.self, forKey: .block)
         if let cards = try container.decodeIfPresent([Card].self, forKey: .cards) {
             for card in cards {
                 card.set = self
             }
-               self.cards.addingObjects(from: cards)
+            self.cards.addingObjects(from: cards)
         }
         self.code = try container.decodeIfPresent(String.self, forKey: .code)
         self.meta = try container.decodeIfPresent(Meta.self, forKey: .meta)
@@ -61,20 +65,26 @@ class MTGSet: NSManagedObject, Codable {
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
         self.releaseDate = try container.decodeIfPresent(String.self, forKey: .releaseDate)
         if let tcgpGID = try container.decodeIfPresent(Int16.self, forKey: .tcgplayerGroupID) {
-                    self.tcgplayerGroupID = tcgpGID
+            self.tcgplayerGroupID = tcgpGID
         }
-
+        
         if let tokens = try container.decodeIfPresent([Token].self, forKey: .tokens) {
             for token in tokens {
                 token.set = self
             }
-                    self.tokens.addingObjects(from: tokens)
+            self.tokens.addingObjects(from: tokens)
         }
         self.totalSetSize = try container.decodeIfPresent(Int16.self, forKey: .totalSetSize)!
         self.type = try container.decodeIfPresent(String.self, forKey: .type)
-
+        if let isFoil = try container.decodeIfPresent(Bool.self, forKey: .isFoilOnly) {
+            self.isFoilOnly = isFoil
+        }
+        if let isOnline = try container.decodeIfPresent(Bool.self, forKey: .isOnlineOnly) {
+            self.isOnlineOnly = isOnline
+        }
+        
     }
-
+    
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(baseSetSize, forKey: .baseSetSize)
@@ -89,7 +99,7 @@ class MTGSet: NSManagedObject, Codable {
         //try container.encode(tokens, forKey: .tokens)
         try container.encode(totalSetSize, forKey: .totalSetSize)
         try container.encode(type, forKey: .type)
-
+        
     }
 }
 // MARK: Convenience initializers and mutators
@@ -98,22 +108,22 @@ extension Array where Element == Sets.Element {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Sets.self, from: data)
     }
-
+    
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-
+    
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-
+    
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-
+    
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
         return String(data: try self.jsonData(), encoding: encoding)
     }

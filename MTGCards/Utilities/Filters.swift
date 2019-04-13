@@ -179,6 +179,10 @@ class Filters {
             let promoPredicate = NSPredicate(format: "set.type == %@", "promo")
             predicates.append(promoPredicate)
         }
+        if UserDefaultsHandler.areOnlineOnlyCardsExcluded() {
+            let onlineOnlyPredicate = NSPredicate(format: "set.isOnlineOnly == false")
+            predicates.append(onlineOnlyPredicate)
+        }
         return predicates
     }
     
