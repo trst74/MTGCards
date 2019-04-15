@@ -15,7 +15,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
     var deckCards: [DeckCard] {
         get {
             if let d = deck {
-                if let sb = d.cards?.filter({ ($0 as? DeckCard)?.isSideboard == false }) as? [DeckCard]
+                if let sb = d.cards?.filter({ ($0 as? DeckCard)?.isSideboard == false && ($0 as? DeckCard)?.isCommander == false}) as? [DeckCard]
                 {
                     return sb.sorted {
                         if let n1 = $0.card?.name, let n2 = $1.card?.name {
@@ -44,12 +44,30 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
             return []
         }
     }
+    var commander : [DeckCard] {
+        get {
+            if let d = deck {
+                if let sb = d.cards?.filter({ ($0 as? DeckCard)?.isCommander == true }) as? [DeckCard]
+                {
+                    return sb.sorted {
+                        if let n1 = $0.card?.name, let n2 = $1.card?.name {
+                            return n1 < n2
+                        }
+                        return false
+                    }
+                }
+            }
+            return []
+        }
+    }
+    var commanderSection = -1
+    var deckSection =  0
+    var sideboardSection = -1
+    var numberOfSections = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // share button
-        //        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(self.share))
-        //        self.navigationItem.setRightBarButton(shareButton, animated: true)
-        // import button
+      setUpSections()
         let importButton = UIBarButtonItem(image: UIImage(named: "import"), style: .plain, target: self, action: #selector(self.importDeck))
         self.navigationItem.setRightBarButton(importButton, animated: true)
         updateTitle()
@@ -60,13 +78,30 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         }
     }
     override func viewWillAppear(_ animated: Bool) {
-//        let resetButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(resetFilters))
-//        let flexiableItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(applyFilters))
+        //        let resetButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(resetFilters))
+        //        let flexiableItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        //        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(applyFilters))
         let deckStatsButton = UIBarButtonItem(image: UIImage(named: "stats"), style: .plain, target: self, action: #selector(showDeckStats))
         if let nav = self.navigationController {
             nav.setToolbarHidden(false, animated: true)
             toolbarItems = [deckStatsButton]
+        }
+    }
+    func setUpSections(){
+        commanderSection = -1
+        deckSection = 0
+        sideboardSection = -1
+        numberOfSections = 0
+        
+        if commander.count > 0 {
+            commanderSection = 0
+            numberOfSections += 1
+            deckSection = 1
+            numberOfSections += 1
+        }
+        if sideboard.count > 0 {
+            sideboardSection = deckSection + 1
+            numberOfSections += 1
         }
     }
     @objc func showDeckStats(){
@@ -193,23 +228,29 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 3
     }
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
+        if section == commanderSection {
+            return "Commander"
+        } else if section == deckSection {
             return "Main Deck"
-        } else {
+        } else if section == sideboardSection {
             return "Sideboard"
         }
+        return nil
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if section == 0 {
+        if section == commanderSection {
+            return commander.count
+        } else if section == deckSection {
             return deckCards.count
-        } else {
+        } else if section == sideboardSection {
             return sideboard.count
         }
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -223,7 +264,8 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             var card: DeckCard? = nil
-            if indexPath.section == 1 {
+            if indexPath.section == commanderSection {
+            } else if indexPath.section == deckSection {
                 card = deckCards[indexPath.row]
             } else {
                 card = sideboard[indexPath.row]
@@ -245,7 +287,8 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "deckCard", for: indexPath) as! DeckTableViewCell
         var deckCard: DeckCard? = nil
-        if indexPath.section == 0 {
+        if indexPath.section == commanderSection {
+        } else if indexPath.section == deckSection {
             deckCard = deckCards[indexPath.row]
         } else {
             deckCard = sideboard[indexPath.row]
@@ -293,17 +336,39 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
+        if indexPath.section == deckSection {
             
             if let card = deckCards[indexPath.row].card {
                 StateCoordinator.shared.didSelectCard(c: card)
             }
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == sideboardSection {
             if let card = sideboard[indexPath.row].card {
                 StateCoordinator.shared.didSelectCard(c: card)
             }
         }
         
+    }
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let editAction = UIContextualAction(style: .normal, title: "Edit") {
+            (contextaction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+            
+            var deckcard = DeckCard()
+            if indexPath.section == self.deckSection {
+                deckcard = self.deckCards[indexPath.row]
+            } else if indexPath.section == self.sideboardSection {
+                deckcard = self.sideboard[indexPath.row]
+            }
+            let storyboard = UIStoryboard(name: "EditDeckCard", bundle: nil)
+            guard let editDeckCardView = storyboard.instantiateInitialViewController() as? EditDeckCardTableViewController else {
+                fatalError("Project config error - storyboard doesnt provide a EditDeckCard")
+            }
+            editDeckCardView.deckCard = deckcard
+            editDeckCardView.deckViewController = self
+            self.navigationController?.pushViewController(editDeckCardView, animated: true)
+            completionHandler(true)
+        }
+        editAction.backgroundColor = .gray
+        return UISwipeActionsConfiguration(actions: [editAction])
     }
 }
 extension DeckTableViewController {
