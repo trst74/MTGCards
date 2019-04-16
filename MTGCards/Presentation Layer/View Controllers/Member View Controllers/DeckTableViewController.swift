@@ -355,6 +355,8 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
                 deckcard = self.deckCards[indexPath.row]
             } else if indexPath.section == self.sideboardSection {
                 deckcard = self.sideboard[indexPath.row]
+            } else if indexPath.section == self.commanderSection {
+                deckcard = self.commander[indexPath.row]
             }
             let storyboard = UIStoryboard(name: "EditDeckCard", bundle: nil)
             guard let editDeckCardView = storyboard.instantiateInitialViewController() as? EditDeckCardTableViewController else {
