@@ -67,7 +67,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      setUpSections()
+        setUpSections()
         let importButton = UIBarButtonItem(image: UIImage(named: "import"), style: .plain, target: self, action: #selector(self.importDeck))
         self.navigationItem.setRightBarButton(importButton, animated: true)
         updateTitle()
@@ -122,14 +122,12 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
             self.title = "\(n) (\(total))"
         }
     }
-    // MARK: - Table view data source
     @objc private func share(){
         print("share")
     }
     @objc private func importDeck(){
         print("import")
         let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePlainText as String], in: .import)
-        //Call Delegate
         documentPicker.delegate = self
         self.present(documentPicker, animated: true)
         updateTitle()
@@ -227,7 +225,6 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         return card
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 3
     }
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -242,7 +239,6 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         if section == commanderSection {
             return commander.count
         } else if section == deckSection {
@@ -257,9 +253,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         return 55
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        
         return true
-        
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -279,7 +273,6 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
                 }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
-                    
                 }
             }
         }
@@ -352,7 +345,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         let editAction = UIContextualAction(style: .normal, title: "Edit") {
             (contextaction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
             
-            var deckcard = DeckCard()
+            var deckcard: DeckCard?
             if indexPath.section == self.deckSection {
                 deckcard = self.deckCards[indexPath.row]
             } else if indexPath.section == self.sideboardSection {
@@ -362,7 +355,9 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
             guard let editDeckCardView = storyboard.instantiateInitialViewController() as? EditDeckCardTableViewController else {
                 fatalError("Project config error - storyboard doesnt provide a EditDeckCard")
             }
-            editDeckCardView.deckCard = deckcard
+            if let deckcard = deckcard {
+                editDeckCardView.deckCard = deckcard
+            }
             editDeckCardView.deckViewController = self
             self.navigationController?.pushViewController(editDeckCardView, animated: true)
             completionHandler(true)
