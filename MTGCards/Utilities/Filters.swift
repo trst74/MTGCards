@@ -193,6 +193,7 @@ class Filters {
         selectedSuperTypes = []
         selectedLegalities = []
         selectedColorIdentities = []
+        isPromo = false
     }
 }
 extension Array where Iterator.Element == String
