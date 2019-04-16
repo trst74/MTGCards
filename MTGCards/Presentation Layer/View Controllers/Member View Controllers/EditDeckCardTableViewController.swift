@@ -101,7 +101,7 @@ class EditDeckCardTableViewController: UITableViewController {
                 cell.accessoryType = row == indexPath.row ? .checkmark : .none
             }
         }
-        if indexPath.section == 2 {
+        if indexPath.section == 3 {
             tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
             deckCard?.card = printings[indexPath.row]
         }
