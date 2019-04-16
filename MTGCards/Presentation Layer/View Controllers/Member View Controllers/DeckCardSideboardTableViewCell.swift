@@ -12,7 +12,6 @@ class DeckCardSideboardTableViewCell: UITableViewCell {
 
     @IBOutlet weak var sideBoardSwitch: UISwitch!
     
-    @IBAction func sideboardToggled(_ sender: UISwitch) {
-    }
+
     
 }

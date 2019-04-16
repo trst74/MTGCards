@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class EditDeckCardTableViewController: UITableViewController {
-    let sectionNames = ["Quatity","Sideboard", "Set"]
+    let sectionNames = ["Quatity","Sideboard","Commander", "Set"]
     var deckCard: DeckCard?
     var printings: [Card] = []
     var deckViewController: DeckTableViewController?
@@ -37,6 +37,9 @@ class EditDeckCardTableViewController: UITableViewController {
         if let sideboardCell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? DeckCardSideboardTableViewCell {
             deckCard?.isSideboard = sideboardCell.sideBoardSwitch.isOn
         }
+        if let commanderCell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as? DeckCardCommanderTableViewCell {
+            deckCard?.isCommander = commanderCell.isCommanderSwitch.isOn
+        }
         CoreDataStack.handler.saveContext()
         if let deckVC = deckViewController {
             deckVC.setUpSections()
@@ -46,12 +49,12 @@ class EditDeckCardTableViewController: UITableViewController {
         
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 2 {
+        if section == 3 {
             return printings.count
         }
         return 1
@@ -76,6 +79,11 @@ class EditDeckCardTableViewController: UITableViewController {
             }
             
         } else if section == 2 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "isCommanderCell", for: indexPath) as? DeckCardCommanderTableViewCell {
+                cell.isCommanderSwitch.isOn = deckCard?.isCommander ?? false
+                return cell
+            }
+        } else if section == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "printingCell", for: indexPath)
             cell.textLabel?.text = printings[indexPath.row].set.name
             if deckCard?.card?.set.name == printings[indexPath.row].set.name {

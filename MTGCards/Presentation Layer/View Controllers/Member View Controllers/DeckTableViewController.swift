@@ -259,6 +259,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         if editingStyle == .delete {
             var card: DeckCard? = nil
             if indexPath.section == commanderSection {
+                card = commander[indexPath.row]
             } else if indexPath.section == deckSection {
                 card = deckCards[indexPath.row]
             } else {
@@ -281,6 +282,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "deckCard", for: indexPath) as! DeckTableViewCell
         var deckCard: DeckCard? = nil
         if indexPath.section == commanderSection {
+            deckCard = commander[indexPath.row]
         } else if indexPath.section == deckSection {
             deckCard = deckCards[indexPath.row]
         } else {
@@ -330,12 +332,15 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == deckSection {
-            
             if let card = deckCards[indexPath.row].card {
                 StateCoordinator.shared.didSelectCard(c: card)
             }
         } else if indexPath.section == sideboardSection {
             if let card = sideboard[indexPath.row].card {
+                StateCoordinator.shared.didSelectCard(c: card)
+            }
+        } else if indexPath.section == commanderSection {
+            if let card = commander[indexPath.row].card {
                 StateCoordinator.shared.didSelectCard(c: card)
             }
         }

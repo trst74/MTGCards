@@ -44,6 +44,7 @@
 		EE2CAC502231707000D24334 /* TcgPrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CAC4F2231707000D24334 /* TcgPrices.swift */; };
 		EE2CAC522231AAF200D24334 /* SafariActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CAC512231AAF200D24334 /* SafariActivity.swift */; };
 		EE2CAC542231C1AA00D24334 /* String+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CAC532231C1AA00D24334 /* String+Custom.swift */; };
+		EE32D7AF2265631D00AEC47E /* DeckCardCommanderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE32D7AE2265631D00AEC47E /* DeckCardCommanderTableViewCell.swift */; };
 		EE4F532522467859003A06CA /* CardRulingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE4F532422467859003A06CA /* CardRulingView.xib */; };
 		EE4F532722467A4D003A06CA /* CardRulingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4F532622467A4D003A06CA /* CardRulingsView.swift */; };
 		EE4FD204223A91BD00E8CDB3 /* Deck+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4FD202223A91BD00E8CDB3 /* Deck+CoreDataClass.swift */; };
@@ -150,6 +151,7 @@
 		EE2CAC4F2231707000D24334 /* TcgPrices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcgPrices.swift; sourceTree = "<group>"; };
 		EE2CAC512231AAF200D24334 /* SafariActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariActivity.swift; sourceTree = "<group>"; };
 		EE2CAC532231C1AA00D24334 /* String+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Custom.swift"; sourceTree = "<group>"; };
+		EE32D7AE2265631D00AEC47E /* DeckCardCommanderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCardCommanderTableViewCell.swift; sourceTree = "<group>"; };
 		EE4F532422467859003A06CA /* CardRulingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardRulingView.xib; sourceTree = "<group>"; };
 		EE4F532622467A4D003A06CA /* CardRulingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardRulingsView.swift; sourceTree = "<group>"; };
 		EE4FD202223A91BD00E8CDB3 /* Deck+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 				EEE7D5A72262852100FE4D1C /* EditDeckCardTableViewController.swift */,
 				EEE7D5A9226375FA00FE4D1C /* DeckCardQuantityTableViewCell.swift */,
 				EEE7D5AB226378CB00FE4D1C /* DeckCardSideboardTableViewCell.swift */,
+				EE32D7AE2265631D00AEC47E /* DeckCardCommanderTableViewCell.swift */,
 			);
 			path = "Member View Controllers";
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				EEF02F23223DAC11008F008B /* Collection+CoreDataProperties.swift in Sources */,
 				EEBE6D9621EFE18F00A3464E /* MTGCards.xcdatamodeld in Sources */,
 				EEBE6D8E21EFE18F00A3464E /* AppDelegate.swift in Sources */,
+				EE32D7AF2265631D00AEC47E /* DeckCardCommanderTableViewCell.swift in Sources */,
 				EEC91990223080DF004E52F5 /* SettingsTableViewController.swift in Sources */,
 				EE2755292234084C006BD083 /* UserDefaultsHandler.swift in Sources */,
 				EEE7D570225B6E0000FE4D1C /* ColorIdentity+CoreDataProperties.swift in Sources */,
