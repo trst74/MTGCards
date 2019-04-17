@@ -173,7 +173,9 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
                 previousline = line
             }
             DispatchQueue.main.async {
+                self.setUpSections()
                 self.tableView.reloadData()
+                
                 self.updateTitle()
             }
         } catch {
