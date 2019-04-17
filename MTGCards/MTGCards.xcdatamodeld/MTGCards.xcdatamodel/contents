@@ -43,18 +43,36 @@
         <relationship name="rulings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ruling" inverseName="card" inverseEntity="Ruling" syncable="YES"/>
         <relationship name="set" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTGSet" inverseName="cards" inverseEntity="MTGSet" syncable="YES"/>
         <relationship name="types" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CardType" inverseName="card" inverseEntity="CardType" syncable="YES"/>
+        <fetchIndex name="byPropertyIndex">
+            <fetchIndexElement property="name" type="Binary" order="ascending"/>
+            <fetchIndexElement property="set" type="Binary" order="ascending"/>
+            <fetchIndexElement property="type" type="Binary" order="ascending"/>
+            <fetchIndexElement property="cardsubtypes" type="Binary" order="ascending"/>
+            <fetchIndexElement property="cardsupertypes" type="Binary" order="ascending"/>
+            <fetchIndexElement property="legalities" type="Binary" order="ascending"/>
+            <fetchIndexElement property="colorIdentity" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="CardSubtype" representedClassName="CardSubtype" syncable="YES">
         <attribute name="subtype" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="card" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card" inverseName="cardsubtypes" inverseEntity="Card" syncable="YES"/>
+        <fetchIndex name="byPropertyIndex">
+            <fetchIndexElement property="subtype" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="CardSupertype" representedClassName="CardSupertype" syncable="YES">
         <attribute name="supertype" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="card" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card" inverseName="cardsupertypes" inverseEntity="Card" syncable="YES"/>
+        <fetchIndex name="byPropertyIndex">
+            <fetchIndexElement property="supertype" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="CardType" representedClassName="CardType" syncable="YES">
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="card" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card" inverseName="types" inverseEntity="Card" syncable="YES"/>
+        <fetchIndex name="byPropertyIndex">
+            <fetchIndexElement property="type" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="Collection" representedClassName="Collection" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -69,6 +87,9 @@
     <entity name="ColorIdentity" representedClassName="ColorIdentity" syncable="YES">
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="card" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card" inverseName="colorIdentity" inverseEntity="Card" syncable="YES"/>
+        <fetchIndex name="byPropertyIndex">
+            <fetchIndexElement property="color" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="Deck" representedClassName=".Deck" syncable="YES">
         <attribute name="format" optional="YES" attributeType="String" syncable="YES"/>
@@ -123,6 +144,11 @@
         <relationship name="cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Card" inverseName="set" inverseEntity="Card" syncable="YES"/>
         <relationship name="meta" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Meta" syncable="YES"/>
         <relationship name="tokens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Token" inverseName="set" inverseEntity="Token" syncable="YES"/>
+        <fetchIndex name="byPropertyIndex">
+            <fetchIndexElement property="name" type="Binary" order="ascending"/>
+            <fetchIndexElement property="code" type="Binary" order="ascending"/>
+            <fetchIndexElement property="isOnlineOnly" type="Binary" order="ascending"/>
+        </fetchIndex>
     </entity>
     <entity name="Ruling" representedClassName=".Ruling" syncable="YES">
         <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
@@ -147,20 +173,20 @@
         <relationship name="set" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTGSet" inverseName="tokens" inverseEntity="MTGSet" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Card" positionX="-421.796875" positionY="-320.98828125" width="128" height="675"/>
-        <element name="CardSubtype" positionX="-216" positionY="-171" width="128" height="75"/>
-        <element name="CardSupertype" positionX="-207" positionY="-162" width="128" height="75"/>
-        <element name="CardType" positionX="-225" positionY="-180" width="128" height="75"/>
-        <element name="Collection" positionX="-216" positionY="-171" width="128" height="75"/>
-        <element name="CollectionCard" positionX="-225" positionY="-180" width="128" height="105"/>
-        <element name="ColorIdentity" positionX="-225" positionY="-180" width="128" height="75"/>
-        <element name="Deck" positionX="-225" positionY="-180" width="128" height="90"/>
-        <element name="DeckCard" positionX="-225" positionY="-180" width="128" height="105"/>
-        <element name="ForeignDatum" positionX="-277.703125" positionY="-181.94140625" width="128" height="150"/>
-        <element name="Legalities" positionX="14.125" positionY="-305.26953125" width="128" height="225"/>
-        <element name="Meta" positionX="205.7734375" positionY="37.49609375" width="128" height="75"/>
+        <element name="Card" positionX="-689.54296875" positionY="-290.1328125" width="128" height="675"/>
+        <element name="CardSubtype" positionX="-867.53515625" positionY="47.19140625" width="128" height="73"/>
+        <element name="CardSupertype" positionX="-889.82421875" positionY="148.953125" width="128" height="73"/>
+        <element name="CardType" positionX="-476.97265625" positionY="381.8125" width="128" height="73"/>
+        <element name="Collection" positionX="-247.4921875" positionY="-145.01953125" width="128" height="75"/>
+        <element name="CollectionCard" positionX="-434.53515625" positionY="-126.5546875" width="128" height="105"/>
+        <element name="ColorIdentity" positionX="-892.46875" positionY="244.78515625" width="128" height="73"/>
+        <element name="Deck" positionX="-243.7265625" positionY="-297.13671875" width="128" height="90"/>
+        <element name="DeckCard" positionX="-439.48828125" positionY="-302.35546875" width="128" height="105"/>
+        <element name="ForeignDatum" positionX="-892.28125" positionY="350.09765625" width="128" height="150"/>
+        <element name="Legalities" positionX="-512.98046875" positionY="94.44140625" width="128" height="225"/>
+        <element name="Meta" positionX="186.17578125" positionY="311.609375" width="128" height="75"/>
         <element name="MTGSet" positionX="36" positionY="189" width="128" height="255"/>
-        <element name="Ruling" positionX="-98.87890625" positionY="-12.99609375" width="128" height="90"/>
-        <element name="Token" positionX="-307.515625" positionY="385.4296875" width="128" height="270"/>
+        <element name="Ruling" positionX="-880.96484375" positionY="548.30078125" width="128" height="90"/>
+        <element name="Token" positionX="-151.34765625" positionY="442.72265625" width="128" height="270"/>
     </elements>
 </model>
