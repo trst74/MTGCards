@@ -43,15 +43,6 @@
         <relationship name="rulings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ruling" inverseName="card" inverseEntity="Ruling" syncable="YES"/>
         <relationship name="set" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTGSet" inverseName="cards" inverseEntity="MTGSet" syncable="YES"/>
         <relationship name="types" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CardType" inverseName="card" inverseEntity="CardType" syncable="YES"/>
-        <fetchIndex name="byPropertyIndex">
-            <fetchIndexElement property="name" type="Binary" order="ascending"/>
-            <fetchIndexElement property="set" type="Binary" order="ascending"/>
-            <fetchIndexElement property="type" type="Binary" order="ascending"/>
-            <fetchIndexElement property="cardsubtypes" type="Binary" order="ascending"/>
-            <fetchIndexElement property="cardsupertypes" type="Binary" order="ascending"/>
-            <fetchIndexElement property="legalities" type="Binary" order="ascending"/>
-            <fetchIndexElement property="colorIdentity" type="Binary" order="ascending"/>
-        </fetchIndex>
     </entity>
     <entity name="CardSubtype" representedClassName="CardSubtype" syncable="YES">
         <attribute name="subtype" optional="YES" attributeType="String" syncable="YES"/>
