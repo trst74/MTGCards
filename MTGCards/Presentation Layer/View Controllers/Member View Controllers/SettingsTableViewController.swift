@@ -88,7 +88,7 @@ class SettingsTableViewController: UITableViewController {
             return
         case 1:
             return
-        case 2:
+        case 3:
             switch indexPath.row {
             case 0:
                 if let url = URL(string: "https://www.raywenderlich.com/7212-multiple-uisplitviewcontroller-tutorial"){
@@ -113,17 +113,21 @@ class SettingsTableViewController: UITableViewController {
             default:
                 return
             }
-        case 3:
+        case 4:
             switch indexPath.row {
             case 0:
-                if let url = URL(string: "http://www.mymtg.app/privacy"){
+                if let url = URL(string: "https://www.reddit.com/r/Mymtgapp/"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
             case 1:
-                if let url = URL(string: "http://www.mymtg.app"){
+                if let url = URL(string: "http://www.mymtg.app/privacy"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
             case 2:
+                if let url = URL(string: "http://www.mymtg.app"){
+                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
+                }
+            case 3:
                 if let url = URL(string: "https://www.roboticsnailsoftware.com"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
@@ -135,7 +139,7 @@ class SettingsTableViewController: UITableViewController {
             return
         }
     }
-   
+    
     func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
         URLSession.shared.dataTask(with: url) {
             (data, response, error) in
