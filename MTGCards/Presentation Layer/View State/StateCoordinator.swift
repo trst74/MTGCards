@@ -1,4 +1,5 @@
 import UIKit
+import CoreData
 
 protocol StateCoordinatorDelegate: class {
     func gotoState(_ nextState: SelectionState, s: AnyObject?)
@@ -23,9 +24,9 @@ class StateCoordinator: NSObject {
 
             delegate?.gotoState(SelectionState.collectionSelected, s: collection)
         }
-        func didSelectCard(c: Card) {
+        func didSelectCard(id: NSManagedObjectID) {
 
-            delegate?.gotoState(SelectionState.cardSelected, s: c)
+            delegate?.gotoState(SelectionState.cardSelected, s: id)
         }
         func didSelectDeck(d: Deck) {
             

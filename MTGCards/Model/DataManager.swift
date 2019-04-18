@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 import UIKit
+import CoreSpotlight
+import MobileCoreServices
 
 public class DataManager {
     static func getLocalVersion() -> String {
@@ -24,6 +26,7 @@ public class DataManager {
                 let set = try newJSONDecoder().decode(MTGSet.self, from: d)
                 print("\(setCode): \(set.cards.count)")
                 
+               
                 
                 do {
                     try CoreDataStack.handler.privateContext.save()

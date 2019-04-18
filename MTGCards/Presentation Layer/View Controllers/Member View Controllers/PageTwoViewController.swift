@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import CoreData
+import CoreServices
+import CoreSpotlight
 
 class PageTwoViewController: UIViewController {
     @IBOutlet weak var downloadLabel: UILabel!
@@ -46,7 +49,7 @@ class PageTwoViewController: UIViewController {
             var doubleFailed = SetList()
             DispatchQueue.global(qos: .default).async {
                 for s in sl {
-                    DataManager.getSet(setCode: s.code!) { success in
+                    DataManager.getSet(setCode: s.code) { success in
                         DispatchQueue.main.async {
                             if success {
                                 //save
@@ -58,6 +61,7 @@ class PageTwoViewController: UIViewController {
                                 if completed == setTotal {
                                     self.doneButton.isEnabled = true
                                     self.downloadLabel.text = "Done!"
+                                    
                                 }
                             } else {
                                 failed.append(s)
@@ -67,7 +71,7 @@ class PageTwoViewController: UIViewController {
                 }
                 if failed.count > 0 {
                     for fs in failed {
-                        DataManager.getSet(setCode: fs.code!) { success in
+                        DataManager.getSet(setCode: fs.code) { success in
                             DispatchQueue.main.async {
                                 if success {
                                     //save
@@ -95,6 +99,64 @@ class PageTwoViewController: UIViewController {
                         self.doneButton.isEnabled = true
                         self.downloadLabel.text = "Done!"
                         self.present(alert, animated: true)
+                    }
+                    DispatchQueue.global(qos: .background).async {
+                        var items: [CSSearchableItem] = []
+                        let request = NSFetchRequest<Card>(entityName: "Card")
+                        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+                        request.sortDescriptors = [sortDescriptor]
+                        do {
+                            let results = try CoreDataStack.handler.managedObjectContext.fetch(request)
+                            for card in results {
+                                if let card = card as? Card, let uuid = card.uuid {
+                                    let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeData as String)
+                                    attributeSet.title = card.name
+                                    attributeSet.contentDescription = card.set.name
+                                    
+                                    
+                                    let item = CSSearchableItem(uniqueIdentifier: "\(uuid)", domainIdentifier: "com.roboticsnailsoftware.MTGCollection", attributeSet: attributeSet)
+                                    print("item created \(card.name)")
+                                    items.append(item)
+                                    //                        CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: ["\(uuid)"]) { error in
+                                    //                            if let error = error {
+                                    //                                print("Deindexing error: \(error.localizedDescription)")
+                                    //                            } else {
+                                    //                                print("Search item successfully removed! \(card.name) \(card.set.name)")
+                                    //                            }
+                                    //                        }
+                                }
+                            }
+                            if items.count > 30000 {
+                                let itemsToAdd = Array(items[0...30000])
+                                CSSearchableIndex.default().indexSearchableItems(itemsToAdd) { error in
+                                    if let error = error {
+                                        print("Indexing error: \(error.localizedDescription)")
+                                    } else {
+                                        print("Search item successfully indexed!")
+                                    }
+                                }
+                                let secondItems = Array(items[30001..<items.count])
+                                CSSearchableIndex.default().indexSearchableItems(secondItems) { error in
+                                    if let error = error {
+                                        print("Indexing error: \(error.localizedDescription)")
+                                    } else {
+                                        print("Search item successfully indexed!")
+                                    }
+                                }
+                            } else {
+                                CSSearchableIndex.default().indexSearchableItems(items) { error in
+                                    if let error = error {
+                                        print("Indexing error: \(error.localizedDescription)")
+                                    } else {
+                                        print("Search item successfully indexed!")
+                                    }
+                                }
+                            }
+                        } catch {
+                            print(error)
+                        }
+                        
+                        
                     }
                 }
             }

@@ -85,7 +85,7 @@ class CollectionTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let card = collectionCards[indexPath.row].card {
-            StateCoordinator.shared.didSelectCard(c: card)
+            StateCoordinator.shared.didSelectCard(id: card.objectID)
         }
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

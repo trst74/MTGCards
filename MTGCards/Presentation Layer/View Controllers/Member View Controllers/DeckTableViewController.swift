@@ -189,7 +189,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
             guard  let entity = NSEntityDescription.entity(forEntityName: "DeckCard", in:  CoreDataStack.handler.managedObjectContext) else {
                 fatalError("Failed to decode Card")
             }
-            let deckCard = DeckCard.init(entity: entity, insertInto: CoreDataStack.handler.managedObjectContext)
+            let deckCard = DeckCard.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
             deckCard.card = card
             deckCard.quantity = Int16(quantity)
             deckCard.isSideboard = isSideboard
@@ -216,7 +216,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         let sortDescriptor = NSSortDescriptor(key: "set.releaseDate", ascending: false)
         request.sortDescriptors = [sortDescriptor]
         do {
-            let results = try CoreDataStack.handler.managedObjectContext.fetch(request)
+            let results = try CoreDataStack.handler.privateContext.fetch(request)
             if results.count > 0 {
                 card = results[0]
             }
@@ -272,7 +272,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
                 deck?.removeFromCards(card)
                 CoreDataStack.handler.saveContext()
                 if let id = deck?.objectID {
-                    deck = CoreDataStack.handler.managedObjectContext.object(with: id) as? Deck
+                    deck = CoreDataStack.handler.privateContext.object(with: id) as? Deck
                 }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -335,15 +335,15 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == deckSection {
             if let card = deckCards[indexPath.row].card {
-                StateCoordinator.shared.didSelectCard(c: card)
+                StateCoordinator.shared.didSelectCard(id: card.objectID)
             }
         } else if indexPath.section == sideboardSection {
             if let card = sideboard[indexPath.row].card {
-                StateCoordinator.shared.didSelectCard(c: card)
+                StateCoordinator.shared.didSelectCard(id: card.objectID)
             }
         } else if indexPath.section == commanderSection {
             if let card = commander[indexPath.row].card {
-                StateCoordinator.shared.didSelectCard(c: card)
+                StateCoordinator.shared.didSelectCard(id: card.objectID)
             }
         }
         

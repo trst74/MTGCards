@@ -24,7 +24,9 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         tableView.keyboardDismissMode = .onDrag
         //cardlist = DataManager.getRNA()
         //cardlist = getSearchCards()
+        
         loadSavedData()
+        
         
         let search = UISearchController(searchResultsController: nil)
         search.obscuresBackgroundDuringPresentation = false
@@ -47,7 +49,6 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         }
         filtersVC.searchTableViewController = self
         self.navigationController?.pushViewController(filtersVC, animated: true)
-        //self.present(filtersVC, animated: true, completion: nil)
     }
     func loadSavedData() {
         var filterPredicates = Filters.current.getPredicates()
@@ -65,23 +66,31 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             
             
             request.predicate = compountPredicate
-            request.fetchBatchSize = 20
+            request.fetchBatchSize = 30
             
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.handler.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
             fetchedResultsController.delegate = self
         }
         
         fetchedResultsController.fetchRequest.predicate = compountPredicate
-        
-        do {
-            try fetchedResultsController.performFetch()
-            tableView.reloadData()
-            if tableView.numberOfSections > 0 && tableView.numberOfRows(inSection: 0) > 0 {
-                tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        DispatchQueue.main.async {
+            do {
+                let methodStart = Date()
+                try self.fetchedResultsController.performFetch()
+                
+                let methodFinish = Date()
+                let executionTime = methodFinish.timeIntervalSince(methodStart)
+                print("Execution time: \(executionTime)")
+                self.tableView.reloadData()
+                if self.tableView.numberOfSections > 0 && self.tableView.numberOfRows(inSection: 0) > 0 {
+                    self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                }
+                self.title = "Search (\(self.fetchedResultsController.sections![0].numberOfObjects))"
+                
+                
+            } catch {
+                print("Fetch failed")
             }
-            self.title = "Search (\(fetchedResultsController.sections![0].numberOfObjects))"
-        } catch {
-            print("Fetch failed")
         }
     }
     func updateTitle(){
@@ -194,7 +203,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         return fetchRequest
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        StateCoordinator.shared.didSelectCard(c: fetchedResultsController.object(at: indexPath))
+        StateCoordinator.shared.didSelectCard(id: fetchedResultsController.object(at: indexPath).objectID)
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -217,7 +226,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             let random = Int.random(in: 0 ..< total)
             
             let card = fetchedResultsController.object(at: IndexPath(item: random, section: 0))
-            StateCoordinator.shared.didSelectCard(c: card)
+            StateCoordinator.shared.didSelectCard(id: card.objectID)
         }
     }
     

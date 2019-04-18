@@ -120,8 +120,8 @@ extension RootViewController: StateCoordinatorDelegate {
         
         
         if nextState == .cardSelected {
-            if let card = s as? Card {
-                gotoCardSelected(s: card)
+            if let id = s as? NSManagedObjectID {
+                gotoCardSelected(id: id)
             }
         } else if nextState == .deckSelected {
             if let deck = s as? Deck {
@@ -145,8 +145,8 @@ extension RootViewController: StateCoordinatorDelegate {
         installCollection(collection: collectionVC)
     }
     
-    func gotoCardSelected(s: Card) {
-        let cardDetails = CardViewController.refreshCardController(s: s)
+    func gotoCardSelected(id: NSManagedObjectID) {
+        let cardDetails = CardViewController.refreshCardController(id: id)
         let navigation = freshNavigationController(rootViewController: cardDetails)
         targetSplitForCurrentTraitCollection().showDetailViewController(navigation, sender: self)
         
