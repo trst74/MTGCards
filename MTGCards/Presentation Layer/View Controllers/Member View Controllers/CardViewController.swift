@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import CoreSpotlight
+import CoreServices
 
 class CardViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var scrollview: UIScrollView!
@@ -52,56 +54,58 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(self.share))
         self.navigationItem.setRightBarButton(shareButton, animated: true)
-
-        costLabel.attributedText = card?.manaCost?.replaceSymbols()
-                typeLabel.text = card?.type
-                if let setname = card?.set.name, let rarity = card?.rarity?.capitalized {
-                    setLabel.text = "\(setname) - \(rarity)"
-                }
-                textLabel.attributedText = card?.text?.replaceSymbols()
-                if let reserved = card?.isReserved, reserved {
-                    otherLabel.text = "Reserved"
-                } else {
-                    otherLabel.text = ""
-                }
-                artistLabel.text = card?.artist
-                if let power = card?.power, let toughness = card?.toughness {
-                    powerToughnessLabel.text = "\(power)/\(toughness)"
-                } else {
-                    powerToughnessLabel.text = ""
-                }
-                if let cardid = card?.tcgplayerProductID, cardid > 0 {
-                    TcgPlayerApi.handler.getPrices(for: cardid) { prices in
-                        if let normal = prices.results.first(where: {$0.subTypeName == "Normal" }), let low = normal.lowPrice, let mid = normal.midPrice, let market = normal.marketPrice {
-                            self.normalLow.text = low.currencyUS
-                            self.normalMid.text = mid.currencyUS
-                            self.normalMarket.text = market.currencyUS
-                        } else {
-                            self.normalStackView.isHidden = true
-                        }
-                        if let foil = prices.results.first(where: {$0.subTypeName == "Foil" }), let fmarket = foil.marketPrice, let flow = foil.lowPrice, let fmid = foil.midPrice {
-                            self.foilMarket.text = fmarket.currencyUS
-                            self.foilLow.text = flow.currencyUS
-                            self.foilMid.text = fmid.currencyUS
-                        } else {
-                            self.foilStackView.isHidden = true
-                        }
-                    }
-                } else {
-                    self.pricesErrorMessage.isHidden = false
-                    self.pricesRootStack.isHidden = true
-                    self.pricesView.layoutSubviews()
-                }
-                loadImage()
         
-                let taps = UITapGestureRecognizer(target: self, action: #selector(showDebug))
-                taps.numberOfTapsRequired = 10
-                taps.delegate = self
-                cardImage.addGestureRecognizer(taps)
-                detailsView.layer.cornerRadius = 10
-                pricesView.layer.cornerRadius = 10
+        costLabel.attributedText = card?.manaCost?.replaceSymbols()
+        typeLabel.text = card?.type
+        if let setname = card?.set.name, let rarity = card?.rarity?.capitalized {
+            setLabel.text = "\(setname) - \(rarity)"
+        }
+        textLabel.attributedText = card?.text?.replaceSymbols()
+        if let reserved = card?.isReserved, reserved {
+            otherLabel.text = "Reserved"
+        } else {
+            otherLabel.text = ""
+        }
+        artistLabel.text = card?.artist
+        if let power = card?.power, let toughness = card?.toughness {
+            powerToughnessLabel.text = "\(power)/\(toughness)"
+        } else {
+            powerToughnessLabel.text = ""
+        }
+        if let cardid = card?.tcgplayerProductID, cardid > 0 {
+            TcgPlayerApi.handler.getPrices(for: cardid) { prices in
+                if let normal = prices.results.first(where: {$0.subTypeName == "Normal" }), let low = normal.lowPrice, let mid = normal.midPrice, let market = normal.marketPrice {
+                    self.normalLow.text = low.currencyUS
+                    self.normalMid.text = mid.currencyUS
+                    self.normalMarket.text = market.currencyUS
+                } else {
+                    self.normalStackView.isHidden = true
+                }
+                if let foil = prices.results.first(where: {$0.subTypeName == "Foil" }), let fmarket = foil.marketPrice, let flow = foil.lowPrice, let fmid = foil.midPrice {
+                    self.foilMarket.text = fmarket.currencyUS
+                    self.foilLow.text = flow.currencyUS
+                    self.foilMid.text = fmid.currencyUS
+                } else {
+                    self.foilStackView.isHidden = true
+                }
+            }
+        } else {
+            self.pricesErrorMessage.isHidden = false
+            self.pricesRootStack.isHidden = true
+            self.pricesView.layoutSubviews()
+        }
+        loadImage()
+        
+        let taps = UITapGestureRecognizer(target: self, action: #selector(showDebug))
+        taps.numberOfTapsRequired = 10
+        taps.delegate = self
+        cardImage.addGestureRecognizer(taps)
+        detailsView.layer.cornerRadius = 10
+        pricesView.layer.cornerRadius = 10
+        
+        
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         loadRulings()
         loadLegalities()
@@ -216,6 +220,21 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
                 if let imageToDisplay = image {
                     self.cardImage.image = imageToDisplay
                     self.saveImage(image: imageToDisplay, Key: Key)
+                    if let c = self.card, let uuid = c.uuid {
+                        let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeData as String)
+                        attributeSet.title = c.name
+                        attributeSet.contentDescription = c.set.name
+                        attributeSet.thumbnailData = data
+                        let item = CSSearchableItem(uniqueIdentifier: "\(uuid)", domainIdentifier: "com.roboticsnailsoftware.MTGCollection", attributeSet: attributeSet)
+                        CSSearchableIndex.default().indexSearchableItems([item]) { error in
+                            if let error = error {
+                                print("Indexing error: \(error.localizedDescription)")
+                            } else {
+                                print("Search item successfully indexed!")
+                            }
+                        }
+                        print("item created \(c.name)")
+                    }
                 }
             }
         }
@@ -448,3 +467,4 @@ extension Locale {
     static let us = Locale(identifier: "en_US")
     static let uk = Locale(identifier: "en_UK")
 }
+
