@@ -19,11 +19,15 @@ class Meta: NSManagedObject, Codable {
         case version = "version"
     }
     required convenience init(from decoder: Decoder) throws {
-        let managedObjectContext = CoreDataStack.handler.privateContext
-        guard let entity = NSEntityDescription.entity(forEntityName: "Meta", in: managedObjectContext) else {
-                fatalError("Failed to decode Meta")
+//        let managedObjectContext = CoreDataStack.handler.privateContext
+//        guard let entity = NSEntityDescription.entity(forEntityName: "Meta", in: managedObjectContext) else {
+//                fatalError("Failed to decode Meta")
+//        }
+        guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,
+            let managedObjectContext = decoder.userInfo[codingUserInfoKeyManagedObjectContext] as? NSManagedObjectContext,
+            let entity = NSEntityDescription.entity(forEntityName: "Meta", in: managedObjectContext) else {
+                fatalError("Failed to decode User")
         }
-
         self.init(entity: entity, insertInto: managedObjectContext)
 
         let container = try decoder.container(keyedBy: CodingKeys.self)

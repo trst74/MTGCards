@@ -130,7 +130,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         let request = NSFetchRequest<Card>(entityName: "Card")
         request.predicate = NSPredicate(format: "uuid == %@", byUUID)
         do {
-            let results = try CoreDataStack.handler.managedObjectContext.fetch(request)
+            let results = try CoreDataStack.handler.privateContext.fetch(request)
             if results.count > 1 {
                 print("Too many items with uuid \(byUUID)")
             } else {
@@ -147,7 +147,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sortDescriptor]
         do {
-            let results = try CoreDataStack.handler.managedObjectContext.fetch(request)
+            let results = try CoreDataStack.handler.privateContext.fetch(request)
             cdDecks = results
         } catch {
             print(error)
@@ -158,7 +158,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sortDescriptor]
         do {
-            let results = try CoreDataStack.handler.managedObjectContext.fetch(request)
+            let results = try CoreDataStack.handler.privateContext.fetch(request)
             cdCollections = results
         } catch {
             print(error)

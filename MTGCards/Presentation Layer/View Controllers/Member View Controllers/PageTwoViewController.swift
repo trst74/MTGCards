@@ -48,27 +48,29 @@ class PageTwoViewController: UIViewController {
             var failed = SetList()
             var doubleFailed = SetList()
             DispatchQueue.global(qos: .default).async {
-                for s in sl {
-                    DataManager.getSet(setCode: s.code) { success in
-                        DispatchQueue.main.async {
-                            if success {
-                                //save
-                                completed += 1
-                                let percent = Float(completed)/Float(setTotal)
-                                print("\(Int(percent*100))%")
-                                self.downloadProgress.setProgress(percent, animated: true)
-                                self.downloadLabel.text = "\(Int(percent*100))%"
-                                if completed == setTotal {
-                                    self.doneButton.isEnabled = true
-                                    self.downloadLabel.text = "Done!"
-                                    
+                    for s in sl {
+                        DataManager.getSet(setCode: s.code) { success in
+                            DispatchQueue.main.async {
+                                if success {
+                                    //save
+                                    completed += 1
+                                    let percent = Float(completed)/Float(setTotal)
+                                    print("\(Int(percent*100))%")
+                                    self.downloadProgress.setProgress(percent, animated: true)
+                                    self.downloadLabel.text = "\(Int(percent*100))%"
+                                    if completed == setTotal {
+                                        self.doneButton.isEnabled = true
+                                        self.downloadLabel.text = "Done!"
+                                        CoreDataStack.handler.privateContext.parent?.reset()
+                                        CoreDataStack.handler.privateContext.reset()
+                                    }
+                                } else {
+                                    failed.append(s)
                                 }
-                            } else {
-                                failed.append(s)
                             }
                         }
                     }
-                }
+   
                 if failed.count > 0 {
                     for fs in failed {
                         DataManager.getSet(setCode: fs.code) { success in

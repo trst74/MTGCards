@@ -9,8 +9,6 @@
 import Foundation
 import CoreData
 import UIKit
-import CoreSpotlight
-import MobileCoreServices
 
 public class DataManager {
     static func getLocalVersion() -> String {
@@ -22,24 +20,36 @@ public class DataManager {
         do {
             let data = try Data(contentsOf: setURL!)
             let d = data
-            do {
-                let set = try newJSONDecoder().decode(MTGSet.self, from: d)
-                print("\(setCode): \(set.cards.count)")
-                
-               
-                
-                do {
-                    try CoreDataStack.handler.privateContext.save()
-                } catch {
-                    print(error)
-                }
-                
-                completion(true)
-            } catch let error {
-                print(error)
-                completion(false)
-            }
             
+            guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext else {
+                fatalError("Failed to retrieve context")
+            }
+            let decoder = newJSONDecoder()
+            let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+            managedObjectContext.persistentStoreCoordinator = CoreDataStack.handler.storeContainer.persistentStoreCoordinator
+            
+            decoder.userInfo[codingUserInfoKeyManagedObjectContext] = managedObjectContext
+            managedObjectContext.perform {
+                do {
+                    try autoreleasepool {
+                        let set = try decoder.decode(MTGSet.self, from: d)
+                        print("\(setCode): \(set.cards.count)")
+                    }
+                    do {
+                        try managedObjectContext.save()
+                        
+                    } catch {
+                        print(error)
+                    }
+                    managedObjectContext.parent?.reset()
+                    
+                    
+                    completion(true)
+                } catch let error {
+                    print(error)
+                    completion(false)
+                }
+            }
         } catch let error {
             print("Download error: \(error)")
             completion(false)
@@ -51,4 +61,8 @@ public class DataManager {
         return setList
     }
     
+}
+public extension CodingUserInfoKey {
+    // Helper property to retrieve the context
+    static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")
 }

@@ -163,16 +163,25 @@ class Filters {
             predicates.append(predicate)
             
         }
-        if selectedColorIdentities.count > 0 {
-        
-                let colorIdentitisPredicate = NSPredicate(format: "ANY colorIdentity.color  in %@", (selectedColorIdentities))
-                if selectedColorIdentities.contains("C") {
+        if selectedColorIdentities.count > 0 && Set(selectedColorIdentities).subtracting(["nC"]).count < 5 {
+            let colors = ["W","U","B","R","G"]
+            var identityPredicates: [NSPredicate] = []
+//            for color in selectedColorIdentities {
+//                let temp = NSPredicate(format: "ANY colorIdentity.color == %@", color)
+//                identityPredicates.append(temp)
+//            }
+//                identityPredicates.append(NSPredicate(format: "ANY colorIdentity.color in %@", selectedColorIdentities))
+//            identityPredicates.append(NSPredicate(format: "NONE colorIdentity.color in %@", Set(colors).subtracting(selectedColorIdentities)))
+            identityPredicates.append(NSPredicate(format: "SUBQUERY(colorIdentity, $i, $i.color in %@).@count > 0", selectedColorIdentities, selectedColorIdentities.count))
+             identityPredicates.append(NSPredicate(format: "SUBQUERY(colorIdentity, $i, $i.color in %@).@count < 1", Set(colors).subtracting(selectedColorIdentities)))
+//            for c in Set(colors).subtracting(selectedColorIdentities) {
+//                let temp = NSPredicate(format: "ANY colorIdentity.color != %@", c)
+//                identityPredicates.append(temp)
+//            }
+            let colorIdentitiesPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: identityPredicates)
                     let colorlessPredicate = NSPredicate(format: "colorIdentity.@count == 0")
-                    let compoundColorPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [colorIdentitisPredicate, colorlessPredicate])
+                    let compoundColorPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [colorIdentitiesPredicate, colorlessPredicate])
                     predicates.append(compoundColorPredicate)
-                } else {
-                    predicates.append(colorIdentitisPredicate)
-                }
             
         }
         if isPromoSelected() {

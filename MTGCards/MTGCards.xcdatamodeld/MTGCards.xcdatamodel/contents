@@ -89,6 +89,7 @@
         <relationship name="card" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card" inverseName="colorIdentity" inverseEntity="Card" syncable="YES"/>
         <fetchIndex name="byPropertyIndex">
             <fetchIndexElement property="color" type="Binary" order="ascending"/>
+            <fetchIndexElement property="card" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
     <entity name="Deck" representedClassName=".Deck" syncable="YES">
@@ -173,20 +174,20 @@
         <relationship name="set" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTGSet" inverseName="tokens" inverseEntity="MTGSet" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Card" positionX="-689.54296875" positionY="-290.1328125" width="128" height="675"/>
-        <element name="CardSubtype" positionX="-867.53515625" positionY="47.19140625" width="128" height="73"/>
-        <element name="CardSupertype" positionX="-889.82421875" positionY="148.953125" width="128" height="73"/>
+        <element name="Card" positionX="-690.01171875" positionY="-156.73046875" width="128" height="675"/>
+        <element name="CardSubtype" positionX="-867.671875" positionY="-68.046875" width="128" height="73"/>
+        <element name="CardSupertype" positionX="-889.9609375" positionY="33.71484375" width="128" height="73"/>
         <element name="CardType" positionX="-476.97265625" positionY="381.8125" width="128" height="73"/>
         <element name="Collection" positionX="-247.4921875" positionY="-145.01953125" width="128" height="75"/>
         <element name="CollectionCard" positionX="-434.53515625" positionY="-126.5546875" width="128" height="105"/>
-        <element name="ColorIdentity" positionX="-892.46875" positionY="244.78515625" width="128" height="73"/>
+        <element name="ColorIdentity" positionX="-892.60546875" positionY="129.546875" width="128" height="73"/>
         <element name="Deck" positionX="-243.7265625" positionY="-297.13671875" width="128" height="90"/>
         <element name="DeckCard" positionX="-439.48828125" positionY="-302.35546875" width="128" height="105"/>
-        <element name="ForeignDatum" positionX="-892.28125" positionY="350.09765625" width="128" height="150"/>
+        <element name="ForeignDatum" positionX="-892.41796875" positionY="234.859375" width="128" height="150"/>
         <element name="Legalities" positionX="-512.98046875" positionY="94.44140625" width="128" height="225"/>
-        <element name="Meta" positionX="186.17578125" positionY="311.609375" width="128" height="75"/>
-        <element name="MTGSet" positionX="36" positionY="189" width="128" height="255"/>
-        <element name="Ruling" positionX="-880.96484375" positionY="548.30078125" width="128" height="90"/>
-        <element name="Token" positionX="-151.34765625" positionY="442.72265625" width="128" height="270"/>
+        <element name="Meta" positionX="-94.49609375" positionY="341.75" width="128" height="75"/>
+        <element name="MTGSet" positionX="-103.45703125" positionY="26.21875" width="128" height="255"/>
+        <element name="Ruling" positionX="-881.1015625" positionY="433.0625" width="128" height="90"/>
+        <element name="Token" positionX="-254.65234375" positionY="286.5546875" width="128" height="270"/>
     </elements>
 </model>

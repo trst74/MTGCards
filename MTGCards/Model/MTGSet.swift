@@ -41,11 +41,18 @@ class MTGSet: NSManagedObject, Codable {
         case isOnlineOnly = "isOnlineOnly"
     }
     required convenience init(from decoder: Decoder) throws {
-        let managedObjectContext = CoreDataStack.handler.privateContext
-        guard let entity = NSEntityDescription.entity(forEntityName: "MTGSet", in: managedObjectContext) else {
-            fatalError("Failed to decode Set")
+//        let managedObjectContext = CoreDataStack.handler.privateContext
+//        guard let entity = NSEntityDescription.entity(forEntityName: "MTGSet", in: managedObjectContext) else {
+//            fatalError("Failed to decode Set")
+//        }
+//
+//
+//
+        guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,
+            let managedObjectContext = decoder.userInfo[codingUserInfoKeyManagedObjectContext] as? NSManagedObjectContext,
+            let entity = NSEntityDescription.entity(forEntityName: "MTGSet", in: managedObjectContext) else {
+                fatalError("Failed to decode User")
         }
-        
         self.init(entity: entity, insertInto: managedObjectContext)
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -82,7 +89,7 @@ class MTGSet: NSManagedObject, Codable {
         if let isOnline = try container.decodeIfPresent(Bool.self, forKey: .isOnlineOnly) {
             self.isOnlineOnly = isOnline
         }
-        
+    
     }
     
     public func encode(to encoder: Encoder) throws {

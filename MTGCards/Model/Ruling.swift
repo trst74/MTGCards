@@ -21,11 +21,15 @@ class Ruling: NSManagedObject, Codable {
     }
 
     required convenience init(from decoder: Decoder) throws {
-        let managedObjectContext = CoreDataStack.handler.privateContext
-        guard let entity = NSEntityDescription.entity(forEntityName: "Ruling", in: managedObjectContext) else {
-                fatalError("Failed to decode Ruling")
+//        let managedObjectContext = CoreDataStack.handler.privateContext
+//        guard let entity = NSEntityDescription.entity(forEntityName: "Ruling", in: managedObjectContext) else {
+//                fatalError("Failed to decode Ruling")
+//        }
+        guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,
+            let managedObjectContext = decoder.userInfo[codingUserInfoKeyManagedObjectContext] as? NSManagedObjectContext,
+            let entity = NSEntityDescription.entity(forEntityName: "Ruling", in: managedObjectContext) else {
+                fatalError("Failed to decode User")
         }
-
         self.init(entity: entity, insertInto: managedObjectContext)
 
         let container = try decoder.container(keyedBy: CodingKeys.self)

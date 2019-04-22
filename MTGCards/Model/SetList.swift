@@ -17,28 +17,25 @@ typealias SetList = [SetListElement]
 
 class SetListElement: Codable {
     let code: String
-    let meta: SetMeta
+    let setMeta: SetMeta?
     let name: String
     let releaseDate: String
     let type: String
-    let parentCode: String?
     
     enum CodingKeys: String, CodingKey {
         case code = "code"
-        case meta = "meta"
+        case setMeta = "meta"
         case name = "name"
         case releaseDate = "releaseDate"
         case type = "type"
-        case parentCode = "parentCode"
     }
     
-    init(code: String, meta: SetMeta, name: String, releaseDate: String, type: String, parentCode: String?) {
+    init(code: String, setMeta: SetMeta?, name: String, releaseDate: String, type: String) {
         self.code = code
-        self.meta = meta
+        self.setMeta = setMeta
         self.name = name
         self.releaseDate = releaseDate
         self.type = type
-        self.parentCode = parentCode
     }
 }
 
@@ -57,12 +54,14 @@ class SetMeta: Codable {
     }
 }
 
+
+
 // MARK: Convenience initializers and mutators
 
 extension SetListElement {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(SetListElement.self, from: data)
-        self.init(code: me.code, meta: me.meta, name: me.name, releaseDate: me.releaseDate, type: me.type, parentCode: me.parentCode)
+        self.init(code: me.code, setMeta: me.setMeta, name: me.name, releaseDate: me.releaseDate, type: me.type)
     }
     
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -78,19 +77,17 @@ extension SetListElement {
     
     func with(
         code: String? = nil,
-        meta: SetMeta? = nil,
+        setMeta: SetMeta?? = nil,
         name: String? = nil,
         releaseDate: String? = nil,
-        type: String? = nil,
-        parentCode: String?? = nil
+        type: String? = nil
         ) -> SetListElement {
         return SetListElement(
             code: code ?? self.code,
-            meta: meta ?? self.meta,
+            setMeta: setMeta ?? self.setMeta,
             name: name ?? self.name,
             releaseDate: releaseDate ?? self.releaseDate,
-            type: type ?? self.type,
-            parentCode: parentCode ?? self.parentCode
+            type: type ?? self.type
         )
     }
     
@@ -102,6 +99,7 @@ extension SetListElement {
         return String(data: try self.jsonData(), encoding: encoding)
     }
 }
+
 
 extension SetMeta {
     convenience init(data: Data) throws {

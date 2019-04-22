@@ -44,11 +44,15 @@ class Token: NSManagedObject, Codable {
         case watermark = "watermark"
     }
     required convenience init(from decoder: Decoder) throws {
-         let managedObjectContext = CoreDataStack.handler.privateContext
-        guard let entity = NSEntityDescription.entity(forEntityName: "Token", in: managedObjectContext) else {
-                fatalError("Failed to decode Token")
+//         let managedObjectContext = CoreDataStack.handler.privateContext
+//        guard let entity = NSEntityDescription.entity(forEntityName: "Token", in: managedObjectContext) else {
+//                fatalError("Failed to decode Token")
+//        }
+        guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,
+            let managedObjectContext = decoder.userInfo[codingUserInfoKeyManagedObjectContext] as? NSManagedObjectContext,
+            let entity = NSEntityDescription.entity(forEntityName: "Token", in: managedObjectContext) else {
+                fatalError("Failed to decode User")
         }
-
         self.init(entity: entity, insertInto: managedObjectContext)
 
         let container = try decoder.container(keyedBy: CodingKeys.self)

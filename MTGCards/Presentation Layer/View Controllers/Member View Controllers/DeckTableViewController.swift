@@ -186,7 +186,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
     private func addCard(name: String, setCode: String, quantity: Int, isSideboard: Bool){
         let card = getCard(name: name, setCode: setCode)
         if let card = card {
-            guard  let entity = NSEntityDescription.entity(forEntityName: "DeckCard", in:  CoreDataStack.handler.managedObjectContext) else {
+            guard  let entity = NSEntityDescription.entity(forEntityName: "DeckCard", in:  CoreDataStack.handler.privateContext) else {
                 fatalError("Failed to decode Card")
             }
             let deckCard = DeckCard.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
@@ -194,7 +194,12 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
             deckCard.quantity = Int16(quantity)
             deckCard.isSideboard = isSideboard
             deck?.addToCards(deckCard)
-            CoreDataStack.handler.saveContext()
+            do {
+                try CoreDataStack.handler.privateContext.save()
+            } catch {
+                print(error)
+            }
+            
         }
     }
     private func getCard(name: String, setCode: String) -> Card? {

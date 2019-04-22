@@ -124,7 +124,7 @@ class EditDeckCardTableViewController: UITableViewController {
             }
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
             do {
-                let results = try CoreDataStack.handler.managedObjectContext.fetch(request)
+                let results = try CoreDataStack.handler.privateContext.fetch(request)
                 printings = results
                 self.tableView.reloadData()
             } catch {
