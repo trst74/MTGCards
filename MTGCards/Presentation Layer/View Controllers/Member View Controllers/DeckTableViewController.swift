@@ -211,11 +211,14 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         
         if setCode != "" {
             predicates.append(predicate2)
+        } else {
+            predicates.append(NSPredicate(format: "set.type == %@", "promo"))
         }
         if UserDefaultsHandler.areOnlineOnlyCardsExcluded() {
             let onlineOnlyPredicate = NSPredicate(format: "set.isOnlineOnly == false")
             predicates.append(onlineOnlyPredicate)
         }
+        
         let compound = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         request.predicate = compound
         let sortDescriptor = NSSortDescriptor(key: "set.releaseDate", ascending: false)
@@ -275,7 +278,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
             //let card = deckCards[indexPath.row]
             if let card = card {
                 deck?.removeFromCards(card)
-                CoreDataStack.handler.saveContext()
+                CoreDataStack.handler.savePrivateContext()
                 if let id = deck?.objectID {
                     deck = CoreDataStack.handler.privateContext.object(with: id) as? Deck
                 }
