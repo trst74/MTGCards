@@ -72,4 +72,14 @@ extension CoreDataStack {
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
+    func savePrivateContext() {
+        guard privateContext.hasChanges else { return }
+        
+        do {
+            try privateContext.save()
+            
+        } catch let nserror as NSError {
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+    }
 }

@@ -38,24 +38,14 @@ extension RootViewController {
         split.viewControllers = [navigation]
         return split
     }
-
-//    func configureFileList(_ fileList: FileListViewController,
-//                           title: String,
-//                           rootFolder: File?) {
-//        let datasource = FileDataSource(context: dataStack.viewContext,
-//                                        presenter: fileList,
-//                                        rootFolder: rootFolder)
-//        datasource.stateCoordinator = stateCoordinator
-//        fileList.fileDataSource = datasource
-//        fileList.title = title
-//    }
-//    
     func primaryNavigation(_ split: UISplitViewController)
         -> UINavigationController {
             guard let nav = split.viewControllers.first
                 as? UINavigationController else {
                     fatalError("Project config error - primary view doesn't have Navigation")
             }
+            nav.navigationBar.prefersLargeTitles = false
+            nav.navigationItem.largeTitleDisplayMode = .never
             return nav
     }
 }

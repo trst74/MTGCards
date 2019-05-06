@@ -12,7 +12,6 @@ import MobileCoreServices
 
 class CardListTableViewController: UITableViewController, UISearchResultsUpdating, NSFetchedResultsControllerDelegate, UITableViewDragDelegate {
     var fetchedResultsController: NSFetchedResultsController<Card>!
-    var appDelegate: AppDelegate = (UIApplication.shared.delegate as? AppDelegate)!
     var cardlist: [Card] = []
     var filteredCardList: [Card] = []
     
@@ -22,26 +21,29 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         super.viewDidLoad()
         
         tableView.keyboardDismissMode = .onDrag
-        //cardlist = DataManager.getRNA()
-        //cardlist = getSearchCards()
-        
         loadSavedData()
         
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationItem.largeTitleDisplayMode = .never
         
-        let search = UISearchController(searchResultsController: nil)
-        search.obscuresBackgroundDuringPresentation = false
-        search.searchBar.placeholder = "Search"
-        search.searchResultsUpdater = self
+        if navigationItem.searchController == nil {
+            let search = UISearchController(searchResultsController: nil)
+            search.obscuresBackgroundDuringPresentation = false
+            search.searchBar.placeholder = "Search"
+            search.searchResultsUpdater = self
+            search.hidesNavigationBarDuringPresentation = false
+            navigationItem.searchController = search
+           self.navigationItem.hidesSearchBarWhenScrolling = false
+        }
         
-        navigationItem.searchController = search
         
-        self.navigationItem.hidesSearchBarWhenScrolling = false
         tableView.dragDelegate = self
         tableView.dragInteractionEnabled = true
         
         let filterButton = UIBarButtonItem(image: UIImage(named: "filter"), style: .plain, target: self, action: #selector(self.filter))
         self.navigationItem.setRightBarButton(filterButton, animated: true)
     }
+    
     @objc func filter(){
         let storyboard = UIStoryboard(name: "Filters", bundle: nil)
         guard let filtersVC = storyboard.instantiateInitialViewController() as? FiltersTableViewController else {
@@ -176,27 +178,6 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         layer.colors = colors
         return layer
     }
-    
-    private func getSearchCards() -> [Card] {
-        var cardList: [Card] = []
-        let fetchRequest: NSFetchRequest<Card> = NSFetchRequest<Card>(entityName: "Card")
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        fetchRequest.predicate = nil
-        do {
-            // Perform Fetch Request
-            let c = try managedContext.fetch(fetchRequest)
-            print(c.count)
-            cardList = c
-            filteredCardList = c
-            return cardList
-        } catch {
-            print("Unable to Fetch Cards, (\(error))")
-            return cardList
-        }
-        
-    }
     private func createFetchRequest() -> NSFetchRequest<Card> {
         let fetchRequest: NSFetchRequest<Card> = NSFetchRequest<Card>(entityName: "Card")
         
@@ -209,7 +190,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text, text.count > 0 else {
             predicate = nil
-            //loadSavedData()
+            loadSavedData()
             return
         }
         if text.count > 2 {

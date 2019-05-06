@@ -16,14 +16,14 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     var cdCollections: [Collection] = []
     var decks = ["Decks"]
     var cdDecks: [Deck] = []
-    var search = ["Tools", "Search", "Life Counter", "Rules"]
+    var search = ["Tools", "Search"]
     var sections: [[String]] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addButton)), animated: true)
         let settingsButton = UIBarButtonItem(image: UIImage(named: "settings"), style: .plain, target: self, action: #selector(self.settings))
         self.navigationItem.setLeftBarButton(settingsButton, animated: true)
-        sections = [collections, decks, search]
+        sections = [ search, collections, decks]
         tableView.dropDelegate = self
         tableView.dragInteractionEnabled = true
         if UserDefaultsHandler.isFirstTimeOpening(){
@@ -68,7 +68,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     }
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
         if let indexPath = coordinator.destinationIndexPath {
-            if indexPath.section == 1 {
+            if indexPath.section == 2 {
                 coordinator.session.loadObjects(ofClass: NSString.self) { items in
                     guard let strings = items as? [String] else { return }
                     for string in strings {
@@ -88,19 +88,23 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
                             }
                         } else {
                             if let card = card {
-                                guard  let entity = NSEntityDescription.entity(forEntityName: "DeckCard", in:  CoreDataStack.handler.managedObjectContext) else {
+                                guard  let entity = NSEntityDescription.entity(forEntityName: "DeckCard", in:  CoreDataStack.handler.privateContext) else {
                                     fatalError("Failed to decode Card")
                                 }
-                                let deckCard = DeckCard.init(entity: entity, insertInto: CoreDataStack.handler.managedObjectContext)
+                                let deckCard = DeckCard.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
                                 deckCard.card = card
                                 deckCard.quantity = 1
                                 self.cdDecks[indexPath.row].addToCards(deckCard)
-                                CoreDataStack.handler.saveContext()
+                                do {
+                                    try CoreDataStack.handler.privateContext.save()
+                                } catch {
+                                    print(error)
+                                }
                             }
                         }
                     }
                 }
-            } else if indexPath.section == 0 {
+            } else if indexPath.section == 1 {
                 coordinator.session.loadObjects(ofClass: NSString.self) { items in
                     guard let strings = items as? [String] else { return }
                     for string in strings {
@@ -108,14 +112,18 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
                         let card = self.getCard(byUUID: string)
                         
                         if let card = card {
-                            guard  let entity = NSEntityDescription.entity(forEntityName: "CollectionCard", in:  CoreDataStack.handler.managedObjectContext) else {
+                            guard  let entity = NSEntityDescription.entity(forEntityName: "CollectionCard", in:  CoreDataStack.handler.privateContext) else {
                                 fatalError("Failed to decode Card")
                             }
-                            let collectionCard = CollectionCard.init(entity: entity, insertInto: CoreDataStack.handler.managedObjectContext)
+                            let collectionCard = CollectionCard.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
                             collectionCard.card = card
                             collectionCard.quantity = 1
                             self.cdCollections[indexPath.row].addToCards(collectionCard)
-                            CoreDataStack.handler.saveContext()
+                            do {
+                                try CoreDataStack.handler.privateContext.save()
+                            } catch {
+                                print(error)
+                            }
                             
                         }
                         //save
@@ -181,9 +189,9 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if section == 1 {
+        if section == 2 {
             return cdDecks.count
-        } else if section == 0 {
+        } else if section == 1 {
             return cdCollections.count
         } else {
             return sections[section].count - 1
@@ -195,9 +203,9 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "collectionCell", for: indexPath)
-        if indexPath.section == 0 {
+        if indexPath.section == 1 {
              cell.textLabel?.text = cdCollections[indexPath.row].name
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 2 {
             cell.textLabel?.text = cdDecks[indexPath.row].name
         } else {
             cell.textLabel?.text = sections[indexPath.section][indexPath.row + 1]
@@ -208,17 +216,17 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 {
+        if indexPath.section == 0 {
             //StateCoordinator.shared.didSelectCollection(collection: "Search")
             StateCoordinator.shared.didSelectTool(tool: "Search")
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 2 {
             StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row])
-        } else if indexPath.section == 0 {
+        } else if indexPath.section == 1 {
             StateCoordinator.shared.didSelectCollection(collection: cdCollections[indexPath.row])
         }
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             return true
         }
         return false
@@ -226,8 +234,8 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             print("delete")
-            CoreDataStack.handler.managedObjectContext.delete(cdDecks[indexPath.row] as NSManagedObject)
-            CoreDataStack.handler.saveContext()
+            CoreDataStack.handler.privateContext.delete(cdDecks[indexPath.row] as NSManagedObject)
+            CoreDataStack.handler.savePrivateContext()
             
             DispatchQueue.main.async {
                 self.reloadDecksFromCoreData()

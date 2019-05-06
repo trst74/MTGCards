@@ -218,4 +218,54 @@ class SettingsTableViewController: UITableViewController {
     @IBAction func excludeSwitchChanged(_ sender: UISwitch) {
         UserDefaultsHandler.setExcludeOnlineOnly(exclude: sender.isOn)
     }
+    @IBAction func manualUpdate(_ sender: Any) {
+    }
+    @IBAction func backupPersonalData(_ sender: Any) {
+        let path = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("myMTG.json")
+        var content = ""
+        let collections = getCollectionsFromCoreData()
+        let collectionUUIDs = (collections[0].cards?.allObjects as? [CollectionCard])?.map { $0.card?.uuid ?? ""} ?? []
+        let wishListUUIDs = (collections[1].cards?.allObjects as? [CollectionCard])?.map { $0.card?.uuid ?? "" } ?? []
+        let deckBackups = getDecksFromCoreData().map { $0.getDeckBackup() }
+        let backup = Backup(collection: collectionUUIDs, wishlist: wishListUUIDs, deckBackups: deckBackups)
+
+        do {
+            try content = backup.jsonString() ?? ""
+            try content.write(to: path, atomically: true, encoding: String.Encoding.utf8)
+            let vc = UIActivityViewController(activityItems: [path], applicationActivities: [])
+            let systemTint = UIButton.appearance().tintColor
+            UIButton.appearance().tintColor = UIColor(red: 14.0/255.0, green: 122.0/255.0, blue: 254.0/255.0, alpha: 1.0)
+            self.present(vc, animated: true){
+                UIButton.appearance().tintColor = systemTint
+            }
+        } catch {
+            print("Failed to export")
+        }
+    }
+    @IBAction func importPersonalData(_ sender: Any) {
+    }
+    func getCollectionsFromCoreData() -> [Collection] {
+        let request = NSFetchRequest<Collection>(entityName: "Collection")
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        do {
+            let results = try CoreDataStack.handler.privateContext.fetch(request)
+            return results
+        } catch {
+            print(error)
+        }
+        return []
+    }
+    func getDecksFromCoreData() -> [Deck] {
+        let request = NSFetchRequest<Deck>(entityName: "Deck")
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        do {
+            let results = try CoreDataStack.handler.privateContext.fetch(request)
+            return results
+        } catch {
+            print(error)
+        }
+        return []
+    }
 }

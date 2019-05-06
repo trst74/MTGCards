@@ -213,12 +213,15 @@ extension RootViewController: UISplitViewControllerDelegate {
             guard let primaryNavigation = primaryViewController as? UINavigationController else {
                 return nil
             }
-            
+            primaryNavigation.navigationBar.prefersLargeTitles = false
+            primaryNavigation.navigationItem.largeTitleDisplayMode = .never
             return decomposeStackForTransitionToRegular(primaryNavigation)
     }
     
     func decomposeStackForTransitionToRegular(_ navigationController: UINavigationController) -> UIViewController? {
         //1
+        navigationController.navigationBar.prefersLargeTitles = false
+        navigationController.navigationItem.largeTitleDisplayMode = .never
         let controllerStack = navigationController.viewControllers
         guard let folders = controllerStack.first else {
             return nil

@@ -68,6 +68,8 @@
 		EE924709225AD4440044F858 /* CardType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE924707225AD4440044F858 /* CardType+CoreDataProperties.swift */; };
 		EEAA53CB223323D700CB4B72 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAA53CA223323D700CB4B72 /* Debug.storyboard */; };
 		EEAA53CD2233241000CB4B72 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAA53CC2233241000CB4B72 /* DebugViewController.swift */; };
+		EEB0ADDA227A3C3400613C8C /* Backup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB0ADD9227A3C3400613C8C /* Backup.swift */; };
+		EEB0ADDC227A3FBF00613C8C /* Deck+Backup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB0ADDB227A3FBF00613C8C /* Deck+Backup.swift */; };
 		EEB5D81D2205EA670070FF8B /* CardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */; };
 		EEB5D81F2205EBFF0070FF8B /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */; };
 		EEB5D8212205F0D30070FF8B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D8202205F0D30070FF8B /* GradientView.swift */; };
@@ -90,6 +92,7 @@
 		EEE7D5A82262852100FE4D1C /* EditDeckCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE7D5A72262852100FE4D1C /* EditDeckCardTableViewController.swift */; };
 		EEE7D5AA226375FA00FE4D1C /* DeckCardQuantityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE7D5A9226375FA00FE4D1C /* DeckCardQuantityTableViewCell.swift */; };
 		EEE7D5AC226378CB00FE4D1C /* DeckCardSideboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE7D5AB226378CB00FE4D1C /* DeckCardSideboardTableViewCell.swift */; };
+		EEEB6F27227929250009B442 /* Collection+Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEB6F26227929250009B442 /* Collection+Export.swift */; };
 		EEF02F22223DAC11008F008B /* Collection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF02F1E223DAC11008F008B /* Collection+CoreDataClass.swift */; };
 		EEF02F23223DAC11008F008B /* Collection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF02F1F223DAC11008F008B /* Collection+CoreDataProperties.swift */; };
 		EEF02F24223DAC11008F008B /* CollectionCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF02F20223DAC11008F008B /* CollectionCard+CoreDataClass.swift */; };
@@ -175,6 +178,8 @@
 		EE924707225AD4440044F858 /* CardType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardType+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EEAA53CA223323D700CB4B72 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
 		EEAA53CC2233241000CB4B72 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
+		EEB0ADD9227A3C3400613C8C /* Backup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backup.swift; sourceTree = "<group>"; };
+		EEB0ADDB227A3FBF00613C8C /* Deck+Backup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+Backup.swift"; sourceTree = "<group>"; };
 		EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListTableViewCell.swift; sourceTree = "<group>"; };
 		EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Custom.swift"; sourceTree = "<group>"; };
 		EEB5D8202205F0D30070FF8B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -203,6 +208,7 @@
 		EEE7D5A72262852100FE4D1C /* EditDeckCardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDeckCardTableViewController.swift; sourceTree = "<group>"; };
 		EEE7D5A9226375FA00FE4D1C /* DeckCardQuantityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCardQuantityTableViewCell.swift; sourceTree = "<group>"; };
 		EEE7D5AB226378CB00FE4D1C /* DeckCardSideboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCardSideboardTableViewCell.swift; sourceTree = "<group>"; };
+		EEEB6F26227929250009B442 /* Collection+Export.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Export.swift"; sourceTree = "<group>"; };
 		EEF02F1E223DAC11008F008B /* Collection+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EEF02F1F223DAC11008F008B /* Collection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EEF02F20223DAC11008F008B /* CollectionCard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCard+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -266,6 +272,7 @@
 				EE27552C22341B04006BD083 /* RoundButton.swift */,
 				EE0F62AC22356494003D8A8A /* CoreDataStack.swift */,
 				EE924702225AA4E70044F858 /* Filters.swift */,
+				EEB0ADD9227A3C3400613C8C /* Backup.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -291,34 +298,36 @@
 		EE2B78BC21EFE67E00306990 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				EEE7D599225BA16D00FE4D1C /* CardSupertype+CoreDataClass.swift */,
-				EEE7D59A225BA16D00FE4D1C /* CardSupertype+CoreDataProperties.swift */,
+				EE2B821E21FCCA3900306990 /* Card.swift */,
 				EEE7D585225B91DD00FE4D1C /* CardSubtype+CoreDataClass.swift */,
 				EEE7D586225B91DD00FE4D1C /* CardSubtype+CoreDataProperties.swift */,
-				EEE7D56D225B6E0000FE4D1C /* ColorIdentity+CoreDataClass.swift */,
-				EEE7D56E225B6E0000FE4D1C /* ColorIdentity+CoreDataProperties.swift */,
+				EEE7D599225BA16D00FE4D1C /* CardSupertype+CoreDataClass.swift */,
+				EEE7D59A225BA16D00FE4D1C /* CardSupertype+CoreDataProperties.swift */,
 				EE924706225AD4440044F858 /* CardType+CoreDataClass.swift */,
 				EE924707225AD4440044F858 /* CardType+CoreDataProperties.swift */,
 				EEF02F1E223DAC11008F008B /* Collection+CoreDataClass.swift */,
 				EEF02F1F223DAC11008F008B /* Collection+CoreDataProperties.swift */,
+				EEEB6F26227929250009B442 /* Collection+Export.swift */,
 				EEF02F20223DAC11008F008B /* CollectionCard+CoreDataClass.swift */,
 				EEF02F21223DAC11008F008B /* CollectionCard+CoreDataProperties.swift */,
-				EE1E1465223AFC6600A54747 /* DeckCard+CoreDataClass.swift */,
-				EE1E1466223AFC6600A54747 /* DeckCard+CoreDataProperties.swift */,
+				EEE7D56D225B6E0000FE4D1C /* ColorIdentity+CoreDataClass.swift */,
+				EEE7D56E225B6E0000FE4D1C /* ColorIdentity+CoreDataProperties.swift */,
+				EE2B78D021F13ACD00306990 /* DataManager.swift */,
 				EE4FD202223A91BD00E8CDB3 /* Deck+CoreDataClass.swift */,
 				EE4FD203223A91BD00E8CDB3 /* Deck+CoreDataProperties.swift */,
-				EE2B821E21FCCA3900306990 /* Card.swift */,
-				EE2B78D021F13ACD00306990 /* DataManager.swift */,
+				EEB0ADDB227A3FBF00613C8C /* Deck+Backup.swift */,
+				EE1E1465223AFC6600A54747 /* DeckCard+CoreDataClass.swift */,
+				EE1E1466223AFC6600A54747 /* DeckCard+CoreDataProperties.swift */,
 				EE2B822021FD254100306990 /* ForeignDatum.swift */,
 				EE2B822221FD258700306990 /* Legalities.swift */,
 				EE2B822421FD25C800306990 /* Meta.swift */,
+				EE2B78D221F13EAF00306990 /* MTGSet.swift */,
 				EE2B821C21FCAD5200306990 /* Ruling.swift */,
 				EE843A2F2228256100B07E09 /* ScryfallCard.swift */,
-				EE2B78D221F13EAF00306990 /* MTGSet.swift */,
 				EE2B78D421F1518E00306990 /* SetList.swift */,
-				EE2B822621FD25FD00306990 /* Token.swift */,
-				EE6F94B1223092AD001B3378 /* TcgToken.swift */,
 				EE2CAC4F2231707000D24334 /* TcgPrices.swift */,
+				EE6F94B1223092AD001B3378 /* TcgToken.swift */,
+				EE2B822621FD25FD00306990 /* Token.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -591,6 +600,7 @@
 				EE9246FB225A9EF80044F858 /* TypeFilterTableViewController.swift in Sources */,
 				EE924701225A9F990044F858 /* LegalityFilterTableViewController.swift in Sources */,
 				EE2B822521FD25C800306990 /* Meta.swift in Sources */,
+				EEEB6F27227929250009B442 /* Collection+Export.swift in Sources */,
 				EEE7D5AA226375FA00FE4D1C /* DeckCardQuantityTableViewCell.swift in Sources */,
 				EEF02F25223DAC11008F008B /* CollectionCard+CoreDataProperties.swift in Sources */,
 				EE2CAC542231C1AA00D24334 /* String+Custom.swift in Sources */,
@@ -619,6 +629,7 @@
 				EE4FD209223AC6FE00E8CDB3 /* DeckTableViewController.swift in Sources */,
 				EEF02F23223DAC11008F008B /* Collection+CoreDataProperties.swift in Sources */,
 				EEBE6D9621EFE18F00A3464E /* MTGCards.xcdatamodeld in Sources */,
+				EEB0ADDC227A3FBF00613C8C /* Deck+Backup.swift in Sources */,
 				EEBE6D8E21EFE18F00A3464E /* AppDelegate.swift in Sources */,
 				EE32D7AF2265631D00AEC47E /* DeckCardCommanderTableViewCell.swift in Sources */,
 				EEC91990223080DF004E52F5 /* SettingsTableViewController.swift in Sources */,
@@ -643,6 +654,7 @@
 				EEB5D8212205F0D30070FF8B /* GradientView.swift in Sources */,
 				EE24B106223DB9910057610D /* CollectionTableViewController.swift in Sources */,
 				EE2B821D21FCAD5200306990 /* Ruling.swift in Sources */,
+				EEB0ADDA227A3C3400613C8C /* Backup.swift in Sources */,
 				EEF02F24223DAC11008F008B /* CollectionCard+CoreDataClass.swift in Sources */,
 				EEB5D81D2205EA670070FF8B /* CardListTableViewCell.swift in Sources */,
 			);
