@@ -55,6 +55,7 @@
 		EE5EDE952246831F00C24C5E /* CardLegalityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EDE932246831F00C24C5E /* CardLegalityView.swift */; };
 		EE6F94B022309136001B3378 /* TcgPlayerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F94AF22309136001B3378 /* TcgPlayerApi.swift */; };
 		EE6F94B2223092AD001B3378 /* TcgToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F94B1223092AD001B3378 /* TcgToken.swift */; };
+		EE75E5F42284DF8300C23421 /* UpdateSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE75E5F32284DF8300C23421 /* UpdateSet.swift */; };
 		EE843A302228256100B07E09 /* ScryfallCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE843A2F2228256100B07E09 /* ScryfallCard.swift */; };
 		EE9246F2225A7B110044F858 /* Filters.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE9246F1225A7B110044F858 /* Filters.storyboard */; };
 		EE9246F4225A7E620044F858 /* FiltersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9246F3225A7E620044F858 /* FiltersTableViewController.swift */; };
@@ -165,6 +166,7 @@
 		EE5EDE932246831F00C24C5E /* CardLegalityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardLegalityView.swift; sourceTree = "<group>"; };
 		EE6F94AF22309136001B3378 /* TcgPlayerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcgPlayerApi.swift; sourceTree = "<group>"; };
 		EE6F94B1223092AD001B3378 /* TcgToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcgToken.swift; sourceTree = "<group>"; };
+		EE75E5F32284DF8300C23421 /* UpdateSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateSet.swift; sourceTree = "<group>"; };
 		EE843A2F2228256100B07E09 /* ScryfallCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryfallCard.swift; sourceTree = "<group>"; };
 		EE9246F1225A7B110044F858 /* Filters.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Filters.storyboard; sourceTree = "<group>"; };
 		EE9246F3225A7E620044F858 /* FiltersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersTableViewController.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				EE2CAC4F2231707000D24334 /* TcgPrices.swift */,
 				EE6F94B1223092AD001B3378 /* TcgToken.swift */,
 				EE2B822621FD25FD00306990 /* Token.swift */,
+				EE75E5F32284DF8300C23421 /* UpdateSet.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				EE924703225AA4E70044F858 /* Filters.swift in Sources */,
 				EE9246FB225A9EF80044F858 /* TypeFilterTableViewController.swift in Sources */,
 				EE924701225A9F990044F858 /* LegalityFilterTableViewController.swift in Sources */,
+				EE75E5F42284DF8300C23421 /* UpdateSet.swift in Sources */,
 				EE2B822521FD25C800306990 /* Meta.swift in Sources */,
 				EEEB6F27227929250009B442 /* Collection+Export.swift in Sources */,
 				EEE7D5AA226375FA00FE4D1C /* DeckCardQuantityTableViewCell.swift in Sources */,

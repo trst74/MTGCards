@@ -8,8 +8,9 @@
 
 import UIKit
 import CoreData
+import MobileCoreServices
 
-class SettingsTableViewController: UITableViewController {
+class SettingsTableViewController: UITableViewController, UIDocumentPickerDelegate {
     
     @IBOutlet weak var fileInfoLabel: UILabel!
     @IBOutlet weak var noImageSwitch: UISwitch!
@@ -219,16 +220,105 @@ class SettingsTableViewController: UITableViewController {
         UserDefaultsHandler.setExcludeOnlineOnly(exclude: sender.isOn)
     }
     @IBAction func manualUpdate(_ sender: Any) {
+        
+        let decoder = newJSONDecoder()
+        let managedObjectContext = CoreDataStack.handler.managedObjectContext
+        managedObjectContext.persistentStoreCoordinator = CoreDataStack.handler.storeContainer.persistentStoreCoordinator
+        guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext else {
+            fatalError("Failed to retrieve context")
+        }
+        decoder.userInfo[codingUserInfoKeyManagedObjectContext] = managedObjectContext
+        
+        guard let setlist = DataManager.getSetList() else { return }
+        let localSets = DataManager.getSets()
+        for sourceSet in setlist {
+            let localSet = localSets.first {
+                $0.code == sourceSet.code
+            }
+            if localSet == nil {
+                print("set missing locally: \(sourceSet.code)")
+                DataManager.getSet(setCode: sourceSet.code) { success in
+                    CoreDataStack.handler.privateContext.parent?.reset()
+                    CoreDataStack.handler.privateContext.reset()
+                }
+            }
+            if localSet?.meta?.date != sourceSet.setMeta?.date && localSet?.code == "WAR" {
+                print("\(sourceSet.code ?? "") local version: \(localSet?.meta?.date ?? "") || source version: \(sourceSet.setMeta?.date ?? "")")
+                
+                let setUpdate = DataManager.getSetUpdate(setCode: "WAR")
+                
+                if let setUpdate = setUpdate {
+                    let updateCards = setUpdate.cards
+                    if let localSetCards = localSet?.cards.allObjects as? [Card]  {
+                        //existing cards?
+                        let existingCards = updateCards.filter {
+                            let uuid = $0.uuid
+                            return localSetCards.contains { $0.uuid == uuid }
+                        }
+                        //new cards?
+                        let newCards = updateCards.filter {
+                            let uuid = $0.uuid
+                            return !localSetCards.contains { $0.uuid == uuid }
+                        }
+                        do {
+                            for card in newCards {
+                                let c1 = try card.jsonData()
+                                let newCard = try decoder.decode(Card.self, from: c1)
+                                if let localSet = localSet {
+                                    newCard.set = localSet
+                                    localSet.cards.addingObjects(from: [newCard])
+                                    print(newCard.name)
+                                }
+                            }
+                            try managedObjectContext.save()
+                        } catch {
+                            print(error)
+                        }
+                        //deleted cards?
+                        let deletedCards = localSetCards.filter {
+                            let uuid = $0.uuid
+                            return !updateCards.contains { $0.uuid == uuid }
+                        }
+                        
+                        for dcard in deletedCards {
+                            managedObjectContext.delete(dcard)
+                        }
+                        //update set data
+                        localSet?.baseSetSize = Int16(setUpdate.baseSetSize)
+                        localSet?.block = setUpdate.block
+                        localSet?.code = setUpdate.code
+                        localSet?.isFoilOnly = setUpdate.isFoilOnly
+                        localSet?.isOnlineOnly = setUpdate.isOnlineOnly
+                        localSet?.meta?.date = setUpdate.meta.date
+                        localSet?.meta?.version = setUpdate.meta.version
+                        localSet?.mtgoCode = setUpdate.mtgoCode
+                        localSet?.name = setUpdate.name
+                        localSet?.releaseDate = setUpdate.releaseDate
+                        localSet?.tcgplayerGroupID = Int16(setUpdate.tcgplayerGroupID)
+                        //tokens
+                        localSet?.totalSetSize = Int16(setUpdate.totalSetSize)
+                        localSet?.type = setUpdate.type
+                        print("test")
+                    }
+                    
+                }
+            }
+            
+        }
+
+        
+  
     }
+
     @IBAction func backupPersonalData(_ sender: Any) {
         let path = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("myMTG.json")
         var content = ""
-        let collections = getCollectionsFromCoreData()
+        let collections = DataManager.getCollectionsFromCoreData()
         let collectionUUIDs = (collections[0].cards?.allObjects as? [CollectionCard])?.map { $0.card?.uuid ?? ""} ?? []
         let wishListUUIDs = (collections[1].cards?.allObjects as? [CollectionCard])?.map { $0.card?.uuid ?? "" } ?? []
-        let deckBackups = getDecksFromCoreData().map { $0.getDeckBackup() }
+        let deckBackups = DataManager.getDecksFromCoreData().map { $0.getDeckBackup() }
         let backup = Backup(collection: collectionUUIDs, wishlist: wishListUUIDs, deckBackups: deckBackups)
-
+        
         do {
             try content = backup.jsonString() ?? ""
             try content.write(to: path, atomically: true, encoding: String.Encoding.utf8)
@@ -243,29 +333,25 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     @IBAction func importPersonalData(_ sender: Any) {
+        let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeJSON as String], in: .import)
+        documentPicker.delegate = self
+        self.present(documentPicker, animated: true)
     }
-    func getCollectionsFromCoreData() -> [Collection] {
-        let request = NSFetchRequest<Collection>(entityName: "Collection")
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        request.sortDescriptors = [sortDescriptor]
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         do {
-            let results = try CoreDataStack.handler.privateContext.fetch(request)
-            return results
+            let data = try Data.init(contentsOf: urls[0])
+            let backup = try Backup.init(data: data)
+            var collections = DataManager.getCollectionsFromCoreData()
+            for card in backup.collection {
+                // collections[0].addToCards(<#T##value: CollectionCard##CollectionCard#>)
+            }
+            for card in backup.wishlist {
+                
+            }
+            print(backup)
         } catch {
             print(error)
         }
-        return []
     }
-    func getDecksFromCoreData() -> [Deck] {
-        let request = NSFetchRequest<Deck>(entityName: "Deck")
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        request.sortDescriptors = [sortDescriptor]
-        do {
-            let results = try CoreDataStack.handler.privateContext.fetch(request)
-            return results
-        } catch {
-            print(error)
-        }
-        return []
-    }
+    
 }
