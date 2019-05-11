@@ -101,10 +101,10 @@ class Card: NSManagedObject, Codable {
     }
     
     required convenience init(from decoder: Decoder) throws {
-//        let managedObjectContext = CoreDataStack.handler.privateContext
-//        guard  let entity = NSEntityDescription.entity(forEntityName: "Card", in: managedObjectContext) else {
-//            fatalError("Failed to decode Card")
-//        }
+        //        let managedObjectContext = CoreDataStack.handler.privateContext
+        //        guard  let entity = NSEntityDescription.entity(forEntityName: "Card", in: managedObjectContext) else {
+        //            fatalError("Failed to decode Card")
+        //        }
         guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,
             let managedObjectContext = decoder.userInfo[codingUserInfoKeyManagedObjectContext] as? NSManagedObjectContext,
             let entity = NSEntityDescription.entity(forEntityName: "Card", in: managedObjectContext) else {
@@ -277,8 +277,95 @@ extension Card {
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
         return String(data: try self.jsonData(), encoding: encoding)
     }
-
+    
 }
+
+
+extension Card {
+    
+    @objc(addCardsubtypesObject:)
+    @NSManaged public func addToCardsubtypes(_ value: CardSubtype)
+    
+    @objc(removeCardsubtypesObject:)
+    @NSManaged public func removeFromCardsubtypes(_ value: CardSubtype)
+    
+    @objc(addCardsubtypes:)
+    @NSManaged public func addToCardsubtypes(_ values: NSSet)
+    
+    @objc(removeCardsubtypes:)
+    @NSManaged public func removeFromCardsubtypes(_ values: NSSet)
+    
+}
+
+// MARK: Generated accessors for cardsupertypes
+extension Card {
+    
+    @objc(addCardsupertypesObject:)
+    @NSManaged public func addToCardsupertypes(_ value: CardSupertype)
+    
+    @objc(removeCardsupertypesObject:)
+    @NSManaged public func removeFromCardsupertypes(_ value: CardSupertype)
+    
+    @objc(addCardsupertypes:)
+    @NSManaged public func addToCardsupertypes(_ values: NSSet)
+    
+    @objc(removeCardsupertypes:)
+    @NSManaged public func removeFromCardsupertypes(_ values: NSSet)
+    
+}
+
+// MARK: Generated accessors for colorIdentity
+extension Card {
+    
+    @objc(addColorIdentityObject:)
+    @NSManaged public func addToColorIdentity(_ value: ColorIdentity)
+    
+    @objc(removeColorIdentityObject:)
+    @NSManaged public func removeFromColorIdentity(_ value: ColorIdentity)
+    
+    @objc(addColorIdentity:)
+    @NSManaged public func addToColorIdentity(_ values: NSSet)
+    
+    @objc(removeColorIdentity:)
+    @NSManaged public func removeFromColorIdentity(_ values: NSSet)
+    
+}
+
+// MARK: Generated accessors for foreignData
+extension Card {
+    
+    @objc(addForeignDataObject:)
+    @NSManaged public func addToForeignData(_ value: ForeignDatum)
+    
+    @objc(removeForeignDataObject:)
+    @NSManaged public func removeFromForeignData(_ value: ForeignDatum)
+    
+    @objc(addForeignData:)
+    @NSManaged public func addToForeignData(_ values: NSSet)
+    
+    @objc(removeForeignData:)
+    @NSManaged public func removeFromForeignData(_ values: NSSet)
+    
+}
+
+// MARK: Generated accessors for rulings
+extension Card {
+    
+    @objc(addRulingsObject:)
+    @NSManaged public func addToRulings(_ value: Ruling)
+    
+    @objc(removeRulingsObject:)
+    @NSManaged public func removeFromRulings(_ value: Ruling)
+    
+    @objc(addRulings:)
+    @NSManaged public func addToRulings(_ values: NSSet)
+    
+    @objc(removeRulings:)
+    @NSManaged public func removeFromRulings(_ values: NSSet)
+    
+}
+
+// MARK: Generated accessors for types
 extension Card {
     
     @objc(addTypesObject:)
@@ -293,39 +380,6 @@ extension Card {
     @objc(removeTypes:)
     @NSManaged public func removeFromTypes(_ values: NSSet)
     
-    @objc(addColorIdentityObject:)
-    @NSManaged public func addToColorIdentity(_ value: ColorIdentity)
-    
-    @objc(removeColorIdentityObject:)
-    @NSManaged public func removeFromColorIdentity(_ value: ColorIdentity)
-    
-    @objc(addColorIdentity:)
-    @NSManaged public func addToColorIdentity(_ values: NSSet)
-    
-    @objc(removeColorIdentity:)
-    @NSManaged public func removeFromColorIdentity(_ values: NSSet)
-
-    @objc(addCardsubtypesObject:)
-    @NSManaged public func addToCardsubtypes(_ value: CardSubtype)
-    
-    @objc(removeCardsubtypesObject:)
-    @NSManaged public func removeFromCardsubtypes(_ value: CardSubtype)
-    
-    @objc(addCardsubtypes:)
-    @NSManaged public func addToCardsubtypes(_ values: NSSet)
-    
-    @objc(removeCardsubtypes:)
-    @NSManaged public func removeFromCardsubtypes(_ values: NSSet)
-
-    @objc(addCardsupertypesObject:)
-    @NSManaged public func addToCardsupertypes(_ value: CardSupertype)
-    
-    @objc(removeCardsupertypesObject:)
-    @NSManaged public func removeFromCardsupertypes(_ value: CardSupertype)
-    
-    @objc(addCardsupertypes:)
-    @NSManaged public func addToCardsupertypes(_ values: NSSet)
-    
-    @objc(removeCardsupertypes:)
-    @NSManaged public func removeFromCardsupertypes(_ values: NSSet)
 }
+
+

@@ -43,8 +43,4 @@ class Ruling: NSManagedObject, Codable {
         try container.encode(text, forKey: .text)
     }
 
-    //    init(date: String?, text: String?) {
-    //        self.date = date
-    //        self.text = text
-    //    }
 }

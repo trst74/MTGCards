@@ -112,7 +112,6 @@ class UpdateCard: Codable {
     let colorIdentity: [String]
     let colors: [String]
     let convertedManaCost: Int
-    let flavorText: String?
     let foreignData: [UpdateForeignDatum]
     let frameVersion: String
     let hasFoil: Bool
@@ -120,16 +119,16 @@ class UpdateCard: Codable {
     let layout: String
     let legalities: UpdateLegalities
     let manaCost: String?
-    let mcmID: Int?
-    let mcmMetaID: Int?
-    let mtgstocksID: Int?
-    let multiverseID: Int?
+    let mcmID: Int
+    let mcmMetaID: Int
+    let mtgstocksID: Int
+    let multiverseID: Int
     let name: String
     let number: String
     let originalText: String?
-    let originalType: String?
+    let originalType: String
     let power: String?
-    let prices: Prices?
+    let prices: Prices
     let printings: [String]
     let purchaseUrls: PurchaseUrls
     let rarity: String
@@ -139,18 +138,23 @@ class UpdateCard: Codable {
     let scryfallOracleID: String
     let subtypes: [String]
     let supertypes: [String]
-    let tcgplayerProductID: Int?
-    let tcgplayerPurchaseURL: String?
+    let tcgplayerProductID: Int
+    let tcgplayerPurchaseURL: String
     let text: String?
     let toughness: String?
     let type: String
     let types: [String]
     let uuid: String
-    let loyalty: String?
-    let variations: [String]?
-    let isAlternative: Bool?
-    let isStarter: Bool?
+    let flavorText: String?
+    let faceConvertedManaCost: Int?
     let frameEffect: String?
+    let names: [String]?
+    let side: String?
+    let isStarter: Bool?
+    let variations: [String]?
+    let loyalty: String?
+    let watermark: String?
+    let isReserved: Bool?
     
     enum CodingKeys: String, CodingKey {
         case artist = "artist"
@@ -158,7 +162,6 @@ class UpdateCard: Codable {
         case colorIdentity = "colorIdentity"
         case colors = "colors"
         case convertedManaCost = "convertedManaCost"
-        case flavorText = "flavorText"
         case foreignData = "foreignData"
         case frameVersion = "frameVersion"
         case hasFoil = "hasFoil"
@@ -192,20 +195,24 @@ class UpdateCard: Codable {
         case type = "type"
         case types = "types"
         case uuid = "uuid"
-        case loyalty = "loyalty"
-        case variations = "variations"
-        case isAlternative = "isAlternative"
-        case isStarter = "isStarter"
+        case flavorText = "flavorText"
+        case faceConvertedManaCost = "faceConvertedManaCost"
         case frameEffect = "frameEffect"
+        case names = "names"
+        case side = "side"
+        case isStarter = "isStarter"
+        case variations = "variations"
+        case loyalty = "loyalty"
+        case watermark = "watermark"
+        case isReserved = "isReserved"
     }
     
-    init(artist: String, borderColor: String, colorIdentity: [String], colors: [String], convertedManaCost: Int, flavorText: String?, foreignData: [UpdateForeignDatum], frameVersion: String, hasFoil: Bool, hasNonFoil: Bool, layout: String, legalities: UpdateLegalities, manaCost: String?, mcmID: Int?, mcmMetaID: Int?, mtgstocksID: Int?, multiverseID: Int?, name: String, number: String, originalText: String?, originalType: String?, power: String?, prices: Prices?, printings: [String], purchaseUrls: PurchaseUrls, rarity: String, rulings: [UpdateRuling], scryfallID: String, scryfallIllustrationID: String?, scryfallOracleID: String, subtypes: [String], supertypes: [String], tcgplayerProductID: Int?, tcgplayerPurchaseURL: String?, text: String?, toughness: String?, type: String, types: [String], uuid: String, loyalty: String?, variations: [String]?, isAlternative: Bool?,  isStarter: Bool?, frameEffect: String?) {
+    init(artist: String, borderColor: String, colorIdentity: [String], colors: [String], convertedManaCost: Int, foreignData: [UpdateForeignDatum], frameVersion: String, hasFoil: Bool, hasNonFoil: Bool, layout: String, legalities: UpdateLegalities, manaCost: String?, mcmID: Int, mcmMetaID: Int, mtgstocksID: Int, multiverseID: Int, name: String, number: String, originalText: String?, originalType: String, power: String?, isReserved: Bool?, prices: Prices, printings: [String], purchaseUrls: PurchaseUrls, rarity: String, rulings: [UpdateRuling], scryfallID: String, scryfallIllustrationID: String?, scryfallOracleID: String, subtypes: [String], supertypes: [String], tcgplayerProductID: Int, tcgplayerPurchaseURL: String, text: String?, toughness: String?, type: String, types: [String], uuid: String, flavorText: String?, faceConvertedManaCost: Int?, frameEffect: String?, names: [String]?, side: String?, isStarter: Bool?, variations: [String]?, loyalty: String?, watermark: String?) {
         self.artist = artist
         self.borderColor = borderColor
         self.colorIdentity = colorIdentity
         self.colors = colors
         self.convertedManaCost = convertedManaCost
-        self.flavorText = flavorText
         self.foreignData = foreignData
         self.frameVersion = frameVersion
         self.hasFoil = hasFoil
@@ -222,6 +229,7 @@ class UpdateCard: Codable {
         self.originalText = originalText
         self.originalType = originalType
         self.power = power
+        self.isReserved = isReserved
         self.prices = prices
         self.printings = printings
         self.purchaseUrls = purchaseUrls
@@ -239,11 +247,15 @@ class UpdateCard: Codable {
         self.type = type
         self.types = types
         self.uuid = uuid
-        self.loyalty = loyalty
-        self.variations = variations
-        self.isAlternative = isAlternative
-        self.isStarter = isStarter
+        self.flavorText = flavorText
+        self.faceConvertedManaCost = faceConvertedManaCost
         self.frameEffect = frameEffect
+        self.names = names
+        self.side = side
+        self.isStarter = isStarter
+        self.variations = variations
+        self.loyalty = loyalty
+        self.watermark = watermark
     }
 }
 
@@ -547,7 +559,8 @@ extension UpdateSet {
 extension UpdateCard {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(UpdateCard.self, from: data)
-        self.init(artist: me.artist, borderColor: me.borderColor, colorIdentity: me.colorIdentity, colors: me.colors, convertedManaCost: me.convertedManaCost, flavorText: me.flavorText, foreignData: me.foreignData, frameVersion: me.frameVersion, hasFoil: me.hasFoil, hasNonFoil: me.hasNonFoil, layout: me.layout, legalities: me.legalities, manaCost: me.manaCost, mcmID: me.mcmID, mcmMetaID: me.mcmMetaID, mtgstocksID: me.mtgstocksID, multiverseID: me.multiverseID, name: me.name, number: me.number, originalText: me.originalText, originalType: me.originalType, power: me.power, prices: me.prices, printings: me.printings, purchaseUrls: me.purchaseUrls, rarity: me.rarity, rulings: me.rulings, scryfallID: me.scryfallID, scryfallIllustrationID: me.scryfallIllustrationID, scryfallOracleID: me.scryfallOracleID, subtypes: me.subtypes, supertypes: me.supertypes, tcgplayerProductID: me.tcgplayerProductID, tcgplayerPurchaseURL: me.tcgplayerPurchaseURL, text: me.text, toughness: me.toughness, type: me.type, types: me.types, uuid: me.uuid, loyalty: me.loyalty, variations: me.variations, isAlternative: me.isAlternative, isStarter: me.isStarter, frameEffect: me.frameEffect)
+        self.init(artist: me.artist, borderColor: me.borderColor, colorIdentity: me.colorIdentity, colors: me.colors, convertedManaCost: me.convertedManaCost, foreignData: me.foreignData, frameVersion: me.frameVersion, hasFoil: me.hasFoil, hasNonFoil: me.hasNonFoil, layout: me.layout, legalities: me.legalities, manaCost: me.manaCost, mcmID: me.mcmID, mcmMetaID: me.mcmMetaID, mtgstocksID: me.mtgstocksID, multiverseID: me.multiverseID, name: me.name, number: me.number, originalText: me.originalText, originalType: me.originalType, power: me.power, isReserved: me.isReserved, prices: me.prices, printings: me.printings, purchaseUrls: me.purchaseUrls, rarity: me.rarity, rulings: me.rulings, scryfallID: me.scryfallID, scryfallIllustrationID: me.scryfallIllustrationID, scryfallOracleID: me.scryfallOracleID, subtypes: me.subtypes, supertypes: me.supertypes, tcgplayerProductID: me.tcgplayerProductID, tcgplayerPurchaseURL: me.tcgplayerPurchaseURL, text: me.text, toughness: me.toughness, type: me.type, types: me.types, uuid: me.uuid, flavorText: me.flavorText, faceConvertedManaCost: me.faceConvertedManaCost, frameEffect: me.frameEffect, names: me.names, side: me.side, isStarter: me.isStarter, variations: me.variations, loyalty: me.loyalty, watermark: me.watermark)
+        
     }
     
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -561,99 +574,8 @@ extension UpdateCard {
         try self.init(data: try Data(contentsOf: url))
     }
     
-    func with(
-        artist: String? = nil,
-        borderColor: String? = nil,
-        colorIdentity: [String]? = nil,
-        colors: [String]? = nil,
-        convertedManaCost: Int? = nil,
-        flavorText: String?? = nil,
-        foreignData: [UpdateForeignDatum]? = nil,
-        frameVersion: String? = nil,
-        hasFoil: Bool? = nil,
-        hasNonFoil: Bool? = nil,
-        layout: String? = nil,
-        legalities: UpdateLegalities? = nil,
-        manaCost: String?? = nil,
-        mcmID: Int?? = nil,
-        mcmMetaID: Int?? = nil,
-        mtgstocksID: Int?? = nil,
-        multiverseID: Int?? = nil,
-        name: String? = nil,
-        number: String? = nil,
-        originalText: String?? = nil,
-        originalType: String?? = nil,
-        power: String?? = nil,
-        prices: Prices?? = nil,
-        printings: [String]? = nil,
-        purchaseUrls: PurchaseUrls? = nil,
-        rarity: String? = nil,
-        rulings: [UpdateRuling]? = nil,
-        scryfallID: String? = nil,
-        scryfallIllustrationID: String?? = nil,
-        scryfallOracleID: String? = nil,
-        subtypes: [String]? = nil,
-        supertypes: [String]? = nil,
-        tcgplayerProductID: Int?? = nil,
-        tcgplayerPurchaseURL: String?? = nil,
-        text: String?? = nil,
-        toughness: String?? = nil,
-        type: String? = nil,
-        types: [String]? = nil,
-        uuid: String? = nil,
-        loyalty: String?? = nil,
-        variations: [String]?? = nil,
-        isAlternative: Bool?? = nil,
-        isStarter: Bool?? = nil,
-        frameEffect: String?? = nil
-        ) -> UpdateCard {
-        return UpdateCard(
-            artist: artist ?? self.artist,
-            borderColor: borderColor ?? self.borderColor,
-            colorIdentity: colorIdentity ?? self.colorIdentity,
-            colors: colors ?? self.colors,
-            convertedManaCost: convertedManaCost ?? self.convertedManaCost,
-            flavorText: flavorText ?? self.flavorText,
-            foreignData: foreignData ?? self.foreignData,
-            frameVersion: frameVersion ?? self.frameVersion,
-            hasFoil: hasFoil ?? self.hasFoil,
-            hasNonFoil: hasNonFoil ?? self.hasNonFoil,
-            layout: layout ?? self.layout,
-            legalities: legalities ?? self.legalities,
-            manaCost: manaCost ?? self.manaCost,
-            mcmID: mcmID ?? self.mcmID,
-            mcmMetaID: mcmMetaID ?? self.mcmMetaID,
-            mtgstocksID: mtgstocksID ?? self.mtgstocksID,
-            multiverseID: multiverseID ?? self.multiverseID,
-            name: name ?? self.name,
-            number: number ?? self.number,
-            originalText: originalText ?? self.originalText,
-            originalType: originalType ?? self.originalType,
-            power: power ?? self.power,
-            prices: prices ?? self.prices,
-            printings: printings ?? self.printings,
-            purchaseUrls: purchaseUrls ?? self.purchaseUrls,
-            rarity: rarity ?? self.rarity,
-            rulings: rulings ?? self.rulings,
-            scryfallID: scryfallID ?? self.scryfallID,
-            scryfallIllustrationID: scryfallIllustrationID ?? self.scryfallIllustrationID,
-            scryfallOracleID: scryfallOracleID ?? self.scryfallOracleID,
-            subtypes: subtypes ?? self.subtypes,
-            supertypes: supertypes ?? self.supertypes,
-            tcgplayerProductID: tcgplayerProductID ?? self.tcgplayerProductID,
-            tcgplayerPurchaseURL: tcgplayerPurchaseURL ?? self.tcgplayerPurchaseURL,
-            text: text ?? self.text,
-            toughness: toughness ?? self.toughness,
-            type: type ?? self.type,
-            types: types ?? self.types,
-            uuid: uuid ?? self.uuid,
-            loyalty: loyalty ?? self.loyalty,
-            variations: variations ?? self.variations,
-            isAlternative: isAlternative ?? self.isAlternative,
-            isStarter: isStarter ?? self.isStarter,
-            frameEffect: frameEffect ?? self.frameEffect
-        )
-    }
+
+    
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
@@ -666,7 +588,7 @@ extension UpdateCard {
 extension UpdateForeignDatum {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(UpdateForeignDatum.self, from: data)
-        self.init(flavorText: me.flavorText, language: me.language ?? "", multiverseID: me.multiverseID, name: me.name, text: me.text, type: me.type)
+        self.init(flavorText: me.flavorText, language: me.language , multiverseID: me.multiverseID, name: me.name, text: me.text, type: me.type)
     }
     
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -710,7 +632,7 @@ extension UpdateForeignDatum {
 extension UpdateLegalities {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(UpdateLegalities.self, from: data)
-        self.init(commander: me.commander ?? "", duel: me.duel, frontier: me.frontier, future: me.future, legacy: me.legacy, modern: me.modern, pauper: me.pauper, standard: me.standard, vintage: me.vintage, penny: me.penny)
+        self.init(commander: me.commander , duel: me.duel, frontier: me.frontier, future: me.future, legacy: me.legacy, modern: me.modern, pauper: me.pauper, standard: me.standard, vintage: me.vintage, penny: me.penny)
     }
     
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -834,7 +756,7 @@ extension PurchaseUrls {
 extension UpdateRuling {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(UpdateRuling.self, from: data)
-        self.init(date: me.date ?? "", text: me.text)
+        self.init(date: me.date , text: me.text)
     }
     
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -866,11 +788,34 @@ extension UpdateRuling {
         return String(data: try self.jsonData(), encoding: encoding)
     }
 }
-
+extension Array where Element == UpdateRuling {
+    init(data: Data) throws {
+        self = try newJSONDecoder().decode([UpdateRuling].self, from: data)
+    }
+    
+    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
+        guard let data = json.data(using: encoding) else {
+            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
+        }
+        try self.init(data: data)
+    }
+    
+    init(fromURL url: URL) throws {
+        try self.init(data: try Data(contentsOf: url))
+    }
+    
+    func jsonData() throws -> Data {
+        return try newJSONEncoder().encode(self)
+    }
+    
+    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
+        return String(data: try self.jsonData(), encoding: encoding)
+    }
+}
 extension UpdateMeta {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(UpdateMeta.self, from: data)
-        self.init(date: me.date ?? "", pricesDate: me.pricesDate, version: me.version)
+        self.init(date: me.date , pricesDate: me.pricesDate, version: me.version)
     }
     
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -900,7 +845,7 @@ extension UpdateMeta {
 extension UpdateToken {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(UpdateToken.self, from: data)
-        self.init(artist: me.artist ?? "", borderColor: me.borderColor, colorIdentity: me.colorIdentity, colors: me.colors, layout: me.layout, name: me.name, number: me.number, power: me.power, reverseRelated: me.reverseRelated, scryfallID: me.scryfallID, scryfallIllustrationID: me.scryfallIllustrationID, scryfallOracleID: me.scryfallOracleID, text: me.text, toughness: me.toughness, type: me.type, uuid: me.uuid)
+        self.init(artist: me.artist , borderColor: me.borderColor, colorIdentity: me.colorIdentity, colors: me.colors, layout: me.layout, name: me.name, number: me.number, power: me.power, reverseRelated: me.reverseRelated, scryfallID: me.scryfallID, scryfallIllustrationID: me.scryfallIllustrationID, scryfallOracleID: me.scryfallOracleID, text: me.text, toughness: me.toughness, type: me.type, uuid: me.uuid)
     }
     
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
