@@ -289,25 +289,56 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                                 if let types = localCard.types {
                                     localCard.removeFromTypes(types)
                                 }
-                                do {
-                                    for type in eCard.types {
-                                        guard  let entity = NSEntityDescription.entity(forEntityName: "CardType", in: managedObjectContext) else {
-                                            fatalError("Failed to decode Card")
-                                        }
-                                        let tempType = CardType.init(entity: entity, insertInto: managedObjectContext)
-                                        tempType.type = type
-                                        tempType.card = localCard
-                                        localCard.addToTypes(tempType)
+                                
+                                for type in eCard.types {
+                                    guard  let entity = NSEntityDescription.entity(forEntityName: "CardType", in: managedObjectContext) else {
+                                        fatalError("Failed to decode Card")
                                     }
-                                } catch {
-                                    
+                                    let tempType = CardType.init(entity: entity, insertInto: managedObjectContext)
+                                    tempType.type = type
+                                    tempType.card = localCard
+                                    localCard.addToTypes(tempType)
                                 }
+                                
                                 //coloridentity
-                                
+                                if let colors = localCard.colorIdentity {
+                                    localCard.removeFromColorIdentity(colors)
+                                }
+                                for i in eCard.colorIdentity{
+                                    guard  let entity = NSEntityDescription.entity(forEntityName: "ColorIdentity", in: managedObjectContext) else {
+                                        fatalError("Failed to decode Card")
+                                    }
+                                    let tempColor = ColorIdentity.init(entity: entity, insertInto: managedObjectContext)
+                                    tempColor.color = i
+                                    tempColor.card = localCard
+                                    localCard.addToColorIdentity(tempColor)
+                                }
                                 //card subtypes
-                                
+                                if let types = localCard.cardsubtypes {
+                                    localCard.removeFromCardsubtypes(types)
+                                }
+                                for sub in eCard.subtypes {
+                                    guard  let entity = NSEntityDescription.entity(forEntityName: "CardSubtype", in: managedObjectContext) else {
+                                        fatalError("Failed to decode Card")
+                                    }
+                                    let tempsub = CardSubtype.init(entity: entity, insertInto: managedObjectContext)
+                                    tempsub.subtype = sub
+                                    tempsub.card = localCard
+                                    localCard.addToCardsubtypes(tempsub)
+                                }
                                 //card super types
-                                
+                                if let types = localCard.cardsupertypes {
+                                    localCard.removeFromCardsupertypes(types)
+                                }
+                                for superType in eCard.supertypes {
+                                    guard  let entity = NSEntityDescription.entity(forEntityName: "CardSupertype", in: managedObjectContext) else {
+                                        fatalError("Failed to decode Card")
+                                    }
+                                    let tempsub = CardSupertype.init(entity: entity, insertInto: managedObjectContext)
+                                    tempsub.supertype = superType
+                                    tempsub.card = localCard
+                                    localCard.addToCardsupertypes(tempsub)
+                                }
                                 //card Data
                                 localCard.artist = eCard.artist
                                 localCard.borderColor = eCard.borderColor
