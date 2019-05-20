@@ -212,7 +212,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         if setCode != "" {
             predicates.append(predicate2)
         } else {
-            predicates.append(NSPredicate(format: "set.type == %@", "promo"))
+            predicates.append(NSPredicate(format: "set.type != %@", "promo"))
         }
         if UserDefaultsHandler.areOnlineOnlyCardsExcluded() {
             let onlineOnlyPredicate = NSPredicate(format: "set.isOnlineOnly == false")

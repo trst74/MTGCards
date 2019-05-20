@@ -14,20 +14,19 @@ import Foundation
 
 class UpdateSet: Codable {
     let baseSetSize: Int
-    let block: String
-    let boosterV3: [BoosterV3]
+    let block: String?
     let cards: [UpdateCard]
     let code: String
     let isFoilOnly: Bool
     let isOnlineOnly: Bool
     let keyruneCode: String
-    let mcmID: Int
-    let mcmName: String
+    let mcmID: Int?
+    let mcmName: String?
     let meta: UpdateMeta
-    let mtgoCode: String
+    let mtgoCode: String?
     let name: String
     let releaseDate: String
-    let tcgplayerGroupID: Int
+    let tcgplayerGroupID: Int?
     let tokens: [UpdateToken]
     let totalSetSize: Int
     let translations: Translations
@@ -36,7 +35,6 @@ class UpdateSet: Codable {
     enum CodingKeys: String, CodingKey {
         case baseSetSize = "baseSetSize"
         case block = "block"
-        case boosterV3 = "boosterV3"
         case cards = "cards"
         case code = "code"
         case isFoilOnly = "isFoilOnly"
@@ -55,10 +53,10 @@ class UpdateSet: Codable {
         case type = "type"
     }
     
-    init(baseSetSize: Int, block: String, boosterV3: [BoosterV3], cards: [UpdateCard], code: String, isFoilOnly: Bool, isOnlineOnly: Bool, keyruneCode: String, mcmID: Int, mcmName: String, meta: UpdateMeta, mtgoCode: String, name: String, releaseDate: String, tcgplayerGroupID: Int, tokens: [UpdateToken], totalSetSize: Int, translations: Translations, type: String) {
+    init(baseSetSize: Int, block: String,  cards: [UpdateCard], code: String, isFoilOnly: Bool, isOnlineOnly: Bool, keyruneCode: String, mcmID: Int, mcmName: String, meta: UpdateMeta, mtgoCode: String, name: String, releaseDate: String, tcgplayerGroupID: Int, tokens: [UpdateToken], totalSetSize: Int, translations: Translations, type: String) {
         self.baseSetSize = baseSetSize
         self.block = block
-        self.boosterV3 = boosterV3
+
         self.cards = cards
         self.code = code
         self.isFoilOnly = isFoilOnly
@@ -107,30 +105,30 @@ enum BoosterV3: Codable {
 }
 
 class UpdateCard: Codable {
-    let artist: String
+    let artist: String?
     let borderColor: String
     let colorIdentity: [String]
     let colors: [String]
-    let convertedManaCost: Int
-    let foreignData: [UpdateForeignDatum]
+    let convertedManaCost: Double?
+    let foreignData: [UpdateForeignDatum]?
     let frameVersion: String
     let hasFoil: Bool
     let hasNonFoil: Bool
     let layout: String
     let legalities: UpdateLegalities
     let manaCost: String?
-    let mcmID: Int
-    let mcmMetaID: Int
-    let mtgstocksID: Int
-    let multiverseID: Int
+    let mcmID: Int?
+    let mcmMetaID: Int?
+    let mtgstocksID: Int?
+    let multiverseID: Int?
     let name: String
     let number: String
     let originalText: String?
-    let originalType: String
+    let originalType: String?
     let power: String?
-    let prices: Prices
+    let prices: Prices?
     let printings: [String]
-    let purchaseUrls: PurchaseUrls
+    let purchaseUrls: PurchaseUrls?
     let rarity: String
     let rulings: [UpdateRuling]
     let scryfallID: String
@@ -138,8 +136,8 @@ class UpdateCard: Codable {
     let scryfallOracleID: String
     let subtypes: [String]
     let supertypes: [String]
-    let tcgplayerProductID: Int
-    let tcgplayerPurchaseURL: String
+    let tcgplayerProductID: Int?
+    let tcgplayerPurchaseURL: String?
     let text: String?
     let toughness: String?
     let type: String
@@ -207,7 +205,7 @@ class UpdateCard: Codable {
         case isReserved = "isReserved"
     }
     
-    init(artist: String, borderColor: String, colorIdentity: [String], colors: [String], convertedManaCost: Int, foreignData: [UpdateForeignDatum], frameVersion: String, hasFoil: Bool, hasNonFoil: Bool, layout: String, legalities: UpdateLegalities, manaCost: String?, mcmID: Int, mcmMetaID: Int, mtgstocksID: Int, multiverseID: Int, name: String, number: String, originalText: String?, originalType: String, power: String?, isReserved: Bool?, prices: Prices, printings: [String], purchaseUrls: PurchaseUrls, rarity: String, rulings: [UpdateRuling], scryfallID: String, scryfallIllustrationID: String?, scryfallOracleID: String, subtypes: [String], supertypes: [String], tcgplayerProductID: Int, tcgplayerPurchaseURL: String, text: String?, toughness: String?, type: String, types: [String], uuid: String, flavorText: String?, faceConvertedManaCost: Int?, frameEffect: String?, names: [String]?, side: String?, isStarter: Bool?, variations: [String]?, loyalty: String?, watermark: String?) {
+    init(artist: String, borderColor: String, colorIdentity: [String], colors: [String], convertedManaCost: Double?, foreignData: [UpdateForeignDatum], frameVersion: String, hasFoil: Bool, hasNonFoil: Bool, layout: String, legalities: UpdateLegalities, manaCost: String?, mcmID: Int, mcmMetaID: Int, mtgstocksID: Int, multiverseID: Int, name: String, number: String, originalText: String?, originalType: String, power: String?, isReserved: Bool?, prices: Prices, printings: [String], purchaseUrls: PurchaseUrls, rarity: String, rulings: [UpdateRuling], scryfallID: String, scryfallIllustrationID: String?, scryfallOracleID: String, subtypes: [String], supertypes: [String], tcgplayerProductID: Int, tcgplayerPurchaseURL: String, text: String?, toughness: String?, type: String, types: [String], uuid: String, flavorText: String?, faceConvertedManaCost: Int?, frameEffect: String?, names: [String]?, side: String?, isStarter: Bool?, variations: [String]?, loyalty: String?, watermark: String?) {
         self.artist = artist
         self.borderColor = borderColor
         self.colorIdentity = colorIdentity
@@ -262,10 +260,10 @@ class UpdateCard: Codable {
 class UpdateForeignDatum: Codable {
     let flavorText: String?
     let language: String
-    let multiverseID: Int
+    let multiverseID: Int?
     let name: String
     let text: String?
-    let type: String
+    let type: String?
     
     enum CodingKeys: String, CodingKey {
         case flavorText = "flavorText"
@@ -287,15 +285,15 @@ class UpdateForeignDatum: Codable {
 }
 
 class UpdateLegalities: Codable {
-    let commander: String
-    let duel: String
-    let frontier: String
-    let future: String
-    let legacy: String
-    let modern: String
+    let commander: String?
+    let duel: String?
+    let frontier: String?
+    let future: String?
+    let legacy: String?
+    let modern: String?
     let pauper: String?
-    let standard: String
-    let vintage: String
+    let standard: String?
+    let vintage: String?
     let penny: String?
     
     enum CodingKeys: String, CodingKey {
@@ -311,7 +309,7 @@ class UpdateLegalities: Codable {
         case penny = "penny"
     }
     
-    init(commander: String, duel: String, frontier: String, future: String, legacy: String, modern: String, pauper: String?, standard: String, vintage: String, penny: String?) {
+    init(commander: String?, duel: String?, frontier: String?, future: String?, legacy: String?, modern: String?, pauper: String?, standard: String?, vintage: String?, penny: String?) {
         self.commander = commander
         self.duel = duel
         self.frontier = frontier
@@ -389,8 +387,8 @@ class UpdateMeta: Codable {
 }
 
 class UpdateToken: Codable {
-    let artist: String
-    let borderColor: String
+    let artist: String?
+    let borderColor: String?
     let colorIdentity: [String]
     let colors: [String]
     let layout: String
@@ -398,8 +396,8 @@ class UpdateToken: Codable {
     let number: String
     let power: String?
     let reverseRelated: [String]
-    let scryfallID: String
-    let scryfallIllustrationID: String
+    let scryfallID: String?
+    let scryfallIllustrationID: String?
     let scryfallOracleID: String
     let text: String?
     let toughness: String?
@@ -446,16 +444,16 @@ class UpdateToken: Codable {
 }
 
 class Translations: Codable {
-    let chineseSimplified: String
-    let chineseTraditional: String
-    let french: String
-    let german: String
-    let italian: String
-    let japanese: String
-    let korean: String
-    let portugueseBrazil: String
-    let russian: String
-    let spanish: String
+    let chineseSimplified: String?
+    let chineseTraditional: String?
+    let french: String?
+    let german: String?
+    let italian: String?
+    let japanese: String?
+    let korean: String?
+    let portugueseBrazil: String?
+    let russian: String?
+    let spanish: String?
     
     enum CodingKeys: String, CodingKey {
         case chineseSimplified = "Chinese Simplified"
@@ -487,66 +485,7 @@ class Translations: Codable {
 // MARK: Convenience initializers and mutators
 
 extension UpdateSet {
-    convenience init(data: Data) throws {
-        let me = try newJSONDecoder().decode(UpdateSet.self, from: data)
-        self.init(baseSetSize: me.baseSetSize, block: me.block, boosterV3: me.boosterV3, cards: me.cards, code: me.code, isFoilOnly: me.isFoilOnly, isOnlineOnly: me.isOnlineOnly, keyruneCode: me.keyruneCode, mcmID: me.mcmID, mcmName: me.mcmName, meta: me.meta, mtgoCode: me.mtgoCode, name: me.name, releaseDate: me.releaseDate, tcgplayerGroupID: me.tcgplayerGroupID, tokens: me.tokens, totalSetSize: me.totalSetSize, translations: me.translations, type: me.type)
-    }
-    
-    convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-    
-    convenience init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-    
-    func with(
-        baseSetSize: Int? = nil,
-        block: String? = nil,
-        boosterV3: [BoosterV3]? = nil,
-        cards: [UpdateCard]? = nil,
-        code: String? = nil,
-        isFoilOnly: Bool? = nil,
-        isOnlineOnly: Bool? = nil,
-        keyruneCode: String? = nil,
-        mcmID: Int? = nil,
-        mcmName: String? = nil,
-        meta: UpdateMeta? = nil,
-        mtgoCode: String? = nil,
-        name: String? = nil,
-        releaseDate: String? = nil,
-        tcgplayerGroupID: Int? = nil,
-        tokens: [UpdateToken]? = nil,
-        totalSetSize: Int? = nil,
-        translations: Translations? = nil,
-        type: String? = nil
-        ) -> UpdateSet {
-        return UpdateSet(
-            baseSetSize: baseSetSize ?? self.baseSetSize,
-            block: block ?? self.block,
-            boosterV3: boosterV3 ?? self.boosterV3,
-            cards: cards ?? self.cards,
-            code: code ?? self.code,
-            isFoilOnly: isFoilOnly ?? self.isFoilOnly,
-            isOnlineOnly: isOnlineOnly ?? self.isOnlineOnly,
-            keyruneCode: keyruneCode ?? self.keyruneCode,
-            mcmID: mcmID ?? self.mcmID,
-            mcmName: mcmName ?? self.mcmName,
-            meta: meta ?? self.meta,
-            mtgoCode: mtgoCode ?? self.mtgoCode,
-            name: name ?? self.name,
-            releaseDate: releaseDate ?? self.releaseDate,
-            tcgplayerGroupID: tcgplayerGroupID ?? self.tcgplayerGroupID,
-            tokens: tokens ?? self.tokens,
-            totalSetSize: totalSetSize ?? self.totalSetSize,
-            translations: translations ?? self.translations,
-            type: type ?? self.type
-        )
-    }
-    
+   
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
@@ -557,22 +496,8 @@ extension UpdateSet {
 }
 
 extension UpdateCard {
-    convenience init(data: Data) throws {
-        let me = try newJSONDecoder().decode(UpdateCard.self, from: data)
-        self.init(artist: me.artist, borderColor: me.borderColor, colorIdentity: me.colorIdentity, colors: me.colors, convertedManaCost: me.convertedManaCost, foreignData: me.foreignData, frameVersion: me.frameVersion, hasFoil: me.hasFoil, hasNonFoil: me.hasNonFoil, layout: me.layout, legalities: me.legalities, manaCost: me.manaCost, mcmID: me.mcmID, mcmMetaID: me.mcmMetaID, mtgstocksID: me.mtgstocksID, multiverseID: me.multiverseID, name: me.name, number: me.number, originalText: me.originalText, originalType: me.originalType, power: me.power, isReserved: me.isReserved, prices: me.prices, printings: me.printings, purchaseUrls: me.purchaseUrls, rarity: me.rarity, rulings: me.rulings, scryfallID: me.scryfallID, scryfallIllustrationID: me.scryfallIllustrationID, scryfallOracleID: me.scryfallOracleID, subtypes: me.subtypes, supertypes: me.supertypes, tcgplayerProductID: me.tcgplayerProductID, tcgplayerPurchaseURL: me.tcgplayerPurchaseURL, text: me.text, toughness: me.toughness, type: me.type, types: me.types, uuid: me.uuid, flavorText: me.flavorText, faceConvertedManaCost: me.faceConvertedManaCost, frameEffect: me.frameEffect, names: me.names, side: me.side, isStarter: me.isStarter, variations: me.variations, loyalty: me.loyalty, watermark: me.watermark)
-        
-    }
     
-    convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-    
-    convenience init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
+
     
 
     
@@ -586,39 +511,6 @@ extension UpdateCard {
 }
 
 extension UpdateForeignDatum {
-    convenience init(data: Data) throws {
-        let me = try newJSONDecoder().decode(UpdateForeignDatum.self, from: data)
-        self.init(flavorText: me.flavorText, language: me.language , multiverseID: me.multiverseID, name: me.name, text: me.text, type: me.type)
-    }
-    
-    convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-    
-    convenience init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-    
-    func with(
-        flavorText: String?? = nil,
-        language: String? = nil,
-        multiverseID: Int? = nil,
-        name: String? = nil,
-        text: String?? = nil,
-        type: String? = nil
-        ) -> UpdateForeignDatum {
-        return UpdateForeignDatum(
-            flavorText: flavorText ?? self.flavorText,
-            language: language ?? self.language,
-            multiverseID: multiverseID ?? self.multiverseID,
-            name: name ?? self.name,
-            text: text ?? self.text,
-            type: type ?? self.type
-        )
-    }
     
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
@@ -843,59 +735,7 @@ extension UpdateMeta {
 }
 
 extension UpdateToken {
-    convenience init(data: Data) throws {
-        let me = try newJSONDecoder().decode(UpdateToken.self, from: data)
-        self.init(artist: me.artist , borderColor: me.borderColor, colorIdentity: me.colorIdentity, colors: me.colors, layout: me.layout, name: me.name, number: me.number, power: me.power, reverseRelated: me.reverseRelated, scryfallID: me.scryfallID, scryfallIllustrationID: me.scryfallIllustrationID, scryfallOracleID: me.scryfallOracleID, text: me.text, toughness: me.toughness, type: me.type, uuid: me.uuid)
-    }
-    
-    convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-    
-    convenience init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-    
-    func with(
-        artist: String? = nil,
-        borderColor: String? = nil,
-        colorIdentity: [String]? = nil,
-        colors: [String]? = nil,
-        layout: String? = nil,
-        name: String? = nil,
-        number: String? = nil,
-        power: String?? = nil,
-        reverseRelated: [String]? = nil,
-        scryfallID: String? = nil,
-        scryfallIllustrationID: String? = nil,
-        scryfallOracleID: String? = nil,
-        text: String?? = nil,
-        toughness: String?? = nil,
-        type: String? = nil,
-        uuid: String? = nil
-        ) -> UpdateToken {
-        return UpdateToken(
-            artist: artist ?? self.artist,
-            borderColor: borderColor ?? self.borderColor,
-            colorIdentity: colorIdentity ?? self.colorIdentity,
-            colors: colors ?? self.colors,
-            layout: layout ?? self.layout,
-            name: name ?? self.name,
-            number: number ?? self.number,
-            power: power ?? self.power,
-            reverseRelated: reverseRelated ?? self.reverseRelated,
-            scryfallID: scryfallID ?? self.scryfallID,
-            scryfallIllustrationID: scryfallIllustrationID ?? self.scryfallIllustrationID,
-            scryfallOracleID: scryfallOracleID ?? self.scryfallOracleID,
-            text: text ?? self.text,
-            toughness: toughness ?? self.toughness,
-            type: type ?? self.type,
-            uuid: uuid ?? self.uuid
-        )
-    }
+ 
     
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
@@ -907,47 +747,7 @@ extension UpdateToken {
 }
 
 extension Translations {
-    convenience init(data: Data) throws {
-        let me = try newJSONDecoder().decode(Translations.self, from: data)
-        self.init(chineseSimplified: me.chineseSimplified, chineseTraditional: me.chineseTraditional, french: me.french, german: me.german, italian: me.italian, japanese: me.japanese, korean: me.korean, portugueseBrazil: me.portugueseBrazil, russian: me.russian, spanish: me.spanish)
-    }
     
-    convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-    
-    convenience init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-    
-    func with(
-        chineseSimplified: String? = nil,
-        chineseTraditional: String? = nil,
-        french: String? = nil,
-        german: String? = nil,
-        italian: String? = nil,
-        japanese: String? = nil,
-        korean: String? = nil,
-        portugueseBrazil: String? = nil,
-        russian: String? = nil,
-        spanish: String? = nil
-        ) -> Translations {
-        return Translations(
-            chineseSimplified: chineseSimplified ?? self.chineseSimplified,
-            chineseTraditional: chineseTraditional ?? self.chineseTraditional,
-            french: french ?? self.french,
-            german: german ?? self.german,
-            italian: italian ?? self.italian,
-            japanese: japanese ?? self.japanese,
-            korean: korean ?? self.korean,
-            portugueseBrazil: portugueseBrazil ?? self.portugueseBrazil,
-            russian: russian ?? self.russian,
-            spanish: spanish ?? self.spanish
-        )
-    }
     
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)

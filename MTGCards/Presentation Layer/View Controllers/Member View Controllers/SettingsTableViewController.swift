@@ -242,10 +242,10 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                     CoreDataStack.handler.privateContext.reset()
                 }
             }
-            if localSet?.meta?.date != sourceSet.setMeta?.date && localSet?.code == "WAR" {
+            if localSet?.meta?.date != sourceSet.setMeta?.date  {
                 print("\(sourceSet.code ?? "") local version: \(localSet?.meta?.date ?? "") || source version: \(sourceSet.setMeta?.date ?? "")")
                 
-                let setUpdate = DataManager.getSetUpdate(setCode: "WAR")
+                let setUpdate = DataManager.getSetUpdate(setCode: sourceSet.code)
                 
                 if let setUpdate = setUpdate {
                     let updateCards = setUpdate.cards
@@ -268,7 +268,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                                     let newRulings = try decoder.decode([Ruling].self, from: json)
                                     newRulings.forEach { $0.card = localCard }
                                     if newRulings.count > 0 {
-                                        localCard.addToRulings(NSSet(object: newRulings))
+                                        localCard.addToRulings(NSSet.init(array: newRulings))
                                     }
                                 } catch {
                                     print(error)
@@ -343,14 +343,14 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                                 localCard.artist = eCard.artist
                                 localCard.borderColor = eCard.borderColor
                                 localCard.colors = eCard.colors
-                                localCard.convertedManaCost = Float(eCard.convertedManaCost)
+                                localCard.convertedManaCost = Float(eCard.convertedManaCost ?? 0)
                                 localCard.flavorText = eCard.flavorText
                                 localCard.frameVersion = eCard.frameVersion
                                 localCard.hasFoil = eCard.hasFoil
                                 localCard.hasNonFoil = eCard.hasNonFoil
                                 localCard.layout = eCard.layout
                                 localCard.manaCost = eCard.manaCost
-                                localCard.multiverseID = Int32(eCard.multiverseID)
+                                localCard.multiverseID = Int32(eCard.multiverseID ?? 0)
                                 localCard.name = eCard.name
                                 localCard.number = eCard.number
                                 localCard.originalText = eCard.originalText
@@ -359,7 +359,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                                 localCard.printings = eCard.printings
                                 localCard.rarity = eCard.rarity
                                 localCard.scryfallID = eCard.scryfallID
-                                localCard.tcgplayerProductID = Int32(eCard.tcgplayerProductID)
+                                localCard.tcgplayerProductID = Int32(eCard.tcgplayerProductID ?? 0)
                                 localCard.text = eCard.text
                                 localCard.toughness = eCard.toughness
                                 localCard.type = eCard.type
@@ -402,20 +402,20 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                             managedObjectContext.delete(dcard)
                         }
                         //update set data
-                        //                        localSet?.baseSetSize = Int16(setUpdate.baseSetSize)
-                        //                        localSet?.block = setUpdate.block
-                        //                        localSet?.code = setUpdate.code
-                        //                        localSet?.isFoilOnly = setUpdate.isFoilOnly
-                        //                        localSet?.isOnlineOnly = setUpdate.isOnlineOnly
-                        //                        localSet?.meta?.date = setUpdate.meta.date
-                        //                        localSet?.meta?.version = setUpdate.meta.version
-                        //                        localSet?.mtgoCode = setUpdate.mtgoCode
-                        //                        localSet?.name = setUpdate.name
-                        //                        localSet?.releaseDate = setUpdate.releaseDate
-                        //                        localSet?.tcgplayerGroupID = Int16(setUpdate.tcgplayerGroupID)
-                        //                        //tokens
-                        //                        localSet?.totalSetSize = Int16(setUpdate.totalSetSize)
-                        //                        localSet?.type = setUpdate.type
+                                                localSet?.baseSetSize = Int16(setUpdate.baseSetSize)
+                                                localSet?.block = setUpdate.block
+                                                localSet?.code = setUpdate.code
+                                                localSet?.isFoilOnly = setUpdate.isFoilOnly
+                                                localSet?.isOnlineOnly = setUpdate.isOnlineOnly
+                                                localSet?.meta?.date = setUpdate.meta.date
+                                                localSet?.meta?.version = setUpdate.meta.version
+                                                localSet?.mtgoCode = setUpdate.mtgoCode
+                                                localSet?.name = setUpdate.name
+                                                localSet?.releaseDate = setUpdate.releaseDate
+                                                localSet?.tcgplayerGroupID = Int16(setUpdate.tcgplayerGroupID ?? 0)
+                                                //tokens
+                                                localSet?.totalSetSize = Int16(setUpdate.totalSetSize)
+                                                localSet?.type = setUpdate.type
                         print("test")
                         
                         do {
