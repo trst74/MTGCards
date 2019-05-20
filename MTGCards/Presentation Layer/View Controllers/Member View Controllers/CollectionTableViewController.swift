@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class CollectionTableViewController: UITableViewController {
     var collection: Collection? = nil
@@ -106,12 +107,16 @@ class CollectionTableViewController: UITableViewController {
     }
 }
 extension CollectionTableViewController {
-    static func freshCollection(collection: Collection) -> CollectionTableViewController {
+    static func freshCollection(collection: NSManagedObjectID) -> CollectionTableViewController {
         let storyboard = UIStoryboard(name: "Collection", bundle: nil)
         guard let collectionVC = storyboard.instantiateInitialViewController() as? CollectionTableViewController else {
             fatalError("Project config error - storyboard doesnt provide a FileListVC")
         }
-        collectionVC.collection = collection
+        if let c = CoreDataStack.handler.privateContext.object(with: collection) as? Collection {
+            collectionVC.collection = c
+            collectionVC.title = c.name
+        }
+        
         return collectionVC
     }
 }

@@ -20,7 +20,7 @@ class StateCoordinator: NSObject {
 
 }
     extension  StateCoordinator {
-        func didSelectCollection(collection: Collection) {
+        func didSelectCollection(collection: NSManagedObjectID) {
 
             delegate?.gotoState(SelectionState.collectionSelected, s: collection)
         }
@@ -28,7 +28,7 @@ class StateCoordinator: NSObject {
 
             delegate?.gotoState(SelectionState.cardSelected, s: id)
         }
-        func didSelectDeck(d: Deck) {
+        func didSelectDeck(d: NSManagedObjectID) {
             
             delegate?.gotoState(SelectionState.deckSelected, s: d)
         }

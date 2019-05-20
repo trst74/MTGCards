@@ -220,9 +220,9 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
             //StateCoordinator.shared.didSelectCollection(collection: "Search")
             StateCoordinator.shared.didSelectTool(tool: "Search")
         } else if indexPath.section == 2 {
-            StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row])
+            StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row].objectID)
         } else if indexPath.section == 1 {
-            StateCoordinator.shared.didSelectCollection(collection: cdCollections[indexPath.row])
+            StateCoordinator.shared.didSelectCollection(collection: cdCollections[indexPath.row].objectID)
         }
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

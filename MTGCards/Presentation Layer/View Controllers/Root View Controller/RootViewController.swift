@@ -124,7 +124,7 @@ extension RootViewController: StateCoordinatorDelegate {
                 gotoCardSelected(id: id)
             }
         } else if nextState == .deckSelected {
-            if let deck = s as? Deck {
+            if let deck = s as? NSManagedObjectID {
                 gotoDeckSelected(deck: deck)
             }
         } else if nextState == .toolSelected {
@@ -132,16 +132,15 @@ extension RootViewController: StateCoordinatorDelegate {
                 gotoToolSelected(name: tool)
             }
         } else if nextState == .collectionSelected {
-            if let collection = s as? Collection {
+            if let collection = s as? NSManagedObjectID {
                 gotoCollectionSelected(s: collection)
             }
         }
     }
     
     
-    func gotoCollectionSelected(s: Collection) {
+    func gotoCollectionSelected(s: NSManagedObjectID) {
         let collectionVC = CollectionTableViewController.freshCollection(collection: s)
-        collectionVC.title = s.name
         installCollection(collection: collectionVC)
     }
     
@@ -151,10 +150,8 @@ extension RootViewController: StateCoordinatorDelegate {
         targetSplitForCurrentTraitCollection().showDetailViewController(navigation, sender: self)
         
     }
-    func gotoDeckSelected(deck: Deck) {
+    func gotoDeckSelected(deck: NSManagedObjectID) {
         let decklist = DeckTableViewController.freshDeck(deck: deck)
-        
-        decklist.title = deck.name
         installDeck(deck: decklist)
         
     }

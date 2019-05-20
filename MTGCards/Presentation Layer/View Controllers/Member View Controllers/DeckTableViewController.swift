@@ -384,12 +384,16 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
     }
 }
 extension DeckTableViewController {
-    static func freshDeck(deck: Deck) -> DeckTableViewController {
+    static func freshDeck(deck: NSManagedObjectID) -> DeckTableViewController {
         let storyboard = UIStoryboard(name: "Deck", bundle: nil)
         guard let decklist = storyboard.instantiateInitialViewController() as? DeckTableViewController else {
             fatalError("Project config error - storyboard doesnt provide a FileListVC")
         }
-        decklist.deck = deck
+        if let d = CoreDataStack.handler.privateContext.object(with: deck) as? Deck {
+            decklist.deck = d
+            decklist.title = d.name
+        }
+        
         return decklist
     }
 }
