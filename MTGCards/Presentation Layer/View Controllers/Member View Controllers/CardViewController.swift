@@ -74,18 +74,20 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         if let cardid = card?.tcgplayerProductID, cardid > 0 {
             TcgPlayerApi.handler.getPrices(for: cardid) { prices in
-                if let normal = prices.results.first(where: {$0.subTypeName == "Normal" }), let low = normal.lowPrice, let mid = normal.midPrice, let market = normal.marketPrice {
-                    self.normalLow.text = low.currencyUS
-                    self.normalMid.text = mid.currencyUS
-                    self.normalMarket.text = market.currencyUS
-                } else {
+                if let normal = prices.results.first(where: {$0.subTypeName == "Normal" }) {
+                    self.normalLow.text = normal.lowPrice?.currencyUS ?? "--"
+                    self.normalMid.text = normal.midPrice?.currencyUS ?? "--"
+                    self.normalMarket.text = normal.marketPrice?.currencyUS ?? "--"
+                }
+                if !(self.card?.hasNonFoil ?? true) {
                     self.normalStackView.isHidden = true
                 }
-                if let foil = prices.results.first(where: {$0.subTypeName == "Foil" }), let fmarket = foil.marketPrice, let flow = foil.lowPrice, let fmid = foil.midPrice {
-                    self.foilMarket.text = fmarket.currencyUS
-                    self.foilLow.text = flow.currencyUS
-                    self.foilMid.text = fmid.currencyUS
-                } else {
+                if let foil = prices.results.first(where: {$0.subTypeName == "Foil" }) {
+                    self.foilMarket.text = foil.marketPrice?.currencyUS ?? "--"
+                    self.foilLow.text = foil.lowPrice?.currencyUS ?? "--"
+                    self.foilMid.text = foil.midPrice?.currencyUS ?? "--"
+                }
+                if !(self.card?.hasFoil ?? true) {
                     self.foilStackView.isHidden = true
                 }
             }

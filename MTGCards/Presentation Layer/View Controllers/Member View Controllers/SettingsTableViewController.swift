@@ -242,7 +242,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                     CoreDataStack.handler.privateContext.reset()
                 }
             }
-            if localSet?.meta?.date != sourceSet.setMeta?.date  {
+            if localSet?.meta?.date != sourceSet.setMeta?.date {
                 print("\(sourceSet.code ?? "") local version: \(localSet?.meta?.date ?? "") || source version: \(sourceSet.setMeta?.date ?? "")")
                 
                 let setUpdate = DataManager.getSetUpdate(setCode: sourceSet.code)
