@@ -8,8 +8,9 @@
 
 import UIKit
 import CoreData
+import MobileCoreServices
 
-class CollectionsTableViewController: UITableViewController, UITableViewDropDelegate {
+class CollectionsTableViewController: UITableViewController, UITableViewDropDelegate, UIDocumentPickerDelegate {
     
     var stateCoordinator: StateCoordinator?
     var collections = ["Collections"]
@@ -43,6 +44,17 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         CoreDataStack.handler.saveContext()
     }
     @objc func addButton() {
+        let menuAlert = UIAlertController(title: "Create Deck(s)", message: nil, preferredStyle: .actionSheet)
+        menuAlert.addAction(UIAlertAction(title: "New Empty Deck", style: .default, handler: {action in  self.addBlankDeck()}))
+        let pasteboard = UIPasteboard.general
+        if let string = pasteboard.string {
+            menuAlert.addAction(UIAlertAction(title: "New Deck from Clipboard", style: .default, handler: {action in  self.addDeckFromClipboard()}))
+        }
+        menuAlert.addAction(UIAlertAction(title: "New Deck(s) from File(s)", style: .default, handler: {action in  self.addDecksFromFiles()}))
+        menuAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(menuAlert, animated: true)
+    }
+    func addBlankDeck(){
         let alert = UIAlertController(title: "Deck Name?", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
@@ -65,6 +77,184 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
             }
         }))
         self.present(alert, animated: true)
+    }
+    func addDeckFromClipboard() {
+        let alert = UIAlertController(title: "Deck Name?", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Deck Name"
+            textField.autocapitalizationType = .words
+        })
+        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { action in
+            if let name = alert.textFields?.first?.text {
+                guard  let entity = NSEntityDescription.entity(forEntityName: "Deck", in:  CoreDataStack.handler.privateContext) else {
+                    fatalError("Failed to decode Card")
+                }
+                let newDeck = Deck.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
+                newDeck.name = name
+                //get clipboard
+                let pasteboard = UIPasteboard.general
+                if let string = pasteboard.string {
+                    let lines = string.components(separatedBy: CharacterSet.newlines)
+                    print(lines.count)
+                    var previousline = ""
+                    var isSideboard = false
+                    for line in lines {
+                        if line != "" {
+                            var parts = line.split(separator: " ")
+                            let quantity = parts[0]
+                            parts.remove(at: 0)
+                            var name = ""
+                            var setCode = ""
+                            for p in parts {
+                                if p.contains("(") {
+                                    setCode = String(p)
+                                    break
+                                } else {
+                                    name += " "+p
+                                }
+                            }
+                            while let range = setCode.range(of: "(") {
+                                setCode.removeSubrange(range.lowerBound..<range.upperBound)
+                            }
+                            while let range = setCode.range(of: ")") {
+                                setCode.removeSubrange(range.lowerBound..<range.upperBound)
+                            }
+                            print("test")
+                            self.addCard(name: name, setCode: setCode, quantity: Int(quantity) ?? 1, isSideboard: isSideboard, newDeck: newDeck)
+                        } else if previousline == "" {
+                            print("sideboard start")
+                            isSideboard = true
+                        }
+                        previousline = line
+                    }
+                }
+                do {
+                    try CoreDataStack.handler.privateContext.save()
+                } catch {
+                    print(error)
+                }
+                self.reloadDecksFromCoreData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }))
+        self.present(alert, animated: true)
+    }
+    func addDecksFromFiles(){
+        let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePlainText as String], in: .import)
+        documentPicker.allowsMultipleSelection = true
+        documentPicker.delegate = self
+        self.present(documentPicker, animated: true)
+    }
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        print(urls)
+        for url in urls {
+            importFile(url: url)
+        }
+    }
+    private func importFile(url: URL){
+        do {
+            guard  let entity = NSEntityDescription.entity(forEntityName: "Deck", in:  CoreDataStack.handler.privateContext) else {
+                fatalError("Failed to decode Card")
+            }
+            let newDeck = Deck.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
+            let name = url.absoluteURL.deletingPathExtension().lastPathComponent
+            newDeck.name = name
+            let contents = try String.init(contentsOf: url)
+            let lines = contents.components(separatedBy: CharacterSet.newlines)
+            print(lines.count)
+            var previousline = ""
+            var isSideboard = false
+            for line in lines {
+                if line != "" {
+                    var parts = line.split(separator: " ")
+                    let quantity = parts[0]
+                    parts.remove(at: 0)
+                    var name = ""
+                    var setCode = ""
+                    for p in parts {
+                        if p.contains("(") {
+                            setCode = String(p)
+                            break
+                        } else {
+                            name += " "+p
+                        }
+                    }
+                    while let range = setCode.range(of: "(") {
+                        setCode.removeSubrange(range.lowerBound..<range.upperBound)
+                    }
+                    while let range = setCode.range(of: ")") {
+                        setCode.removeSubrange(range.lowerBound..<range.upperBound)
+                    }
+                    print("test")
+                    addCard(name: name, setCode: setCode, quantity: Int(quantity) ?? 1, isSideboard: isSideboard, newDeck: newDeck)
+                } else if previousline == "" {
+                    print("sideboard start")
+                    isSideboard = true
+                }
+                previousline = line
+            }
+            do {
+                try CoreDataStack.handler.privateContext.save()
+            } catch {
+                print(error)
+            }
+            self.reloadDecksFromCoreData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        } catch {
+            print(error)
+        }
+        
+    }
+    private func addCard(name: String, setCode: String, quantity: Int, isSideboard: Bool, newDeck: Deck){
+        let card = getCard(name: name, setCode: setCode)
+        if let card = card {
+            guard  let entity = NSEntityDescription.entity(forEntityName: "DeckCard", in:  CoreDataStack.handler.privateContext) else {
+                fatalError("Failed to decode Card")
+            }
+            let deckCard = DeckCard.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
+            deckCard.card = card
+            deckCard.quantity = Int16(quantity)
+            deckCard.isSideboard = isSideboard
+            newDeck.addToCards(deckCard)
+        }
+    }
+    private func getCard(name: String, setCode: String) -> Card? {
+        var card: Card?
+        let request = NSFetchRequest<Card>(entityName: "Card")
+        let predicate1 = NSPredicate(format: "name == %@", name.trimmingCharacters(in: CharacterSet.whitespaces))
+        let predicate2 = NSPredicate(format: "set.code == %@", setCode)
+        var predicates = [predicate1]
+        
+        if setCode != "" {
+            predicates.append(predicate2)
+        } else {
+            predicates.append(NSPredicate(format: "set.type != %@", "promo"))
+        }
+        if UserDefaultsHandler.areOnlineOnlyCardsExcluded() {
+            let onlineOnlyPredicate = NSPredicate(format: "set.isOnlineOnly == false")
+            predicates.append(onlineOnlyPredicate)
+        }
+        
+        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        request.predicate = compound
+        let sortDescriptor = NSSortDescriptor(key: "set.releaseDate", ascending: false)
+        request.sortDescriptors = [sortDescriptor]
+        do {
+            let results = try CoreDataStack.handler.privateContext.fetch(request)
+            if results.count > 0 {
+                card = results[0]
+            }
+        } catch {
+            print(error)
+            card = nil
+        }
+        return card
     }
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
         if let indexPath = coordinator.destinationIndexPath {
@@ -204,7 +394,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "collectionCell", for: indexPath)
         if indexPath.section == 1 {
-             cell.textLabel?.text = cdCollections[indexPath.row].name
+            cell.textLabel?.text = cdCollections[indexPath.row].name
         } else if indexPath.section == 2 {
             cell.textLabel?.text = cdDecks[indexPath.row].name
         } else {

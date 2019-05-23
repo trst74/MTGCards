@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 import MobileCoreServices
+import CoreServices
+import CoreSpotlight
 
 class SettingsTableViewController: UITableViewController, UIDocumentPickerDelegate {
     
@@ -386,6 +388,21 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                                 if let localSet = localSet {
                                     newCard.set = localSet
                                     localSet.cards.addingObjects(from: [newCard])
+                                    let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeData as String)
+                                    attributeSet.title = newCard.name
+                                    attributeSet.contentDescription = newCard.set.name
+                                    
+                                    if let uuid = newCard.uuid {
+                                        let item = CSSearchableItem(uniqueIdentifier: "\(uuid)", domainIdentifier: "com.roboticsnailsoftware.MTGCollection", attributeSet: attributeSet)
+                                        CSSearchableIndex.default().indexSearchableItems([item]) { error in
+                                            if let error = error {
+                                                print("Indexing error: \(error.localizedDescription)")
+                                            } else {
+                                                print("Search item successfully indexed!")
+                                            }
+                                        }
+                                        
+                                    }
                                 }
                             } catch {
                                 print(error)
@@ -402,20 +419,20 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                             managedObjectContext.delete(dcard)
                         }
                         //update set data
-                                                localSet?.baseSetSize = Int16(setUpdate.baseSetSize)
-                                                localSet?.block = setUpdate.block
-                                                localSet?.code = setUpdate.code
-                                                localSet?.isFoilOnly = setUpdate.isFoilOnly
-                                                localSet?.isOnlineOnly = setUpdate.isOnlineOnly
-                                                localSet?.meta?.date = setUpdate.meta.date
-                                                localSet?.meta?.version = setUpdate.meta.version
-                                                localSet?.mtgoCode = setUpdate.mtgoCode
-                                                localSet?.name = setUpdate.name
-                                                localSet?.releaseDate = setUpdate.releaseDate
-                                                localSet?.tcgplayerGroupID = Int16(setUpdate.tcgplayerGroupID ?? 0)
-                                                //tokens
-                                                localSet?.totalSetSize = Int16(setUpdate.totalSetSize)
-                                                localSet?.type = setUpdate.type
+                        localSet?.baseSetSize = Int16(setUpdate.baseSetSize)
+                        localSet?.block = setUpdate.block
+                        localSet?.code = setUpdate.code
+                        localSet?.isFoilOnly = setUpdate.isFoilOnly
+                        localSet?.isOnlineOnly = setUpdate.isOnlineOnly
+                        localSet?.meta?.date = setUpdate.meta.date
+                        localSet?.meta?.version = setUpdate.meta.version
+                        localSet?.mtgoCode = setUpdate.mtgoCode
+                        localSet?.name = setUpdate.name
+                        localSet?.releaseDate = setUpdate.releaseDate
+                        localSet?.tcgplayerGroupID = Int16(setUpdate.tcgplayerGroupID ?? 0)
+                        //tokens
+                        localSet?.totalSetSize = Int16(setUpdate.totalSetSize)
+                        localSet?.type = setUpdate.type
                         print("test")
                         
                         do {
