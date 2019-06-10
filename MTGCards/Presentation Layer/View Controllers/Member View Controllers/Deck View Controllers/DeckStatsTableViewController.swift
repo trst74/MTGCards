@@ -10,7 +10,8 @@ import UIKit
 import CoreData
 
 class DeckStatsTableViewController: UITableViewController {
-
+    
+    var deckCost = 0.0
     var deck: Deck? = nil
     var rarities = Rarities()
     var deckCards: [DeckCard] {
@@ -33,7 +34,33 @@ class DeckStatsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         calculateRarities()
-
+        deckCost = getPrices()
+    }
+    private func getPrices() -> Double {
+        var total = 0.0
+        var cardids = deckCards.map{
+            $0.card?.tcgplayerProductID
+            }.compactMap { $0 }
+        cardids.removeAll(where: {$0 == 0})
+        TcgPlayerApi.handler.getPrices(for: cardids) { prices in
+            var markettotal = 0.0
+            for deckcard in self.deckCards {
+                if let tcgid = deckcard.card?.tcgplayerProductID {
+                    var subtype = "Normal"
+                    if deckcard.isFoil {
+                        subtype = "Foil"
+                    }
+                    let cardprices = prices.results.first(where: {$0.productID == tcgid && $0.subTypeName == subtype})
+                    if let result = cardprices {
+                        total += (result.marketPrice ?? 0.0 * Double(deckcard.quantity))
+                    }
+                }
+            }
+            print(total)
+            self.tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.detailTextLabel?.text = total.currencyUS
+        }
+        
+        return total
     }
     struct Rarities {
         var common = 0
@@ -42,7 +69,7 @@ class DeckStatsTableViewController: UITableViewController {
         var mythic = 0
     }
     private func calculateRarities() {
-
+        
         for card in deckCards{
             let quantity = Int(card.quantity)
             switch card.card?.rarity {
@@ -71,7 +98,7 @@ class DeckStatsTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of sections
         return sectionTitles.count
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
@@ -82,7 +109,7 @@ class DeckStatsTableViewController: UITableViewController {
             return 1
         }
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
@@ -116,8 +143,8 @@ class DeckStatsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "rarityCell", for: indexPath)
         return cell
     }
- 
-
+    
+    
 }
 extension DeckStatsTableViewController {
     static func refreshDeckStats(id: NSManagedObjectID) -> DeckStatsTableViewController {

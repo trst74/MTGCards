@@ -276,6 +276,11 @@ extension RootViewController {
             targetSplit.showDetailViewController(freshFileLevelPlaceholder(), sender: self)
         }
     }
+    func showDeckStats(in targetSplit: UISplitViewController, id: NSManagedObjectID) {
+        if isHorizontallyRegular {
+            targetSplit.showDetailViewController(DeckStatsTableViewController.refreshDeckStats(id: id), sender: self)
+        }
+    }
     
     func showFolderLevelPlaceholder(in targetSplit: UISplitViewController) {
         if isHorizontallyRegular {
@@ -312,7 +317,12 @@ extension RootViewController {
             subSplit.preferredPrimaryColumnWidthFraction = rootSplitLargeFraction
             rootSplitView.preferredPrimaryColumnWidthFraction = rootSplitSmallFraction
             //3
-            showFileLevelPlaceholder(in: subSplit)
+            
+            if let id = deck.deck?.objectID {
+                showDeckStats(in: subSplit, id: id)
+            } else {
+                showFileLevelPlaceholder(in: subSplit)
+            }
         } else {
             let navigation = primaryNavigation(rootSplitView)
             navigation.pushViewController(deck, animated: true)

@@ -43,7 +43,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         wishlist.name = "Wish List"
         CoreDataStack.handler.saveContext()
     }
-    @objc func addButton() {
+    @objc func addButton(sender: UIBarButtonItem) {
         let menuAlert = UIAlertController(title: "Create Deck(s)", message: nil, preferredStyle: .actionSheet)
         menuAlert.addAction(UIAlertAction(title: "New Empty Deck", style: .default, handler: {action in  self.addBlankDeck()}))
         let pasteboard = UIPasteboard.general
@@ -52,6 +52,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         }
         menuAlert.addAction(UIAlertAction(title: "New Deck(s) from File(s)", style: .default, handler: {action in  self.addDecksFromFiles()}))
         menuAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        menuAlert.popoverPresentationController?.barButtonItem = sender
         self.present(menuAlert, animated: true)
     }
     func addBlankDeck(){

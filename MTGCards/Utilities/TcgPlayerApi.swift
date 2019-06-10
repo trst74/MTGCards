@@ -15,7 +15,7 @@ class TcgPlayerApi {
     private let clientSecret = "7A65BBC3-8B1A-43D8-998E-476949A4A6E8"
     
     private let tokenURL = "https://api.tcgplayer.com/token"
-    private let pricesURL = "http://api.tcgplayer.com/v1.20.0/pricing/product/"
+    private let pricesURL = "http://api.tcgplayer.com/v1.27.0/pricing/product/"
     private var token: TcgToken? = nil
     
     private func getToken( completion: @escaping (_ success: Bool) -> Void) {
@@ -52,7 +52,7 @@ class TcgPlayerApi {
             task.resume()
         }
     }
-    public func getPrices(for cardId: Int32, completion: @escaping (_ prices: TcgPrices) -> Void){
+    public func getPrices(for cardIds: [Int32], completion: @escaping (_ prices: TcgPrices) -> Void){
         let group = DispatchGroup()
         group.enter()
         if let tkn = self.token {
@@ -69,7 +69,8 @@ class TcgPlayerApi {
             }
         }
         group.notify(queue: .main){
-            if let url = URL(string: self.pricesURL + cardId.description){
+            let ids = cardIds.map({"\($0)"}).joined(separator: ",")
+            if let url = URL(string: self.pricesURL + ids){
                 print(url)
                 var request = URLRequest(url: url)
                 if let bearer = self.token?.accessToken {
@@ -85,7 +86,7 @@ class TcgPlayerApi {
                                 do {
                                     let prices = try decoder.decode(TcgPrices.self, from: jsonData)
                                     if prices.errors.isEmpty {
-                                        print("Prices recieved for \(cardId): \(String(describing: prices.results[0].midPrice))")
+                                        print("Prices recieved for \(cardIds): \(String(describing: prices.results[0].midPrice))")
                                         completion(prices)
                                     }
                                 } catch {

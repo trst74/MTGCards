@@ -73,7 +73,7 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
             powerToughnessLabel.text = ""
         }
         if let cardid = card?.tcgplayerProductID, cardid > 0 {
-            TcgPlayerApi.handler.getPrices(for: cardid) { prices in
+            TcgPlayerApi.handler.getPrices(for: [cardid]) { prices in
                 if let normal = prices.results.first(where: {$0.subTypeName == "Normal" }) {
                     self.normalLow.text = normal.lowPrice?.currencyUS ?? "--"
                     self.normalMid.text = normal.midPrice?.currencyUS ?? "--"

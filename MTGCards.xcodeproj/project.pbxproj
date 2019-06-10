@@ -270,17 +270,17 @@
 		EE2B78A921EFE45B00306990 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				EEB5D8202205F0D30070FF8B /* GradientView.swift */,
-				EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */,
-				EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */,
-				EE6F94AF22309136001B3378 /* TcgPlayerApi.swift */,
-				EE2CAC512231AAF200D24334 /* SafariActivity.swift */,
-				EE2CAC532231C1AA00D24334 /* String+Custom.swift */,
-				EE2755282234084C006BD083 /* UserDefaultsHandler.swift */,
-				EE27552C22341B04006BD083 /* RoundButton.swift */,
+				EEB0ADD9227A3C3400613C8C /* Backup.swift */,
 				EE0F62AC22356494003D8A8A /* CoreDataStack.swift */,
 				EE924702225AA4E70044F858 /* Filters.swift */,
-				EEB0ADD9227A3C3400613C8C /* Backup.swift */,
+				EEB5D8202205F0D30070FF8B /* GradientView.swift */,
+				EE27552C22341B04006BD083 /* RoundButton.swift */,
+				EE2CAC512231AAF200D24334 /* SafariActivity.swift */,
+				EE2CAC532231C1AA00D24334 /* String+Custom.swift */,
+				EE6F94AF22309136001B3378 /* TcgPlayerApi.swift */,
+				EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */,
+				EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */,
+				EE2755282234084C006BD083 /* UserDefaultsHandler.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -436,17 +436,17 @@
 		EEE221F222AEBC8F009638D5 /* Deck View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				EE1E1469223AFFEA00A54747 /* DeckTableViewCell.swift */,
-				EE4FD208223AC6FE00E8CDB3 /* DeckTableViewController.swift */,
+				EE4FD206223AC6CE00E8CDB3 /* Deck.storyboard */,
+				EE32D7AE2265631D00AEC47E /* DeckCardCommanderTableViewCell.swift */,
+				EEB0E85922ADDDE700BB8B74 /* DeckCardFoilTableViewCell.swift */,
 				EEE7D5A9226375FA00FE4D1C /* DeckCardQuantityTableViewCell.swift */,
 				EEE7D5AB226378CB00FE4D1C /* DeckCardSideboardTableViewCell.swift */,
-				EE32D7AE2265631D00AEC47E /* DeckCardCommanderTableViewCell.swift */,
-				EE4FD206223AC6CE00E8CDB3 /* Deck.storyboard */,
 				EEB0E85322ADDB2C00BB8B74 /* DeckStats.storyboard */,
-				EEB0E85922ADDDE700BB8B74 /* DeckCardFoilTableViewCell.swift */,
+				EEB0E85B22ADE58A00BB8B74 /* DeckStatsTableViewController.swift */,
+				EE1E1469223AFFEA00A54747 /* DeckTableViewCell.swift */,
+				EE4FD208223AC6FE00E8CDB3 /* DeckTableViewController.swift */,
 				EEE7D5A5226284E800FE4D1C /* EditDeckCard.storyboard */,
 				EEE7D5A72262852100FE4D1C /* EditDeckCardTableViewController.swift */,
-				EEB0E85B22ADE58A00BB8B74 /* DeckStatsTableViewController.swift */,
 			);
 			path = "Deck View Controllers";
 			sourceTree = "<group>";
