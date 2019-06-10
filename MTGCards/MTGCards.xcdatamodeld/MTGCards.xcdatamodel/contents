@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="19A471t" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Card" representedClassName=".Card" syncable="YES">
         <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="borderColor" optional="YES" attributeType="String" syncable="YES"/>
@@ -99,6 +99,7 @@
     </entity>
     <entity name="DeckCard" representedClassName="DeckCard" syncable="YES">
         <attribute name="isCommander" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isFoil" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isSideboard" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="card" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card" syncable="YES"/>
@@ -182,7 +183,7 @@
         <element name="CollectionCard" positionX="-434.53515625" positionY="-126.5546875" width="128" height="105"/>
         <element name="ColorIdentity" positionX="-892.60546875" positionY="129.546875" width="128" height="73"/>
         <element name="Deck" positionX="-243.7265625" positionY="-297.13671875" width="128" height="90"/>
-        <element name="DeckCard" positionX="-439.48828125" positionY="-302.35546875" width="128" height="105"/>
+        <element name="DeckCard" positionX="-439.48828125" positionY="-302.35546875" width="128" height="120"/>
         <element name="ForeignDatum" positionX="-892.41796875" positionY="234.859375" width="128" height="150"/>
         <element name="Legalities" positionX="-512.98046875" positionY="94.44140625" width="128" height="225"/>
         <element name="Meta" positionX="-94.49609375" positionY="341.75" width="128" height="75"/>

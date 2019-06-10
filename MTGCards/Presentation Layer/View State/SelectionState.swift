@@ -35,4 +35,5 @@ enum SelectionState {
     case deckSelected
     case collectionSelected
     case toolSelected
+    case deckStatsSelected
 }

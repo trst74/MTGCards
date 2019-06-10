@@ -425,10 +425,14 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         if editingStyle == .delete {
             print("delete")
             CoreDataStack.handler.privateContext.delete(cdDecks[indexPath.row] as NSManagedObject)
-            CoreDataStack.handler.savePrivateContext()
-            
+            do {
+                try CoreDataStack.handler.privateContext.save()
+            } catch {
+                print(error)
+            }
+            self.reloadDecksFromCoreData()
             DispatchQueue.main.async {
-                self.reloadDecksFromCoreData()
+                
                 self.tableView.reloadData()
             }
         }

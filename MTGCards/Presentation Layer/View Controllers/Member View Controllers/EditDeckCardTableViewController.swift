@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class EditDeckCardTableViewController: UITableViewController {
-    let sectionNames = ["Quatity","Sideboard","Commander", "Set"]
+    let sectionNames = ["Quatity","Foil","Sideboard","Commander", "Set"]
     var deckCard: DeckCard?
     var printings: [Card] = []
     var deckViewController: DeckTableViewController?
@@ -34,13 +34,21 @@ class EditDeckCardTableViewController: UITableViewController {
         if let quantityCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? DeckCardQuantityTableViewCell {
             deckCard?.quantity = Int16(quantityCell.quantityStepper.value)
         }
-        if let sideboardCell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? DeckCardSideboardTableViewCell {
+        if let foilCell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? DeckCardFoilTableViewCell {
+            deckCard?.isFoil = foilCell.isFoil.isOn
+        }
+        if let sideboardCell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as? DeckCardSideboardTableViewCell {
             deckCard?.isSideboard = sideboardCell.sideBoardSwitch.isOn
         }
-        if let commanderCell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as? DeckCardCommanderTableViewCell {
+        if let commanderCell = tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as? DeckCardCommanderTableViewCell {
             deckCard?.isCommander = commanderCell.isCommanderSwitch.isOn
         }
-        CoreDataStack.handler.saveContext()
+        do {
+            try CoreDataStack.handler.privateContext.save()
+        } catch {
+            print(error)
+        }
+        
         if let deckVC = deckViewController {
             deckVC.setUpSections()
             deckVC.tableView.reloadData()
@@ -49,12 +57,12 @@ class EditDeckCardTableViewController: UITableViewController {
         
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 3 {
+        if section == 4 {
             return printings.count
         }
         return 1
@@ -72,18 +80,25 @@ class EditDeckCardTableViewController: UITableViewController {
                 cell.quantityStepper.value = Double(deckCard?.quantity ?? 0)
                 return cell
             }
-        } else if section == 1 {
+        }
+        else if section == 1 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "isFoilCell", for: indexPath) as? DeckCardFoilTableViewCell {
+                cell.isFoil.isOn = deckCard?.isFoil ?? false
+                
+                return cell
+            }
+        }else if section == 2 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "sideBoardCell", for: indexPath) as? DeckCardSideboardTableViewCell {
                 cell.sideBoardSwitch.isOn = deckCard?.isSideboard ?? false
                 return cell
             }
             
-        } else if section == 2 {
+        } else if section == 3 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "isCommanderCell", for: indexPath) as? DeckCardCommanderTableViewCell {
                 cell.isCommanderSwitch.isOn = deckCard?.isCommander ?? false
                 return cell
             }
-        } else if section == 3 {
+        } else if section == 4 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "printingCell", for: indexPath)
             cell.textLabel?.text = printings[indexPath.row].set.name
             if deckCard?.card?.set.name == printings[indexPath.row].set.name {
@@ -96,8 +111,8 @@ class EditDeckCardTableViewController: UITableViewController {
         return UITableViewCell()
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
-        if indexPath.section == 3 {
+        
+        if indexPath.section == 4 {
             for row in 0..<tableView.numberOfRows(inSection: indexPath.section) {
                 if let cell = tableView.cellForRow(at: IndexPath(row: row, section: indexPath.section)) {
                     cell.accessoryType = row == indexPath.row ? .checkmark : .none

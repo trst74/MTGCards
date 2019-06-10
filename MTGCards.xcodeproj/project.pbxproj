@@ -71,6 +71,9 @@
 		EEAA53CD2233241000CB4B72 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAA53CC2233241000CB4B72 /* DebugViewController.swift */; };
 		EEB0ADDA227A3C3400613C8C /* Backup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB0ADD9227A3C3400613C8C /* Backup.swift */; };
 		EEB0ADDC227A3FBF00613C8C /* Deck+Backup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB0ADDB227A3FBF00613C8C /* Deck+Backup.swift */; };
+		EEB0E85422ADDB2C00BB8B74 /* DeckStats.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEB0E85322ADDB2C00BB8B74 /* DeckStats.storyboard */; };
+		EEB0E85A22ADDDE700BB8B74 /* DeckCardFoilTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB0E85922ADDDE700BB8B74 /* DeckCardFoilTableViewCell.swift */; };
+		EEB0E85C22ADE58A00BB8B74 /* DeckStatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB0E85B22ADE58A00BB8B74 /* DeckStatsTableViewController.swift */; };
 		EEB5D81D2205EA670070FF8B /* CardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */; };
 		EEB5D81F2205EBFF0070FF8B /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */; };
 		EEB5D8212205F0D30070FF8B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D8202205F0D30070FF8B /* GradientView.swift */; };
@@ -182,6 +185,9 @@
 		EEAA53CC2233241000CB4B72 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		EEB0ADD9227A3C3400613C8C /* Backup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backup.swift; sourceTree = "<group>"; };
 		EEB0ADDB227A3FBF00613C8C /* Deck+Backup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+Backup.swift"; sourceTree = "<group>"; };
+		EEB0E85322ADDB2C00BB8B74 /* DeckStats.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DeckStats.storyboard; sourceTree = "<group>"; };
+		EEB0E85922ADDDE700BB8B74 /* DeckCardFoilTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCardFoilTableViewCell.swift; sourceTree = "<group>"; };
+		EEB0E85B22ADE58A00BB8B74 /* DeckStatsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStatsTableViewController.swift; sourceTree = "<group>"; };
 		EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListTableViewCell.swift; sourceTree = "<group>"; };
 		EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Custom.swift"; sourceTree = "<group>"; };
 		EEB5D8202205F0D30070FF8B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -372,6 +378,9 @@
 				EEE7D5A9226375FA00FE4D1C /* DeckCardQuantityTableViewCell.swift */,
 				EEE7D5AB226378CB00FE4D1C /* DeckCardSideboardTableViewCell.swift */,
 				EE32D7AE2265631D00AEC47E /* DeckCardCommanderTableViewCell.swift */,
+				EEB0E85322ADDB2C00BB8B74 /* DeckStats.storyboard */,
+				EEB0E85922ADDDE700BB8B74 /* DeckCardFoilTableViewCell.swift */,
+				EEB0E85B22ADE58A00BB8B74 /* DeckStatsTableViewController.swift */,
 			);
 			path = "Member View Controllers";
 			sourceTree = "<group>";
@@ -559,6 +568,7 @@
 				EE2B78C121F0075100306990 /* Collections.storyboard in Resources */,
 				EEBE6D9B21EFE19100A3464E /* LaunchScreen.storyboard in Resources */,
 				EE2B78CE21F009A600306990 /* PlaceholderView.storyboard in Resources */,
+				EEB0E85422ADDB2C00BB8B74 /* DeckStats.storyboard in Resources */,
 				EEC9198E223080A0004E52F5 /* Settings.storyboard in Resources */,
 				EE2B78C721F0084A00306990 /* Card.storyboard in Resources */,
 				EEBE6D9821EFE19100A3464E /* Assets.xcassets in Resources */,
@@ -590,6 +600,7 @@
 			files = (
 				EE0F62AB22341DC1003D8A8A /* PageOneViewController.swift in Sources */,
 				EEE7D59B225BA16D00FE4D1C /* CardSupertype+CoreDataClass.swift in Sources */,
+				EEB0E85A22ADDDE700BB8B74 /* DeckCardFoilTableViewCell.swift in Sources */,
 				EE2B78C921F0087200306990 /* CardListTableViewController.swift in Sources */,
 				EE2B821F21FCCA3900306990 /* Card.swift in Sources */,
 				EEB5D81F2205EBFF0070FF8B /* UIColor+Custom.swift in Sources */,
@@ -621,6 +632,7 @@
 				EE2B78A621EFE39700306990 /* RootViewController+ViewFactory.swift in Sources */,
 				EE27552D22341B04006BD083 /* RoundButton.swift in Sources */,
 				EE9246FE225A9EF80044F858 /* SetFilterTableViewController.swift in Sources */,
+				EEB0E85C22ADE58A00BB8B74 /* DeckStatsTableViewController.swift in Sources */,
 				EE4FD205223A91BD00E8CDB3 /* Deck+CoreDataProperties.swift in Sources */,
 				EEE7D587225B91DD00FE4D1C /* CardSubtype+CoreDataClass.swift in Sources */,
 				EE9246FF225A9EF80044F858 /* SuperTypeFilterTableViewController.swift in Sources */,

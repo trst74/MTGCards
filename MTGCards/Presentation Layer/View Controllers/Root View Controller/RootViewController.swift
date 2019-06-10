@@ -135,6 +135,10 @@ extension RootViewController: StateCoordinatorDelegate {
             if let collection = s as? NSManagedObjectID {
                 gotoCollectionSelected(s: collection)
             }
+        } else if nextState == .deckStatsSelected {
+            if let id = s as? NSManagedObjectID {
+                gotoDeckStats(id: id)
+            }
         }
     }
     
@@ -147,6 +151,12 @@ extension RootViewController: StateCoordinatorDelegate {
     func gotoCardSelected(id: NSManagedObjectID) {
         let cardDetails = CardViewController.refreshCardController(id: id)
         let navigation = freshNavigationController(rootViewController: cardDetails)
+        targetSplitForCurrentTraitCollection().showDetailViewController(navigation, sender: self)
+        
+    }
+    func gotoDeckStats(id: NSManagedObjectID) {
+        let deckStats = DeckStatsTableViewController.refreshDeckStats(id: id)
+        let navigation = freshNavigationController(rootViewController: deckStats)
         targetSplitForCurrentTraitCollection().showDetailViewController(navigation, sender: self)
         
     }

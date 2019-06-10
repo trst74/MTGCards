@@ -105,7 +105,9 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         }
     }
     @objc func showDeckStats(){
-        
+        if let id = deck?.objectID {
+            StateCoordinator.shared.didSelectDeckStats(d: id)
+        }
     }
     private func updateTitle(){
         let name = deck?.name
