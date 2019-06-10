@@ -344,25 +344,16 @@
 		EE2B78BF21F006F900306990 /* Member View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				EE2B78C621F0084A00306990 /* Card.storyboard */,
-				EE5EDE932246831F00C24C5E /* CardLegalityView.swift */,
-				EE5EDE922246831E00C24C5E /* CardLegalityView.xib */,
+				EEE221F322AEBD16009638D5 /* Card View Controllers */,
+				EEE221F222AEBC8F009638D5 /* Deck View Controllers */,
 				EE2B78C421F0083E00306990 /* CardList.storyboard */,
 				EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */,
 				EE2B78C821F0087200306990 /* CardListTableViewController.swift */,
-				EE4F532622467A4D003A06CA /* CardRulingsView.swift */,
-				EE4F532422467859003A06CA /* CardRulingView.xib */,
-				EE2B78CA21F0089500306990 /* CardViewController.swift */,
 				EE24B103223DB9700057610D /* Collection.storyboard */,
 				EE2B78C021F0075100306990 /* Collections.storyboard */,
 				EE2B78C221F0077400306990 /* CollectionsTableViewController.swift */,
 				EE24B107223DB9F50057610D /* CollectionTableViewCell.swift */,
 				EE24B105223DB9910057610D /* CollectionTableViewController.swift */,
-				EEAA53CA223323D700CB4B72 /* Debug.storyboard */,
-				EEAA53CC2233241000CB4B72 /* DebugViewController.swift */,
-				EE4FD206223AC6CE00E8CDB3 /* Deck.storyboard */,
-				EE1E1469223AFFEA00A54747 /* DeckTableViewCell.swift */,
-				EE4FD208223AC6FE00E8CDB3 /* DeckTableViewController.swift */,
 				EE9246F5225A9EBE0044F858 /* Filter View Controllers */,
 				EE9246F1225A7B110044F858 /* Filters.storyboard */,
 				EE9246F3225A7E620044F858 /* FiltersTableViewController.swift */,
@@ -373,14 +364,6 @@
 				EE2B78CD21F009A600306990 /* PlaceholderViewController.swift */,
 				EEC9198D223080A0004E52F5 /* Settings.storyboard */,
 				EEC9198F223080DF004E52F5 /* SettingsTableViewController.swift */,
-				EEE7D5A5226284E800FE4D1C /* EditDeckCard.storyboard */,
-				EEE7D5A72262852100FE4D1C /* EditDeckCardTableViewController.swift */,
-				EEE7D5A9226375FA00FE4D1C /* DeckCardQuantityTableViewCell.swift */,
-				EEE7D5AB226378CB00FE4D1C /* DeckCardSideboardTableViewCell.swift */,
-				EE32D7AE2265631D00AEC47E /* DeckCardCommanderTableViewCell.swift */,
-				EEB0E85322ADDB2C00BB8B74 /* DeckStats.storyboard */,
-				EEB0E85922ADDDE700BB8B74 /* DeckCardFoilTableViewCell.swift */,
-				EEB0E85B22ADE58A00BB8B74 /* DeckStatsTableViewController.swift */,
 			);
 			path = "Member View Controllers";
 			sourceTree = "<group>";
@@ -448,6 +431,39 @@
 				EEBE6DB221EFE19100A3464E /* Info.plist */,
 			);
 			path = MTGCardsUITests;
+			sourceTree = "<group>";
+		};
+		EEE221F222AEBC8F009638D5 /* Deck View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EE1E1469223AFFEA00A54747 /* DeckTableViewCell.swift */,
+				EE4FD208223AC6FE00E8CDB3 /* DeckTableViewController.swift */,
+				EEE7D5A9226375FA00FE4D1C /* DeckCardQuantityTableViewCell.swift */,
+				EEE7D5AB226378CB00FE4D1C /* DeckCardSideboardTableViewCell.swift */,
+				EE32D7AE2265631D00AEC47E /* DeckCardCommanderTableViewCell.swift */,
+				EE4FD206223AC6CE00E8CDB3 /* Deck.storyboard */,
+				EEB0E85322ADDB2C00BB8B74 /* DeckStats.storyboard */,
+				EEB0E85922ADDDE700BB8B74 /* DeckCardFoilTableViewCell.swift */,
+				EEE7D5A5226284E800FE4D1C /* EditDeckCard.storyboard */,
+				EEE7D5A72262852100FE4D1C /* EditDeckCardTableViewController.swift */,
+				EEB0E85B22ADE58A00BB8B74 /* DeckStatsTableViewController.swift */,
+			);
+			path = "Deck View Controllers";
+			sourceTree = "<group>";
+		};
+		EEE221F322AEBD16009638D5 /* Card View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EE2B78C621F0084A00306990 /* Card.storyboard */,
+				EE5EDE932246831F00C24C5E /* CardLegalityView.swift */,
+				EE4F532622467A4D003A06CA /* CardRulingsView.swift */,
+				EE4F532422467859003A06CA /* CardRulingView.xib */,
+				EE2B78CA21F0089500306990 /* CardViewController.swift */,
+				EEAA53CA223323D700CB4B72 /* Debug.storyboard */,
+				EEAA53CC2233241000CB4B72 /* DebugViewController.swift */,
+				EE5EDE922246831E00C24C5E /* CardLegalityView.xib */,
+			);
+			path = "Card View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
