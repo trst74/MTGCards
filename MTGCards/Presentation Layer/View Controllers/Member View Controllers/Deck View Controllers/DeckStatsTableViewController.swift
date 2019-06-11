@@ -41,7 +41,9 @@ class DeckStatsTableViewController: UITableViewController {
         var cardids = deckCards.map{
             $0.card?.tcgplayerProductID
             }.compactMap { $0 }
+        print("With 0s: \(cardids)")
         cardids.removeAll(where: {$0 == 0})
+        print("Without 0s: \(cardids)")
         TcgPlayerApi.handler.getPrices(for: cardids) { prices in
             var markettotal = 0.0
             for deckcard in self.deckCards {
@@ -51,8 +53,11 @@ class DeckStatsTableViewController: UITableViewController {
                         subtype = "Foil"
                     }
                     let cardprices = prices.results.first(where: {$0.productID == tcgid && $0.subTypeName == subtype})
-                    if let result = cardprices {
-                        total += (result.marketPrice ?? 0.0 * Double(deckcard.quantity))
+                    if let result = cardprices, let market = result.marketPrice {
+                        total += (market * Double(deckcard.quantity))
+                        print("Found card price for \(deckcard.card?.name) of type \(subtype): \((market * Double(deckcard.quantity)).currencyUS)")
+                    } else {
+                        print("Cannot find card price for \(deckcard.card?.name) of type \(subtype)")
                     }
                 }
             }
