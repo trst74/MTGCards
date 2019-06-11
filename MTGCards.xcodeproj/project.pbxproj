@@ -350,6 +350,7 @@
 				EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */,
 				EE2B78C821F0087200306990 /* CardListTableViewController.swift */,
 				EE24B103223DB9700057610D /* Collection.storyboard */,
+				EE2B78C621F0084A00306990 /* Card.storyboard */,
 				EE2B78C021F0075100306990 /* Collections.storyboard */,
 				EE2B78C221F0077400306990 /* CollectionsTableViewController.swift */,
 				EE24B107223DB9F50057610D /* CollectionTableViewCell.swift */,
@@ -454,7 +455,6 @@
 		EEE221F322AEBD16009638D5 /* Card View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				EE2B78C621F0084A00306990 /* Card.storyboard */,
 				EE5EDE932246831F00C24C5E /* CardLegalityView.swift */,
 				EE4F532622467A4D003A06CA /* CardRulingsView.swift */,
 				EE4F532422467859003A06CA /* CardRulingView.xib */,
