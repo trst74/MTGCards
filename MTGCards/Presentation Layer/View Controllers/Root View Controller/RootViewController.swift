@@ -319,7 +319,9 @@ extension RootViewController {
             //3
             
             if let id = deck.deck?.objectID {
-                showDeckStats(in: subSplit, id: id)
+                let deckStats = DeckStatsTableViewController.refreshDeckStats(id: id)
+                let navigation = freshNavigationController(rootViewController: deckStats)
+                targetSplitForCurrentTraitCollection().showDetailViewController(navigation, sender: self)
             } else {
                 showFileLevelPlaceholder(in: subSplit)
             }

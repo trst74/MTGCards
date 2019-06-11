@@ -106,7 +106,11 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         pricesView.layer.cornerRadius = 10
         cardImage.layer.cornerRadius = 15
         cardImage.clipsToBounds = true
-        
+        if #available(iOS 13.0, *) {
+            textLabel.textColor = UIColor.label
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
