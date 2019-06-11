@@ -35,4 +35,7 @@ class StateCoordinator: NSObject {
         func didSelectTool(tool: String){
             delegate?.gotoState(SelectionState.toolSelected, s: tool as AnyObject)
         }
+        func didSelectDeckStats(d: NSManagedObjectID) {
+            delegate?.gotoState(SelectionState.deckStatsSelected, s: d)
+        }
 }

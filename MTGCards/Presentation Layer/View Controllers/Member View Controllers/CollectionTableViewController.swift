@@ -94,9 +94,14 @@ class CollectionTableViewController: UITableViewController {
             let card: CollectionCard? = collectionCards[indexPath.row]
             if let card = card {
                 collection?.removeFromCards(card)
-                CoreDataStack.handler.saveContext()
+                CoreDataStack.handler.privateContext.delete(card)
+                do {
+                    try CoreDataStack.handler.privateContext.save()
+                } catch {
+                    print(error)
+                }
                 if let id = collection?.objectID {
-                    collection = CoreDataStack.handler.managedObjectContext.object(with: id) as? Collection
+                    collection = CoreDataStack.handler.privateContext.object(with: id) as? Collection
                 }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()

@@ -135,6 +135,10 @@ extension RootViewController: StateCoordinatorDelegate {
             if let collection = s as? NSManagedObjectID {
                 gotoCollectionSelected(s: collection)
             }
+        } else if nextState == .deckStatsSelected {
+            if let id = s as? NSManagedObjectID {
+                gotoDeckStats(id: id)
+            }
         }
     }
     
@@ -147,6 +151,12 @@ extension RootViewController: StateCoordinatorDelegate {
     func gotoCardSelected(id: NSManagedObjectID) {
         let cardDetails = CardViewController.refreshCardController(id: id)
         let navigation = freshNavigationController(rootViewController: cardDetails)
+        targetSplitForCurrentTraitCollection().showDetailViewController(navigation, sender: self)
+        
+    }
+    func gotoDeckStats(id: NSManagedObjectID) {
+        let deckStats = DeckStatsTableViewController.refreshDeckStats(id: id)
+        let navigation = freshNavigationController(rootViewController: deckStats)
         targetSplitForCurrentTraitCollection().showDetailViewController(navigation, sender: self)
         
     }
@@ -266,6 +276,11 @@ extension RootViewController {
             targetSplit.showDetailViewController(freshFileLevelPlaceholder(), sender: self)
         }
     }
+    func showDeckStats(in targetSplit: UISplitViewController, id: NSManagedObjectID) {
+        if isHorizontallyRegular {
+            targetSplit.showDetailViewController(DeckStatsTableViewController.refreshDeckStats(id: id), sender: self)
+        }
+    }
     
     func showFolderLevelPlaceholder(in targetSplit: UISplitViewController) {
         if isHorizontallyRegular {
@@ -302,7 +317,12 @@ extension RootViewController {
             subSplit.preferredPrimaryColumnWidthFraction = rootSplitLargeFraction
             rootSplitView.preferredPrimaryColumnWidthFraction = rootSplitSmallFraction
             //3
-            showFileLevelPlaceholder(in: subSplit)
+            
+            if let id = deck.deck?.objectID {
+                showDeckStats(in: subSplit, id: id)
+            } else {
+                showFileLevelPlaceholder(in: subSplit)
+            }
         } else {
             let navigation = primaryNavigation(rootSplitView)
             navigation.pushViewController(deck, animated: true)
