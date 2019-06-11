@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.13"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,7 +36,7 @@
                                         <rect key="frame" x="215" y="8" width="191" height="172.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFR-hm-GrY">
-                                                <rect key="frame" x="8" y="8" width="175" height="20.5"/>
+                                                <rect key="frame" x="8" y="8" width="175" height="19"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Cost">
                                                         <attributes>
@@ -48,7 +48,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6cz-Cu-igf">
-                                                <rect key="frame" x="8" y="36.5" width="175" height="20.5"/>
+                                                <rect key="frame" x="8" y="35" width="175" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -85,13 +85,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjs-6J-lgD">
-                                                <rect key="frame" x="8" y="65" width="175" height="14.5"/>
+                                                <rect key="frame" x="8" y="63.5" width="175" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tertiarySystemFillColor"/>
                                         <constraints>
                                             <constraint firstItem="aFR-hm-GrY" firstAttribute="top" secondItem="fXh-QE-IzL" secondAttribute="top" constant="8" id="0nd-O2-aCl"/>
                                             <constraint firstItem="LFU-cW-Nki" firstAttribute="top" secondItem="JjE-jw-j3J" secondAttribute="bottom" constant="8.0000000000000426" id="1N8-nz-Wj3"/>
@@ -138,7 +138,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="Wc2-wR-GMi"/>
                                         </constraints>
@@ -256,7 +256,7 @@
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tertiarySystemFillColor"/>
                                         <constraints>
                                             <constraint firstItem="fK6-Tf-HPd" firstAttribute="centerX" secondItem="SR5-Ph-kfA" secondAttribute="centerX" id="190-IX-MJD"/>
                                             <constraint firstAttribute="trailing" secondItem="tjR-TK-ssm" secondAttribute="trailing" constant="8" id="5pp-Ip-cWK"/>
@@ -282,7 +282,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="FEw-BN-RP7"/>
                                         </constraints>
@@ -479,7 +479,7 @@
                                 </variation>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="lsn-QU-8kl" firstAttribute="height" secondItem="yeU-fE-uvR" secondAttribute="height" id="2oF-96-miA"/>
                             <constraint firstItem="lsn-QU-8kl" firstAttribute="centerX" secondItem="fwu-5A-cAe" secondAttribute="centerX" id="XSY-RM-Qan"/>

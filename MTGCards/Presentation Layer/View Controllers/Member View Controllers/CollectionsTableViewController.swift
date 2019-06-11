@@ -19,9 +19,10 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     var cdDecks: [Deck] = []
     var search = ["Tools", "Search"]
     var sections: [[String]] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addButton)), animated: true)
+        self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addButton(sender:))), animated: true)
         let settingsButton = UIBarButtonItem(image: UIImage(named: "settings"), style: .plain, target: self, action: #selector(self.settings))
         self.navigationItem.setLeftBarButton(settingsButton, animated: true)
         sections = [ search, collections, decks]

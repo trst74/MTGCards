@@ -104,7 +104,8 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         cardImage.addGestureRecognizer(taps)
         detailsView.layer.cornerRadius = 10
         pricesView.layer.cornerRadius = 10
-        
+        cardImage.layer.cornerRadius = 15
+        cardImage.clipsToBounds = true
         
     }
     

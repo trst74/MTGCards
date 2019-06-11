@@ -30,7 +30,11 @@ class CardLegalityView: UIView {
             } else if legality == "Restricted" {
                 self.backgroundColor = UIColor.Identity.Islands
             } else {
-                self.backgroundColor = UIColor.lightGray
+                if #available(iOS 13.0, *) {
+                    self.backgroundColor = UIColor.systemFill
+                } else {
+                    self.backgroundColor = UIColor.lightGray
+                }
             }
             legalityText.text = legality
         }
