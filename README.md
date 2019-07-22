@@ -8,7 +8,11 @@ Small application to allow the lookup of Magic cards.
         <img src="http://img.shields.io/badge/swift-5-brightgreen.svg" alt="Swift 4">
     </a>
 </p>
+<p align="left">
+    <a href="https://www.reddit.com/r/Mymtgapp">
 <img alt="Subreddit subscribers" src="https://img.shields.io/reddit/subreddit-subscribers/mymtgapp.svg?style=social">
+    </a>
+</p>
 
 ## TODO
 * ~~Allow addition of cards to collections and decks~~
