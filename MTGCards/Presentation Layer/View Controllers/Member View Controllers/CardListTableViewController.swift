@@ -40,7 +40,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         tableView.dragDelegate = self
         tableView.dragInteractionEnabled = true
         
-        let filterButton = UIBarButtonItem(image: UIImage(named: "filter"), style: .plain, target: self, action: #selector(self.filter))
+        let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: #selector(self.filter))
         self.navigationItem.setRightBarButton(filterButton, animated: true)
     }
     

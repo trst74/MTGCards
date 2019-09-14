@@ -68,7 +68,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpSections()
-        let importButton = UIBarButtonItem(image: UIImage(named: "import"), style: .plain, target: self, action: #selector(self.importDeck))
+        let importButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.down"), style: .plain, target: self, action: #selector(self.importDeck))
         self.navigationItem.setRightBarButton(importButton, animated: true)
         updateTitle()
     }
@@ -81,7 +81,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         //        let resetButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(resetFilters))
         //        let flexiableItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         //        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(applyFilters))
-        let deckStatsButton = UIBarButtonItem(image: UIImage(named: "stats"), style: .plain, target: self, action: #selector(showDeckStats))
+        let deckStatsButton = UIBarButtonItem(image: UIImage(systemName: "chart.bar.fill"), style: .plain, target: self, action: #selector(showDeckStats))
         if let nav = self.navigationController {
             nav.setToolbarHidden(false, animated: true)
             toolbarItems = [deckStatsButton]

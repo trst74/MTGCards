@@ -23,7 +23,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addButton(sender:))), animated: true)
-        let settingsButton = UIBarButtonItem(image: UIImage(named: "settings"), style: .plain, target: self, action: #selector(self.settings))
+        let settingsButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(self.settings))
         self.navigationItem.setLeftBarButton(settingsButton, animated: true)
         sections = [ search, collections, decks]
         tableView.dropDelegate = self
