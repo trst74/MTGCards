@@ -312,26 +312,26 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
             let identities: [String?] = colorIdentities.map ({ $0.color })
             var colors: [UIColor] = []
             if identities.contains("W") {
-                colors.append(UIColor.Identity.Plains)
+                colors.append(UIColor(named: "Plains") ?? UIColor.white)
             }
             if identities.contains("U") {
-                colors.append(UIColor.Identity.Islands)
+                colors.append(UIColor(named: "Islands") ?? UIColor.white)
             }
             if identities.contains("B") {
-                colors.append(UIColor.Identity.Swamps)
+                colors.append(UIColor(named: "Swamps") ?? UIColor.white)
             }
             if identities.contains("R") {
-                colors.append(UIColor.Identity.Mountains)
+                colors.append(UIColor(named: "Mountains") ?? UIColor.white)
             }
             if identities.contains("G") {
-                colors.append(UIColor.Identity.Forests)
+                colors.append(UIColor(named: "Forests") ?? UIColor.white)
             }
             if colors.count == 0 {
                 if deckCard?.card?.type == "Land" {
-                    colors = [UIColor.Identity.Lands]
+                    colors = [UIColor(named: "Lands") ?? UIColor.white]
                     
                 } else {
-                    colors = [UIColor.Identity.Artifacts]
+                    colors = [UIColor(named: "Artifacts") ?? UIColor.white]
                 }
             }
             if colors.count == 1 {
