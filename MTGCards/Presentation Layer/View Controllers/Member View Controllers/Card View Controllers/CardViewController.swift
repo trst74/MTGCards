@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import CoreSpotlight
 import CoreServices
+import SwiftUI
 
 class CardViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var scrollview: UIScrollView!
@@ -125,15 +126,18 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     @objc func showDebug(){
         print("debug")
-        let storyboard = UIStoryboard(name: "Debug", bundle: nil)
-        guard let debugVC = storyboard.instantiateInitialViewController() as? DebugViewController else {
-            fatalError("Error going to settings")
-        }
-        if let json = ((try? card?.jsonString()) as String??) {
-            debugVC.json = json ?? ""
-            //self.navigationController?.pushViewController(settingsVC, animated: true)
-            self.present(debugVC, animated: true, completion: nil)
-        }
+//        let storyboard = UIStoryboard(name: "Debug", bundle: nil)
+//        guard let debugVC = storyboard.instantiateInitialViewController() as? DebugViewController else {
+//            fatalError("Error going to settings")
+//        }
+//        if let json = ((try? card?.jsonString()) as String??) {
+//            debugVC.json = json ?? ""
+//            //self.navigationController?.pushViewController(settingsVC, animated: true)
+//            self.present(debugVC, animated: true, completion: nil)
+//        }
+//        let cardView = CardView(card: card)
+//        let viewCtrl = UIHostingController(rootView: cardView)
+//        self.present(viewCtrl, animated: true, completion: nil)
     }
     @objc func share(){
         let alert = UIAlertController(title: "Share", message: nil, preferredStyle: .actionSheet)
@@ -164,7 +168,7 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func loadImage() {
         if var key = card?.uuid {
-            if card?.side == "b" {
+            if card?.side == "b" && card?.layout != "adventure"{
                 key += "b"
             }
             let image = getImage(Key: key)
@@ -176,7 +180,7 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
                         let version = UserDefaultsHandler.selectedCardImageQuality()
                         if version != "none" {
                             var url = "https://api.scryfall.com/cards/\(id)?format=image&version=\(version)"
-                            if card?.side == "b" && card?.layout != "split" && card?.layout != "flip" && card?.layout != "meld"{
+                            if card?.side == "b" && card?.layout != "split" && card?.layout != "flip" && card?.layout != "meld" && card?.layout != "adventure"{
                                 url += "&face=back"
                             }
                             if  let imageURL = URL(string: url) {

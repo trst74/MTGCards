@@ -45,6 +45,8 @@
 		EE2CAC522231AAF200D24334 /* SafariActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CAC512231AAF200D24334 /* SafariActivity.swift */; };
 		EE2CAC542231C1AA00D24334 /* String+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2CAC532231C1AA00D24334 /* String+Custom.swift */; };
 		EE32D7AF2265631D00AEC47E /* DeckCardCommanderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE32D7AE2265631D00AEC47E /* DeckCardCommanderTableViewCell.swift */; };
+		EE35EDAF23F5EC27000254E7 /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35EDAE23F5EC27000254E7 /* BarChart.swift */; };
+		EE35EDB123F627D4000254E7 /* Array+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35EDB023F627D4000254E7 /* Array+Custom.swift */; };
 		EE4F532522467859003A06CA /* CardRulingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE4F532422467859003A06CA /* CardRulingView.xib */; };
 		EE4F532722467A4D003A06CA /* CardRulingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4F532622467A4D003A06CA /* CardRulingsView.swift */; };
 		EE4FD204223A91BD00E8CDB3 /* Deck+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4FD202223A91BD00E8CDB3 /* Deck+CoreDataClass.swift */; };
@@ -160,6 +162,8 @@
 		EE2CAC532231C1AA00D24334 /* String+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Custom.swift"; sourceTree = "<group>"; };
 		EE2E412B22A8680F00A9CCF6 /* MTGCards.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MTGCards.entitlements; sourceTree = "<group>"; };
 		EE32D7AE2265631D00AEC47E /* DeckCardCommanderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCardCommanderTableViewCell.swift; sourceTree = "<group>"; };
+		EE35EDAE23F5EC27000254E7 /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
+		EE35EDB023F627D4000254E7 /* Array+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Custom.swift"; sourceTree = "<group>"; };
 		EE4F532422467859003A06CA /* CardRulingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardRulingView.xib; sourceTree = "<group>"; };
 		EE4F532622467A4D003A06CA /* CardRulingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardRulingsView.swift; sourceTree = "<group>"; };
 		EE4FD202223A91BD00E8CDB3 /* Deck+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -282,6 +286,7 @@
 				EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */,
 				EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */,
 				EE2755282234084C006BD083 /* UserDefaultsHandler.swift */,
+				EE35EDB023F627D4000254E7 /* Array+Custom.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -369,6 +374,14 @@
 			path = "Member View Controllers";
 			sourceTree = "<group>";
 		};
+		EE35EDAD23F5EBE7000254E7 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				EE35EDAE23F5EC27000254E7 /* BarChart.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		EE9246F5225A9EBE0044F858 /* Filter View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,6 +451,7 @@
 		EEE221F222AEBC8F009638D5 /* Deck View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EE35EDAD23F5EBE7000254E7 /* SwiftUI */,
 				EE4FD206223AC6CE00E8CDB3 /* Deck.storyboard */,
 				EE32D7AE2265631D00AEC47E /* DeckCardCommanderTableViewCell.swift */,
 				EEB0E85922ADDDE700BB8B74 /* DeckCardFoilTableViewCell.swift */,
@@ -484,6 +498,8 @@
 			dependencies = (
 			);
 			name = MTGCards;
+			packageProductDependencies = (
+			);
 			productName = MTGCards;
 			productReference = EEBE6D8A21EFE18F00A3464E /* MTGCards.app */;
 			productType = "com.apple.product-type.application";
@@ -559,6 +575,8 @@
 				Base,
 			);
 			mainGroup = EEBE6D8121EFE18F00A3464E;
+			packageReferences = (
+			);
 			productRefGroup = EEBE6D8B21EFE18F00A3464E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -647,6 +665,7 @@
 				EE2CAC522231AAF200D24334 /* SafariActivity.swift in Sources */,
 				EEE7D5A82262852100FE4D1C /* EditDeckCardTableViewController.swift in Sources */,
 				EE2B78D321F13EAF00306990 /* MTGSet.swift in Sources */,
+				EE35EDAF23F5EC27000254E7 /* BarChart.swift in Sources */,
 				EE2B78A621EFE39700306990 /* RootViewController+ViewFactory.swift in Sources */,
 				EE27552D22341B04006BD083 /* RoundButton.swift in Sources */,
 				EE9246FE225A9EF80044F858 /* SetFilterTableViewController.swift in Sources */,
@@ -689,6 +708,7 @@
 				EE24B106223DB9910057610D /* CollectionTableViewController.swift in Sources */,
 				EE2B821D21FCAD5200306990 /* Ruling.swift in Sources */,
 				EEB0ADDA227A3C3400613C8C /* Backup.swift in Sources */,
+				EE35EDB123F627D4000254E7 /* Array+Custom.swift in Sources */,
 				EEF02F24223DAC11008F008B /* CollectionCard+CoreDataClass.swift in Sources */,
 				EEB5D81D2205EA670070FF8B /* CardListTableViewCell.swift in Sources */,
 			);
@@ -867,6 +887,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MTGCards/MTGCards.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = JANZDS5D43;
 				INFOPLIST_FILE = MTGCards/Info.plist;
@@ -888,6 +909,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MTGCards/MTGCards.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = JANZDS5D43;
 				INFOPLIST_FILE = MTGCards/Info.plist;

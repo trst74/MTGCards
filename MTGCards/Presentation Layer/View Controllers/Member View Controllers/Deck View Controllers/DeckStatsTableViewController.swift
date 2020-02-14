@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SwiftUI
 
 class DeckStatsTableViewController: UITableViewController {
     
@@ -30,22 +31,23 @@ class DeckStatsTableViewController: UITableViewController {
             return []
         }
     }
+    var CMCs: [Float] = []
     var sectionTitles = ["Rarity Breakdown", "Cost","CMC","Colors","Types"]
     override func viewDidLoad() {
         super.viewDidLoad()
         calculateRarities()
+        calculateCMCs()
         deckCost = getPrices()
     }
     private func getPrices() -> Double {
         var total = 0.0
         var cardids = deckCards.map{
             $0.card?.tcgplayerProductID
-            }.compactMap { $0 }
+        }.compactMap { $0 }
         print("With 0s: \(cardids)")
         cardids.removeAll(where: {$0 == 0})
         print("Without 0s: \(cardids)")
         TcgPlayerApi.handler.getPrices(for: cardids) { prices in
-            var markettotal = 0.0
             for deckcard in self.deckCards {
                 if let tcgid = deckcard.card?.tcgplayerProductID {
                     var subtype = "Normal"
@@ -95,6 +97,23 @@ class DeckStatsTableViewController: UITableViewController {
             }
         }
     }
+    
+    private func calculateCMCs(){
+        print("Deck Card Count: \(deckCards.count)")
+        var temp: [Float?] = []
+        for card in deckCards{
+            let quantity = Int(card.quantity)
+            for _ in 1...quantity {
+                temp.append(card.card?.convertedManaCost)
+            }
+        }
+        
+        for cmc in temp {
+            if let tempcmc = cmc {
+                CMCs.append(tempcmc)
+            }
+        }
+    }
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionTitles[section]
@@ -107,50 +126,68 @@ class DeckStatsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
-            return 4
+            return 1
         } else if section == 4 {
             return 2
         } else {
             return 1
         }
     }
-    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 || indexPath.section == 2 || indexPath.section == 3 {
+            return 200
+        }
+        return 54
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "rarityCell", for: indexPath)
-            var title = ""
-            var count = 0
-            switch indexPath.row {
-            case 0:
-                title = "Common"
-                count = rarities.common
-                break
-            case 1:
-                title = "Uncommon"
-                count = rarities.uncommon
-                break
-            case 2:
-                title = "Rare"
-                count = rarities.rare
-                break
-            case 3:
-                title = "Mythic"
-                count = rarities.mythic
-                break
-            default:
-                break
-            }
-            cell.textLabel?.text = title
-            cell.detailTextLabel?.text = "\(count)"
-            return cell
-        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "rarityCell", for: indexPath)
+        if indexPath.section == 0 {
+            let chart = UIHostingController(rootView: BarChart(bars: [
+                Bar(id: UUID(), value: Double(rarities.common), label: "Common", color: Color("Common")),
+                Bar(id: UUID(), value: Double(rarities.uncommon), label: "Uncommon", color: Color("Uncommon")),
+                Bar(id: UUID(), value: Double(rarities.rare), label: "Rare", color: Color("Rare")),
+                Bar(id: UUID(), value: Double(rarities.mythic), label: "Mythic", color: Color("Mythic"))]))
+            
+            
+            chart.view.translatesAutoresizingMaskIntoConstraints = false
+            chart.view.frame = cell.contentView.bounds
+            cell.contentView.addSubview(chart.view)
+        }
+        else if indexPath.section == 2 {
+            let chart = UIHostingController(rootView: BarChart(bars: createCMCBars()))
+            
+            chart.view.translatesAutoresizingMaskIntoConstraints = false
+            chart.view.frame = cell.contentView.bounds
+            cell.contentView.addSubview(chart.view)
+        } else if indexPath.section == 3 {
+            
+            let chart = UIHostingController(rootView: BarChart(bars:
+                [Bar(id: UUID(), value: 2.2, label: "Plains", color: Color("Plains")),
+                 Bar(id: UUID(), value: 8.2, label: "Islands",color: Color("Islands")),
+                 Bar(id: UUID(), value: 4.2, label: "Swamps",color: Color("Swamps")),
+                 Bar(id: UUID(), value: 6.0, label: "Mountains",color: Color("Mountains")),
+                 Bar(id: UUID(), value: 4.2, label: "Forests",color: Color("Forests"))]))
+            
+            
+            chart.view.translatesAutoresizingMaskIntoConstraints = false
+            chart.view.frame = cell.contentView.bounds
+            cell.contentView.addSubview(chart.view)
+        }
         return cell
     }
     
-    
+    private func createCMCBars() -> [Bar] {
+        var bars: [Bar] = []
+        let unique = CMCs.removingDuplicates().sorted()
+        for cmc in unique {
+            bars.append(Bar(id: UUID(), value: Double(CMCs.filter { $0 == cmc}.count), label: "\(cmc)", color: .gray))
+            print(cmc)
+        }
+        return bars
+    }
 }
+
 extension DeckStatsTableViewController {
     static func refreshDeckStats(id: NSManagedObjectID) -> DeckStatsTableViewController {
         let storyboard = UIStoryboard(name: "DeckStats", bundle: nil)
@@ -164,3 +201,4 @@ extension DeckStatsTableViewController {
         return deckstats
     }
 }
+

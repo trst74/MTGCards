@@ -113,6 +113,10 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                 if let url = URL(string: "https://medium.com/@sakhabaevegor/create-a-color-gradient-on-the-storyboard-18ccfd8158c2"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
+                case 5:
+                    if let url = URL(string: "https://swiftwithmajid.com/2019/08/14/building-barchart-with-shape-api-in-swiftui/"){
+                        UIApplication.shared.open(url, options:[:], completionHandler: nil)
+                    }
             default:
                 return
             }

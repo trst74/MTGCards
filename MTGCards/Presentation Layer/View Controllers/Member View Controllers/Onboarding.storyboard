@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tFQ-Tl-UL0">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tFQ-Tl-UL0">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -35,19 +32,18 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to MyMTG" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="3SV-0i-ZuR">
-                                <rect key="frame" x="8" y="126" width="359" height="160"/>
+                                <rect key="frame" x="8" y="120" width="359" height="160"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="67"/>
-                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just one more step!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ig9-hJ-Lna">
-                                <rect key="frame" x="20" y="294" width="335" height="21"/>
+                                <rect key="frame" x="20" y="288" width="335" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="JNt-g7-spw" firstAttribute="trailing" secondItem="ig9-hJ-Lna" secondAttribute="trailing" constant="20" id="7X8-er-PJe"/>
                             <constraint firstItem="ig9-hJ-Lna" firstAttribute="leading" secondItem="JNt-g7-spw" secondAttribute="leading" constant="20" id="Htv-o1-2vS"/>
@@ -72,11 +68,11 @@
             <objects>
                 <viewController storyboardIdentifier="pageTwo" id="IL5-oH-z6U" customClass="PageTwoViewController" customModule="MTGCards" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0t8-pd-fuv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2h3-Mc-Bw6" customClass="RoundButton" customModule="MTGCards" customModuleProvider="target">
-                                <rect key="frame" x="20" y="294" width="335" height="30"/>
+                                <rect key="frame" x="20" y="276" width="335" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Download Card Data"/>
@@ -90,7 +86,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7n-cu-Lip" customClass="RoundButton" customModule="MTGCards" customModuleProvider="target">
-                                <rect key="frame" x="20" y="577" width="335" height="50"/>
+                                <rect key="frame" x="20" y="557" width="335" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="dwg-xe-93s"/>
@@ -107,13 +103,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BnT-MX-vRi">
-                                <rect key="frame" x="124.5" y="129" width="126" height="35"/>
+                                <rect key="frame" x="124.5" y="111" width="126" height="35"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jvc-bw-hte">
-                                <rect key="frame" x="20" y="184" width="335" height="90"/>
+                                <rect key="frame" x="20" y="166" width="335" height="90"/>
                                 <attributedString key="attributedText">
                                     <fragment>
                                         <string key="content">We need to download card data, complements of  MTGJSON. This is about 200MB of data. 
@@ -133,10 +129,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9vW-e2-sgJ">
-                                <rect key="frame" x="20" y="344" width="335" height="2"/>
+                                <rect key="frame" x="20" y="326" width="335" height="2"/>
                             </progressView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPH-eJ-YZ0">
-                                <rect key="frame" x="20" y="354" width="335" height="21"/>
+                                <rect key="frame" x="20" y="336" width="335" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Exg-GL-Iyt"/>
                                 </constraints>
@@ -145,7 +141,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="oPH-eJ-YZ0" firstAttribute="top" secondItem="9vW-e2-sgJ" secondAttribute="bottom" constant="8" id="2Ht-j5-Ahz"/>
                             <constraint firstItem="M4S-S1-ocE" firstAttribute="trailing" secondItem="9vW-e2-sgJ" secondAttribute="trailing" constant="20" id="7Sz-7g-Xb1"/>
