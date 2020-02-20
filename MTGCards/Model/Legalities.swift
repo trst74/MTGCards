@@ -23,7 +23,8 @@ class Legalities: NSManagedObject, Codable {
     @NSManaged var  brawl: String?
     @NSManaged var  future: String?
     @NSManaged var  standard: String?
-
+    @NSManaged var pioneer: String?
+    
     enum CodingKeys: String, CodingKey {
         case the1V1 = "1v1"
         case brawl = "brawl"
@@ -37,19 +38,20 @@ class Legalities: NSManagedObject, Codable {
         case penny = "penny"
         case standard = "standard"
         case vintage = "vintage"
+        case pioneer = "pioneer"
     }
     required convenience init(from decoder: Decoder) throws {
-//        let managedObjectContext = CoreDataStack.handler.privateContext
-//        guard  let entity = NSEntityDescription.entity(forEntityName: "Legalities", in: managedObjectContext) else {
-//                fatalError("Failed to decode Legalities")
-//        }
+        //        let managedObjectContext = CoreDataStack.handler.privateContext
+        //        guard  let entity = NSEntityDescription.entity(forEntityName: "Legalities", in: managedObjectContext) else {
+        //                fatalError("Failed to decode Legalities")
+        //        }
         guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,
             let managedObjectContext = decoder.userInfo[codingUserInfoKeyManagedObjectContext] as? NSManagedObjectContext,
             let entity = NSEntityDescription.entity(forEntityName: "Legalities", in: managedObjectContext) else {
                 fatalError("Failed to decode User")
         }
         self.init(entity: entity, insertInto: managedObjectContext)
-
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.the1V1 = try container.decodeIfPresent(String.self, forKey: .the1V1)
         self.commander = try container.decodeIfPresent(String.self, forKey: .commander)
@@ -63,8 +65,9 @@ class Legalities: NSManagedObject, Codable {
         self.brawl = try container.decodeIfPresent(String.self, forKey: .brawl)
         self.future = try container.decodeIfPresent(String.self, forKey: .future)
         self.standard = try container.decodeIfPresent(String.self, forKey: .standard)
+        self.pioneer = try container.decodeIfPresent(String.self, forKey: .pioneer)
     }
-
+    
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(the1V1, forKey: .the1V1)
@@ -79,6 +82,7 @@ class Legalities: NSManagedObject, Codable {
         try container.encode(brawl, forKey: .brawl)
         try container.encode(future, forKey: .future)
         try container.encode(standard, forKey: .standard)
+        try container.encode(pioneer, forKey: .pioneer)
     }
     public func getLegalitiesCollection() -> [Legality] {
         var results: [Legality] = []
@@ -86,6 +90,11 @@ class Legalities: NSManagedObject, Codable {
             results.append(Legality(format: "Standard", legality: standard))
         } else {
             results.append(Legality(format: "Standard", legality: "Not Legal"))
+        }
+        if let duel = pioneer {
+            results.append(Legality(format: "Pioneer", legality: duel))
+        } else {
+            results.append(Legality(format: "Pioneer", legality: "Not Legal"))
         }
         if let modern = modern {
             results.append(Legality(format: "Modern", legality: modern))
@@ -112,7 +121,6 @@ class Legalities: NSManagedObject, Codable {
         } else {
             results.append(Legality(format: "Frontier", legality: "Not Legal"))
         }
-        
         if let pauper = pauper {
             results.append(Legality(format: "Pauper", legality: pauper))
         } else {
@@ -128,8 +136,9 @@ class Legalities: NSManagedObject, Codable {
         } else {
             results.append(Legality(format: "Duel", legality: "Not Legal"))
         }
-
-     
+        
+        
+        
         return results
     }
 }
