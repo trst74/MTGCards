@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE0573D923FF342600316516 /* SunburstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0573D823FF342600316516 /* SunburstView.swift */; };
+		EE0573DB23FF345B00316516 /* Sunburst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0573DA23FF345B00316516 /* Sunburst.swift */; };
+		EE0573DD23FF347C00316516 /* ArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0573DC23FF347C00316516 /* ArcView.swift */; };
+		EE0573DF23FF34A800316516 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0573DE23FF34A800316516 /* DataModel.swift */; };
+		EE0573E123FF34BF00316516 /* IfLetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0573E023FF34BF00316516 /* IfLetView.swift */; };
+		EE0573E323FF393F00316516 /* UIImage+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0573E223FF393F00316516 /* UIImage+Custom.swift */; };
 		EE0F62A922341CD7003D8A8A /* PageTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0F62A822341CD7003D8A8A /* PageTwoViewController.swift */; };
 		EE0F62AB22341DC1003D8A8A /* PageOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0F62AA22341DC1003D8A8A /* PageOneViewController.swift */; };
 		EE0F62AD22356494003D8A8A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0F62AC22356494003D8A8A /* CoreDataStack.swift */; };
@@ -123,6 +129,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EE0573D823FF342600316516 /* SunburstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunburstView.swift; sourceTree = "<group>"; };
+		EE0573DA23FF345B00316516 /* Sunburst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunburst.swift; sourceTree = "<group>"; };
+		EE0573DC23FF347C00316516 /* ArcView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcView.swift; sourceTree = "<group>"; };
+		EE0573DE23FF34A800316516 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		EE0573E023FF34BF00316516 /* IfLetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IfLetView.swift; sourceTree = "<group>"; };
+		EE0573E223FF393F00316516 /* UIImage+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Custom.swift"; sourceTree = "<group>"; };
 		EE0F62A822341CD7003D8A8A /* PageTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTwoViewController.swift; sourceTree = "<group>"; };
 		EE0F62AA22341DC1003D8A8A /* PageOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageOneViewController.swift; sourceTree = "<group>"; };
 		EE0F62AC22356494003D8A8A /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -287,6 +299,7 @@
 				EE2B78AA21EFE47600306990 /* UIView+AutolayoutHelp.swift */,
 				EE2755282234084C006BD083 /* UserDefaultsHandler.swift */,
 				EE35EDB023F627D4000254E7 /* Array+Custom.swift */,
+				EE0573E223FF393F00316516 /* UIImage+Custom.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -378,6 +391,11 @@
 			isa = PBXGroup;
 			children = (
 				EE35EDAE23F5EC27000254E7 /* BarChart.swift */,
+				EE0573DC23FF347C00316516 /* ArcView.swift */,
+				EE0573E023FF34BF00316516 /* IfLetView.swift */,
+				EE0573DE23FF34A800316516 /* DataModel.swift */,
+				EE0573D823FF342600316516 /* SunburstView.swift */,
+				EE0573DA23FF345B00316516 /* Sunburst.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -642,6 +660,7 @@
 				EEB5D81F2205EBFF0070FF8B /* UIColor+Custom.swift in Sources */,
 				EE2B78CF21F009A600306990 /* PlaceholderViewController.swift in Sources */,
 				EE2B78D521F1518E00306990 /* SetList.swift in Sources */,
+				EE0573DF23FF34A800316516 /* DataModel.swift in Sources */,
 				EE924709225AD4440044F858 /* CardType+CoreDataProperties.swift in Sources */,
 				EEF02F22223DAC11008F008B /* Collection+CoreDataClass.swift in Sources */,
 				EE24B108223DB9F50057610D /* CollectionTableViewCell.swift in Sources */,
@@ -670,10 +689,12 @@
 				EE27552D22341B04006BD083 /* RoundButton.swift in Sources */,
 				EE9246FE225A9EF80044F858 /* SetFilterTableViewController.swift in Sources */,
 				EEB0E85C22ADE58A00BB8B74 /* DeckStatsTableViewController.swift in Sources */,
+				EE0573D923FF342600316516 /* SunburstView.swift in Sources */,
 				EE4FD205223A91BD00E8CDB3 /* Deck+CoreDataProperties.swift in Sources */,
 				EEE7D587225B91DD00FE4D1C /* CardSubtype+CoreDataClass.swift in Sources */,
 				EE9246FF225A9EF80044F858 /* SuperTypeFilterTableViewController.swift in Sources */,
 				EE0F62AD22356494003D8A8A /* CoreDataStack.swift in Sources */,
+				EE0573DD23FF347C00316516 /* ArcView.swift in Sources */,
 				EE4FD204223A91BD00E8CDB3 /* Deck+CoreDataClass.swift in Sources */,
 				EE4F532722467A4D003A06CA /* CardRulingsView.swift in Sources */,
 				EE6F94B2223092AD001B3378 /* TcgToken.swift in Sources */,
@@ -682,8 +703,10 @@
 				EE4FD209223AC6FE00E8CDB3 /* DeckTableViewController.swift in Sources */,
 				EEF02F23223DAC11008F008B /* Collection+CoreDataProperties.swift in Sources */,
 				EEBE6D9621EFE18F00A3464E /* MTGCards.xcdatamodeld in Sources */,
+				EE0573E123FF34BF00316516 /* IfLetView.swift in Sources */,
 				EEB0ADDC227A3FBF00613C8C /* Deck+Backup.swift in Sources */,
 				EEBE6D8E21EFE18F00A3464E /* AppDelegate.swift in Sources */,
+				EE0573DB23FF345B00316516 /* Sunburst.swift in Sources */,
 				EE32D7AF2265631D00AEC47E /* DeckCardCommanderTableViewCell.swift in Sources */,
 				EEC91990223080DF004E52F5 /* SettingsTableViewController.swift in Sources */,
 				EE2755292234084C006BD083 /* UserDefaultsHandler.swift in Sources */,
@@ -692,6 +715,7 @@
 				EEE7D59C225BA16D00FE4D1C /* CardSupertype+CoreDataProperties.swift in Sources */,
 				EE2B78CB21F0089500306990 /* CardViewController.swift in Sources */,
 				EE2B78BB21EFE60E00306990 /* StateCoordinator.swift in Sources */,
+				EE0573E323FF393F00316516 /* UIImage+Custom.swift in Sources */,
 				EE5EDE952246831F00C24C5E /* CardLegalityView.swift in Sources */,
 				EE924708225AD4440044F858 /* CardType+CoreDataClass.swift in Sources */,
 				EE2B822321FD258700306990 /* Legalities.swift in Sources */,

@@ -57,9 +57,6 @@ class DeckStatsTableViewController: UITableViewController {
                     let cardprices = prices.results.first(where: {$0.productID == tcgid && $0.subTypeName == subtype})
                     if let result = cardprices, let market = result.marketPrice {
                         total += (market * Double(deckcard.quantity))
-                        print("Found card price for \(deckcard.card?.name) of type \(subtype): \((market * Double(deckcard.quantity)).currencyUS)")
-                    } else {
-                        print("Cannot find card price for \(deckcard.card?.name) of type \(subtype)")
                     }
                 }
             }
@@ -102,12 +99,13 @@ class DeckStatsTableViewController: UITableViewController {
         print("Deck Card Count: \(deckCards.count)")
         var temp: [Float?] = []
         for card in deckCards{
-            let quantity = Int(card.quantity)
-            for _ in 1...quantity {
-                temp.append(card.card?.convertedManaCost)
+            if !(card.card?.type?.contains("Land") ?? true) {
+                let quantity = Int(card.quantity)
+                for _ in 1...quantity {
+                    temp.append(card.card?.convertedManaCost)
+                }
             }
         }
-        
         for cmc in temp {
             if let tempcmc = cmc {
                 CMCs.append(tempcmc)
@@ -125,16 +123,10 @@ class DeckStatsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if section == 0 {
-            return 1
-        } else if section == 4 {
-            return 2
-        } else {
-            return 1
-        }
+        return 1
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 || indexPath.section == 2 || indexPath.section == 3 {
+        if indexPath.section != 1 {
             return 200
         }
         return 54
@@ -162,21 +154,62 @@ class DeckStatsTableViewController: UITableViewController {
             cell.contentView.addSubview(chart.view)
         } else if indexPath.section == 3 {
             
-            let chart = UIHostingController(rootView: BarChart(bars:
-                [Bar(id: UUID(), value: 2.2, label: "Plains", color: Color("Plains")),
-                 Bar(id: UUID(), value: 8.2, label: "Islands",color: Color("Islands")),
-                 Bar(id: UUID(), value: 4.2, label: "Swamps",color: Color("Swamps")),
-                 Bar(id: UUID(), value: 6.0, label: "Mountains",color: Color("Mountains")),
-                 Bar(id: UUID(), value: 4.2, label: "Forests",color: Color("Forests"))]))
             
-            
+            let chart = UIHostingController(rootView: SunburstView(configuration: createSunburstConfigForColor()))
             chart.view.translatesAutoresizingMaskIntoConstraints = false
             chart.view.frame = cell.contentView.bounds
             cell.contentView.addSubview(chart.view)
+        } else if indexPath.section == 4 {
+            
         }
         return cell
     }
-    
+    private func createSunburstConfigForColor() -> SunburstConfiguration {
+
+        var W = 0.0
+        var U = 0.0
+        var B = 0.0
+        var R = 0.0
+        var G = 0.0
+        var A = 0.0
+
+        for card in deckCards{
+            if !(card.card?.type?.contains("Land") ?? true) {
+                let quantity = Int(card.quantity)
+                if let colorIdentities = card.card?.colorIdentity?.allObjects as? [ColorIdentity] {
+                    let identities: [String?] = colorIdentities.map ({ $0.color })
+                    if identities.contains("W") {
+                        W += Double(quantity)
+                    }
+                    if identities.contains("U") {
+                        U += Double(quantity)
+                    }
+                    if identities.contains("B") {
+                        B += Double(quantity)
+                    }
+                    if identities.contains("R") {
+                        R += Double(quantity)
+                    }
+                    if identities.contains("G") {
+                        G += Double(quantity)
+                    }
+                    if identities.count == 0 {
+                        A += Double(quantity)
+                    }
+                }
+            }
+        }
+        
+        
+        
+        let configuration = SunburstConfiguration(nodes: [Node(name: Int(W).description, value: W, backgroundColor: UIColor(named: "Plains") ),
+        Node(name: Int(U).description, value: U, backgroundColor: UIColor(named: "Islands")),
+        Node(name: Int(B).description, value: B, backgroundColor: UIColor(named: "Swamps")),
+        Node(name: Int(R).description, value: R, backgroundColor: UIColor(named: "Mountains")),
+        Node(name: Int(G).description, value: G, backgroundColor: UIColor(named: "Forests")),
+        Node(name: Int(A).description, value: A, backgroundColor: UIColor(named: "Artifacts"))], calculationMode: .parentIndependent(totalValue: W+U+B+R+G+A))
+        return configuration
+    }
     private func createCMCBars() -> [Bar] {
         var bars: [Bar] = []
         let unique = CMCs.removingDuplicates().sorted()
