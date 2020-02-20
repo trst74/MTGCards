@@ -9,14 +9,28 @@
 import UIKit
 import CoreData
 
-class SetFilterTableViewController: UITableViewController {
+class SetFilterTableViewController: UITableViewController, UISearchResultsUpdating {
     var filterController: FiltersTableViewController? = nil
     
     var sets: [MTGSet] = []
+    var filteredSets: [MTGSet] = []
     var selectedSets: [String] = []
-
+    let searchController = UISearchController(searchResultsController: nil)
+    var isSearchBarEmpty: Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    var isFiltering: Bool {
+        return searchController.isActive && !isSearchBarEmpty
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Sets"
+        searchController.hidesNavigationBarDuringPresentation = false
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        self.navigationItem.hidesSearchBarWhenScrolling = false
         DispatchQueue.main.async {
             self.getSets()
         }
@@ -41,16 +55,38 @@ class SetFilterTableViewController: UITableViewController {
             print(error)
         }
     }
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        filterContentForSearchText(searchBar.text!)
+    }
+    func filterContentForSearchText(_ searchText: String) {
+        filteredSets = sets.filter { (set: MTGSet) -> Bool in
+            return (set.name?.lowercased().contains(searchText.lowercased()) ?? true) || (set.code?.lowercased().contains(searchText.lowercased()) ?? true)
+        }
+        
+        tableView.reloadData()
+    }
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering {
+            return filteredSets.count
+        }
+        
+        
         return sets.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "setCell", for: indexPath)
-        if let code = sets[indexPath.row].code {
+        let set: MTGSet
+        if isFiltering {
+            set = filteredSets[indexPath.row]
+        } else {
+            set = sets[indexPath.row]
+        }
+        if let code = set.code {
             let checked = Filters.current.isSetSelected(setCode: code)
             if checked {
                 cell.accessoryType = .checkmark
@@ -59,11 +95,17 @@ class SetFilterTableViewController: UITableViewController {
             }
             
         }
-        cell.textLabel?.text = sets[indexPath.row].name
+        cell.textLabel?.text = set.name
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let set = sets[indexPath.row]
+        let set: MTGSet
+        if isFiltering {
+            set = filteredSets[indexPath.row]
+        } else {
+            set = sets[indexPath.row]
+        }
+        
         if let code = set.code {
             if Filters.current.isSetSelected(setCode: code) {
                 tableView.cellForRow(at: indexPath)?.accessoryType = .none

@@ -38,7 +38,7 @@ class CollectionTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return collectionCards.count
     }
@@ -83,7 +83,7 @@ class CollectionTableViewController: UITableViewController {
         
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let card = collectionCards[indexPath.row].card {
             StateCoordinator.shared.didSelectCard(id: card.objectID)
@@ -109,6 +109,15 @@ class CollectionTableViewController: UITableViewController {
                 }
             }
         }
+    }
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        guard UIApplication.shared.applicationState == .inactive else {
+            return
+        }
+        
+        print("Called")
     }
 }
 extension CollectionTableViewController {
