@@ -161,6 +161,8 @@ class DeckStatsTableViewController: UITableViewController {
             cell.contentView.addSubview(chart.view)
         } else if indexPath.section == 4 {
             
+        } else if indexPath.section == 1 {
+            cell.textLabel?.text = "TCGPlayer"
         }
         return cell
     }

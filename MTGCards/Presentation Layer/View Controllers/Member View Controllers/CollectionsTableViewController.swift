@@ -74,6 +74,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
                 CoreDataStack.handler.saveContext()
                 self.reloadDecksFromCoreData()
                 DispatchQueue.main.async {
+                    self.reloadCollectionsFromCoreData()
                     self.tableView.reloadData()
                 }
             }
@@ -205,6 +206,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
                 print(error)
             }
             self.reloadDecksFromCoreData()
+            self.reloadCollectionsFromCoreData()
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
