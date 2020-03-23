@@ -10,7 +10,9 @@ import UIKit
 import CoreData
 import MobileCoreServices
 
-class CardListTableViewController: UITableViewController, UISearchResultsUpdating, NSFetchedResultsControllerDelegate, UITableViewDragDelegate {
+class CardListTableViewController: UITableViewController, UISearchResultsUpdating, NSFetchedResultsControllerDelegate, UITableViewDragDelegate, UIContextMenuInteractionDelegate {
+
+    
     var fetchedResultsController: NSFetchedResultsController<Card>!
     var cardlist: [Card] = []
     var filteredCardList: [Card] = []
@@ -208,6 +210,31 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             
             let card = fetchedResultsController.object(at: IndexPath(item: random, section: 0))
             StateCoordinator.shared.didSelectCard(id: card.objectID)
+        }
+    }
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        return nil
+    }
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let addToDeck = UIAction(title: "Add To Deck",
+          image: UIImage(systemName: "plus")) { _ in
+          print("Add To Deck")
+        }
+
+        let share = UIAction(title: "Share",
+          image: UIImage(systemName: "square.and.arrow.up")) { action in
+          print("Share")
+        }
+
+        let delete = UIAction(title: "Delete",
+          image: UIImage(systemName: "trash.fill"),
+          attributes: [.destructive]) { action in
+           // Perform action
+         }
+
+        return UIContextMenuConfiguration(identifier: nil,
+          previewProvider: nil) { _ in
+          UIMenu(title: "", children: [addToDeck, share])
         }
     }
     

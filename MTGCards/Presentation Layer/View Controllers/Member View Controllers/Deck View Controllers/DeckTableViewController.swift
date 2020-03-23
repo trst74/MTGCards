@@ -10,7 +10,11 @@ import UIKit
 import CoreData
 import MobileCoreServices
 
-class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
+class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        return nil
+    }
+    
     var deck: Deck? = nil
     var deckCards: [DeckCard] {
         get {
@@ -383,6 +387,63 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate {
         }
         editAction.backgroundColor = .gray
         return UISwipeActionsConfiguration(actions: [editAction])
+    }
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let edit = UIAction(title: "Edit",
+                            image: UIImage(systemName: "pencil")) { _ in
+                                var deckcard: DeckCard?
+                                if indexPath.section == self.deckSection {
+                                    deckcard = self.deckCards[indexPath.row]
+                                } else if indexPath.section == self.sideboardSection {
+                                    deckcard = self.sideboard[indexPath.row]
+                                } else if indexPath.section == self.commanderSection {
+                                    deckcard = self.commander[indexPath.row]
+                                }
+                                let storyboard = UIStoryboard(name: "EditDeckCard", bundle: nil)
+                                guard let editDeckCardView = storyboard.instantiateInitialViewController() as? EditDeckCardTableViewController else {
+                                    fatalError("Project config error - storyboard doesnt provide a EditDeckCard")
+                                }
+                                if let deckcard = deckcard {
+                                    editDeckCardView.deckCard = deckcard
+                                }
+                                editDeckCardView.deckViewController = self
+                                self.navigationController?.pushViewController(editDeckCardView, animated: true)
+                                
+        }
+        
+        let share = UIAction(title: "Share",
+                             image: UIImage(systemName: "square.and.arrow.up")) { action in
+                                print("Share")
+        }
+        
+        let delete = UIAction(title: "Delete",
+                              image: UIImage(systemName: "trash.fill"),
+                              attributes: [.destructive]) { action in
+                                var card: DeckCard? = nil
+                                if indexPath.section == self.commanderSection {
+                                    card = self.commander[indexPath.row]
+                                } else if indexPath.section == self.deckSection {
+                                    card = self.deckCards[indexPath.row]
+                                } else {
+                                    card = self.sideboard[indexPath.row]
+                                }
+                                //let card = deckCards[indexPath.row]
+                                if let card = card {
+                                    self.deck?.removeFromCards(card)
+                                    CoreDataStack.handler.savePrivateContext()
+                                    if let id = self.deck?.objectID {
+                                        self.deck = CoreDataStack.handler.privateContext.object(with: id) as? Deck
+                                    }
+                                    DispatchQueue.main.async {
+                                        self.tableView.reloadData()
+                                    }
+                                }
+        }
+        
+        return UIContextMenuConfiguration(identifier: nil,
+                                          previewProvider: nil) { _ in
+                                            UIMenu(title: "", children: [edit, share, delete])
+        }
     }
 }
 extension DeckTableViewController {
