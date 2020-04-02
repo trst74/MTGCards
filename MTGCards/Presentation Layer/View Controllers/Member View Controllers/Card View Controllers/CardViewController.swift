@@ -48,13 +48,14 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var foilMarket: UILabel!
     
     var shareButton: UIBarButtonItem?
+    var addToDeckButton: UIBarButtonItem?
     
     var card: Card?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(self.share))
-        self.navigationItem.setRightBarButton(shareButton, animated: true)
+        
+        //self.navigationItem.setRightBarButton(shareButton, animated: true)
         
         costLabel.attributedText = card?.manaCost?.replaceSymbols()
         typeLabel.text = card?.type
@@ -113,7 +114,23 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
             // Fallback on earlier versions
         }
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        var barItems: [UIBarButtonItem] = []
+        shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(self.share))
+        if let shareButton = shareButton {
+            barItems.append(shareButton)
+        }
+        
+        barItems.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
+        addToDeckButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addToDeck))
+        if let addToDeckButton = addToDeckButton{
+            barItems.append(addToDeckButton)
+        }
+        if let nav = self.navigationController {
+            nav.setToolbarHidden(false, animated: false)
+            toolbarItems = barItems
+        }
+    }
     override func viewDidAppear(_ animated: Bool) {
         loadRulings()
         loadLegalities()
@@ -124,20 +141,23 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         loadRulings()
         loadLegalities()
     }
+    @objc func addToDeck(){
+        
+    }
     @objc func showDebug(){
         print("debug")
-//        let storyboard = UIStoryboard(name: "Debug", bundle: nil)
-//        guard let debugVC = storyboard.instantiateInitialViewController() as? DebugViewController else {
-//            fatalError("Error going to settings")
-//        }
-//        if let json = ((try? card?.jsonString()) as String??) {
-//            debugVC.json = json ?? ""
-//            //self.navigationController?.pushViewController(settingsVC, animated: true)
-//            self.present(debugVC, animated: true, completion: nil)
-//        }
-//        let cardView = CardView(card: card)
-//        let viewCtrl = UIHostingController(rootView: cardView)
-//        self.present(viewCtrl, animated: true, completion: nil)
+        //        let storyboard = UIStoryboard(name: "Debug", bundle: nil)
+        //        guard let debugVC = storyboard.instantiateInitialViewController() as? DebugViewController else {
+        //            fatalError("Error going to settings")
+        //        }
+        //        if let json = ((try? card?.jsonString()) as String??) {
+        //            debugVC.json = json ?? ""
+        //            //self.navigationController?.pushViewController(settingsVC, animated: true)
+        //            self.present(debugVC, animated: true, completion: nil)
+        //        }
+        //        let cardView = CardView(card: card)
+        //        let viewCtrl = UIHostingController(rootView: cardView)
+        //        self.present(viewCtrl, animated: true, completion: nil)
     }
     @objc func share(){
         let alert = UIAlertController(title: "Share", message: nil, preferredStyle: .actionSheet)
@@ -254,7 +274,7 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         URLSession.shared.dataTask(with: url) {
             (data, response, error) in
             completion(data, response, error)
-            }.resume()
+        }.resume()
     }
     @IBAction func imageLongPressed(_ sender: UILongPressGestureRecognizer) {
         shareImage()

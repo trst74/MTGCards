@@ -391,14 +391,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
     override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let edit = UIAction(title: "Edit",
                             image: UIImage(systemName: "pencil")) { _ in
-                                var deckcard: DeckCard?
-                                if indexPath.section == self.deckSection {
-                                    deckcard = self.deckCards[indexPath.row]
-                                } else if indexPath.section == self.sideboardSection {
-                                    deckcard = self.sideboard[indexPath.row]
-                                } else if indexPath.section == self.commanderSection {
-                                    deckcard = self.commander[indexPath.row]
-                                }
+                                let deckcard = self.getDeckcardForIndexPath(indexPath: indexPath)
                                 let storyboard = UIStoryboard(name: "EditDeckCard", bundle: nil)
                                 guard let editDeckCardView = storyboard.instantiateInitialViewController() as? EditDeckCardTableViewController else {
                                     fatalError("Project config error - storyboard doesnt provide a EditDeckCard")
@@ -413,20 +406,53 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
         
         let share = UIAction(title: "Share",
                              image: UIImage(systemName: "square.and.arrow.up")) { action in
-                                print("Share")
+                                let deckcard = self.getDeckcardForIndexPath(indexPath: indexPath)
+                                
+                                let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                                var imageAction = UIAlertAction(title: "Image", style: .default, handler: { action in
+                                    if let uuid = deckcard?.card?.uuid {
+                                        if let image = self.getImage(Key: uuid) {
+                                            self.shareImage(image: image, popupView: self.tableView.cellForRow(at: indexPath))
+                                        }
+                                    }
+                                    
+                                })
+                                imageAction.setValue(UIImage(systemName: "photo"), forKey: "image")
+                                imageAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+                                alert.addAction(imageAction)
+                                if let multiverseid = deckcard?.card?.multiverseID, multiverseid > 0 {
+                                    alert.addAction(UIAlertAction(title: "Gatherer", style: .default, handler: { action in
+                                        if let url = URL(string:  "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=\(multiverseid)"){
+                                            self.shareUrl(url: url, popupView: self.tableView.cellForRow(at: indexPath))
+                                        }
+                                    }))
+                                }
+                                if let tcg = deckcard?.card?.tcgplayerPurchaseURL {
+                                    alert.addAction(UIAlertAction(title: "TCGPlayer", style: .default, handler: { action in
+                                        //self.shareText(text: tcg)
+                                        if let url = URL(string:  tcg){
+                                            self.shareUrl(url: url, popupView: self.tableView.cellForRow(at: indexPath))
+                                        }
+                                        
+                                    }))
+                                }
+                                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                                    
+                                    self.dismiss(animated: true, completion: nil)
+                                }))
+                                if let popoverController = alert.popoverPresentationController {
+                                    popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
+                                    popoverController.sourceView = tableView.cellForRow(at: indexPath)
+                                    //popoverController.sourceRect = tableView.cellForRow(at: indexPath)?.bounds
+                                }
+                                self.present(alert, animated: true, completion: nil)
         }
         
         let delete = UIAction(title: "Delete",
                               image: UIImage(systemName: "trash.fill"),
                               attributes: [.destructive]) { action in
-                                var card: DeckCard? = nil
-                                if indexPath.section == self.commanderSection {
-                                    card = self.commander[indexPath.row]
-                                } else if indexPath.section == self.deckSection {
-                                    card = self.deckCards[indexPath.row]
-                                } else {
-                                    card = self.sideboard[indexPath.row]
-                                }
+                                let card = self.getDeckcardForIndexPath(indexPath: indexPath)
+                                
                                 //let card = deckCards[indexPath.row]
                                 if let card = card {
                                     self.deck?.removeFromCards(card)
@@ -444,6 +470,50 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
                                           previewProvider: nil) { _ in
                                             UIMenu(title: "", children: [edit, share, delete])
         }
+    }
+    func getDeckcardForIndexPath(indexPath: IndexPath) -> DeckCard? {
+        var deckcard: DeckCard?
+        if indexPath.section == self.deckSection {
+            deckcard = self.deckCards[indexPath.row]
+        } else if indexPath.section == self.sideboardSection {
+            deckcard = self.sideboard[indexPath.row]
+        } else if indexPath.section == self.commanderSection {
+            deckcard = self.commander[indexPath.row]
+        }
+        return deckcard
+    }
+    func shareUrl(url: URL, popupView: AnyObject?){
+        let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: [SafariActivity()])
+        if let location = popupView as? UIView {
+            activityViewController.popoverPresentationController?.sourceView = location
+        } else {
+            activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        }
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    func shareImage(image: UIImage, popupView: AnyObject?){
+        
+        let imageToShare = [ image ]
+        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+        if let location = popupView as? UIView {
+            activityViewController.popoverPresentationController?.sourceView = location
+        } else {
+            activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        }
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    func getImage(Key: String) -> UIImage? {
+        let fileManager = FileManager.default
+        let filename = getDocumentsDirectory().appendingPathComponent("\(Key).png")
+        if fileManager.fileExists(atPath: filename.path) {
+            print("loaded from cache")
+            return UIImage(contentsOfFile: filename.path)
+        }
+        return nil
+    }
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
     }
 }
 extension DeckTableViewController {

@@ -86,7 +86,7 @@ class TcgPlayerApi {
                                 do {
                                     let prices = try decoder.decode(TcgPrices.self, from: jsonData)
                                     if prices.errors.isEmpty {
-                                        print("Prices recieved for \(cardIds): \(String(describing: prices.results[0].midPrice))")
+                                        //print("Prices recieved for \(cardIds): \(String(describing: prices.results[0].midPrice))")
                                         completion(prices)
                                     }
                                 } catch {
