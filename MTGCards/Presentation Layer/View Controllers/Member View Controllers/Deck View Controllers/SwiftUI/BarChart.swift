@@ -14,7 +14,7 @@ struct BarChart: View {
     var body: some View {
         Group {
             if bars.isEmpty {
-                Text("There is no data to display chart...")
+                Text("There is no data to display.")
             } else {
                 VStack {
                     BarsView(bars: bars)

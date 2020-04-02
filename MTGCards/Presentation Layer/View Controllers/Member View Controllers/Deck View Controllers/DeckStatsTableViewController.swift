@@ -71,6 +71,11 @@ class DeckStatsTableViewController: UITableViewController {
         var uncommon = 0
         var rare = 0
         var mythic = 0
+        var total: Int {
+            get {
+                return common + uncommon + rare + mythic
+            }
+        }
     }
     private func calculateRarities() {
         
@@ -135,11 +140,15 @@ class DeckStatsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "rarityCell", for: indexPath)
         if indexPath.section == 0 {
-            let chart = UIHostingController(rootView: BarChart(bars: [
-                Bar(id: UUID(), value: Double(rarities.common), label: "Common", color: Color("Common")),
-                Bar(id: UUID(), value: Double(rarities.uncommon), label: "Uncommon", color: Color("Uncommon")),
-                Bar(id: UUID(), value: Double(rarities.rare), label: "Rare", color: Color("Rare")),
-                Bar(id: UUID(), value: Double(rarities.mythic), label: "Mythic", color: Color("Mythic"))]))
+            var bars: [Bar] = []
+            if rarities.total != 0 {
+            bars = [
+            Bar(id: UUID(), value: Double(rarities.common), label: "Common", color: Color("Common")),
+            Bar(id: UUID(), value: Double(rarities.uncommon), label: "Uncommon", color: Color("Uncommon")),
+            Bar(id: UUID(), value: Double(rarities.rare), label: "Rare", color: Color("Rare")),
+            Bar(id: UUID(), value: Double(rarities.mythic), label: "Mythic", color: Color("Mythic"))]
+            }
+            let chart = UIHostingController(rootView: BarChart(bars: bars))
             
             
             chart.view.translatesAutoresizingMaskIntoConstraints = false
@@ -163,6 +172,9 @@ class DeckStatsTableViewController: UITableViewController {
             
         } else if indexPath.section == 1 {
             cell.textLabel?.text = "TCGPlayer"
+            if deckCards.count == 0 {
+                cell.detailTextLabel?.text = "--"
+            }
         }
         return cell
     }

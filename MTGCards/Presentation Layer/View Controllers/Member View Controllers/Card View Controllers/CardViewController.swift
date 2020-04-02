@@ -48,7 +48,7 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var foilMarket: UILabel!
     
     var shareButton: UIBarButtonItem?
-    var addToDeckButton: UIBarButtonItem?
+    var addToButton: UIBarButtonItem?
     
     var card: Card?
     
@@ -122,8 +122,8 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         barItems.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
-        addToDeckButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addToDeck))
-        if let addToDeckButton = addToDeckButton{
+        addToButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addTo))
+        if let addToDeckButton = addToButton{
             barItems.append(addToDeckButton)
         }
         if let nav = self.navigationController {
@@ -141,8 +141,24 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         loadRulings()
         loadLegalities()
     }
-    @objc func addToDeck(){
-        
+    @objc func addTo(){
+        let alert = UIAlertController(title: "Add To", message: nil, preferredStyle: .actionSheet)
+        let addToCollection = UIAlertAction(title: "Collection", style: .default, handler: { action in
+            print(self.card?.name)
+        })
+        alert.addAction(addToCollection)
+        let addToWishList = UIAlertAction(title: "Wish List", style: .default, handler: { action in
+            
+        })
+        alert.addAction(addToWishList)
+        let addToDeck = UIAlertAction(title: "Deck...", style: .default, handler: { action in
+            
+        })
+        alert.addAction(addToDeck)
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.barButtonItem = addToButton
+        }
+        self.present(alert, animated: true, completion: nil)
     }
     @objc func showDebug(){
         print("debug")
