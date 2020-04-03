@@ -128,6 +128,84 @@ public class DataManager {
         }
         return []
     }
+    static func getCollection() -> Collection? {
+        let request = NSFetchRequest<Collection>(entityName: "Collection")
+            let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+            request.sortDescriptors = [sortDescriptor]
+            do {
+                let results = try CoreDataStack.handler.privateContext.fetch(request)
+                return results[0]
+            } catch {
+                print(error)
+            }
+        return nil
+    }
+    static func getWishList() -> Collection? {
+        let request = NSFetchRequest<Collection>(entityName: "Collection")
+            let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+            request.sortDescriptors = [sortDescriptor]
+            do {
+                let results = try CoreDataStack.handler.privateContext.fetch(request)
+                return results[1]
+            } catch {
+                print(error)
+            }
+        return nil
+    }
+    static func addCardToCollection(id: NSManagedObjectID) {
+        if let card = CoreDataStack.handler.privateContext.object(with: id) as? Card {
+            if let collection = getCollection() {
+                guard  let entity = NSEntityDescription.entity(forEntityName: "CollectionCard", in:  CoreDataStack.handler.privateContext) else {
+                    fatalError("Failed to decode Card")
+                }
+                let collectionCard = CollectionCard.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
+                collectionCard.card = card
+                collectionCard.quantity = 1
+                collection.addToCards(collectionCard)
+                do {
+                    try CoreDataStack.handler.privateContext.save()
+                } catch {
+                    print(error)
+                }
+            }
+        }
+    }
+    static func addCardToWishList(id: NSManagedObjectID) {
+        if let card = CoreDataStack.handler.privateContext.object(with: id) as? Card {
+            if let collection = getWishList(){
+                guard  let entity = NSEntityDescription.entity(forEntityName: "CollectionCard", in:  CoreDataStack.handler.privateContext) else {
+                    fatalError("Failed to decode Card")
+                }
+                let collectionCard = CollectionCard.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
+                collectionCard.card = card
+                collectionCard.quantity = 1
+                collection.addToCards(collectionCard)
+                do {
+                    try CoreDataStack.handler.privateContext.save()
+                } catch {
+                    print(error)
+                }
+            }
+        }
+    }
+    static func addCardToDeck(deckId: NSManagedObjectID, cardId: NSManagedObjectID) {
+        if let card = CoreDataStack.handler.privateContext.object(with: cardId) as? Card {
+            if let deck = CoreDataStack.handler.privateContext.object(with: deckId) as? Deck {
+                guard  let entity = NSEntityDescription.entity(forEntityName: "DeckCard", in:  CoreDataStack.handler.privateContext) else {
+                    fatalError("Failed to decode Card")
+                }
+                let deckCard = DeckCard.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
+                deckCard.card = card
+                deckCard.quantity = 1
+                deck.addToCards(deckCard)
+                do {
+                    try CoreDataStack.handler.privateContext.save()
+                } catch {
+                    print(error)
+                }
+            }
+        }
+    }
 }
 public extension CodingUserInfoKey {
     // Helper property to retrieve the context

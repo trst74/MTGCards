@@ -51,7 +51,7 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
     var addToButton: UIBarButtonItem?
     
     var card: Card?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -144,21 +144,34 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
     @objc func addTo(){
         let alert = UIAlertController(title: "Add To", message: nil, preferredStyle: .actionSheet)
         let addToCollection = UIAlertAction(title: "Collection", style: .default, handler: { action in
-            print(self.card?.name)
+            self.addToCollection()
         })
         alert.addAction(addToCollection)
         let addToWishList = UIAlertAction(title: "Wish List", style: .default, handler: { action in
-            
+            if let id = self.card?.objectID {
+                DataManager.addCardToWishList(id: id)
+            }
         })
         alert.addAction(addToWishList)
         let addToDeck = UIAlertAction(title: "Deck...", style: .default, handler: { action in
-            
+            if let id = self.card?.objectID {
+                self.presentAddToDeckMenu(id: id)
+            }
         })
         alert.addAction(addToDeck)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+              
+              self.dismiss(animated: true, completion: nil)
+          }))
         if let popoverController = alert.popoverPresentationController {
             popoverController.barButtonItem = addToButton
         }
         self.present(alert, animated: true, completion: nil)
+    }
+    @objc func addToCollection(){
+        if let id = self.card?.objectID {
+            DataManager.addCardToCollection(id: id)
+        }
     }
     @objc func showDebug(){
         print("debug")
@@ -201,7 +214,22 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         self.present(alert, animated: true, completion: nil)
     }
-    
+    func presentAddToDeckMenu(id: NSManagedObjectID){
+        let alert = UIAlertController(title: "Add To Deck...", message: nil, preferredStyle: .actionSheet)
+        let decks = DataManager.getDecksFromCoreData()
+        for d in decks {
+            alert.addAction(UIAlertAction(title: d.name ?? "", style: .default, handler: { action in
+                DataManager.addCardToDeck(deckId: d.objectID, cardId: id)
+            }))
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.barButtonItem = addToButton
+        }
+        self.present(alert, animated: true, completion: nil)
+    }
     func loadImage() {
         if var key = card?.uuid {
             if card?.side == "b" && card?.layout != "adventure"{
@@ -472,6 +500,7 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
             rulingsHeightContstraint.constant = rulingsHeight
         }
     }
+    
 }
 extension CardViewController {
     static func refreshCardController(id: NSManagedObjectID) -> CardViewController {

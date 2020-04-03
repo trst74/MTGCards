@@ -403,7 +403,47 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
                                 self.navigationController?.pushViewController(editDeckCardView, animated: true)
                                 
         }
-        
+        let addTo = UIAction(title: "Add To...",
+                             image: UIImage(systemName: "plus")) { action in
+                                let deckcard = self.getDeckcardForIndexPath(indexPath: indexPath)
+                                let alert = UIAlertController(title: "Add To", message: nil, preferredStyle: .actionSheet)
+                                
+                                if let popoverController = alert.popoverPresentationController {
+                                    popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
+                                    popoverController.sourceView = tableView.cellForRow(at: indexPath)
+                                    //popoverController.sourceRect = tableView.cellForRow(at: indexPath)?.bounds
+                                }
+                                
+                                let addToCollection = UIAlertAction(title: "Collection", style: .default, handler: { action in
+                                    if let id = deckcard?.card?.objectID {
+                                        DataManager.addCardToCollection(id: id)
+                                    }
+                                })
+                                alert.addAction(addToCollection)
+                                let addToWishList = UIAlertAction(title: "Wish List", style: .default, handler: { action in
+                                    if let id = deckcard?.card?.objectID {
+                                        DataManager.addCardToWishList(id: id)
+                                    }
+                                })
+                                alert.addAction(addToWishList)
+                                let addToDeck = UIAlertAction(title: "Deck...", style: .default, handler: { action in
+                                    if let id = deckcard?.card?.objectID {
+                                        self.presentAddToDeckMenu(id: id, sourceView: tableView.cellForRow(at: indexPath))
+                                    }
+                                })
+                                alert.addAction(addToDeck)
+                                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                                    
+                                    self.dismiss(animated: true, completion: nil)
+                                }))
+                                if let popoverController = alert.popoverPresentationController {
+                                    popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
+                                    popoverController.sourceView = tableView.cellForRow(at: indexPath)
+                                    //popoverController.sourceRect = tableView.cellForRow(at: indexPath)?.bounds
+                                }
+                                self.present(alert, animated: true, completion: nil)
+                                
+        }
         let share = UIAction(title: "Share",
                              image: UIImage(systemName: "square.and.arrow.up")) { action in
                                 let deckcard = self.getDeckcardForIndexPath(indexPath: indexPath)
@@ -468,8 +508,26 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
         
         return UIContextMenuConfiguration(identifier: nil,
                                           previewProvider: nil) { _ in
-                                            UIMenu(title: "", children: [edit, share, delete])
+                                            UIMenu(title: "", children: [edit,addTo, share, delete])
         }
+    }
+    func presentAddToDeckMenu(id: NSManagedObjectID, sourceView: UITableViewCell?){
+        let alert = UIAlertController(title: "Add To Deck...", message: nil, preferredStyle: .actionSheet)
+        let decks = DataManager.getDecksFromCoreData()
+        for d in decks {
+            alert.addAction(UIAlertAction(title: d.name ?? "", style: .default, handler: { action in
+                DataManager.addCardToDeck(deckId: d.objectID, cardId: id)
+            }))
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
+            popoverController.sourceView = sourceView
+            //popoverController.sourceRect = tableView.cellForRow(at: indexPath)?.bounds
+        }
+        self.present(alert, animated: true, completion: nil)
     }
     func getDeckcardForIndexPath(indexPath: IndexPath) -> DeckCard? {
         var deckcard: DeckCard?
