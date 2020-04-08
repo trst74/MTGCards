@@ -191,18 +191,18 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
     @objc func share(){
         let alert = UIAlertController(title: "Share", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Image", style: .default, handler: { action in
-            self.shareImage()
+            self.shareImage(self.shareButton)
         }))
         if let multiverseid = card?.multiverseID, multiverseid > 0 {
             alert.addAction(UIAlertAction(title: "Gatherer", style: .default, handler: { action in
                 if let url = URL(string:  "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=\(multiverseid)"){
-                    self.shareUrl(url: url, popupView: self.shareButton)
+                    self.shareUrl(url: url, self.shareButton)
                 }
             }))
         }
         if let tcg = card?.tcgplayerPurchaseURL {
             alert.addAction(UIAlertAction(title: "TCGPlayer", style: .default, handler: { action in
-                self.shareText(text: tcg)
+                self.shareText(text: tcg, self.shareButton)
             }))
         }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
@@ -286,7 +286,6 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         getDataFromUrl(url: url) { (data, _, error)  in
             guard let data = data, error == nil else {
                 return
-                
             }
             print("Download Finished")
             DispatchQueue.main.async { () -> Void in
@@ -321,28 +320,37 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         }.resume()
     }
     @IBAction func imageLongPressed(_ sender: UILongPressGestureRecognizer) {
-        shareImage()
+        shareImage(self.cardImage)
     }
-    func shareImage(){
+    func shareImage(_ sender: Any?){
         let image = self.cardImage.image
         let imageToShare = [ image! ]
-        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-        self.present(activityViewController, animated: true, completion: nil)
+        let activityController = UIActivityViewController(activityItems: imageToShare,
+                                                          applicationActivities: nil)
+        // if the action is sent from a bar button item
+        activityController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
+        // if the action is sent from some other kind of UIView (a table cell or button)
+        activityController.popoverPresentationController?.sourceView = sender as? UIView
+        present(activityController, animated: true)
     }
-    func shareText(text: String){
-        let activityViewController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-        self.present(activityViewController, animated: true, completion: nil)
+    func shareText(text: String,_ sender: Any?){
+                 let activityController = UIActivityViewController(activityItems: [text],
+                                                          applicationActivities: nil)
+        // if the action is sent from a bar button item
+        activityController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
+        // if the action is sent from some other kind of UIView (a table cell or button)
+        activityController.popoverPresentationController?.sourceView = sender as? UIView
+        present(activityController, animated: true)
     }
-    func shareUrl(url: URL, popupView: AnyObject?){
-        let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: [SafariActivity()])
-        if let location = popupView {
-            activityViewController.popoverPresentationController?.sourceView = location.view
-        } else {
-            activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-        }
-        self.present(activityViewController, animated: true, completion: nil)
+    func shareUrl(url: URL, _ sender: Any?){
+           let items = [url]
+         let activityController = UIActivityViewController(activityItems: items,
+                                                           applicationActivities: nil)
+         // if the action is sent from a bar button item
+         activityController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
+         // if the action is sent from some other kind of UIView (a table cell or button)
+         activityController.popoverPresentationController?.sourceView = sender as? UIView
+         present(activityController, animated: true)
     }
     func loadLegalities(){
         if let legalities = card?.legalities

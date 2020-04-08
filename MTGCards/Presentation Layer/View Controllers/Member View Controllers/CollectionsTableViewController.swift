@@ -48,7 +48,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         let menuAlert = UIAlertController(title: "Create Deck(s)", message: nil, preferredStyle: .actionSheet)
         menuAlert.addAction(UIAlertAction(title: "New Empty Deck", style: .default, handler: {action in  self.addBlankDeck()}))
         let pasteboard = UIPasteboard.general
-        if let string = pasteboard.string {
+        if pasteboard.string != nil {
             menuAlert.addAction(UIAlertAction(title: "New Deck from Clipboard", style: .default, handler: {action in  self.addDeckFromClipboard()}))
         }
         menuAlert.addAction(UIAlertAction(title: "New Deck(s) from File(s)", style: .default, handler: {action in  self.addDecksFromFiles()}))
