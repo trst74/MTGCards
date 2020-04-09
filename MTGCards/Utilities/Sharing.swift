@@ -22,9 +22,7 @@ class Sharing {
     static func shareText(text: String,_ sender: Any?) -> UIActivityViewController{
         let activityController = UIActivityViewController(activityItems: [text],
                                                           applicationActivities: nil)
-        // if the action is sent from a bar button item
         activityController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
-        // if the action is sent from some other kind of UIView (a table cell or button)
         activityController.popoverPresentationController?.sourceView = sender as? UIView
         return activityController
     }
@@ -32,13 +30,11 @@ class Sharing {
         let items = [url]
         let activityController = UIActivityViewController(activityItems: items,
                                                           applicationActivities: nil)
-        // if the action is sent from a bar button item
         activityController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
-        // if the action is sent from some other kind of UIView (a table cell or button)
         activityController.popoverPresentationController?.sourceView = sender as? UIView
         return activityController
     }
-    static func presentAddToDeckMenu(id: NSManagedObjectID, sourceView: UITableViewCell?) -> UIAlertController{
+    static func addToDeckMenu(id: NSManagedObjectID, sourceView: UITableViewCell?) -> UIAlertController{
         let alert = UIAlertController(title: "Add To Deck...", message: nil, preferredStyle: .actionSheet)
         let decks = DataManager.getDecksFromCoreData()
         for d in decks {
