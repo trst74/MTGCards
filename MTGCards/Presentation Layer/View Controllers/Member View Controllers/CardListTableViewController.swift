@@ -216,7 +216,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
                                 })
                                 alert.addAction(addToWishList)
                                 let addToDeck = UIAlertAction(title: "Deck...", style: .default, handler: { action in
-                                    self.present(Sharing.presentAddToDeckMenu(id: card.objectID, sourceView: tableView.cellForRow(at: indexPath)), animated: true)
+                                    self.present(Sharing.addToDeckMenu(id: card.objectID, sourceView: tableView.cellForRow(at: indexPath)), animated: true)
                                 })
                                 alert.addAction(addToDeck)
                                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
@@ -274,7 +274,6 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
                                             UIMenu(title: "", children: [addTo, share])
         }
     }
-
     func getImage(Key: String) -> UIImage? {
         let fileManager = FileManager.default
         let filename = getDocumentsDirectory().appendingPathComponent("\(Key).png")

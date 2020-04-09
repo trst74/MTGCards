@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import MobileCoreServices
 
-class CollectionsTableViewController: UITableViewController, UITableViewDropDelegate, UIDocumentPickerDelegate {
+class CollectionsTableViewController: UITableViewController, UITableViewDropDelegate, UIDocumentPickerDelegate  {
     
     var stateCoordinator: StateCoordinator?
     var collections = ["Collections"]
@@ -441,6 +441,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
             }
         }
     }
+
 }
 extension CollectionsTableViewController {
     static func freshCollectionsList() -> CollectionsTableViewController {

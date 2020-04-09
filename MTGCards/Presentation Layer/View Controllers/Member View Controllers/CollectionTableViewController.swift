@@ -9,7 +9,11 @@
 import UIKit
 import CoreData
 
-class CollectionTableViewController: UITableViewController {
+class CollectionTableViewController: UITableViewController, UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        return nil
+    }
+    
     var collection: Collection? = nil
     
     var collectionCards: [CollectionCard] {
@@ -118,6 +122,115 @@ class CollectionTableViewController: UITableViewController {
         }
         
         print("Called")
+    }
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let addTo = UIAction(title: "Add To...",
+                             image: UIImage(systemName: "plus")) { action in
+                                if let card = self.collectionCards[indexPath.row].card {
+                                    let alert = UIAlertController(title: "Add To", message: nil, preferredStyle: .actionSheet)
+                                    
+                                    if let popoverController = alert.popoverPresentationController {
+                                        popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
+                                        popoverController.sourceView = tableView.cellForRow(at: indexPath)
+                                    }
+                                    let addToCollection = UIAlertAction(title: "Collection", style: .default, handler: { action in
+                                        DataManager.addCardToCollection(id: card.objectID)
+                                    })
+                                    alert.addAction(addToCollection)
+                                    let addToWishList = UIAlertAction(title: "Wish List", style: .default, handler: { action in
+                                        DataManager.addCardToWishList(id: card.objectID)
+                                    })
+                                    alert.addAction(addToWishList)
+                                    let addToDeck = UIAlertAction(title: "Deck...", style: .default, handler: { action in
+                                        self.present(Sharing.addToDeckMenu(id: card.objectID, sourceView: tableView.cellForRow(at: indexPath)), animated: true)
+                                    })
+                                    alert.addAction(addToDeck)
+                                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                                        self.dismiss(animated: true, completion: nil)
+                                    }))
+                                    if let popoverController = alert.popoverPresentationController {
+                                        popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
+                                        popoverController.sourceView = tableView.cellForRow(at: indexPath)
+                                    }
+                                    self.present(alert, animated: true, completion: nil)
+                                }
+        }
+        let share = UIAction(title: "Share",
+                             image: UIImage(systemName: "square.and.arrow.up")) { action in
+                                if let card = self.collectionCards[indexPath.row].card {
+                                    
+                                    let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                                    let imageAction = UIAlertAction(title: "Image", style: .default, handler: { action in
+                                        if let uuid = card.uuid {
+                                            if let image = self.getImage(Key: uuid) {
+                                                self.present(Sharing.shareImage(image: image, self.tableView.cellForRow(at: indexPath)?.contentView), animated: true)
+                                            }
+                                        }
+                                        
+                                    })
+                                    imageAction.setValue(UIImage(systemName: "photo"), forKey: "image")
+                                    imageAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+                                    alert.addAction(imageAction)
+                                    if card.multiverseID > 0 {
+                                        alert.addAction(UIAlertAction(title: "Gatherer", style: .default, handler: { action in
+                                            if let url = URL(string:  "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=\(card.multiverseID)"){
+                                                self.present(Sharing.shareUrl(url: url, self.tableView.cellForRow(at: indexPath)?.contentView), animated: true)
+                                            }
+                                        }))
+                                    }
+                                    if let tcg = card.tcgplayerPurchaseURL {
+                                        alert.addAction(UIAlertAction(title: "TCGPlayer", style: .default, handler: { action in
+                                            //self.shareText(text: tcg)
+                                            if let url = URL(string:  tcg){
+                                                self.present(Sharing.shareUrl(url: url, self.tableView.cellForRow(at: indexPath)), animated: true)
+                                            }
+                                        }))
+                                    }
+                                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                                        self.dismiss(animated: true, completion: nil)
+                                    }))
+                                    if let popoverController = alert.popoverPresentationController {
+                                        popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
+                                        popoverController.sourceView = tableView.cellForRow(at: indexPath)
+                                    }
+                                    self.present(alert, animated: true, completion: nil)
+                                }
+        }
+        let delete = UIAction(title: "Delete",
+                              image: UIImage(systemName: "trash.fill"),
+                              attributes: [.destructive]) { action in
+                                let card = self.collectionCards[indexPath.row]
+                                
+                                //let card = deckCards[indexPath.row]
+                                self.collection?.removeFromCards(card)
+                                    
+                                    CoreDataStack.handler.savePrivateContext()
+                                    if let id = self.collection?.objectID {
+                                        self.collection = CoreDataStack.handler.privateContext.object(with: id) as? Collection
+                                    }
+                                    DispatchQueue.main.async {
+                                        self.tableView.reloadData()
+                                    }
+                                
+        }
+        return UIContextMenuConfiguration(identifier: nil,
+                                          previewProvider: nil) { _ in
+                                            UIMenu(title: "", children: [addTo, share, delete])
+        }
+
+    }
+    func getImage(Key: String) -> UIImage? {
+        let fileManager = FileManager.default
+        let filename = getDocumentsDirectory().appendingPathComponent("\(Key).png")
+        if fileManager.fileExists(atPath: filename.path) {
+            print("loaded from cache")
+            return UIImage(contentsOfFile: filename.path)
+        }
+        return nil
+    }
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
     }
 }
 extension CollectionTableViewController {
