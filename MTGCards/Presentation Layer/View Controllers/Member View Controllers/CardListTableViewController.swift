@@ -24,10 +24,8 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         
         tableView.keyboardDismissMode = .onDrag
         loadSavedData()
-        
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationItem.largeTitleDisplayMode = .never
-        
         if navigationItem.searchController == nil {
             let search = UISearchController(searchResultsController: nil)
             search.obscuresBackgroundDuringPresentation = false
@@ -37,11 +35,8 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             navigationItem.searchController = search
             self.navigationItem.hidesSearchBarWhenScrolling = false
         }
-        
-        
         tableView.dragDelegate = self
         tableView.dragInteractionEnabled = true
-        
         let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: #selector(self.filter))
         self.navigationItem.setRightBarButton(filterButton, animated: true)
     }
@@ -62,16 +57,11 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         let compountPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: filterPredicates)
         if fetchedResultsController == nil {
             let request = createFetchRequest()
-            
             let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
             let sortDescriptor2 = NSSortDescriptor(key: "set.name", ascending: true)
             request.sortDescriptors = [sortDescriptor, sortDescriptor2]
-            //request.sortDescriptors = [sortDescriptor]
-            
-            
             request.predicate = compountPredicate
             request.fetchBatchSize = 30
-            
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.handler.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
             fetchedResultsController.delegate = self
         }
@@ -90,8 +80,6 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
                     self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
                 }
                 self.title = "Search (\(self.fetchedResultsController.sections![0].numberOfObjects))"
-                
-                
             } catch {
                 print("Fetch failed")
             }
@@ -116,15 +104,12 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         
         return [UIDragItem(itemProvider: itemProvider)]
     }
-    // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return fetchedResultsController.sections?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return fetchedResultsController.sections![section].numberOfObjects
     }
     
@@ -168,7 +153,6 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             }
             cell.gradientView?.colors = colors
         }
-        
         return cell
     }
     
@@ -182,7 +166,6 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
     }
     private func createFetchRequest() -> NSFetchRequest<Card> {
         let fetchRequest: NSFetchRequest<Card> = NSFetchRequest<Card>(entityName: "Card")
-        
         return fetchRequest
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -200,7 +183,6 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             loadSavedData()
         }
         return
-        
     }
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
@@ -224,35 +206,25 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
                                 if let popoverController = alert.popoverPresentationController {
                                     popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
                                     popoverController.sourceView = tableView.cellForRow(at: indexPath)
-                                    //popoverController.sourceRect = tableView.cellForRow(at: indexPath)?.bounds
                                 }
-                                
                                 let addToCollection = UIAlertAction(title: "Collection", style: .default, handler: { action in
-                                    
                                     DataManager.addCardToCollection(id: card.objectID)
-                                    
                                 })
                                 alert.addAction(addToCollection)
                                 let addToWishList = UIAlertAction(title: "Wish List", style: .default, handler: { action in
-                                    
                                     DataManager.addCardToWishList(id: card.objectID)
-                                    
                                 })
                                 alert.addAction(addToWishList)
                                 let addToDeck = UIAlertAction(title: "Deck...", style: .default, handler: { action in
-                                    
-                                    self.presentAddToDeckMenu(id: card.objectID, sourceView: tableView.cellForRow(at: indexPath))
-                                    
+                                    self.present(Sharing.presentAddToDeckMenu(id: card.objectID, sourceView: tableView.cellForRow(at: indexPath)), animated: true)
                                 })
                                 alert.addAction(addToDeck)
                                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-                                    
                                     self.dismiss(animated: true, completion: nil)
                                 }))
                                 if let popoverController = alert.popoverPresentationController {
                                     popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
                                     popoverController.sourceView = tableView.cellForRow(at: indexPath)
-                                    //popoverController.sourceRect = tableView.cellForRow(at: indexPath)?.bounds
                                 }
                                 self.present(alert, animated: true, completion: nil)
                                 
@@ -262,10 +234,10 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
                                 let card = self.fetchedResultsController.object(at: indexPath)
                                 
                                 let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-                                var imageAction = UIAlertAction(title: "Image", style: .default, handler: { action in
+                                let imageAction = UIAlertAction(title: "Image", style: .default, handler: { action in
                                     if let uuid = card.uuid {
                                         if let image = self.getImage(Key: uuid) {
-                                            self.shareImage(image: image, self.tableView.cellForRow(at: indexPath)?.contentView)
+                                            self.present(Sharing.shareImage(image: image, self.tableView.cellForRow(at: indexPath)?.contentView), animated: true)
                                         }
                                     }
                                     
@@ -276,7 +248,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
                                 if card.multiverseID > 0 {
                                     alert.addAction(UIAlertAction(title: "Gatherer", style: .default, handler: { action in
                                         if let url = URL(string:  "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=\(card.multiverseID)"){
-                                            self.shareUrl(url: url, self.tableView.cellForRow(at: indexPath)?.contentView)
+                                            self.present(Sharing.shareUrl(url: url, self.tableView.cellForRow(at: indexPath)?.contentView), animated: true)
                                         }
                                     }))
                                 }
@@ -284,78 +256,23 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
                                     alert.addAction(UIAlertAction(title: "TCGPlayer", style: .default, handler: { action in
                                         //self.shareText(text: tcg)
                                         if let url = URL(string:  tcg){
-                                            self.shareUrl(url: url, self.tableView.cellForRow(at: indexPath))
+                                            self.present(Sharing.shareUrl(url: url, self.tableView.cellForRow(at: indexPath)), animated: true)
                                         }
-                                        
                                     }))
                                 }
                                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-                                    
                                     self.dismiss(animated: true, completion: nil)
                                 }))
                                 if let popoverController = alert.popoverPresentationController {
                                     popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
                                     popoverController.sourceView = tableView.cellForRow(at: indexPath)
-                                    //popoverController.sourceRect = tableView.cellForRow(at: indexPath)?.bounds
                                 }
                                 self.present(alert, animated: true, completion: nil)
         }
-        
-        
-        
         return UIContextMenuConfiguration(identifier: nil,
                                           previewProvider: nil) { _ in
                                             UIMenu(title: "", children: [addTo, share])
         }
-    }
-    func presentAddToDeckMenu(id: NSManagedObjectID, sourceView: UITableViewCell?){
-        let alert = UIAlertController(title: "Add To Deck...", message: nil, preferredStyle: .actionSheet)
-        let decks = DataManager.getDecksFromCoreData()
-        for d in decks {
-            alert.addAction(UIAlertAction(title: d.name ?? "", style: .default, handler: { action in
-                DataManager.addCardToDeck(deckId: d.objectID, cardId: id)
-            }))
-        }
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-            self.dismiss(animated: true, completion: nil)
-        }))
-        if let popoverController = alert.popoverPresentationController {
-            popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
-            popoverController.sourceView = sourceView
-            //popoverController.sourceRect = tableView.cellForRow(at: indexPath)?.bounds
-        }
-        self.present(alert, animated: true, completion: nil)
-    }
-    func shareImage(image: UIImage,_ sender: Any?){
-        let imageToShare = [ image ]
-        
-        let activityController = UIActivityViewController(activityItems: imageToShare,
-                                                          applicationActivities: nil)
-        // if the action is sent from a bar button item
-        activityController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
-        // if the action is sent from some other kind of UIView (a table cell or button)
-        activityController.popoverPresentationController?.sourceView = sender as? UIView
-        present(activityController, animated: true)
-    }
-    func shareText(text: String,_ sender: Any?){
-                 let activityController = UIActivityViewController(activityItems: [text],
-                                                          applicationActivities: nil)
-        // if the action is sent from a bar button item
-        activityController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
-        // if the action is sent from some other kind of UIView (a table cell or button)
-        activityController.popoverPresentationController?.sourceView = sender as? UIView
-        present(activityController, animated: true)
-    }
-    func shareUrl(url: URL, _ sender: Any?){
-           let items = [url]
-         let activityController = UIActivityViewController(activityItems: items,
-                                                           applicationActivities: nil)
-         // if the action is sent from a bar button item
-         activityController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
-         // if the action is sent from some other kind of UIView (a table cell or button)
-         activityController.popoverPresentationController?.sourceView = sender as? UIView
-
-         present(activityController, animated: true)
     }
 
     func getImage(Key: String) -> UIImage? {
