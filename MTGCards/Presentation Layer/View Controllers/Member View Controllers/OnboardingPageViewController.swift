@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDelegate {
     
     lazy var pages: [UIViewController] = {
         return [
@@ -52,25 +52,11 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         super.viewDidLoad()
-        self.dataSource = self
         self.delegate   = self
         
         if let firstVC = pages.first
         {
             setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
-        // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
