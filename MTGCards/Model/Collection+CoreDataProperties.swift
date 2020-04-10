@@ -2,8 +2,8 @@
 //  Collection+CoreDataProperties.swift
 //  MTGCards
 //
-//  Created by Joseph Smith on 3/16/19.
-//  Copyright © 2019 Robotic Snail Software. All rights reserved.
+//  Created by Joseph Smith on 4/10/20.
+//  Copyright © 2020 Robotic Snail Software. All rights reserved.
 //
 //
 

@@ -142,11 +142,11 @@ class DeckStatsTableViewController: UITableViewController {
         if indexPath.section == 0 {
             var bars: [Bar] = []
             if rarities.total != 0 {
-            bars = [
-            Bar(id: UUID(), value: Double(rarities.common), label: "Common", color: Color("Common")),
-            Bar(id: UUID(), value: Double(rarities.uncommon), label: "Uncommon", color: Color("Uncommon")),
-            Bar(id: UUID(), value: Double(rarities.rare), label: "Rare", color: Color("Rare")),
-            Bar(id: UUID(), value: Double(rarities.mythic), label: "Mythic", color: Color("Mythic"))]
+                bars = [
+                    Bar(id: UUID(), value: Double(rarities.common), label: "Common", color: Color("Common")),
+                    Bar(id: UUID(), value: Double(rarities.uncommon), label: "Uncommon", color: Color("Uncommon")),
+                    Bar(id: UUID(), value: Double(rarities.rare), label: "Rare", color: Color("Rare")),
+                    Bar(id: UUID(), value: Double(rarities.mythic), label: "Mythic", color: Color("Mythic"))]
             }
             let chart = UIHostingController(rootView: BarChart(bars: bars))
             
@@ -179,14 +179,14 @@ class DeckStatsTableViewController: UITableViewController {
         return cell
     }
     private func createSunburstConfigForColor() -> SunburstConfiguration {
-
+        
         var W = 0.0
         var U = 0.0
         var B = 0.0
         var R = 0.0
         var G = 0.0
         var A = 0.0
-
+        
         for card in deckCards{
             if !(card.card?.type?.contains("Land") ?? true) {
                 let quantity = Int(card.quantity)
@@ -214,14 +214,15 @@ class DeckStatsTableViewController: UITableViewController {
             }
         }
         
-        
-        
-        let configuration = SunburstConfiguration(nodes: [Node(name: Int(W).description, value: W, backgroundColor: UIColor(named: "Plains") ),
-        Node(name: Int(U).description, value: U, backgroundColor: UIColor(named: "Islands")),
-        Node(name: Int(B).description, value: B, backgroundColor: UIColor(named: "Swamps")),
-        Node(name: Int(R).description, value: R, backgroundColor: UIColor(named: "Mountains")),
-        Node(name: Int(G).description, value: G, backgroundColor: UIColor(named: "Forests")),
-        Node(name: Int(A).description, value: A, backgroundColor: UIColor(named: "Artifacts"))], calculationMode: .parentIndependent(totalValue: W+U+B+R+G+A))
+        var configuration = SunburstConfiguration(nodes: [])
+        if W+U+B+R+G+A > 0 {
+            configuration = SunburstConfiguration(nodes: [Node(name: Int(W).description, value: W, backgroundColor: UIColor(named: "Plains") ),
+                                                          Node(name: Int(U).description, value: U, backgroundColor: UIColor(named: "Islands")),
+                                                          Node(name: Int(B).description, value: B, backgroundColor: UIColor(named: "Swamps")),
+                                                          Node(name: Int(R).description, value: R, backgroundColor: UIColor(named: "Mountains")),
+                                                          Node(name: Int(G).description, value: G, backgroundColor: UIColor(named: "Forests")),
+                                                          Node(name: Int(A).description, value: A, backgroundColor: UIColor(named: "Artifacts"))], calculationMode: .parentIndependent(totalValue: W+U+B+R+G+A))
+        }
         return configuration
     }
     private func createCMCBars() -> [Bar] {

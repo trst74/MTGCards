@@ -283,8 +283,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
             }
             //let card = deckCards[indexPath.row]
             if let card = card {
-                deck?.removeFromCards(card)
-                CoreDataStack.handler.savePrivateContext()
+                DataManager.removeCardFromDeck(cardId: card.objectID)
                 if let id = deck?.objectID {
                     deck = CoreDataStack.handler.privateContext.object(with: id) as? Deck
                 }
@@ -449,7 +448,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
                                 let deckcard = self.getDeckcardForIndexPath(indexPath: indexPath)
                                 
                                 let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-                                var imageAction = UIAlertAction(title: "Image", style: .default, handler: { action in
+                                let imageAction = UIAlertAction(title: "Image", style: .default, handler: { action in
                                     if let uuid = deckcard?.card?.uuid {
                                         if let image = self.getImage(Key: uuid) {
                                             self.shareImage(image: image, popupView: self.tableView.cellForRow(at: indexPath))
@@ -492,11 +491,8 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
                               image: UIImage(systemName: "trash.fill"),
                               attributes: [.destructive]) { action in
                                 let card = self.getDeckcardForIndexPath(indexPath: indexPath)
-                                
-                                //let card = deckCards[indexPath.row]
                                 if let card = card {
-                                    self.deck?.removeFromCards(card)
-                                    CoreDataStack.handler.savePrivateContext()
+                                    DataManager.removeCardFromDeck(cardId: card.objectID)
                                     if let id = self.deck?.objectID {
                                         self.deck = CoreDataStack.handler.privateContext.object(with: id) as? Deck
                                     }

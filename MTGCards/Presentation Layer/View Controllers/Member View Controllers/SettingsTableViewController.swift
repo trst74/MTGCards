@@ -249,7 +249,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                 }
             }
             if localSet?.meta?.date != sourceSet.setMeta?.date {
-                print("\(sourceSet.code ?? "") local version: \(localSet?.meta?.date ?? "") || source version: \(sourceSet.setMeta?.date ?? "")")
+                print("\(sourceSet.code ) local version: \(localSet?.meta?.date ?? "") || source version: \(sourceSet.setMeta?.date ?? "")")
                 
                 let setUpdate = DataManager.getSetUpdate(setCode: sourceSet.code)
                 
@@ -263,10 +263,10 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                         }
                         for eCard in existingCards {
                             
-                            var localCard = localSetCards.first {
+                            let localCard = localSetCards.first {
                                 $0.uuid == eCard.uuid
                             }
-                            if var localCard = localCard {
+                            if let localCard = localCard {
                                 //rulings
                                 localCard.removeFromRulings(localCard.rulings)
                                 do {
@@ -482,21 +482,6 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
         documentPicker.delegate = self
         self.present(documentPicker, animated: true)
     }
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        do {
-            let data = try Data.init(contentsOf: urls[0])
-            let backup = try Backup.init(data: data)
-            var collections = DataManager.getCollectionsFromCoreData()
-            for card in backup.collection {
-                // collections[0].addToCards(<#T##value: CollectionCard##CollectionCard#>)
-            }
-            for card in backup.wishlist {
-                
-            }
-            print(backup)
-        } catch {
-            print(error)
-        }
-    }
+    
     
 }

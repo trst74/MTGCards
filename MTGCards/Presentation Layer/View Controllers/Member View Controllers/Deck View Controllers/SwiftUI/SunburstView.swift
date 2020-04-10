@@ -9,7 +9,7 @@
 import SwiftUI
 
 public struct SunburstView: View {
-
+    
     @ObservedObject var sunburst: Sunburst
     
     public init(configuration: SunburstConfiguration) {
@@ -17,17 +17,26 @@ public struct SunburstView: View {
     }
     
     public var body: some View {
-        let arcs = ZStack {
-            configureViews(arcs: sunburst.rootArcs)
+        var view = AnyView(Text("There is no data to display."))
+        print(sunburst.configuration.nodes.count)
+        if sunburst.configuration.nodes.count > 0 {
             
-            // Stop the window shrinking to zero when there is no arcs.
-            Spacer()
+            
+            let arcs = ZStack {
+                configureViews(arcs: sunburst.rootArcs)
+                
+                // Stop the window shrinking to zero when there is no arcs.
+                Spacer()
+            }
+            .flipsForRightToLeftLayoutDirection(true)
+            .padding()
+            
+            view = AnyView(arcs.drawingGroup())
+            
         }
-        .flipsForRightToLeftLayoutDirection(true)
-        .padding()
-
-        let drawnArcs = arcs.drawingGroup()
-        return drawnArcs
+        return view
+        
+        
     }
     
     private func configureViews(arcs: [Sunburst.Arc], parentArc: Sunburst.Arc? = nil) -> some View {
@@ -41,11 +50,11 @@ public struct SunburstView: View {
 struct SunburstView_Previews : PreviewProvider {
     static var previews: some View {
         let configuration = SunburstConfiguration(nodes: [
-                       Node(name: "6", value: 6.0, backgroundColor: UIColor(named: "Plains") ),
-                       Node(name: "4", value: 4.0, backgroundColor: UIColor(named: "Islands")),
-                       Node(name: "5", value: 5.0, backgroundColor: UIColor(named: "Swamps")),
-                       Node(name: "10", value: 10000.0, backgroundColor: UIColor(named: "Mountains")),
-                       Node(name: "1", value: 1.0, backgroundColor: UIColor(named: "Forests") )
+            Node(name: "6", value: 6.0, backgroundColor: UIColor(named: "Plains") ),
+            Node(name: "4", value: 4.0, backgroundColor: UIColor(named: "Islands")),
+            Node(name: "5", value: 5.0, backgroundColor: UIColor(named: "Swamps")),
+            Node(name: "10", value: 10000.0, backgroundColor: UIColor(named: "Mountains")),
+            Node(name: "1", value: 1.0, backgroundColor: UIColor(named: "Forests") )
         ], calculationMode: .ordinalFromLeaves)
         return SunburstView(configuration: configuration)
     }

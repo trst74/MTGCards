@@ -110,22 +110,12 @@ class PageTwoViewController: UIViewController {
                         do {
                             let results = try CoreDataStack.handler.managedObjectContext.fetch(request)
                             for card in results {
-                                if let card = card as? Card, let uuid = card.uuid {
+                                if let uuid = card.uuid {
                                     let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeData as String)
                                     attributeSet.title = card.name
                                     attributeSet.contentDescription = card.set.name
-                                    
-                                    
                                     let item = CSSearchableItem(uniqueIdentifier: "\(uuid)", domainIdentifier: "com.roboticsnailsoftware.MTGCollection", attributeSet: attributeSet)
-                                    print("item created \(card.name)")
                                     items.append(item)
-                                    //                        CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: ["\(uuid)"]) { error in
-                                    //                            if let error = error {
-                                    //                                print("Deindexing error: \(error.localizedDescription)")
-                                    //                            } else {
-                                    //                                print("Search item successfully removed! \(card.name) \(card.set.name)")
-                                    //                            }
-                                    //                        }
                                 }
                             }
                             if items.count > 30000 {

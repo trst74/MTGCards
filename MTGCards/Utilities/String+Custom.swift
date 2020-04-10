@@ -11,7 +11,7 @@ import UIKit
 
 extension String {
     mutating func replaceSymbols() -> NSAttributedString {
-        var result = NSMutableAttributedString()
+        let result = NSMutableAttributedString()
         let parts = self.components(separatedBy: "{")
         for part in parts {
             if part.contains("}") {

@@ -307,7 +307,6 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
                                 print("Search item successfully indexed!")
                             }
                         }
-                        print("item created \(c.name)")
                     }
                 }
             }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16114.2" systemVersion="19E224g" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F53f" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Card" representedClassName=".Card" syncable="YES">
         <attribute name="artist" optional="YES" attributeType="String"/>
         <attribute name="borderColor" optional="YES" attributeType="String"/>
@@ -76,13 +76,14 @@
     </entity>
     <entity name="Collection" representedClassName="Collection" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CollectionCard"/>
+        <relationship name="cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CollectionCard" inverseName="collection" inverseEntity="CollectionCard"/>
     </entity>
     <entity name="CollectionCard" representedClassName="CollectionCard" syncable="YES">
         <attribute name="condition" optional="YES" attributeType="String"/>
         <attribute name="isFoil" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="card" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card"/>
+        <relationship name="collection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Collection" inverseName="cards" inverseEntity="Collection"/>
     </entity>
     <entity name="ColorIdentity" representedClassName="ColorIdentity" syncable="YES">
         <attribute name="color" optional="YES" attributeType="String"/>
@@ -95,7 +96,7 @@
     <entity name="Deck" representedClassName=".Deck" syncable="YES">
         <attribute name="format" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DeckCard"/>
+        <relationship name="cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DeckCard" inverseName="deck" inverseEntity="DeckCard"/>
     </entity>
     <entity name="DeckCard" representedClassName="DeckCard" syncable="YES">
         <attribute name="isCommander" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -103,6 +104,7 @@
         <attribute name="isSideboard" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="card" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card"/>
+        <relationship name="deck" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Deck" inverseName="cards" inverseEntity="Deck"/>
     </entity>
     <entity name="ForeignDatum" representedClassName=".ForeignDatum" syncable="YES">
         <attribute name="flavorText" optional="YES" attributeType="String"/>
@@ -180,11 +182,11 @@
         <element name="CardSubtype" positionX="-867.671875" positionY="-68.046875" width="128" height="73"/>
         <element name="CardSupertype" positionX="-889.9609375" positionY="33.71484375" width="128" height="73"/>
         <element name="CardType" positionX="-476.97265625" positionY="381.8125" width="128" height="73"/>
-        <element name="Collection" positionX="-247.4921875" positionY="-145.01953125" width="128" height="75"/>
-        <element name="CollectionCard" positionX="-434.53515625" positionY="-126.5546875" width="128" height="105"/>
+        <element name="Collection" positionX="-247.4921875" positionY="-145.01953125" width="128" height="73"/>
+        <element name="CollectionCard" positionX="-434.53515625" positionY="-126.5546875" width="128" height="118"/>
         <element name="ColorIdentity" positionX="-892.60546875" positionY="129.546875" width="128" height="73"/>
-        <element name="Deck" positionX="-243.7265625" positionY="-297.13671875" width="128" height="90"/>
-        <element name="DeckCard" positionX="-439.48828125" positionY="-302.35546875" width="128" height="120"/>
+        <element name="Deck" positionX="-243.7265625" positionY="-297.13671875" width="128" height="88"/>
+        <element name="DeckCard" positionX="-439.48828125" positionY="-302.35546875" width="128" height="133"/>
         <element name="ForeignDatum" positionX="-892.41796875" positionY="234.859375" width="128" height="150"/>
         <element name="Legalities" positionX="-512.98046875" positionY="94.44140625" width="128" height="238"/>
         <element name="Meta" positionX="-94.49609375" positionY="341.75" width="128" height="75"/>

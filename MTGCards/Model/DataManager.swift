@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 public class DataManager {
-
+    
     static func getSet(setCode: String, completion: @escaping (_ success: Bool) -> Void) {
         
         let setURL = URL(string: "https://mtgjson.com/json/\(setCode).json")
@@ -59,9 +59,9 @@ public class DataManager {
         do {
             let data = try Data(contentsOf: setURL!)
             let d = data
-           
+            
             let decoder = newJSONDecoder()
-
+            
             
             return try decoder.decode(UpdateSet.self, from: d)
         } catch {
@@ -130,26 +130,26 @@ public class DataManager {
     }
     static func getCollection() -> Collection? {
         let request = NSFetchRequest<Collection>(entityName: "Collection")
-            let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-            request.sortDescriptors = [sortDescriptor]
-            do {
-                let results = try CoreDataStack.handler.privateContext.fetch(request)
-                return results[0]
-            } catch {
-                print(error)
-            }
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        do {
+            let results = try CoreDataStack.handler.privateContext.fetch(request)
+            return results[0]
+        } catch {
+            print(error)
+        }
         return nil
     }
     static func getWishList() -> Collection? {
         let request = NSFetchRequest<Collection>(entityName: "Collection")
-            let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-            request.sortDescriptors = [sortDescriptor]
-            do {
-                let results = try CoreDataStack.handler.privateContext.fetch(request)
-                return results[1]
-            } catch {
-                print(error)
-            }
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        do {
+            let results = try CoreDataStack.handler.privateContext.fetch(request)
+            return results[1]
+        } catch {
+            print(error)
+        }
         return nil
     }
     static func addCardToCollection(id: NSManagedObjectID) {
@@ -198,6 +198,18 @@ public class DataManager {
                 deckCard.card = card
                 deckCard.quantity = 1
                 deck.addToCards(deckCard)
+                do {
+                    try CoreDataStack.handler.privateContext.save()
+                } catch {
+                    print(error)
+                }
+            }
+        }
+    }
+    static func removeCardFromDeck(cardId: NSManagedObjectID){
+        if let card = CoreDataStack.handler.privateContext.object(with: cardId) as? DeckCard {
+            if let deck = card.deck {
+                deck.removeFromCards(card)
                 do {
                     try CoreDataStack.handler.privateContext.save()
                 } catch {
