@@ -65,10 +65,10 @@ class RootViewController: UIViewController {
         if UserDefaultsHandler.isFirstTimeOpening(){
             //onbarding
             let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-            guard let pageOne = storyboard.instantiateInitialViewController() as? PageOneViewController else {
+            guard let pageOne = storyboard.instantiateInitialViewController() as? OnboardingPageViewController else {
                 fatalError("Error going to settings")
             }
-            //self.navigationController?.pushViewController(settingsVC, animated: true)
+            pageOne.modalPresentationStyle = .fullScreen
             self.present(pageOne, animated: true, completion: nil)
             //create collection and wish list
             UserDefaultsHandler.setSelectedCardImageQuality(quality: "high")

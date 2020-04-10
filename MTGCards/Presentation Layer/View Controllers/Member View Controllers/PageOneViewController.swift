@@ -21,6 +21,11 @@ class PageOneViewController: UIViewController {
             destination?.pageOne = self
         }
     }
- 
+    @IBAction func next(_ sender: Any) {
+        if let pageViewController = self.parent as? OnboardingPageViewController {
+            pageViewController.setViewControllers([pageViewController.pages[1]], direction: .forward, animated: true, completion: nil)
+        }
+    }
+    
 
 }

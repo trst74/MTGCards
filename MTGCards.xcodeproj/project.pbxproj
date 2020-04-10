@@ -76,6 +76,7 @@
 		EE924708225AD4440044F858 /* CardType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE924706225AD4440044F858 /* CardType+CoreDataClass.swift */; };
 		EE924709225AD4440044F858 /* CardType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE924707225AD4440044F858 /* CardType+CoreDataProperties.swift */; };
 		EE99E168243FBFC6008BEFAA /* Sharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE99E167243FBFC6008BEFAA /* Sharing.swift */; };
+		EE99E17424411856008BEFAA /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE99E17324411856008BEFAA /* OnboardingPageViewController.swift */; };
 		EEAA53CB223323D700CB4B72 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEAA53CA223323D700CB4B72 /* Debug.storyboard */; };
 		EEAA53CD2233241000CB4B72 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAA53CC2233241000CB4B72 /* DebugViewController.swift */; };
 		EEB0ADDA227A3C3400613C8C /* Backup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB0ADD9227A3C3400613C8C /* Backup.swift */; };
@@ -200,6 +201,7 @@
 		EE924706225AD4440044F858 /* CardType+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardType+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EE924707225AD4440044F858 /* CardType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardType+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EE99E167243FBFC6008BEFAA /* Sharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sharing.swift; sourceTree = "<group>"; };
+		EE99E17324411856008BEFAA /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		EEAA53CA223323D700CB4B72 /* Debug.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
 		EEAA53CC2233241000CB4B72 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		EEB0ADD9227A3C3400613C8C /* Backup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backup.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				EE9246F1225A7B110044F858 /* Filters.storyboard */,
 				EE9246F3225A7E620044F858 /* FiltersTableViewController.swift */,
 				EE27552A22340F0F006BD083 /* Onboarding.storyboard */,
+				EE99E17324411856008BEFAA /* OnboardingPageViewController.swift */,
 				EE0F62AA22341DC1003D8A8A /* PageOneViewController.swift */,
 				EE0F62A822341CD7003D8A8A /* PageTwoViewController.swift */,
 				EE2B78CC21F009A600306990 /* PlaceholderView.storyboard */,
@@ -662,6 +665,7 @@
 				EE99E168243FBFC6008BEFAA /* Sharing.swift in Sources */,
 				EE2B821F21FCCA3900306990 /* Card.swift in Sources */,
 				EEB5D81F2205EBFF0070FF8B /* UIColor+Custom.swift in Sources */,
+				EE99E17424411856008BEFAA /* OnboardingPageViewController.swift in Sources */,
 				EE2B78CF21F009A600306990 /* PlaceholderViewController.swift in Sources */,
 				EE2B78D521F1518E00306990 /* SetList.swift in Sources */,
 				EE0573DF23FF34A800316516 /* DataModel.swift in Sources */,
