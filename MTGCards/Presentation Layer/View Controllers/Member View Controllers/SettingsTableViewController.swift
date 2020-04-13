@@ -11,6 +11,7 @@ import CoreData
 import MobileCoreServices
 import CoreServices
 import CoreSpotlight
+import StoreKit
 
 class SettingsTableViewController: UITableViewController, UIDocumentPickerDelegate {
     
@@ -113,10 +114,10 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                 if let url = URL(string: "https://medium.com/@sakhabaevegor/create-a-color-gradient-on-the-storyboard-18ccfd8158c2"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
-                case 5:
-                    if let url = URL(string: "https://swiftwithmajid.com/2019/08/14/building-barchart-with-shape-api-in-swiftui/"){
-                        UIApplication.shared.open(url, options:[:], completionHandler: nil)
-                    }
+            case 5:
+                if let url = URL(string: "https://swiftwithmajid.com/2019/08/14/building-barchart-with-shape-api-in-swiftui/"){
+                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
+                }
             default:
                 return
             }
@@ -127,14 +128,16 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
             case 1:
+                SKStoreReviewController.requestReview()
+            case 2:
                 if let url = URL(string: "http://www.mymtg.app/privacy"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
-            case 2:
+            case 3:
                 if let url = URL(string: "http://www.mymtg.app"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
-            case 3:
+            case 4:
                 if let url = URL(string: "https://www.roboticsnailsoftware.com"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
@@ -151,7 +154,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
         URLSession.shared.dataTask(with: url) {
             (data, response, error) in
             completion(data, response, error)
-            }.resume()
+        }.resume()
     }
     func saveImage(image: UIImage, Key: String, dir: String) {
         if let data = image.pngData() {
