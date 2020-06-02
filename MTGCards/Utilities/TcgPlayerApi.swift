@@ -15,7 +15,7 @@ class TcgPlayerApi {
     private let clientSecret = "7A65BBC3-8B1A-43D8-998E-476949A4A6E8"
     
     private let tokenURL = "https://api.tcgplayer.com/token"
-    private let pricesURL = "http://api.tcgplayer.com/v1.37.0/pricing/product/"
+    private let pricesURL = "https://api.tcgplayer.com/v1.37.0/pricing/product/"
     private var token: TcgToken? = nil
     
     private func getToken( completion: @escaping (_ success: Bool) -> Void) {
@@ -88,6 +88,8 @@ class TcgPlayerApi {
                                     if prices.errors.isEmpty {
                                         //print("Prices recieved for \(cardIds): \(String(describing: prices.results[0].midPrice))")
                                         completion(prices)
+                                    } else {
+                                        print(prices.errors[0].value)
                                     }
                                 } catch {
                                     print(error)
