@@ -31,6 +31,7 @@ class FiltersTableViewController: UITableViewController {
         let applyButton = UIBarButtonItem(title: "Apply", style: .plain, target: self, action: #selector(applyFilters))
         self.navigationItem.setRightBarButton(applyButton, animated: true)
         setCurrentFilters()
+        tableView.tableFooterView = UIView()
     }
     override func viewWillDisappear(_ animated: Bool) {
         if let nav = self.navigationController {

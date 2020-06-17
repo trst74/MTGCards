@@ -33,6 +33,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         }
         reloadDecksFromCoreData()
         reloadCollectionsFromCoreData()
+        tableView.tableFooterView = UIView()
     }
     private func firstTimeOpened(){
         guard  let entity = NSEntityDescription.entity(forEntityName: "Collection", in:  CoreDataStack.handler.managedObjectContext) else {

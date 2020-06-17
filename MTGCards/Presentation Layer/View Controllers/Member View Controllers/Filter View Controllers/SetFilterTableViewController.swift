@@ -31,6 +31,7 @@ class SetFilterTableViewController: UITableViewController, UISearchResultsUpdati
         navigationItem.searchController = searchController
         definesPresentationContext = true
         self.navigationItem.hidesSearchBarWhenScrolling = false
+        tableView.tableFooterView = UIView()
         DispatchQueue.main.async {
             self.getSets()
         }

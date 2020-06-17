@@ -34,6 +34,7 @@ class CollectionTableViewController: UITableViewController, UIContextMenuInterac
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.tableFooterView = UIView()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -18,6 +18,7 @@ class SuperTypeFilterTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.tableFooterView = UIView()
         DispatchQueue.main.async {
             self.getTypes()
         }
