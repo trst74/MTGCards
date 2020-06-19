@@ -296,6 +296,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "deckCard", for: indexPath) as! DeckTableViewCell
+        cell.layer.borderWidth = 0
         var deckCard: DeckCard? = nil
         if indexPath.section == commanderSection {
             deckCard = commander[indexPath.row]
@@ -342,9 +343,42 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
                 colors += colors
             }
             cell.gradientView?.colors = colors
+            
+            if let card = deckCard?.card, let format = deck?.format {
+                if !checkCardLegality(card: card, legality: format) {
+                    cell.layer.borderWidth = 2
+                    cell.layer.borderColor = UIColor.red.cgColor
+                }
+            }
         }
         
         return cell
+    }
+    private func checkCardLegality(card: Card, legality: String) -> Bool {
+        switch legality {
+        case "Standard":
+          return card.legalities?.standard == "Legal"
+        case "Pioneer":
+            return card.legalities?.pioneer == "Legal"
+        case "Modern":
+            return card.legalities?.modern == "Legal"
+        case "Legacy":
+            return card.legalities?.legacy == "Legal"
+        case "Vintage":
+            return card.legalities?.vintage == "Legal"
+        case "Commander":
+            return card.legalities?.commander == "Legal"
+        case "Frontier":
+            return card.legalities?.frontier == "Legal"
+        case "Pauper":
+            return card.legalities?.pauper == "Legal"
+        case "Penny":
+            return card.legalities?.penny == "Legal"
+        case "Duel":
+            return card.legalities?.duel == "Legal"
+        default:
+            return false
+        }
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == deckSection {

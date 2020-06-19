@@ -14,7 +14,7 @@ public class DataManager {
     
     static func getSet(setCode: String, completion: @escaping (_ success: Bool) -> Void) {
         
-        let setURL = URL(string: "https://mtgjson.com/json/\(setCode).json")
+        let setURL = URL(string: "https://mtgjson.com/api/v5/\(setCode).json")
         do {
             let data = try Data(contentsOf: setURL!)
             let d = data

@@ -10,8 +10,9 @@ import UIKit
 
 class CardRulingsView: UIView {
 
-    @IBOutlet weak var rulingDate: UILabel!
     @IBOutlet weak var rulingText: UILabel!
+    @IBOutlet weak var rulingDate: UILabel!
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

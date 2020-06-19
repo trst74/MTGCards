@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F53f" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G36e" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Card" representedClassName=".Card" syncable="YES">
         <attribute name="artist" optional="YES" attributeType="String"/>
         <attribute name="borderColor" optional="YES" attributeType="String"/>
@@ -39,6 +39,7 @@
         <relationship name="cardsupertypes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CardSupertype" inverseName="card" inverseEntity="CardSupertype"/>
         <relationship name="colorIdentity" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ColorIdentity" inverseName="card" inverseEntity="ColorIdentity"/>
         <relationship name="foreignData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ForeignDatum" inverseName="card" inverseEntity="ForeignDatum"/>
+        <relationship name="keywords" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CardKeyword"/>
         <relationship name="legalities" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Legalities"/>
         <relationship name="rulings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ruling" inverseName="card" inverseEntity="Ruling"/>
         <relationship name="set" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTGSet" inverseName="cards" inverseEntity="MTGSet"/>
@@ -51,6 +52,12 @@
             <fetchIndexElement property="legalities" type="Binary" order="ascending"/>
             <fetchIndexElement property="set" type="Binary" order="ascending"/>
             <fetchIndexElement property="uuid" type="Binary" order="ascending"/>
+        </fetchIndex>
+    </entity>
+    <entity name="CardKeyword" representedClassName="CardKeyword" syncable="YES">
+        <attribute name="keyword" optional="YES" attributeType="String"/>
+        <fetchIndex name="byPropertyIndex">
+            <fetchIndexElement property="keyword" type="Binary" order="ascending"/>
         </fetchIndex>
     </entity>
     <entity name="CardSubtype" representedClassName="CardSubtype" syncable="YES">
@@ -178,7 +185,7 @@
         <relationship name="set" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTGSet" inverseName="tokens" inverseEntity="MTGSet"/>
     </entity>
     <elements>
-        <element name="Card" positionX="-690.01171875" positionY="-156.73046875" width="128" height="675"/>
+        <element name="Card" positionX="-690.01171875" positionY="-156.73046875" width="128" height="688"/>
         <element name="CardSubtype" positionX="-867.671875" positionY="-68.046875" width="128" height="73"/>
         <element name="CardSupertype" positionX="-889.9609375" positionY="33.71484375" width="128" height="73"/>
         <element name="CardType" positionX="-476.97265625" positionY="381.8125" width="128" height="73"/>
@@ -193,5 +200,6 @@
         <element name="MTGSet" positionX="-103.45703125" positionY="26.21875" width="128" height="255"/>
         <element name="Ruling" positionX="-881.1015625" positionY="433.0625" width="128" height="90"/>
         <element name="Token" positionX="-254.65234375" positionY="286.5546875" width="128" height="270"/>
+        <element name="CardKeyword" positionX="-693" positionY="-153" width="128" height="58"/>
     </elements>
 </model>

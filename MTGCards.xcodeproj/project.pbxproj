@@ -62,6 +62,11 @@
 		EE4FD209223AC6FE00E8CDB3 /* DeckTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4FD208223AC6FE00E8CDB3 /* DeckTableViewController.swift */; };
 		EE5EDE942246831F00C24C5E /* CardLegalityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE5EDE922246831E00C24C5E /* CardLegalityView.xib */; };
 		EE5EDE952246831F00C24C5E /* CardLegalityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5EDE932246831F00C24C5E /* CardLegalityView.swift */; };
+		EE65339F249A9E8200489802 /* CardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE65339E249A9E8200489802 /* CardIdentifiers.swift */; };
+		EE6533A2249AAC2600489802 /* CardKeyword+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6533A0249AAC2600489802 /* CardKeyword+CoreDataClass.swift */; };
+		EE6533A3249AAC2600489802 /* CardKeyword+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6533A1249AAC2600489802 /* CardKeyword+CoreDataProperties.swift */; };
+		EE6533A9249BEEC600489802 /* EditDeck.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE6533A8249BEEC600489802 /* EditDeck.storyboard */; };
+		EE6533AB249BEEF800489802 /* EditDeckTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6533AA249BEEF800489802 /* EditDeckTableViewController.swift */; };
 		EE6F94B022309136001B3378 /* TcgPlayerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F94AF22309136001B3378 /* TcgPlayerApi.swift */; };
 		EE6F94B2223092AD001B3378 /* TcgToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F94B1223092AD001B3378 /* TcgToken.swift */; };
 		EE75E5F42284DF8300C23421 /* UpdateSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE75E5F32284DF8300C23421 /* UpdateSet.swift */; };
@@ -188,6 +193,11 @@
 		EE4FD208223AC6FE00E8CDB3 /* DeckTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckTableViewController.swift; sourceTree = "<group>"; };
 		EE5EDE922246831E00C24C5E /* CardLegalityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardLegalityView.xib; sourceTree = "<group>"; };
 		EE5EDE932246831F00C24C5E /* CardLegalityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardLegalityView.swift; sourceTree = "<group>"; };
+		EE65339E249A9E8200489802 /* CardIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardIdentifiers.swift; sourceTree = "<group>"; };
+		EE6533A0249AAC2600489802 /* CardKeyword+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardKeyword+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		EE6533A1249AAC2600489802 /* CardKeyword+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardKeyword+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		EE6533A8249BEEC600489802 /* EditDeck.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditDeck.storyboard; sourceTree = "<group>"; };
+		EE6533AA249BEEF800489802 /* EditDeckTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDeckTableViewController.swift; sourceTree = "<group>"; };
 		EE6F94AF22309136001B3378 /* TcgPlayerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcgPlayerApi.swift; sourceTree = "<group>"; };
 		EE6F94B1223092AD001B3378 /* TcgToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcgToken.swift; sourceTree = "<group>"; };
 		EE75E5F32284DF8300C23421 /* UpdateSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateSet.swift; sourceTree = "<group>"; };
@@ -214,7 +224,7 @@
 		EEB5D81C2205EA670070FF8B /* CardListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListTableViewCell.swift; sourceTree = "<group>"; };
 		EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Custom.swift"; sourceTree = "<group>"; };
 		EEB5D8202205F0D30070FF8B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		EEBE6D8A21EFE18F00A3464E /* MTGCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTGCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEBE6D8A21EFE18F00A3464E /* My MTG v5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My MTG v5.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBE6D8D21EFE18F00A3464E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEBE6D9221EFE18F00A3464E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EEBE6D9521EFE18F00A3464E /* MTGCards.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MTGCards.xcdatamodel; sourceTree = "<group>"; };
@@ -332,6 +342,8 @@
 		EE2B78BC21EFE67E00306990 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EE6533A0249AAC2600489802 /* CardKeyword+CoreDataClass.swift */,
+				EE6533A1249AAC2600489802 /* CardKeyword+CoreDataProperties.swift */,
 				EE2B821E21FCCA3900306990 /* Card.swift */,
 				EEE7D585225B91DD00FE4D1C /* CardSubtype+CoreDataClass.swift */,
 				EEE7D586225B91DD00FE4D1C /* CardSubtype+CoreDataProperties.swift */,
@@ -363,6 +375,7 @@
 				EE6F94B1223092AD001B3378 /* TcgToken.swift */,
 				EE2B822621FD25FD00306990 /* Token.swift */,
 				EE75E5F32284DF8300C23421 /* UpdateSet.swift */,
+				EE65339E249A9E8200489802 /* CardIdentifiers.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -434,7 +447,7 @@
 		EEBE6D8B21EFE18F00A3464E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EEBE6D8A21EFE18F00A3464E /* MTGCards.app */,
+				EEBE6D8A21EFE18F00A3464E /* My MTG v5.app */,
 				EEBE6DA121EFE19100A3464E /* MTGCardsTests.xctest */,
 				EEBE6DAC21EFE19100A3464E /* MTGCardsUITests.xctest */,
 			);
@@ -490,6 +503,8 @@
 				EE4FD208223AC6FE00E8CDB3 /* DeckTableViewController.swift */,
 				EEE7D5A5226284E800FE4D1C /* EditDeckCard.storyboard */,
 				EEE7D5A72262852100FE4D1C /* EditDeckCardTableViewController.swift */,
+				EE6533A8249BEEC600489802 /* EditDeck.storyboard */,
+				EE6533AA249BEEF800489802 /* EditDeckTableViewController.swift */,
 			);
 			path = "Deck View Controllers";
 			sourceTree = "<group>";
@@ -528,7 +543,7 @@
 			packageProductDependencies = (
 			);
 			productName = MTGCards;
-			productReference = EEBE6D8A21EFE18F00A3464E /* MTGCards.app */;
+			productReference = EEBE6D8A21EFE18F00A3464E /* My MTG v5.app */;
 			productType = "com.apple.product-type.application";
 		};
 		EEBE6DA021EFE19100A3464E /* MTGCardsTests */ = {
@@ -625,6 +640,7 @@
 				EEAA53CB223323D700CB4B72 /* Debug.storyboard in Resources */,
 				EE9246F2225A7B110044F858 /* Filters.storyboard in Resources */,
 				EE4F532522467859003A06CA /* CardRulingView.xib in Resources */,
+				EE6533A9249BEEC600489802 /* EditDeck.storyboard in Resources */,
 				EE4FD207223AC6CE00E8CDB3 /* Deck.storyboard in Resources */,
 				EE27552B22340F0F006BD083 /* Onboarding.storyboard in Resources */,
 				EEE7D5A6226284E800FE4D1C /* EditDeckCard.storyboard in Resources */,
@@ -677,10 +693,13 @@
 				EE24B108223DB9F50057610D /* CollectionTableViewCell.swift in Sources */,
 				EE2B78A821EFE3DB00306990 /* RootViewController.swift in Sources */,
 				EE924703225AA4E70044F858 /* Filters.swift in Sources */,
+				EE6533A3249AAC2600489802 /* CardKeyword+CoreDataProperties.swift in Sources */,
 				EE9246FB225A9EF80044F858 /* TypeFilterTableViewController.swift in Sources */,
 				EE924701225A9F990044F858 /* LegalityFilterTableViewController.swift in Sources */,
 				EE75E5F42284DF8300C23421 /* UpdateSet.swift in Sources */,
+				EE65339F249A9E8200489802 /* CardIdentifiers.swift in Sources */,
 				EE2B822521FD25C800306990 /* Meta.swift in Sources */,
+				EE6533A2249AAC2600489802 /* CardKeyword+CoreDataClass.swift in Sources */,
 				EEEB6F27227929250009B442 /* Collection+Export.swift in Sources */,
 				EEE7D5AA226375FA00FE4D1C /* DeckCardQuantityTableViewCell.swift in Sources */,
 				EEF02F25223DAC11008F008B /* CollectionCard+CoreDataProperties.swift in Sources */,
@@ -746,6 +765,7 @@
 				EEB0ADDA227A3C3400613C8C /* Backup.swift in Sources */,
 				EE35EDB123F627D4000254E7 /* Array+Custom.swift in Sources */,
 				EEF02F24223DAC11008F008B /* CollectionCard+CoreDataClass.swift in Sources */,
+				EE6533AB249BEEF800489802 /* EditDeckTableViewController.swift in Sources */,
 				EEB5D81D2205EA670070FF8B /* CardListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -937,8 +957,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollection;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollectionv5;
+				PRODUCT_NAME = "My MTG v5";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = YES;
@@ -964,8 +984,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollection;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollectionv5;
+				PRODUCT_NAME = "My MTG v5";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = YES;

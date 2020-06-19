@@ -12,7 +12,9 @@ import CoreSpotlight
 import CoreServices
 import SwiftUI
 
-class CardViewController: UIViewController, UIGestureRecognizerDelegate {
+class CardViewController: UIViewController, UIGestureRecognizerDelegate, UIDragInteractionDelegate {
+    
+    
     @IBOutlet weak var scrollview: UIScrollView!
     
     @IBOutlet weak var cardImage: UIImageView!
@@ -51,7 +53,7 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
     var addToButton: UIBarButtonItem?
     
     var card: Card?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -108,11 +110,11 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         pricesView.layer.cornerRadius = 10
         cardImage.layer.cornerRadius = 20
         cardImage.clipsToBounds = true
-        if #available(iOS 13.0, *) {
-            textLabel.textColor = UIColor.label
-        } else {
-            // Fallback on earlier versions
-        }
+        
+        textLabel.textColor = UIColor.label
+        let dragInteration = UIDragInteraction(delegate: self)
+        cardImage.addInteraction(dragInteration)
+        cardImage.isUserInteractionEnabled = true
     }
     override func viewWillAppear(_ animated: Bool) {
         var barItems: [UIBarButtonItem] = []
@@ -160,9 +162,9 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         })
         alert.addAction(addToDeck)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-              
-              self.dismiss(animated: true, completion: nil)
-          }))
+            
+            self.dismiss(animated: true, completion: nil)
+        }))
         if let popoverController = alert.popoverPresentationController {
             popoverController.barButtonItem = addToButton
         }
@@ -333,7 +335,7 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         present(activityController, animated: true)
     }
     func shareText(text: String,_ sender: Any?){
-                 let activityController = UIActivityViewController(activityItems: [text],
+        let activityController = UIActivityViewController(activityItems: [text],
                                                           applicationActivities: nil)
         // if the action is sent from a bar button item
         activityController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
@@ -342,14 +344,14 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
         present(activityController, animated: true)
     }
     func shareUrl(url: URL, _ sender: Any?){
-           let items = [url]
-         let activityController = UIActivityViewController(activityItems: items,
-                                                           applicationActivities: nil)
-         // if the action is sent from a bar button item
-         activityController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
-         // if the action is sent from some other kind of UIView (a table cell or button)
-         activityController.popoverPresentationController?.sourceView = sender as? UIView
-         present(activityController, animated: true)
+        let items = [url]
+        let activityController = UIActivityViewController(activityItems: items,
+                                                          applicationActivities: nil)
+        // if the action is sent from a bar button item
+        activityController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
+        // if the action is sent from some other kind of UIView (a table cell or button)
+        activityController.popoverPresentationController?.sourceView = sender as? UIView
+        present(activityController, animated: true)
     }
     func loadLegalities(){
         if let legalities = card?.legalities
@@ -506,6 +508,13 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate {
             rulingsView.sizeToFit()
             rulingsHeightContstraint.constant = rulingsHeight
         }
+    }
+    func dragInteraction(_ interaction: UIDragInteraction, itemsForBeginning session: UIDragSession) -> [UIDragItem] {
+        guard let image = cardImage.image else { return [] }
+        let provider = NSItemProvider(object: image)
+        let item = UIDragItem(itemProvider: provider)
+        item.localObject = image
+        return [item]
     }
     
 }

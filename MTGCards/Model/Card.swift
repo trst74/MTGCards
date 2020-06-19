@@ -56,6 +56,9 @@ class Card: NSManagedObject, Codable {
     @NSManaged var colorIdentity: NSSet?
     @NSManaged var cardsubtypes: NSSet?
     @NSManaged public var cardsupertypes: NSSet?
+    private var identifiers: CardIdentifiers?
+    private var keywordStrings: [String]?
+    @NSManaged var keywords: NSSet?
     
     enum CodingKeys: String, CodingKey {
         case artist = "artist"
@@ -98,6 +101,8 @@ class Card: NSManagedObject, Codable {
         case variations = "variations"
         case starter = "starter"
         case isReserved = "isReserved"
+        case identifiers = "identifiers"
+        case keywordStrings = "keywords"
     }
     
     required convenience init(from decoder: Decoder) throws {
@@ -113,6 +118,8 @@ class Card: NSManagedObject, Codable {
         self.init(entity: entity, insertInto: managedObjectContext)
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.identifiers = try container.decodeIfPresent(CardIdentifiers.self, forKey: .identifiers)
         self.artist = try container.decodeIfPresent(String.self, forKey: .artist)
         self.borderColor = try container.decodeIfPresent(String.self, forKey: .borderColor)
         self.stringColorIdentity = try container.decodeIfPresent([String].self, forKey: .stringColorIdentity)
@@ -144,9 +151,9 @@ class Card: NSManagedObject, Codable {
         self.layout = try container.decodeIfPresent(String.self, forKey: .layout)
         self.legalities = try container.decodeIfPresent(Legalities.self, forKey: .legalities)
         self.manaCost = try container.decodeIfPresent(String.self, forKey: .manaCost)
-        if let mvid = try container.decodeIfPresent(Int32.self, forKey: .multiverseID) {
-            self.multiverseID = mvid
-        }
+        
+        self.multiverseID = Int32(identifiers?.multiverseID ?? "") ?? 0
+        
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
         self.number = try container.decodeIfPresent(String.self, forKey: .number)
         self.originalText = try container.decodeIfPresent(String.self, forKey: .originalText)
@@ -162,7 +169,7 @@ class Card: NSManagedObject, Codable {
                 self.rulings.addingObjects(from: tempRulings)
             }
         }
-        self.scryfallID = try container.decodeIfPresent(String.self, forKey: .scryfallID)
+        self.scryfallID = identifiers?.scryfallID
         self.stringsubtypes = try container.decodeIfPresent([String].self, forKey: .stringsubtypes)
         for sub in stringsubtypes ?? [] {
             guard  let entity = NSEntityDescription.entity(forEntityName: "CardSubtype", in: managedObjectContext) else {
@@ -183,9 +190,9 @@ class Card: NSManagedObject, Codable {
             tempsub.card = self
             self.addToCardsupertypes(tempsub)
         }
-        if let tcgpID = try container.decodeIfPresent(Int32.self, forKey: .tcgplayerProductID) {
-            self.tcgplayerProductID = tcgpID
-        }
+        
+        self.tcgplayerProductID = Int32(identifiers?.tcgplayerProductID ?? "") ?? 0
+        
         self.tcgplayerPurchaseURL = try container.decodeIfPresent(String.self, forKey: .tcgplayerPurchaseURL)
         self.text = try container.decodeIfPresent(String.self, forKey: .text)
         self.toughness = try container.decodeIfPresent(String.self, forKey: .toughness)
@@ -216,6 +223,15 @@ class Card: NSManagedObject, Codable {
             self.isReserved = reserved
         } else {
             self.isReserved = false
+        }
+        self.keywordStrings = try container.decodeIfPresent([String].self, forKey: .keywordStrings)
+        for k in self.keywordStrings ?? [] {
+            guard let entity = NSEntityDescription.entity(forEntityName: "CardKeyword", in: managedObjectContext) else {
+                fatalError("Failed to decode Card")
+            }
+            let tempKeyword = CardKeyword.init(entity: entity, insertInto: managedObjectContext)
+            tempKeyword.keyword = k
+            self.addToKeywords(tempKeyword)
         }
     }
     
@@ -382,4 +398,19 @@ extension Card {
     
 }
 
+// MARK: Generated accessors for keywords
+extension Card {
 
+    @objc(addKeywordsObject:)
+    @NSManaged public func addToKeywords(_ value: CardKeyword)
+
+    @objc(removeKeywordsObject:)
+    @NSManaged public func removeFromKeywords(_ value: CardKeyword)
+
+    @objc(addKeywords:)
+    @NSManaged public func addToKeywords(_ values: NSSet)
+
+    @objc(removeKeywords:)
+    @NSManaged public func removeFromKeywords(_ values: NSSet)
+
+}
