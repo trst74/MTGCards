@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.11" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vcV-UP-Eqo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vcV-UP-Eqo">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.13"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Card List-->
         <scene sceneID="9a3-6C-n5v">
             <objects>
-                <tableViewController title="Card List" definesPresentationContext="YES" id="vcV-UP-Eqo" customClass="CardListTableViewController" customModule="MTGCards" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Card List" definesPresentationContext="YES" id="vcV-UP-Eqo" customClass="CardListTableViewController" customModule="My_MTG_v5" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="d5g-4u-SVU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cardCell" rowHeight="55" id="F14-En-gDa" customClass="CardListTableViewCell" customModule="MTGCards" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cardCell" rowHeight="55" id="F14-En-gDa" customClass="CardListTableViewCell" customModule="My_MTG_v5" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="F14-En-gDa" id="eZL-r1-7ES">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XWJ-kZ-SZj" customClass="GradientView" customModule="MTGCards" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XWJ-kZ-SZj" customClass="GradientView" customModule="My_MTG_v5" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xws-xR-JcM">
@@ -40,9 +39,16 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAf-rv-hCB">
+                                                    <rect key="frame" x="397" y="27.666666666666668" width="0.0" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
-                                            <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="AAf-rv-hCB" secondAttribute="trailing" constant="17" id="1qX-p2-f2z"/>
                                                 <constraint firstAttribute="trailing" secondItem="ejN-jU-Sb7" secondAttribute="trailing" constant="17" id="K1m-zA-5AP"/>
                                                 <constraint firstItem="ejN-jU-Sb7" firstAttribute="top" secondItem="Xws-xR-JcM" secondAttribute="bottom" constant="2" id="Ki3-kN-7Gf"/>
                                                 <constraint firstAttribute="trailing" secondItem="Xws-xR-JcM" secondAttribute="trailing" constant="17" id="Lrm-qN-jAz"/>
@@ -50,6 +56,7 @@
                                                 <constraint firstItem="Xws-xR-JcM" firstAttribute="top" secondItem="XWJ-kZ-SZj" secondAttribute="top" constant="8" id="SCY-LW-8zq"/>
                                                 <constraint firstItem="ejN-jU-Sb7" firstAttribute="leading" secondItem="XWJ-kZ-SZj" secondAttribute="leading" constant="17" id="Wh6-9n-BxM"/>
                                                 <constraint firstItem="Xws-xR-JcM" firstAttribute="leading" secondItem="XWJ-kZ-SZj" secondAttribute="leading" constant="17" id="j4w-Es-3eb"/>
+                                                <constraint firstItem="AAf-rv-hCB" firstAttribute="centerY" secondItem="XWJ-kZ-SZj" secondAttribute="centerY" id="pAX-0G-nAf"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -61,6 +68,7 @@
                                     <constraint firstItem="XWJ-kZ-SZj" firstAttribute="height" secondItem="F14-En-gDa" secondAttribute="height" id="n7r-HA-un0"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="frameEffectIndicator" destination="AAf-rv-hCB" id="SB1-cS-U9M"/>
                                     <outlet property="gradientView" destination="XWJ-kZ-SZj" id="I4l-qs-b8M"/>
                                     <outlet property="subtitle" destination="ejN-jU-Sb7" id="akm-Yi-eEO"/>
                                     <outlet property="title" destination="Xws-xR-JcM" id="pBl-nc-o4A"/>

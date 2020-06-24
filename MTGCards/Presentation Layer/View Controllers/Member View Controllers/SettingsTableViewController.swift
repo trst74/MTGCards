@@ -130,7 +130,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
             case 1:
                 SKStoreReviewController.requestReview()
             case 2:
-                if let url = URL(string: "http://www.mymtg.app/privacy"){
+                if let url = URL(string: "https://roboticsnailsoftware.com/my-mtg/privacy"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
             case 3:

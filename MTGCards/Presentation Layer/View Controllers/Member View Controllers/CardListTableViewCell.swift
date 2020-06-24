@@ -13,7 +13,8 @@ class CardListTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var gradientView: GradientView!
-
+    @IBOutlet weak var frameEffectIndicator: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

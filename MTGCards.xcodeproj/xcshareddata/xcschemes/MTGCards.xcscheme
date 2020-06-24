@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "EEBE6D8921EFE18F00A3464E"
-               BuildableName = "MTGCards.app"
+               BuildableName = "My MTG v5.app"
                BlueprintName = "MTGCards"
                ReferencedContainer = "container:MTGCards.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EEBE6D8921EFE18F00A3464E"
-            BuildableName = "MTGCards.app"
+            BuildableName = "My MTG v5.app"
             BlueprintName = "MTGCards"
             ReferencedContainer = "container:MTGCards.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EEBE6D8921EFE18F00A3464E"
-            BuildableName = "MTGCards.app"
+            BuildableName = "My MTG v5.app"
             BlueprintName = "MTGCards"
             ReferencedContainer = "container:MTGCards.xcodeproj">
          </BuildableReference>

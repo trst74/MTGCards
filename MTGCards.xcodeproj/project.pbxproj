@@ -67,6 +67,8 @@
 		EE6533A3249AAC2600489802 /* CardKeyword+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6533A1249AAC2600489802 /* CardKeyword+CoreDataProperties.swift */; };
 		EE6533A9249BEEC600489802 /* EditDeck.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE6533A8249BEEC600489802 /* EditDeck.storyboard */; };
 		EE6533AB249BEEF800489802 /* EditDeckTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6533AA249BEEF800489802 /* EditDeckTableViewController.swift */; };
+		EE6533AE249D3E1100489802 /* CardFrameEffect+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6533AC249D3E1100489802 /* CardFrameEffect+CoreDataClass.swift */; };
+		EE6533AF249D3E1100489802 /* CardFrameEffect+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6533AD249D3E1100489802 /* CardFrameEffect+CoreDataProperties.swift */; };
 		EE6F94B022309136001B3378 /* TcgPlayerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F94AF22309136001B3378 /* TcgPlayerApi.swift */; };
 		EE6F94B2223092AD001B3378 /* TcgToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F94B1223092AD001B3378 /* TcgToken.swift */; };
 		EE75E5F42284DF8300C23421 /* UpdateSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE75E5F32284DF8300C23421 /* UpdateSet.swift */; };
@@ -198,6 +200,8 @@
 		EE6533A1249AAC2600489802 /* CardKeyword+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardKeyword+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		EE6533A8249BEEC600489802 /* EditDeck.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditDeck.storyboard; sourceTree = "<group>"; };
 		EE6533AA249BEEF800489802 /* EditDeckTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDeckTableViewController.swift; sourceTree = "<group>"; };
+		EE6533AC249D3E1100489802 /* CardFrameEffect+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardFrameEffect+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EE6533AD249D3E1100489802 /* CardFrameEffect+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardFrameEffect+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EE6F94AF22309136001B3378 /* TcgPlayerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcgPlayerApi.swift; sourceTree = "<group>"; };
 		EE6F94B1223092AD001B3378 /* TcgToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcgToken.swift; sourceTree = "<group>"; };
 		EE75E5F32284DF8300C23421 /* UpdateSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateSet.swift; sourceTree = "<group>"; };
@@ -342,6 +346,8 @@
 		EE2B78BC21EFE67E00306990 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EE6533AC249D3E1100489802 /* CardFrameEffect+CoreDataClass.swift */,
+				EE6533AD249D3E1100489802 /* CardFrameEffect+CoreDataProperties.swift */,
 				EE6533A0249AAC2600489802 /* CardKeyword+CoreDataClass.swift */,
 				EE6533A1249AAC2600489802 /* CardKeyword+CoreDataProperties.swift */,
 				EE2B821E21FCCA3900306990 /* Card.swift */,
@@ -689,6 +695,7 @@
 				EE2B78D521F1518E00306990 /* SetList.swift in Sources */,
 				EE0573DF23FF34A800316516 /* DataModel.swift in Sources */,
 				EE924709225AD4440044F858 /* CardType+CoreDataProperties.swift in Sources */,
+				EE6533AF249D3E1100489802 /* CardFrameEffect+CoreDataProperties.swift in Sources */,
 				EEF02F22223DAC11008F008B /* Collection+CoreDataClass.swift in Sources */,
 				EE24B108223DB9F50057610D /* CollectionTableViewCell.swift in Sources */,
 				EE2B78A821EFE3DB00306990 /* RootViewController.swift in Sources */,
@@ -726,6 +733,7 @@
 				EE9246FF225A9EF80044F858 /* SuperTypeFilterTableViewController.swift in Sources */,
 				EE0F62AD22356494003D8A8A /* CoreDataStack.swift in Sources */,
 				EE0573DD23FF347C00316516 /* ArcView.swift in Sources */,
+				EE6533AE249D3E1100489802 /* CardFrameEffect+CoreDataClass.swift in Sources */,
 				EE4FD204223A91BD00E8CDB3 /* Deck+CoreDataClass.swift in Sources */,
 				EE4F532722467A4D003A06CA /* CardRulingsView.swift in Sources */,
 				EE6F94B2223092AD001B3378 /* TcgToken.swift in Sources */,

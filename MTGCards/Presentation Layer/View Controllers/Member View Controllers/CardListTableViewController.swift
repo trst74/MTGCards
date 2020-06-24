@@ -153,6 +153,18 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             }
             cell.gradientView?.colors = colors
         }
+        if card.frameEffects?.count ?? 0 > 0 {
+            if card.frameEffects?.count == 1 && (card.frameEffects?.allObjects[0] as? CardFrameEffect)?.effect == "legendary" {
+                cell.frameEffectIndicator.text = ""
+            } else {
+                print((card.frameEffects?.allObjects[0] as? CardFrameEffect)?.effect)
+                cell.frameEffectIndicator.text = "✨"
+            }
+        } else if card.borderColor == "borderless" || card.isFullArt ?? false {
+            cell.frameEffectIndicator.text = "✨"
+        } else {
+            cell.frameEffectIndicator.text = ""
+        }
         return cell
     }
     

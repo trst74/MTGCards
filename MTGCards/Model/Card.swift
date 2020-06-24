@@ -59,6 +59,9 @@ class Card: NSManagedObject, Codable {
     private var identifiers: CardIdentifiers?
     private var keywordStrings: [String]?
     @NSManaged var keywords: NSSet?
+    private var frameEffectStrings: [String]?
+    @NSManaged var frameEffects: NSSet?
+    @NSManaged var isFullArt: Bool
     
     enum CodingKeys: String, CodingKey {
         case artist = "artist"
@@ -103,6 +106,8 @@ class Card: NSManagedObject, Codable {
         case isReserved = "isReserved"
         case identifiers = "identifiers"
         case keywordStrings = "keywords"
+        case frameEffectStrings = "frameEffects"
+        case isFullArt = "isFullArt"
     }
     
     required convenience init(from decoder: Decoder) throws {
@@ -233,6 +238,16 @@ class Card: NSManagedObject, Codable {
             tempKeyword.keyword = k
             self.addToKeywords(tempKeyword)
         }
+        self.frameEffectStrings = try container.decodeIfPresent([String].self, forKey: .frameEffectStrings)
+        for k in self.frameEffectStrings ?? [] {
+            guard let entity = NSEntityDescription.entity(forEntityName: "CardFrameEffect", in: managedObjectContext) else {
+                fatalError("Failed to decode Card")
+            }
+            let tempEffect = CardFrameEffect.init(entity: entity, insertInto: managedObjectContext)
+            tempEffect.effect = k
+            self.addToFrameEffects(tempEffect)
+        }
+        self.isFullArt = try container.decodeIfPresent(Bool.self, forKey: .isFullArt) ?? false
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -412,5 +427,21 @@ extension Card {
 
     @objc(removeKeywords:)
     @NSManaged public func removeFromKeywords(_ values: NSSet)
+
+}
+// MARK: Generated accessors for frameEffects
+extension Card {
+
+    @objc(addFrameEffectsObject:)
+    @NSManaged public func addToFrameEffects(_ value: CardFrameEffect)
+
+    @objc(removeFrameEffectsObject:)
+    @NSManaged public func removeFromFrameEffects(_ value: CardFrameEffect)
+
+    @objc(addFrameEffects:)
+    @NSManaged public func addToFrameEffects(_ values: NSSet)
+
+    @objc(removeFrameEffects:)
+    @NSManaged public func removeFromFrameEffects(_ values: NSSet)
 
 }
