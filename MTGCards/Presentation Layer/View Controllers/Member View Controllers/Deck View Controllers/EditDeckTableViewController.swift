@@ -24,15 +24,12 @@ class EditDeckTableViewController: UITableViewController, UIPickerViewDelegate, 
         if let name = deck?.name {
             self.deckName.text = name
         }
-        if var format = deck?.format {
+        if let format = deck?.format {
       
             formatPicker.selectRow(formats.firstIndex(of: format) ?? 0, inComponent: 0, animated: true)
         }
         tableView.tableFooterView = UIView()
     }
-
-    // MARK: - Table view data source
-
     @IBAction func cancel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }

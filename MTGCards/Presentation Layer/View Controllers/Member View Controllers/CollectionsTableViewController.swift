@@ -420,6 +420,12 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
             StateCoordinator.shared.didSelectCollection(collection: cdCollections[indexPath.row].objectID)
         }
     }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        #if targetEnvironment(macCatalyst)
+        return 20
+        #endif
+        return 55
+    }
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if indexPath.section == 2 {
             
@@ -427,7 +433,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
             let editAction = UIContextualAction(style: .normal, title: "Edit") {
                 (contextaction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
                 
-                var deck = self.cdDecks[indexPath.row]
+                let deck = self.cdDecks[indexPath.row]
                 let storyboard = UIStoryboard(name: "EditDeck", bundle: nil)
                 guard let editDeckView = storyboard.instantiateInitialViewController() as? EditDeckTableViewController else {
                     fatalError("Project config error - storyboard doesnt provide a EditDeckCard")
@@ -445,37 +451,37 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let edit = UIAction(title: "Edit",
                             image: UIImage(systemName: "pencil")) { _ in
-                                var deck = self.cdDecks[indexPath.row]
-                                let storyboard = UIStoryboard(name: "EditDeck", bundle: nil)
-                                guard let editDeckView = storyboard.instantiateInitialViewController() as? EditDeckTableViewController else {
-                                    fatalError("Project config error - storyboard doesnt provide a EditDeckCard")
-                                }
-                                editDeckView.deck = deck
-                                editDeckView.collectionsViewController = self
-                                self.present(editDeckView, animated: true, completion: nil)
-                                
+            let deck = self.cdDecks[indexPath.row]
+            let storyboard = UIStoryboard(name: "EditDeck", bundle: nil)
+            guard let editDeckView = storyboard.instantiateInitialViewController() as? EditDeckTableViewController else {
+                fatalError("Project config error - storyboard doesnt provide a EditDeckCard")
+            }
+            editDeckView.deck = deck
+            editDeckView.collectionsViewController = self
+            self.present(editDeckView, animated: true, completion: nil)
+            
         }
         
         
         let delete = UIAction(title: "Delete",
                               image: UIImage(systemName: "trash.fill"),
                               attributes: [.destructive]) { action in
-                                CoreDataStack.handler.privateContext.delete(self.cdDecks[indexPath.row] as NSManagedObject)
-                                do {
-                                    try CoreDataStack.handler.privateContext.save()
-                                } catch {
-                                    print(error)
-                                }
-                                self.reloadDecksFromCoreData()
-                                DispatchQueue.main.async {
-                                    
-                                    self.tableView.reloadData()
-                                }
+            CoreDataStack.handler.privateContext.delete(self.cdDecks[indexPath.row] as NSManagedObject)
+            do {
+                try CoreDataStack.handler.privateContext.save()
+            } catch {
+                print(error)
+            }
+            self.reloadDecksFromCoreData()
+            DispatchQueue.main.async {
+                
+                self.tableView.reloadData()
+            }
         }
         
         return UIContextMenuConfiguration(identifier: nil,
                                           previewProvider: nil) { _ in
-                                            UIMenu(title: "", children: [edit, delete])
+            UIMenu(title: "", children: [edit, delete])
         }
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

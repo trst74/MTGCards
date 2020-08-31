@@ -47,6 +47,9 @@ class RootViewController: UIViewController {
     
     lazy var rootSplitView: UISplitViewController = {
         let split = freshSplitViewTemplate()
+        #if targetEnvironment(macCatalyst)
+        split.primaryBackgroundStyle = .sidebar
+        #endif
         split.preferredPrimaryColumnWidthFraction = rootSplitLargeFraction
         split.delegate = self
         return split
@@ -340,6 +343,9 @@ extension RootViewController {
             subSplit.preferredDisplayMode = .allVisible
             subSplit.preferredPrimaryColumnWidthFraction = rootSplitLargeFraction
             rootSplitView.preferredPrimaryColumnWidthFraction = rootSplitSmallFraction
+            #if targetEnvironment(macCatalyst)
+            rootSplitView.primaryBackgroundStyle = .sidebar
+            #endif
             //3
             showFileLevelPlaceholder(in: subSplit)
         } else {
