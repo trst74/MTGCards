@@ -256,7 +256,7 @@ class DeckStatsTableViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 5 {
-            return 350
+            return 400
         }
         if indexPath.section != 1 {
             return 200
@@ -281,6 +281,13 @@ class DeckStatsTableViewController: UITableViewController {
             chart.view.translatesAutoresizingMaskIntoConstraints = false
             chart.view.frame = cell.contentView.bounds
             cell.contentView.addSubview(chart.view)
+            let margins = cell.contentView.safeAreaLayoutGuide
+            NSLayoutConstraint.activate([
+                chart.view.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+                chart.view.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+                chart.view.topAnchor.constraint(equalTo: margins.topAnchor),
+                chart.view.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -20.0)
+            ])
         }
         else if indexPath.section == 2 {
             let chart = UIHostingController(rootView: BarChart(bars: createCMCBars()))
@@ -288,6 +295,13 @@ class DeckStatsTableViewController: UITableViewController {
             chart.view.translatesAutoresizingMaskIntoConstraints = false
             chart.view.frame = cell.contentView.bounds
             cell.contentView.addSubview(chart.view)
+            let margins = cell.contentView.safeAreaLayoutGuide
+            NSLayoutConstraint.activate([
+                chart.view.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+                chart.view.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+                chart.view.topAnchor.constraint(equalTo: margins.topAnchor),
+                chart.view.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -20.0)
+            ])
         } else if indexPath.section == 3 {
             
             
@@ -295,6 +309,13 @@ class DeckStatsTableViewController: UITableViewController {
             chart.view.translatesAutoresizingMaskIntoConstraints = false
             chart.view.frame = cell.contentView.bounds
             cell.contentView.addSubview(chart.view)
+            let margins = cell.contentView.safeAreaLayoutGuide
+            NSLayoutConstraint.activate([
+                chart.view.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+                chart.view.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+                chart.view.topAnchor.constraint(equalTo: margins.topAnchor),
+                chart.view.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
+            ])
         } else if indexPath.section == 4 {
             
         } else if indexPath.section == 1 {
@@ -307,6 +328,13 @@ class DeckStatsTableViewController: UITableViewController {
             legalities.view.translatesAutoresizingMaskIntoConstraints = false
             legalities.view.frame = cell.contentView.bounds
             cell.contentView.addSubview(legalities.view)
+            let margins = cell.contentView.safeAreaLayoutGuide
+            NSLayoutConstraint.activate([
+                legalities.view.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+                legalities.view.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+                legalities.view.topAnchor.constraint(equalTo: margins.topAnchor),
+                legalities.view.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -20.0)
+            ])
         }
         return cell
     }

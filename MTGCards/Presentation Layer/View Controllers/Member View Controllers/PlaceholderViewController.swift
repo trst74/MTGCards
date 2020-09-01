@@ -41,6 +41,7 @@ class PlaceholderViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     message.text = messageString
+    
   }
 }
 

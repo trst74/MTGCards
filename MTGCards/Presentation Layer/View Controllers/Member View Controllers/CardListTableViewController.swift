@@ -21,7 +21,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //self.tableView.register(CardListTableViewCell.self, forCellReuseIdentifier: "cardCell")
         tableView.keyboardDismissMode = .onDrag
         loadSavedData()
         navigationController?.navigationBar.prefersLargeTitles = false
@@ -114,7 +114,11 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55
+        var height: CGFloat = 55.0
+        #if targetEnvironment(macCatalyst)
+        height = 50.0
+        #endif
+        return height
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as! CardListTableViewCell
@@ -158,12 +162,12 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
                 cell.frameEffectIndicator.text = ""
             } else {
                 print((card.frameEffects?.allObjects[0] as? CardFrameEffect)?.effect ?? "")
-                cell.frameEffectIndicator.text = "✨"
+                cell.frameEffectIndicator?.text = "✨"
             }
         } else if card.borderColor == "borderless" || card.isFullArt {
-            cell.frameEffectIndicator.text = "✨"
+            cell.frameEffectIndicator?.text = "✨"
         } else {
-            cell.frameEffectIndicator.text = ""
+            cell.frameEffectIndicator?.text = ""
         }
         return cell
     }
@@ -181,7 +185,12 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         return fetchRequest
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        StateCoordinator.shared.didSelectCard(id: fetchedResultsController.object(at: indexPath).objectID)
+        if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
+            self.navigationController?.pushViewController(CardViewController.refreshCardController(id: fetchedResultsController.object(at: indexPath).objectID), animated: true)
+        } else {
+            self.splitViewController?.setViewController(nil, for: .secondary)
+            self.splitViewController?.setViewController(CardViewController.refreshCardController(id: fetchedResultsController.object(at: indexPath).objectID), for: .secondary)
+        }
     }
     
     func updateSearchResults(for searchController: UISearchController) {

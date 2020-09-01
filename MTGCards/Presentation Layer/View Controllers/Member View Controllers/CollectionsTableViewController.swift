@@ -23,6 +23,10 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
+            self.title = "Collections"
+        }
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "collectionCell")
         self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addButton(sender:))), animated: true)
         let settingsButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(self.settings))
         self.navigationItem.setLeftBarButton(settingsButton, animated: true)
@@ -150,13 +154,20 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         self.present(alert, animated: true)
     }
     func addDecksFromFiles(){
+        #if !targetEnvironment(macCatalyst)
         let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePlainText as String], in: .import)
-        #if targetEnvironment(macCatalyst)
-        documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.text])
-        #endif
         documentPicker.allowsMultipleSelection = true
         documentPicker.delegate = self
         self.present(documentPicker, animated: true)
+        #endif
+        #if targetEnvironment(macCatalyst)
+        //remove above and #if after setting min version to iOS 14
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.text])
+        documentPicker.allowsMultipleSelection = true
+        documentPicker.delegate = self
+        self.present(documentPicker, animated: true)
+        #endif
+        
     }
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         print(urls)
@@ -416,20 +427,54 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            //StateCoordinator.shared.didSelectCollection(collection: "Search")
-            StateCoordinator.shared.didSelectTool(tool: "Search")
-        } else if indexPath.section == 2 {
-            StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row].objectID)
-        } else if indexPath.section == 1 {
-            StateCoordinator.shared.didSelectCollection(collection: cdCollections[indexPath.row].objectID)
+        //        if indexPath.section == 0 {
+        //            //StateCoordinator.shared.didSelectCollection(collection: "Search")
+        //            StateCoordinator.shared.didSelectTool(tool: "Search")
+        //        } else if indexPath.section == 2 {
+        //            StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row].objectID)
+        //        } else if indexPath.section == 1 {
+        //            StateCoordinator.shared.didSelectCollection(collection: cdCollections[indexPath.row].objectID)
+        //        }
+        //
+        if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
+            if indexPath.section == 0 {
+                //StateCoordinator.shared.didSelectCollection(collection: "Search")
+                self.navigationController?.pushViewController(CardListTableViewController.freshCardList(), animated: true)
+            } else if indexPath.section == 2 {
+                //StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row].objectID)
+                self.navigationController?.pushViewController(DeckTableViewController.freshDeck(deck: cdDecks[indexPath.row].objectID), animated: true)
+            } else if indexPath.section == 1 {
+                //StateCoordinator.shared.didSelectCollection(collection: cdCollections[indexPath.row].objectID)
+                self.navigationController?.pushViewController(CollectionTableViewController.freshCollection(collection: cdCollections[indexPath.row].objectID), animated: true)
+            }
+            //self.navigationController?.pushViewController(details, animated: true)
+        } else {
+            
+            if indexPath.section == 0 {
+                //StateCoordinator.shared.didSelectCollection(collection: "Search")
+                self.splitViewController?.setViewController(nil, for: .supplementary)
+                self.splitViewController?.setViewController(CardListTableViewController.freshCardList(), for: .supplementary)
+            } else if indexPath.section == 2 {
+                //StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row].objectID)
+                self.splitViewController?.setViewController(nil, for: .supplementary)
+                self.splitViewController?.setViewController(DeckTableViewController.freshDeck(deck: cdDecks[indexPath.row].objectID), for: .supplementary)
+                
+                self.splitViewController?.setViewController(nil, for: .secondary)
+                self.splitViewController?.setViewController(DeckStatsTableViewController.refreshDeckStats(id: cdDecks[indexPath.row].objectID), for: .secondary)
+                
+            } else if indexPath.section == 1 {
+                //StateCoordinator.shared.didSelectCollection(collection: cdCollections[indexPath.row].objectID)
+                self.splitViewController?.setViewController(nil, for: .supplementary)
+                self.splitViewController?.setViewController(CollectionTableViewController.freshCollection(collection: cdCollections[indexPath.row].objectID), for: .supplementary)
+            }
         }
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var height: CGFloat = 40
         #if targetEnvironment(macCatalyst)
-        return 20
+        height = 20
         #endif
-        return 40
+        return height
     }
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if indexPath.section == 2 {

@@ -23,7 +23,7 @@ struct DeckLegalities: View {
                     
                 .background(format.backgroundColor)
                 .cornerRadius(10)
-                .padding(4)
+                .padding(2)
             }
             
         }
