@@ -299,7 +299,7 @@ extension RootViewController {
             let navigation = primaryNavigation(subSplit)
             navigation.viewControllers = [fileList]
             //2
-            subSplit.preferredDisplayMode = .allVisible
+            subSplit.preferredDisplayMode = .oneBesideSecondary
             subSplit.preferredPrimaryColumnWidthFraction = rootSplitLargeFraction
             rootSplitView.preferredPrimaryColumnWidthFraction = rootSplitSmallFraction
             //3
@@ -316,7 +316,7 @@ extension RootViewController {
             let navigation = primaryNavigation(subSplit)
             navigation.viewControllers = [deck]
             //2
-            subSplit.preferredDisplayMode = .allVisible
+            subSplit.preferredDisplayMode = .oneBesideSecondary
             subSplit.preferredPrimaryColumnWidthFraction = rootSplitLargeFraction
             rootSplitView.preferredPrimaryColumnWidthFraction = rootSplitSmallFraction
             //3
@@ -340,12 +340,12 @@ extension RootViewController {
             let navigation = primaryNavigation(subSplit)
             navigation.viewControllers = [collection]
             //2
-            subSplit.preferredDisplayMode = .allVisible
+            subSplit.preferredDisplayMode = .oneBesideSecondary
             subSplit.preferredPrimaryColumnWidthFraction = rootSplitLargeFraction
             rootSplitView.preferredPrimaryColumnWidthFraction = rootSplitSmallFraction
-            #if targetEnvironment(macCatalyst)
+            //#if targetEnvironment(macCatalyst)
             rootSplitView.primaryBackgroundStyle = .sidebar
-            #endif
+            //#endif
             //3
             showFileLevelPlaceholder(in: subSplit)
         } else {

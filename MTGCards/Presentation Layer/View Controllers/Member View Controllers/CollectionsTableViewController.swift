@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import MobileCoreServices
+import UniformTypeIdentifiers
 
 class CollectionsTableViewController: UITableViewController, UITableViewDropDelegate, UIDocumentPickerDelegate  {
     
@@ -28,6 +29,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         sections = [ search, collections, decks]
         tableView.dropDelegate = self
         tableView.dragInteractionEnabled = true
+        
         if UserDefaultsHandler.isFirstTimeOpening(){
             firstTimeOpened()
         }
@@ -149,6 +151,9 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     }
     func addDecksFromFiles(){
         let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePlainText as String], in: .import)
+        #if targetEnvironment(macCatalyst)
+        documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.text])
+        #endif
         documentPicker.allowsMultipleSelection = true
         documentPicker.delegate = self
         self.present(documentPicker, animated: true)
@@ -424,7 +429,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         #if targetEnvironment(macCatalyst)
         return 20
         #endif
-        return 55
+        return 40
     }
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if indexPath.section == 2 {
