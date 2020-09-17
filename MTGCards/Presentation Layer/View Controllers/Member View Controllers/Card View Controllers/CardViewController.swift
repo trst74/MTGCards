@@ -103,7 +103,7 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate, UIDragI
         loadImage()
         
         let taps = UITapGestureRecognizer(target: self, action: #selector(showDebug))
-        taps.numberOfTapsRequired = 10
+        taps.numberOfTapsRequired = 2
         taps.delegate = self
         cardImage.addGestureRecognizer(taps)
         detailsView.layer.cornerRadius = 10
@@ -189,6 +189,10 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate, UIDragI
         //        let cardView = CardView(card: card)
         //        let viewCtrl = UIHostingController(rootView: cardView)
         //        self.present(viewCtrl, animated: true, completion: nil)
+        let vc = UIHostingController(rootView: CardVC(card: card!))
+        vc.navigationController?.title = card?.name
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     @objc func share(){
         let alert = UIAlertController(title: "Share", message: nil, preferredStyle: .actionSheet)
@@ -270,7 +274,6 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate, UIDragI
     func saveImage(image: UIImage, Key: String) {
         if let data = image.pngData() {
             let filename = getDocumentsDirectory().appendingPathComponent("\(Key).png")
-            print(filename)
             try? data.write(to: filename)
         }
     }

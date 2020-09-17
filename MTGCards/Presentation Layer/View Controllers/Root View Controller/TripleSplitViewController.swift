@@ -14,7 +14,7 @@ class TripleSplitViewController: UIViewController, UISplitViewControllerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        
         let sb = CollectionsTableViewController.freshCollectionsList()
         split.setViewController(sb, for: .primary)
         split.delegate = self
@@ -30,14 +30,14 @@ class TripleSplitViewController: UIViewController, UISplitViewControllerDelegate
         
         let sec = PlaceholderViewController.freshPlaceholderController(message: "Select a Card, Deck, or Collection to get started.")
         split.setViewController(sec, for: .secondary)
-
+        
         
         split.show(.primary)
         split.preferredDisplayMode = .twoBesideSecondary
-        split.preferredSplitBehavior = .automatic
+        split.preferredSplitBehavior = .tile
         split.showsSecondaryOnlyButton = false
         split.preferredPrimaryColumnWidthFraction = 0.2
-        split.preferredSupplementaryColumnWidthFraction = 0.3
+        split.preferredSupplementaryColumnWidthFraction = 0.2
         #if targetEnvironment(macCatalyst)
         split.view.translatesAutoresizingMaskIntoConstraints = false
         #endif
@@ -53,13 +53,28 @@ class TripleSplitViewController: UIViewController, UISplitViewControllerDelegate
         #endif
         //view.addSubview(nav.view)
     }
-    //    func splitViewController(_ svc: UISplitViewController, topColumnForCollapsingToProposedTopColumn proposedTopColumn: UISplitViewController.Column) -> UISplitViewController.Column {
-    //        return .supplementary
-    //    }
-    //    func splitViewController(_ svc: UISplitViewController,
-    //                             displayModeForExpandingToProposedDisplayMode proposedDisplayMode: UISplitViewController.DisplayMode) -> UISplitViewController.DisplayMode {
-    //        print(proposedDisplayMode.rawValue)
-    //
-    //        return .oneBesideSecondary
-    //    }
+    override func viewDidAppear(_ animated: Bool) {
+        if UserDefaultsHandler.isFirstTimeOpening(){
+            //onbarding
+            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+            guard let pageOne = storyboard.instantiateInitialViewController() as? OnboardingPageViewController else {
+                fatalError("Error going to settings")
+            }
+            pageOne.modalPresentationStyle = .fullScreen
+            self.present(pageOne, animated: true, completion: nil)
+            //create collection and wish list
+            UserDefaultsHandler.setSelectedCardImageQuality(quality: "high")
+            UserDefaultsHandler.setHasOpened(opened: true)
+        }
+    }
+//    func splitViewController(_ svc: UISplitViewController, topColumnForCollapsingToProposedTopColumn proposedTopColumn: UISplitViewController.Column) -> UISplitViewController.Column {
+//        return .supplementary
+//    }
+    func splitViewController(_ svc: UISplitViewController,
+                             displayModeForExpandingToProposedDisplayMode proposedDisplayMode: UISplitViewController.DisplayMode) -> UISplitViewController.DisplayMode {
+        print(proposedDisplayMode.rawValue)
+        
+        return .twoBesideSecondary
+    }
+    
 }

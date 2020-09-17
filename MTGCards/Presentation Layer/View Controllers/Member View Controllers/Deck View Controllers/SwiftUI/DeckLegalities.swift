@@ -16,9 +16,9 @@ struct DeckLegalities: View {
             ForEach(formats, id: \.self) { format in
                 HStack {
                     Text("\(format.name) : ")
-                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 35, alignment: .trailing)
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 35, maxHeight: 35, alignment: .trailing)
                     Text("\(format.legality)")
-                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 35, alignment: .leading)
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 35, maxHeight: 35, alignment: .leading)
                 }
                     
                 .background(format.backgroundColor)
@@ -27,7 +27,7 @@ struct DeckLegalities: View {
             }
             
         }
-    .padding()
+    //.padding()
         .background(Color(UIColor.systemBackground))
     }
     

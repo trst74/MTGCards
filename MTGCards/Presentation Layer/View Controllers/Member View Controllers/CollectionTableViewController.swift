@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SwiftUI
 
 class CollectionTableViewController: UITableViewController, UIContextMenuInteractionDelegate {
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
@@ -91,7 +92,14 @@ class CollectionTableViewController: UITableViewController, UIContextMenuInterac
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let card = collectionCards[indexPath.row].card {
-            StateCoordinator.shared.didSelectCard(id: card.objectID)
+            if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
+                let vc = UIHostingController(rootView: CardVC(card: card))
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                self.splitViewController?.setViewController(nil, for: .secondary)
+                let vc = UIHostingController(rootView: CardVC(card: card))
+                self.splitViewController?.setViewController(vc, for: .secondary)
+            }
         }
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import MobileCoreServices
+import SwiftUI
 
 class CardListTableViewController: UITableViewController, UISearchResultsUpdating, NSFetchedResultsControllerDelegate, UITableViewDragDelegate, UIContextMenuInteractionDelegate {
     
@@ -39,6 +40,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         tableView.dragInteractionEnabled = true
         let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: #selector(self.filter))
         self.navigationItem.setRightBarButton(filterButton, animated: true)
+        
     }
     
     @objc func filter(){
@@ -186,10 +188,12 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
-            self.navigationController?.pushViewController(CardViewController.refreshCardController(id: fetchedResultsController.object(at: indexPath).objectID), animated: true)
+            let vc = UIHostingController(rootView: CardVC(card: fetchedResultsController.object(at: indexPath)))
+            self.navigationController?.pushViewController(vc, animated: true)
         } else {
             self.splitViewController?.setViewController(nil, for: .secondary)
-            self.splitViewController?.setViewController(CardViewController.refreshCardController(id: fetchedResultsController.object(at: indexPath).objectID), for: .secondary)
+            let vc = UIHostingController(rootView: CardVC(card: fetchedResultsController.object(at: indexPath)))
+            self.splitViewController?.setViewController(vc, for: .secondary)
         }
     }
     

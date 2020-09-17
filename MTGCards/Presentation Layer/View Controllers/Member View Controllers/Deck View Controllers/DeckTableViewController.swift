@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import MobileCoreServices
 import UniformTypeIdentifiers
+import SwiftUI
 
 class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, UIContextMenuInteractionDelegate {
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
@@ -392,25 +393,29 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
         }
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var cardVC = CardViewController()
+        var card: Card? = nil
         if indexPath.section == deckSection {
-            if let card = deckCards[indexPath.row].card {
-                cardVC = CardViewController.refreshCardController(id: card.objectID)
+            if let c = deckCards[indexPath.row].card {
+                card = c
             }
         } else if indexPath.section == sideboardSection {
-            if let card = sideboard[indexPath.row].card {
-                cardVC = CardViewController.refreshCardController(id: card.objectID)
+            if let c = sideboard[indexPath.row].card {
+                card = c
             }
         } else if indexPath.section == commanderSection {
-            if let card = commander[indexPath.row].card {
-                cardVC = CardViewController.refreshCardController(id: card.objectID)
+            if let c = commander[indexPath.row].card {
+                card = c
             }
         }
-        if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
-                self.navigationController?.pushViewController(cardVC, animated: true)
-        } else {
+        if let card = card {
+            if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
+                let vc = UIHostingController(rootView: CardVC(card: card))
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
                 self.splitViewController?.setViewController(nil, for: .secondary)
-                self.splitViewController?.setViewController(cardVC, for: .secondary)
+                let vc = UIHostingController(rootView: CardVC(card: card))
+                self.splitViewController?.setViewController(vc, for: .secondary)
+            }
         }
     }
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

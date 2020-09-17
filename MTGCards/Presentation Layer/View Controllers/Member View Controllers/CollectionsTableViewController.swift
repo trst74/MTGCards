@@ -154,20 +154,10 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         self.present(alert, animated: true)
     }
     func addDecksFromFiles(){
-        #if !targetEnvironment(macCatalyst)
-        let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePlainText as String], in: .import)
-        documentPicker.allowsMultipleSelection = true
-        documentPicker.delegate = self
-        self.present(documentPicker, animated: true)
-        #endif
-        #if targetEnvironment(macCatalyst)
-        //remove above and #if after setting min version to iOS 14
         let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.text])
         documentPicker.allowsMultipleSelection = true
         documentPicker.delegate = self
         self.present(documentPicker, animated: true)
-        #endif
-        
     }
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         print(urls)
