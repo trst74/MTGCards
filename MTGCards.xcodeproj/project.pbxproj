@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE010518251A6EBD00FFA24C /* CollectionSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE010517251A6EBD00FFA24C /* CollectionSectionHeader.xib */; };
+		EE01051E251A6FBF00FFA24C /* CollectionSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE01051D251A6FBF00FFA24C /* CollectionSectionHeaderView.swift */; };
 		EE0573D923FF342600316516 /* SunburstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0573D823FF342600316516 /* SunburstView.swift */; };
 		EE0573DB23FF345B00316516 /* Sunburst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0573DA23FF345B00316516 /* Sunburst.swift */; };
 		EE0573DD23FF347C00316516 /* ArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0573DC23FF347C00316516 /* ArcView.swift */; };
@@ -134,7 +136,6 @@
 		EEF8AC432513F88F002E10CF /* CardArtWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EEF8AC3F2513F88D002E10CF /* CardArtWidget.intentdefinition */; };
 		EEF8AC442513F88F002E10CF /* CardArtWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EEF8AC3F2513F88D002E10CF /* CardArtWidget.intentdefinition */; };
 		EEF8AC472513F88F002E10CF /* CardArtWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EEF8AC392513F88C002E10CF /* CardArtWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		EEF8AC4E2513F8A4002E10CF /* WidgetLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF8AC4C2513F8A4002E10CF /* WidgetLoader.swift */; };
 		EEF8AC4F2513F8A4002E10CF /* RandomCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF8AC4D2513F8A4002E10CF /* RandomCard.swift */; };
 		EEF8AC502513FF90002E10CF /* UIImage+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0573E223FF393F00316516 /* UIImage+Custom.swift */; };
 		EEF8AC5125140045002E10CF /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */; };
@@ -181,6 +182,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EE010517251A6EBD00FFA24C /* CollectionSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionSectionHeader.xib; sourceTree = "<group>"; };
+		EE01051D251A6FBF00FFA24C /* CollectionSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSectionHeaderView.swift; sourceTree = "<group>"; };
 		EE0573D823FF342600316516 /* SunburstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunburstView.swift; sourceTree = "<group>"; };
 		EE0573DA23FF345B00316516 /* Sunburst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sunburst.swift; sourceTree = "<group>"; };
 		EE0573DC23FF347C00316516 /* ArcView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcView.swift; sourceTree = "<group>"; };
@@ -239,7 +242,6 @@
 		EE4FD208223AC6FE00E8CDB3 /* DeckTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckTableViewController.swift; sourceTree = "<group>"; };
 		EE5741D12513D516006FA8C2 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		EE5741D32513D517006FA8C2 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		EE5741E12513D519006FA8C2 /* CardWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CardWidgetExtension.entitlements; sourceTree = "<group>"; };
 		EE5742062513E22D006FA8C2 /* PricesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricesView.swift; sourceTree = "<group>"; };
 		EE5EDE922246831E00C24C5E /* CardLegalityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardLegalityView.xib; sourceTree = "<group>"; };
 		EE5EDE932246831F00C24C5E /* CardLegalityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardLegalityView.swift; sourceTree = "<group>"; };
@@ -311,13 +313,16 @@
 		EEF02F1F223DAC11008F008B /* Collection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EEF02F20223DAC11008F008B /* CollectionCard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCard+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EEF02F21223DAC11008F008B /* CollectionCard+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCard+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EEF78A572517B612008422A8 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		EEF78A592517B614008422A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EEF78A5B2517B614008422A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEF78A5F2517B614008422A8 /* TestExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestExtension.entitlements; sourceTree = "<group>"; };
 		EEF8AC392513F88C002E10CF /* CardArtWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CardArtWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEF8AC3D2513F88D002E10CF /* CardArtWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardArtWidget.swift; sourceTree = "<group>"; };
 		EEF8AC3F2513F88D002E10CF /* CardArtWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = CardArtWidget.intentdefinition; sourceTree = "<group>"; };
 		EEF8AC402513F88F002E10CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEF8AC422513F88F002E10CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEF8AC482513F88F002E10CF /* CardArtWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CardArtWidgetExtension.entitlements; sourceTree = "<group>"; };
-		EEF8AC4C2513F8A4002E10CF /* WidgetLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WidgetLoader.swift; path = ../../../Desktop/WidgetLoader.swift; sourceTree = "<group>"; };
 		EEF8AC4D2513F8A4002E10CF /* RandomCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RandomCard.swift; path = ../../../Desktop/RandomCard.swift; sourceTree = "<group>"; };
 		EEF8AC5225140194002E10CF /* DebugBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugBorder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -486,6 +491,8 @@
 				EE2B78CD21F009A600306990 /* PlaceholderViewController.swift */,
 				EEC9198D223080A0004E52F5 /* Settings.storyboard */,
 				EEC9198F223080DF004E52F5 /* SettingsTableViewController.swift */,
+				EE010517251A6EBD00FFA24C /* CollectionSectionHeader.xib */,
+				EE01051D251A6FBF00FFA24C /* CollectionSectionHeaderView.swift */,
 			);
 			path = "Member View Controllers";
 			sourceTree = "<group>";
@@ -528,12 +535,13 @@
 		EEBE6D8121EFE18F00A3464E = {
 			isa = PBXGroup;
 			children = (
+				EEF78A5F2517B614008422A8 /* TestExtension.entitlements */,
 				EEF8AC482513F88F002E10CF /* CardArtWidgetExtension.entitlements */,
-				EE5741E12513D519006FA8C2 /* CardWidgetExtension.entitlements */,
 				EEBE6D8C21EFE18F00A3464E /* MTGCards */,
 				EEBE6DA421EFE19100A3464E /* MTGCardsTests */,
 				EEBE6DAF21EFE19100A3464E /* MTGCardsUITests */,
 				EEF8AC3C2513F88D002E10CF /* CardArtWidget */,
+				EEF78A562517B612008422A8 /* Test */,
 				EE5741D02513D516006FA8C2 /* Frameworks */,
 				EEBE6D8B21EFE18F00A3464E /* Products */,
 			);
@@ -624,11 +632,20 @@
 			path = "Card View Controllers";
 			sourceTree = "<group>";
 		};
+		EEF78A562517B612008422A8 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				EEF78A572517B612008422A8 /* Test.swift */,
+				EEF78A592517B614008422A8 /* Assets.xcassets */,
+				EEF78A5B2517B614008422A8 /* Info.plist */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
 		EEF8AC3C2513F88D002E10CF /* CardArtWidget */ = {
 			isa = PBXGroup;
 			children = (
 				EEF8AC4D2513F8A4002E10CF /* RandomCard.swift */,
-				EEF8AC4C2513F8A4002E10CF /* WidgetLoader.swift */,
 				EEF8AC3D2513F88D002E10CF /* CardArtWidget.swift */,
 				EEF8AC3F2513F88D002E10CF /* CardArtWidget.intentdefinition */,
 				EEF8AC402513F88F002E10CF /* Assets.xcassets */,
@@ -720,7 +737,7 @@
 		EEBE6D8221EFE18F00A3464E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1200;
+				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Robotic Snail Software";
 				TargetAttributes = {
@@ -785,6 +802,7 @@
 				EE2B78CE21F009A600306990 /* PlaceholderView.storyboard in Resources */,
 				EEB0E85422ADDB2C00BB8B74 /* DeckStats.storyboard in Resources */,
 				EEC9198E223080A0004E52F5 /* Settings.storyboard in Resources */,
+				EE010518251A6EBD00FFA24C /* CollectionSectionHeader.xib in Resources */,
 				EE2B78C721F0084A00306990 /* Card.storyboard in Resources */,
 				EEBE6D9821EFE19100A3464E /* Assets.xcassets in Resources */,
 				EE2B78C521F0083E00306990 /* CardList.storyboard in Resources */,
@@ -862,6 +880,7 @@
 				EE1E1467223AFC6600A54747 /* DeckCard+CoreDataClass.swift in Sources */,
 				EEE7D5AC226378CB00FE4D1C /* DeckCardSideboardTableViewCell.swift in Sources */,
 				EE2CAC522231AAF200D24334 /* SafariActivity.swift in Sources */,
+				EE01051E251A6FBF00FFA24C /* CollectionSectionHeaderView.swift in Sources */,
 				EEE7D5A82262852100FE4D1C /* EditDeckCardTableViewController.swift in Sources */,
 				EE2B78D321F13EAF00306990 /* MTGSet.swift in Sources */,
 				EE35EDAF23F5EC27000254E7 /* BarChart.swift in Sources */,
@@ -947,7 +966,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEF8AC432513F88F002E10CF /* CardArtWidget.intentdefinition in Sources */,
-				EEF8AC4E2513F8A4002E10CF /* WidgetLoader.swift in Sources */,
 				EEF8AC5125140045002E10CF /* UIColor+Custom.swift in Sources */,
 				EEF8AC502513FF90002E10CF /* UIImage+Custom.swift in Sources */,
 				EEF8AC4F2513F8A4002E10CF /* RandomCard.swift in Sources */,
@@ -1269,6 +1287,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = JANZDS5D43;
 				INFOPLIST_FILE = CardArtWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1295,6 +1314,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = JANZDS5D43;
 				INFOPLIST_FILE = CardArtWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

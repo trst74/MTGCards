@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import CoreSpotlight
+import SwiftUI
 
 
 @UIApplicationMain
@@ -19,20 +20,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UINavigationBar.appearance().prefersLargeTitles = false
-
+        
         
         if let windowScene = self.window?.windowScene {
-        #if targetEnvironment(macCatalyst)
-        if let titlebar = windowScene.titlebar {
-            titlebar.titleVisibility = .hidden
-            titlebar.toolbar = nil
-        }
-    
-        #endif
+                        #if targetEnvironment(macCatalyst)
+                        
+                        if let titlebar = windowScene.titlebar {
+                            
+                            titlebar.titleVisibility = .hidden
+                            titlebar.toolbar?.isVisible = false
+                            titlebar.toolbar = nil
+                        }
+
+
+                        #endif
         }
         return true
     }
-
+    
+    override func buildMenu(with builder: UIMenuBuilder) {
+        super.buildMenu(with: builder)
+        
+        builder.remove(menu: .services)
+        builder.remove(menu: .format)
+        builder.remove(menu: .toolbar)
+        
+        let addCommand  = UIKeyCommand(input: "A", modifierFlags: [.control], action: #selector(self.add))
+        addCommand.title = "Add..."
+        let addMenu = UIMenu(title: "Add...", image: nil, identifier: UIMenu.Identifier("add"), options: .displayInline, children: [addCommand])
+        builder.insertChild(addMenu, atStartOfMenu: .file)
+        
+        let settingsCommand = UIKeyCommand(input: "S", modifierFlags: [.control, .shift], action: #selector(self.settings))
+        settingsCommand.title = "Settings"
+        let settingsMenu = UIMenu(title: "Settings", image: nil, identifier: UIMenu.Identifier("settings"), options: .displayInline, children: [settingsCommand])
+        builder.insertSibling(settingsMenu, afterMenu: addMenu.identifier)
+        
+                
+        
+   
+    }
+    @objc func add(){
+    }
+    @objc func settings(){
+        let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+        guard let settingsVC = storyboard.instantiateInitialViewController() as? SettingsTableViewController else {
+            fatalError("Error going to settings")
+        }
+        //self.navigationController?.pushViewController(settingsVC, animated: true)
+        self.window?.rootViewController?.present(settingsVC, animated: true, completion: nil)
+        
+    }
+    @IBAction func showHelp(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://www.roboticsnailsoftware.com")!)
+    }
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -87,6 +127,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
+    }
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        // Process the URL.
+        guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
+              let params = components.queryItems else {
+            print("Invalid URL or album path missing")
+            return false
+        }
+        if let scryfallID = params.first(where: { $0.name == "scryfallID" })?.value {
+            var card: Card?
+            let request = NSFetchRequest<Card>(entityName: "Card")
+            request.predicate = NSPredicate(format: "scryfallID == %@", scryfallID)
+            do {
+                let results = try CoreDataStack.handler.privateContext.fetch(request)
+                if results.count > 1 {
+                    print("Too many items with uuid \(scryfallID)")
+                } else if results.count < 1 {
+                } else {
+                    card = results[0]
+                    if let card = card {
+                        if let t = self.window?.rootViewController as? TripleSplitViewController {
+                            if !(t.split.traitCollection.horizontalSizeClass == .regular) {
+                                let vc = UIHostingController(rootView: CardVC(card: card))
+                                let nav = t.split.viewController(for: .compact) as? UINavigationController
+                                nav?.pushViewController(vc, animated: true)
+                                
+                            } else {
+                                t.split.setViewController(nil, for: .secondary)
+                                let vc = UIHostingController(rootView: CardVC(card: card))
+                                t.split.setViewController(vc, for: .secondary)
+                            }
+                        }
+                    }
+                }
+            } catch {
+                print(error)
+                card = nil
+            }
+            return true
+        } else {
+            print("param missing")
+            return false
+        }
     }
     func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
         if userActivityType == "com.apple.corespotlightitem" {

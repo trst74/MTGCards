@@ -125,5 +125,9 @@ struct PricesResultsView: View {
 struct PricesPlaceholderView: View {
     var body: some View {
         Text("Prices not avaliable")
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .padding(.init(top: 8.0, leading: 16.0, bottom: 8.0, trailing: 16.0))
+            .background(Color(UIColor.secondarySystemBackground))
+            .cornerRadius(10)
     }
 }

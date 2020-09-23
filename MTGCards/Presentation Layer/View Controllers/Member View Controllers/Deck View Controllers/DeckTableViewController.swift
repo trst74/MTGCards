@@ -79,6 +79,9 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
         let importButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.down"), style: .plain, target: self, action: #selector(self.importDeck))
         self.navigationItem.setRightBarButton(importButton, animated: true)
         updateTitle()
+        for card in deck?.cards?.allObjects as! [DeckCard] {
+            print("\(card.quantity) \(String(describing: card.card?.name ?? "")) (\(card.card?.set.code ?? ""))")
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         if let nav = self.navigationController {

@@ -40,11 +40,11 @@ struct CardVC: View {
     var body: some View {
         GeometryReader { geometry in
             ScrollView{
-                VStack{
+                VStack(alignment: .leading){
                     if geometry.size.width > 500 {
                         HStack(alignment: .top){
                             loadImage()
-                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 35, maxHeight: .infinity, alignment: .center)
+                                //.frame(minWidth: 0, maxWidth: .infinity, minHeight: 35, maxHeight: .infinity, alignment: .center)
                             VStack{
                                 CardDetailsView(card: card)
                                 PricesView(cardIDs: [card.tcgplayerProductID], card: card)

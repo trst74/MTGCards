@@ -10,8 +10,12 @@ import UIKit
 import CoreData
 import MobileCoreServices
 import UniformTypeIdentifiers
+#if !targetEnvironment(macCatalyst)
+@objc protocol NSToolbarDelegate {
+}
+#endif
 
-class CollectionsTableViewController: UITableViewController, UITableViewDropDelegate, UIDocumentPickerDelegate  {
+class CollectionsTableViewController: UITableViewController, UITableViewDropDelegate, UIDocumentPickerDelegate, NSToolbarDelegate  {
     
     var stateCoordinator: StateCoordinator?
     var collections = ["Collections"]
@@ -23,13 +27,17 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
             self.title = "Collections"
         }
+        
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "collectionCell")
+        #if !targetEnvironment(macCatalyst)
         self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addButton(sender:))), animated: true)
         let settingsButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(self.settings))
         self.navigationItem.setLeftBarButton(settingsButton, animated: true)
+        #endif
         sections = [ search, collections, decks]
         tableView.dropDelegate = self
         tableView.dragInteractionEnabled = true
@@ -40,6 +48,12 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         reloadDecksFromCoreData()
         reloadCollectionsFromCoreData()
         tableView.tableFooterView = UIView()
+        #if targetEnvironment(macCatalyst)
+        
+        self.additionalSafeAreaInsets = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+        self.navigationController?.navigationBar.isHidden = true
+        //setupNSToolbar()
+        #endif
     }
     private func firstTimeOpened(){
         guard  let entity = NSEntityDescription.entity(forEntityName: "Collection", in:  CoreDataStack.handler.managedObjectContext) else {
@@ -173,7 +187,9 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
             let newDeck = Deck.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
             let name = url.absoluteURL.deletingPathExtension().lastPathComponent
             newDeck.name = name
+            _ = url.startAccessingSecurityScopedResource()
             let contents = try String.init(contentsOf: url)
+            
             let lines = contents.components(separatedBy: CharacterSet.newlines)
             print(lines.count)
             var previousline = ""
@@ -199,7 +215,6 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
                     while let range = setCode.range(of: ")") {
                         setCode.removeSubrange(range.lowerBound..<range.upperBound)
                     }
-                    print("test")
                     addCard(name: name, setCode: setCode, quantity: Int(quantity) ?? 1, isSideboard: isSideboard, newDeck: newDeck)
                 } else if previousline == "" {
                     print("sideboard start")
@@ -267,6 +282,19 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         }
         return card
     }
+    #if targetEnvironment(macCatalyst)
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = Bundle.main.loadNibNamed("CollectionSectionHeader", owner: self, options: nil)?[0] as! CollectionSectionHeaderView
+        view.frame = CGRect(x: 0 , y: 0, width: tableView.frame.width, height: 28)
+        if section != 2 {
+            view.addbutton.removeFromSuperview()
+        }
+        view.addbutton.addTarget(self, action: #selector(addButton), for: .touchUpInside)
+        view.backgroundColor = .clear   
+        view.title.text = sections[section][0]
+        return view
+    }
+    #endif
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
         if let indexPath = coordinator.destinationIndexPath {
             if indexPath.section == 2 {
@@ -546,6 +574,47 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
             }
         }
     }
+    #if targetEnvironment(macCatalyst)
+    func setupNSToolbar()
+    {
+        if let app = UIApplication.shared.delegate as? AppDelegate, let window = app.window {
+            let toolbar = NSToolbar()
+            toolbar.delegate = self
+            window.windowScene?.titlebar?.toolbar = toolbar
+            window.windowScene?.titlebar?.titleVisibility = .hidden
+        }
+        
+    }
+    func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        return [NSToolbarItem.Identifier("add")]
+    }
+    
+    func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        return [NSToolbarItem.Identifier("add")]
+    }
+    
+    func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        
+        switch itemIdentifier {
+        case NSToolbarItem.Identifier("settings"):
+            let barButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(self.settings))
+            return NSToolbarItem(itemIdentifier: itemIdentifier, barButtonItem: barButtonItem)
+        case NSToolbarItem.Identifier("add"):
+            let barButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addButton(sender:)))
+            return NSToolbarItem(itemIdentifier: itemIdentifier, barButtonItem: barButtonItem)
+        default:
+            break
+        }
+        
+        return NSToolbarItem(itemIdentifier: itemIdentifier)
+    }
+    
+    @objc func nop(_ sender : NSObject)
+    {
+        
+    }
+    
+    #endif
     
 }
 extension CollectionsTableViewController {
