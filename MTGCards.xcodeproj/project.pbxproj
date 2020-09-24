@@ -283,7 +283,7 @@
 		EEBA1B7D25091F84006DF743 /* TCGPricesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCGPricesLoader.swift; sourceTree = "<group>"; };
 		EEBA1B7F25093854006DF743 /* CardDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsView.swift; sourceTree = "<group>"; };
 		EEBA1B81250939FC006DF743 /* RulingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulingsView.swift; sourceTree = "<group>"; };
-		EEBE6D8A21EFE18F00A3464E /* My MTG v5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My MTG v5.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEBE6D8A21EFE18F00A3464E /* My MTG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My MTG.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBE6D8D21EFE18F00A3464E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEBE6D9221EFE18F00A3464E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EEBE6D9521EFE18F00A3464E /* MTGCards.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MTGCards.xcdatamodel; sourceTree = "<group>"; };
@@ -550,7 +550,7 @@
 		EEBE6D8B21EFE18F00A3464E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EEBE6D8A21EFE18F00A3464E /* My MTG v5.app */,
+				EEBE6D8A21EFE18F00A3464E /* My MTG.app */,
 				EEBE6DA121EFE19100A3464E /* MTGCardsTests.xctest */,
 				EEBE6DAC21EFE19100A3464E /* MTGCardsUITests.xctest */,
 				EEF8AC392513F88C002E10CF /* CardArtWidgetExtension.appex */,
@@ -675,7 +675,7 @@
 			packageProductDependencies = (
 			);
 			productName = MTGCards;
-			productReference = EEBE6D8A21EFE18F00A3464E /* My MTG v5.app */;
+			productReference = EEBE6D8A21EFE18F00A3464E /* My MTG.app */;
 			productType = "com.apple.product-type.application";
 		};
 		EEBE6DA021EFE19100A3464E /* MTGCardsTests */ = {
@@ -1155,8 +1155,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollectionv5;
-				PRODUCT_NAME = "My MTG v5";
+				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollection;
+				PRODUCT_NAME = "My MTG";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = YES;
@@ -1185,8 +1185,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollectionv5;
-				PRODUCT_NAME = "My MTG v5";
+				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollection;
+				PRODUCT_NAME = "My MTG";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = YES;
@@ -1296,7 +1296,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollectionv5.CardArtWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollection.CardArtWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
@@ -1323,7 +1323,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollectionv5.CardArtWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollection.CardArtWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
