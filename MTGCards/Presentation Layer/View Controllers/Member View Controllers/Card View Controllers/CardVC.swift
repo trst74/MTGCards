@@ -43,8 +43,11 @@ struct CardVC: View {
                 VStack(alignment: .leading){
                     if geometry.size.width > 500 {
                         HStack(alignment: .top){
+                            //GeometryReader { geometry in
                             loadImage()
+                                //.frame( height: geometry.size.width * 1.392857142857143)
                                 //.frame(minWidth: 0, maxWidth: .infinity, minHeight: 35, maxHeight: .infinity, alignment: .center)
+                            //}
                             VStack{
                                 CardDetailsView(card: card)
                                 PricesView(cardIDs: [card.tcgplayerProductID], card: card)
@@ -69,7 +72,11 @@ struct CardVC: View {
                         }
                     }
                     else {
-                        loadImage()
+                        //GeometryReader { geometry in
+                            loadImage()
+                                //.frame( minHeight: geometry.size.width * 1.392857142857143)
+                            //.frame(minWidth: 0, maxWidth: .infinity, minHeight: 35, maxHeight: .infinity, alignment: .center)
+                        //}
                         CardDetailsView(card: card)
                         PricesView(cardIDs: [card.tcgplayerProductID], card: card)
                         if rulings.count > 0 {

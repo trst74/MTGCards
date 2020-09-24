@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="u8g-a2-Ysq">
-    <device id="retina6_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17503.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="u8g-a2-Ysq">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17502"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Edit Deck Card Table View Controller-->
         <scene sceneID="xQ3-5S-FuJ">
             <objects>
-                <tableViewController id="u8g-a2-Ysq" customClass="EditDeckCardTableViewController" customModule="MTGCards" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="u8g-a2-Ysq" customClass="EditDeckCardTableViewController" customModule="My_MTG" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="HTq-8d-ddm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="quantityCell" id="050-dI-QFl" customClass="DeckCardQuantityTableViewCell" customModule="MTGCards" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333333333333343" width="414" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="quantityCell" id="050-dI-QFl" customClass="DeckCardQuantityTableViewCell" customModule="My_MTG" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="414" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="050-dI-QFl" id="Haf-Hc-NSb">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVG-SZ-bAX">
@@ -31,38 +28,28 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="6M1-VM-KDp">
-                                            <rect key="frame" x="300" y="7.3333333333333321" width="94" height="28.999999999999996"/>
-                                            <connections>
-                                                <action selector="quantityStepper:" destination="050-dI-QFl" eventType="valueChanged" id="wXj-I6-kfT"/>
-                                            </connections>
-                                        </stepper>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2g-7F-51u">
-                                            <rect key="frame" x="281" y="11.333333333333336" width="11" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sPC-r1-bK9">
+                                            <rect key="frame" x="297" y="5" width="97" height="34"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                                        </textField>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="6M1-VM-KDp" firstAttribute="centerY" secondItem="Haf-Hc-NSb" secondAttribute="centerY" id="Iqj-qW-gx8"/>
-                                        <constraint firstAttribute="trailing" secondItem="6M1-VM-KDp" secondAttribute="trailing" constant="20" id="UL7-fB-RFa"/>
-                                        <constraint firstItem="6M1-VM-KDp" firstAttribute="leading" secondItem="K2g-7F-51u" secondAttribute="trailing" constant="8" id="bfl-HJ-jdg"/>
+                                        <constraint firstItem="sPC-r1-bK9" firstAttribute="centerY" secondItem="Haf-Hc-NSb" secondAttribute="centerY" id="Bzx-Wq-Req"/>
+                                        <constraint firstAttribute="trailing" secondItem="sPC-r1-bK9" secondAttribute="trailing" constant="20" symbolic="YES" id="Cpb-hz-6O2"/>
                                         <constraint firstItem="ZVG-SZ-bAX" firstAttribute="centerY" secondItem="Haf-Hc-NSb" secondAttribute="centerY" id="sPz-J4-gY7"/>
-                                        <constraint firstItem="K2g-7F-51u" firstAttribute="centerY" secondItem="Haf-Hc-NSb" secondAttribute="centerY" id="veR-uc-i8R"/>
                                         <constraint firstItem="ZVG-SZ-bAX" firstAttribute="leading" secondItem="Haf-Hc-NSb" secondAttribute="leading" constant="20" id="xMx-qs-Izf"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="quantityLabel" destination="K2g-7F-51u" id="j3A-dX-fII"/>
-                                    <outlet property="quantityStepper" destination="6M1-VM-KDp" id="4YU-OL-Ibb"/>
+                                    <outlet property="quantity" destination="sPC-r1-bK9" id="w5B-L4-aTT"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="isFoilCell" id="LFm-0n-7AY" customClass="DeckCardFoilTableViewCell" customModule="MTGCards" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="99.333333333333343" width="414" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="isFoilCell" id="LFm-0n-7AY" customClass="DeckCardFoilTableViewCell" customModule="My_MTG" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="99" width="414" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LFm-0n-7AY" id="Ocm-Om-QfY">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is Foil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KMs-P2-8qC">
@@ -86,15 +73,15 @@
                                     <outlet property="isFoil" destination="Doh-kx-G4S" id="jcK-uG-wYV"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="sideBoardCell" id="GOq-2J-pX8" customClass="DeckCardSideboardTableViewCell" customModule="MTGCards" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="143.33333333333334" width="414" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="sideBoardCell" id="GOq-2J-pX8" customClass="DeckCardSideboardTableViewCell" customModule="My_MTG" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="142.66666793823242" width="414" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GOq-2J-pX8" id="4db-79-PB6">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is Sideboard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q42-zL-e6a">
-                                            <rect key="frame" x="20" y="11.333333333333336" width="96" height="21"/>
+                                            <rect key="frame" x="20" y="11.333333333333336" width="95" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -114,15 +101,15 @@
                                     <outlet property="sideBoardSwitch" destination="kDB-iL-npe" id="YH0-29-gJ8"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="isCommanderCell" id="VIp-SN-j2k" customClass="DeckCardCommanderTableViewCell" customModule="MTGCards" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="187.33333333333334" width="414" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="isCommanderCell" id="VIp-SN-j2k" customClass="DeckCardCommanderTableViewCell" customModule="My_MTG" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="186.33333587646484" width="414" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VIp-SN-j2k" id="MvI-NQ-YLw">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is Commander" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSt-5o-EpA">
-                                            <rect key="frame" x="20" y="11.333333333333336" width="112" height="21"/>
+                                            <rect key="frame" x="20" y="11.333333333333336" width="111" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -143,14 +130,14 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="printingCell" textLabel="NkA-iH-tpx" style="IBUITableViewCellStyleDefault" id="E2C-5C-fGg">
-                                <rect key="frame" x="0.0" y="231.33333333333334" width="414" height="44.000000000000028"/>
+                                <rect key="frame" x="0.0" y="230.00000381469727" width="414" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E2C-5C-fGg" id="Ies-XL-Dyg">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NkA-iH-tpx">
-                                            <rect key="frame" x="20" y="0.0" width="374" height="43.666666666666664"/>
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -171,4 +158,9 @@
             <point key="canvasLocation" x="-171.01449275362319" y="127.98913043478262"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

@@ -47,6 +47,9 @@ struct RulingsView: View {
                         temp.removeSubrange(range.lowerBound..<range.upperBound)
                     }
                     var width = 17
+                    #if targetEnvironment(macCatalyst)
+                    width = 15
+                    #endif
                     if temp == "100" {
                         width = 32
                     } else if temp == "1000000" {
@@ -54,7 +57,8 @@ struct RulingsView: View {
                     } else if temp == "HR" || temp == "HW" {
                         width = 8
                     }
-                    result = result + Text(Image(uiImage: getImage(width: width, name: String(temp)))).baselineOffset(-2)
+                    var offset: CGFloat = -2
+                    result = result + Text(Image(uiImage: getImage(width: width, name: String(temp)))).baselineOffset(offset)
                     if pieces.count > 1 {
                         result = result + Text(String(pieces[1]))
                     }
@@ -68,7 +72,11 @@ struct RulingsView: View {
     }
     func getImage(width: Int, name: String) -> UIImage {
         let image = UIImage(named: name)
-        let sizeChange = CGSize(width: width, height: 17)
+        var height = 17
+        #if targetEnvironment(macCatalyst)
+        height = 15
+        #endif
+        let sizeChange = CGSize(width: width, height: height)
         let hasAlpha = true
         let scale: CGFloat = 0.0
         UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)

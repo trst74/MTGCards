@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class EditDeckCardTableViewController: UITableViewController {
+class EditDeckCardTableViewController: UITableViewController, UITextFieldDelegate {
     let sectionNames = ["Quatity","Foil","Sideboard","Commander", "Set"]
     var deckCard: DeckCard?
     var printings: [Card] = []
@@ -17,6 +17,7 @@ class EditDeckCardTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         getOtherPrintings()
         if let name = deckCard?.card?.name {
             self.title = name
@@ -32,7 +33,9 @@ class EditDeckCardTableViewController: UITableViewController {
     }
     func saveDeckCard(){
         if let quantityCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? DeckCardQuantityTableViewCell {
-            deckCard?.quantity = Int16(quantityCell.quantityStepper.value)
+            if let q = Int(quantityCell.quantity.text ?? "") {
+                deckCard?.quantity = Int16(q)
+            }
         }
         if let foilCell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? DeckCardFoilTableViewCell {
             deckCard?.isFoil = foilCell.isFoil.isOn
@@ -76,8 +79,8 @@ class EditDeckCardTableViewController: UITableViewController {
         
         if section == 0 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "quantityCell", for: indexPath) as? DeckCardQuantityTableViewCell {
-                cell.quantityLabel.text = "\(deckCard?.quantity ?? 0)"
-                cell.quantityStepper.value = Double(deckCard?.quantity ?? 0)
+               
+                cell.quantity.text = Int(deckCard?.quantity ?? 0).description
                 return cell
             }
         }
@@ -100,8 +103,8 @@ class EditDeckCardTableViewController: UITableViewController {
             }
         } else if section == 4 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "printingCell", for: indexPath)
-            cell.textLabel?.text = printings[indexPath.row].set.name
-            if deckCard?.card?.set.name == printings[indexPath.row].set.name {
+            cell.textLabel?.text = "\(printings[indexPath.row].set.name ?? "") (\(printings[indexPath.row].number ?? ""))"
+            if deckCard?.card?.set.name == printings[indexPath.row].set.name && deckCard?.card?.number == printings[indexPath.row].number {
                 cell.accessoryType = .checkmark
             } else {
                 cell.accessoryType = .none
@@ -153,5 +156,24 @@ class EditDeckCardTableViewController: UITableViewController {
                 print(error)
             }
         }
+    }
+}
+extension UITextField{
+    
+    func addDoneButtonToKeyboard(myAction:Selector?){
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 300, height: 40))
+        doneToolbar.barStyle = UIBarStyle.default
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: myAction)
+        
+        var items = [UIBarButtonItem]()
+        items.append(flexSpace)
+        items.append(done)
+        
+        doneToolbar.items = items
+        doneToolbar.sizeToFit()
+        
+        self.inputAccessoryView = doneToolbar
     }
 }

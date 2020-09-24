@@ -1,14 +1,13 @@
 //
-//  CardArtWidget.swift
-//  CardArtWidget
+//  RandomCardArtWidget.swift
+//  RandomCardArtWidget
 //
-//  Created by Joseph Smith on 9/17/20.
+//  Created by Joseph Smith on 9/24/20.
 //  Copyright © 2020 Robotic Snail Software. All rights reserved.
 //
 
 import WidgetKit
 import SwiftUI
-import Intents
 
 struct Provider: TimelineProvider {
     
@@ -66,19 +65,22 @@ struct SimpleEntry: TimelineEntry {
     var card: RandomCard? = nil
 }
 
-struct CardArtWidgetEntryView : View {
+struct RandomCardArtWidgetEntryView : View {
     var placeholder = Image(systemName: "photo")
     var entry: SimpleEntry
     var body: some View {
         
         ZStack{
             if let uiimage = entry.image {
-                AnyView(Image(uiImage: uiimage).resizable().aspectRatio(contentMode: .fill)  .frame(minWidth: 0,
-                                                                                                    maxWidth: .infinity,
-                                                                                                    minHeight: 0,
-                                                                                                    maxHeight: .infinity,
-                                                                                                    alignment: .topLeading
-                ))
+                AnyView(Image(uiImage: uiimage).resizable().aspectRatio(contentMode: .fill)
+                            .frame(minWidth: 0,
+                                   maxWidth: .infinity,
+                                   minHeight: 0,
+                                   maxHeight: .infinity,
+                                   alignment: .topLeading
+                            )
+                        //.scaledToFill()
+                )
             } else {
                 AnyView(placeholder)
             }
@@ -114,17 +116,21 @@ struct CardArtWidgetEntryView : View {
 }
 
 @main
-struct CardArtWidget: Widget {
-    let kind: String = "CardArtWidget"
-    
+struct RandomCardArtWidget: Widget {
+    let kind: String = "RandomCardArtWidget"
+
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            CardArtWidgetEntryView(entry: entry)
+            RandomCardArtWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("Card Art")
-        .description("This is an example widget.")
+        .configurationDisplayName("Random Card Art")
+        .description("Art of a random MTG card. Click to open for card details.")
     }
 }
 
-
-
+struct RandomCardArtWidget_Previews: PreviewProvider {
+    static var previews: some View {
+        RandomCardArtWidgetEntryView(entry: SimpleEntry(date: Date()))
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
+    }
+}

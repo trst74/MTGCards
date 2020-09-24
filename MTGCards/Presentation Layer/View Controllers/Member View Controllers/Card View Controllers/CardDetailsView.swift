@@ -65,6 +65,9 @@ struct CardDetailsView: View {
                         temp.removeSubrange(range.lowerBound..<range.upperBound)
                     }
                     var width = 17
+                    #if targetEnvironment(macCatalyst)
+                    width = 15
+                    #endif
                     if temp == "100" {
                         width = 32
                     } else if temp == "1000000" {
@@ -86,7 +89,11 @@ struct CardDetailsView: View {
     }
     func getImage(width: Int, name: String) -> UIImage {
         let image = UIImage(named: name)
-        let sizeChange = CGSize(width: width, height: 17)
+        var height = 17
+        #if targetEnvironment(macCatalyst)
+        height = 15
+        #endif
+        let sizeChange = CGSize(width: width, height: height)
         let hasAlpha = true
         let scale: CGFloat = 0.0
         UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)

@@ -129,18 +129,13 @@
 		EEF02F23223DAC11008F008B /* Collection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF02F1F223DAC11008F008B /* Collection+CoreDataProperties.swift */; };
 		EEF02F24223DAC11008F008B /* CollectionCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF02F20223DAC11008F008B /* CollectionCard+CoreDataClass.swift */; };
 		EEF02F25223DAC11008F008B /* CollectionCard+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF02F21223DAC11008F008B /* CollectionCard+CoreDataProperties.swift */; };
-		EEF8AC3A2513F88D002E10CF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5741D12513D516006FA8C2 /* WidgetKit.framework */; };
-		EEF8AC3B2513F88D002E10CF /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5741D32513D517006FA8C2 /* SwiftUI.framework */; };
-		EEF8AC3E2513F88D002E10CF /* CardArtWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF8AC3D2513F88D002E10CF /* CardArtWidget.swift */; };
-		EEF8AC412513F88F002E10CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEF8AC402513F88F002E10CF /* Assets.xcassets */; };
-		EEF8AC432513F88F002E10CF /* CardArtWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EEF8AC3F2513F88D002E10CF /* CardArtWidget.intentdefinition */; };
-		EEF8AC442513F88F002E10CF /* CardArtWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EEF8AC3F2513F88D002E10CF /* CardArtWidget.intentdefinition */; };
-		EEF8AC472513F88F002E10CF /* CardArtWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EEF8AC392513F88C002E10CF /* CardArtWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		EEF8AC4F2513F8A4002E10CF /* RandomCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF8AC4D2513F8A4002E10CF /* RandomCard.swift */; };
-		EEF8AC502513FF90002E10CF /* UIImage+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0573E223FF393F00316516 /* UIImage+Custom.swift */; };
-		EEF8AC5125140045002E10CF /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB5D81E2205EBFF0070FF8B /* UIColor+Custom.swift */; };
+		EEF33D3C251D55BF003D1856 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5741D12513D516006FA8C2 /* WidgetKit.framework */; };
+		EEF33D3D251D55BF003D1856 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5741D32513D517006FA8C2 /* SwiftUI.framework */; };
+		EEF33D40251D55BF003D1856 /* RandomCardArtWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF33D3F251D55BF003D1856 /* RandomCardArtWidget.swift */; };
+		EEF33D42251D55C1003D1856 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEF33D41251D55C1003D1856 /* Assets.xcassets */; };
+		EEF33D46251D55C1003D1856 /* RandomCardArtWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EEF33D3B251D55BF003D1856 /* RandomCardArtWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EEF33D52251D5654003D1856 /* RandomCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF33D51251D5654003D1856 /* RandomCard.swift */; };
 		EEF8AC5325140194002E10CF /* DebugBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF8AC5225140194002E10CF /* DebugBorder.swift */; };
-		EEF8AC54251401B1002E10CF /* DebugBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF8AC5225140194002E10CF /* DebugBorder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,12 +153,12 @@
 			remoteGlobalIDString = EEBE6D8921EFE18F00A3464E;
 			remoteInfo = MTGCards;
 		};
-		EEF8AC452513F88F002E10CF /* PBXContainerItemProxy */ = {
+		EEF33D44251D55C1003D1856 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EEBE6D8221EFE18F00A3464E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = EEF8AC382513F88C002E10CF;
-			remoteInfo = CardArtWidgetExtension;
+			remoteGlobalIDString = EEF33D3A251D55BF003D1856;
+			remoteInfo = RandomCardArtWidgetExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -174,7 +169,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				EEF8AC472513F88F002E10CF /* CardArtWidgetExtension.appex in Embed App Extensions */,
+				EEF33D46251D55C1003D1856 /* RandomCardArtWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,17 +308,12 @@
 		EEF02F1F223DAC11008F008B /* Collection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EEF02F20223DAC11008F008B /* CollectionCard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCard+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EEF02F21223DAC11008F008B /* CollectionCard+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCard+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		EEF78A572517B612008422A8 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
-		EEF78A592517B614008422A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EEF78A5B2517B614008422A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EEF78A5F2517B614008422A8 /* TestExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestExtension.entitlements; sourceTree = "<group>"; };
-		EEF8AC392513F88C002E10CF /* CardArtWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CardArtWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		EEF8AC3D2513F88D002E10CF /* CardArtWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardArtWidget.swift; sourceTree = "<group>"; };
-		EEF8AC3F2513F88D002E10CF /* CardArtWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = CardArtWidget.intentdefinition; sourceTree = "<group>"; };
-		EEF8AC402513F88F002E10CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EEF8AC422513F88F002E10CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EEF8AC482513F88F002E10CF /* CardArtWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CardArtWidgetExtension.entitlements; sourceTree = "<group>"; };
-		EEF8AC4D2513F8A4002E10CF /* RandomCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RandomCard.swift; path = ../../../Desktop/RandomCard.swift; sourceTree = "<group>"; };
+		EEF33D3B251D55BF003D1856 /* RandomCardArtWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RandomCardArtWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEF33D3F251D55BF003D1856 /* RandomCardArtWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomCardArtWidget.swift; sourceTree = "<group>"; };
+		EEF33D41251D55C1003D1856 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EEF33D43251D55C1003D1856 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEF33D47251D55C1003D1856 /* RandomCardArtWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RandomCardArtWidgetExtension.entitlements; sourceTree = "<group>"; };
+		EEF33D51251D5654003D1856 /* RandomCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomCard.swift; sourceTree = "<group>"; };
 		EEF8AC5225140194002E10CF /* DebugBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugBorder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -349,12 +339,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EEF8AC362513F88C002E10CF /* Frameworks */ = {
+		EEF33D38251D55BF003D1856 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEF8AC3B2513F88D002E10CF /* SwiftUI.framework in Frameworks */,
-				EEF8AC3A2513F88D002E10CF /* WidgetKit.framework in Frameworks */,
+				EEF33D3D251D55BF003D1856 /* SwiftUI.framework in Frameworks */,
+				EEF33D3C251D55BF003D1856 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,13 +525,11 @@
 		EEBE6D8121EFE18F00A3464E = {
 			isa = PBXGroup;
 			children = (
-				EEF78A5F2517B614008422A8 /* TestExtension.entitlements */,
-				EEF8AC482513F88F002E10CF /* CardArtWidgetExtension.entitlements */,
+				EEF33D47251D55C1003D1856 /* RandomCardArtWidgetExtension.entitlements */,
 				EEBE6D8C21EFE18F00A3464E /* MTGCards */,
 				EEBE6DA421EFE19100A3464E /* MTGCardsTests */,
 				EEBE6DAF21EFE19100A3464E /* MTGCardsUITests */,
-				EEF8AC3C2513F88D002E10CF /* CardArtWidget */,
-				EEF78A562517B612008422A8 /* Test */,
+				EEF33D3E251D55BF003D1856 /* RandomCardArtWidget */,
 				EE5741D02513D516006FA8C2 /* Frameworks */,
 				EEBE6D8B21EFE18F00A3464E /* Products */,
 			);
@@ -553,7 +541,7 @@
 				EEBE6D8A21EFE18F00A3464E /* My MTG.app */,
 				EEBE6DA121EFE19100A3464E /* MTGCardsTests.xctest */,
 				EEBE6DAC21EFE19100A3464E /* MTGCardsUITests.xctest */,
-				EEF8AC392513F88C002E10CF /* CardArtWidgetExtension.appex */,
+				EEF33D3B251D55BF003D1856 /* RandomCardArtWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -632,26 +620,15 @@
 			path = "Card View Controllers";
 			sourceTree = "<group>";
 		};
-		EEF78A562517B612008422A8 /* Test */ = {
+		EEF33D3E251D55BF003D1856 /* RandomCardArtWidget */ = {
 			isa = PBXGroup;
 			children = (
-				EEF78A572517B612008422A8 /* Test.swift */,
-				EEF78A592517B614008422A8 /* Assets.xcassets */,
-				EEF78A5B2517B614008422A8 /* Info.plist */,
+				EEF33D51251D5654003D1856 /* RandomCard.swift */,
+				EEF33D3F251D55BF003D1856 /* RandomCardArtWidget.swift */,
+				EEF33D41251D55C1003D1856 /* Assets.xcassets */,
+				EEF33D43251D55C1003D1856 /* Info.plist */,
 			);
-			path = Test;
-			sourceTree = "<group>";
-		};
-		EEF8AC3C2513F88D002E10CF /* CardArtWidget */ = {
-			isa = PBXGroup;
-			children = (
-				EEF8AC4D2513F8A4002E10CF /* RandomCard.swift */,
-				EEF8AC3D2513F88D002E10CF /* CardArtWidget.swift */,
-				EEF8AC3F2513F88D002E10CF /* CardArtWidget.intentdefinition */,
-				EEF8AC402513F88F002E10CF /* Assets.xcassets */,
-				EEF8AC422513F88F002E10CF /* Info.plist */,
-			);
-			path = CardArtWidget;
+			path = RandomCardArtWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -669,7 +646,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				EEF8AC462513F88F002E10CF /* PBXTargetDependency */,
+				EEF33D45251D55C1003D1856 /* PBXTargetDependency */,
 			);
 			name = MTGCards;
 			packageProductDependencies = (
@@ -714,21 +691,21 @@
 			productReference = EEBE6DAC21EFE19100A3464E /* MTGCardsUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		EEF8AC382513F88C002E10CF /* CardArtWidgetExtension */ = {
+		EEF33D3A251D55BF003D1856 /* RandomCardArtWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EEF8AC492513F88F002E10CF /* Build configuration list for PBXNativeTarget "CardArtWidgetExtension" */;
+			buildConfigurationList = EEF33D48251D55C1003D1856 /* Build configuration list for PBXNativeTarget "RandomCardArtWidgetExtension" */;
 			buildPhases = (
-				EEF8AC352513F88C002E10CF /* Sources */,
-				EEF8AC362513F88C002E10CF /* Frameworks */,
-				EEF8AC372513F88C002E10CF /* Resources */,
+				EEF33D37251D55BF003D1856 /* Sources */,
+				EEF33D38251D55BF003D1856 /* Frameworks */,
+				EEF33D39251D55BF003D1856 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = CardArtWidgetExtension;
-			productName = CardArtWidgetExtension;
-			productReference = EEF8AC392513F88C002E10CF /* CardArtWidgetExtension.appex */;
+			name = RandomCardArtWidgetExtension;
+			productName = RandomCardArtWidgetExtension;
+			productReference = EEF33D3B251D55BF003D1856 /* RandomCardArtWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -755,8 +732,8 @@
 						LastSwiftMigration = 1020;
 						TestTargetID = EEBE6D8921EFE18F00A3464E;
 					};
-					EEF8AC382513F88C002E10CF = {
-						CreatedOnToolsVersion = 12.0;
+					EEF33D3A251D55BF003D1856 = {
+						CreatedOnToolsVersion = 12.2;
 					};
 				};
 			};
@@ -778,7 +755,7 @@
 				EEBE6D8921EFE18F00A3464E /* MTGCards */,
 				EEBE6DA021EFE19100A3464E /* MTGCardsTests */,
 				EEBE6DAB21EFE19100A3464E /* MTGCardsUITests */,
-				EEF8AC382513F88C002E10CF /* CardArtWidgetExtension */,
+				EEF33D3A251D55BF003D1856 /* RandomCardArtWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -824,11 +801,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EEF8AC372513F88C002E10CF /* Resources */ = {
+		EEF33D39251D55BF003D1856 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEF8AC412513F88F002E10CF /* Assets.xcassets in Resources */,
+				EEF33D42251D55C1003D1856 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,7 +875,6 @@
 				EE6533AE249D3E1100489802 /* CardFrameEffect+CoreDataClass.swift in Sources */,
 				EE4FD204223A91BD00E8CDB3 /* Deck+CoreDataClass.swift in Sources */,
 				EE5742072513E22D006FA8C2 /* PricesView.swift in Sources */,
-				EEF8AC442513F88F002E10CF /* CardArtWidget.intentdefinition in Sources */,
 				EE4F532722467A4D003A06CA /* CardRulingsView.swift in Sources */,
 				EE6F94B2223092AD001B3378 /* TcgToken.swift in Sources */,
 				EE2B78AB21EFE47600306990 /* UIView+AutolayoutHelp.swift in Sources */,
@@ -961,16 +937,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EEF8AC352513F88C002E10CF /* Sources */ = {
+		EEF33D37251D55BF003D1856 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEF8AC432513F88F002E10CF /* CardArtWidget.intentdefinition in Sources */,
-				EEF8AC5125140045002E10CF /* UIColor+Custom.swift in Sources */,
-				EEF8AC502513FF90002E10CF /* UIImage+Custom.swift in Sources */,
-				EEF8AC4F2513F8A4002E10CF /* RandomCard.swift in Sources */,
-				EEF8AC3E2513F88D002E10CF /* CardArtWidget.swift in Sources */,
-				EEF8AC54251401B1002E10CF /* DebugBorder.swift in Sources */,
+				EEF33D52251D5654003D1856 /* RandomCard.swift in Sources */,
+				EEF33D40251D55BF003D1856 /* RandomCardArtWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -987,10 +959,10 @@
 			target = EEBE6D8921EFE18F00A3464E /* MTGCards */;
 			targetProxy = EEBE6DAD21EFE19100A3464E /* PBXContainerItemProxy */;
 		};
-		EEF8AC462513F88F002E10CF /* PBXTargetDependency */ = {
+		EEF33D45251D55C1003D1856 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = EEF8AC382513F88C002E10CF /* CardArtWidgetExtension */;
-			targetProxy = EEF8AC452513F88F002E10CF /* PBXContainerItemProxy */;
+			target = EEF33D3A251D55BF003D1856 /* RandomCardArtWidgetExtension */;
+			targetProxy = EEF33D44251D55C1003D1856 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1278,25 +1250,24 @@
 			};
 			name = Release;
 		};
-		EEF8AC4A2513F88F002E10CF /* Debug */ = {
+		EEF33D49251D55C1003D1856 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = CardArtWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = RandomCardArtWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = JANZDS5D43;
-				INFOPLIST_FILE = CardArtWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				INFOPLIST_FILE = RandomCardArtWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollection.CardArtWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollection.RandomCardArtWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
@@ -1305,25 +1276,24 @@
 			};
 			name = Debug;
 		};
-		EEF8AC4B2513F88F002E10CF /* Release */ = {
+		EEF33D4A251D55C1003D1856 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = CardArtWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = RandomCardArtWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = JANZDS5D43;
-				INFOPLIST_FILE = CardArtWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				INFOPLIST_FILE = RandomCardArtWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollection.CardArtWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollection.RandomCardArtWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
@@ -1371,11 +1341,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EEF8AC492513F88F002E10CF /* Build configuration list for PBXNativeTarget "CardArtWidgetExtension" */ = {
+		EEF33D48251D55C1003D1856 /* Build configuration list for PBXNativeTarget "RandomCardArtWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EEF8AC4A2513F88F002E10CF /* Debug */,
-				EEF8AC4B2513F88F002E10CF /* Release */,
+				EEF33D49251D55C1003D1856 /* Debug */,
+				EEF33D4A251D55C1003D1856 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
