@@ -41,7 +41,13 @@ class LegalityFilterTableViewController: UITableViewController {
         cell.textLabel?.text = legalities[indexPath.row]
         return cell
      }
-    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var height: CGFloat = 55.0
+        #if targetEnvironment(macCatalyst)
+        height = 40.0
+        #endif
+        return height
+    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let legality = legalities[indexPath.row]

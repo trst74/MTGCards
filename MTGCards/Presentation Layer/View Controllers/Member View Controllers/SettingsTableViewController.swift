@@ -24,6 +24,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         updateFileInfoLabel()
         setImageQuality(quality: UserDefaultsHandler.selectedCardImageQuality())
         excludeOnlineSwitch.isOn = UserDefaultsHandler.areOnlineOnlyCardsExcluded()
@@ -86,6 +87,13 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        if section == 4 {
+//            return 60
+//        } else {
+//            return 30
+//        }
+//    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
@@ -128,9 +136,11 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
             case 1:
-                SKStoreReviewController.requestReview()
+                if let window = self.view.window?.windowScene {
+                    SKStoreReviewController.requestReview(in: window)
+                }
             case 2:
-                if let url = URL(string: "http://www.mymtg.app/privacy"){
+                if let url = URL(string: "https://roboticsnailsoftware.com/my-mtg/privacy"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
             case 3:
@@ -480,7 +490,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
         }
     }
     @IBAction func importPersonalData(_ sender: Any) {
-        let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeJSON as String], in: .import)
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.text])
         documentPicker.delegate = self
         self.present(documentPicker, animated: true)
     }

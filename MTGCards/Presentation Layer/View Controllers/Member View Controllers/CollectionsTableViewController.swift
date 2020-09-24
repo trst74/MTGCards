@@ -9,8 +9,13 @@
 import UIKit
 import CoreData
 import MobileCoreServices
+import UniformTypeIdentifiers
+#if !targetEnvironment(macCatalyst)
+@objc protocol NSToolbarDelegate {
+}
+#endif
 
-class CollectionsTableViewController: UITableViewController, UITableViewDropDelegate, UIDocumentPickerDelegate  {
+class CollectionsTableViewController: UITableViewController, UITableViewDropDelegate, UIDocumentPickerDelegate, NSToolbarDelegate  {
     
     var stateCoordinator: StateCoordinator?
     var collections = ["Collections"]
@@ -19,21 +24,36 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     var cdDecks: [Deck] = []
     var search = ["Tools", "Search"]
     var sections: [[String]] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
+            self.title = "Collections"
+        }
+        
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "collectionCell")
+        #if !targetEnvironment(macCatalyst)
         self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addButton(sender:))), animated: true)
         let settingsButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(self.settings))
         self.navigationItem.setLeftBarButton(settingsButton, animated: true)
+        #endif
         sections = [ search, collections, decks]
         tableView.dropDelegate = self
         tableView.dragInteractionEnabled = true
+        
         if UserDefaultsHandler.isFirstTimeOpening(){
             firstTimeOpened()
         }
         reloadDecksFromCoreData()
         reloadCollectionsFromCoreData()
         tableView.tableFooterView = UIView()
+        #if targetEnvironment(macCatalyst)
+        
+        self.additionalSafeAreaInsets = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+        self.navigationController?.navigationBar.isHidden = true
+        //setupNSToolbar()
+        #endif
     }
     private func firstTimeOpened(){
         guard  let entity = NSEntityDescription.entity(forEntityName: "Collection", in:  CoreDataStack.handler.managedObjectContext) else {
@@ -148,7 +168,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         self.present(alert, animated: true)
     }
     func addDecksFromFiles(){
-        let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePlainText as String], in: .import)
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.text])
         documentPicker.allowsMultipleSelection = true
         documentPicker.delegate = self
         self.present(documentPicker, animated: true)
@@ -167,7 +187,9 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
             let newDeck = Deck.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
             let name = url.absoluteURL.deletingPathExtension().lastPathComponent
             newDeck.name = name
+            _ = url.startAccessingSecurityScopedResource()
             let contents = try String.init(contentsOf: url)
+            
             let lines = contents.components(separatedBy: CharacterSet.newlines)
             print(lines.count)
             var previousline = ""
@@ -193,7 +215,6 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
                     while let range = setCode.range(of: ")") {
                         setCode.removeSubrange(range.lowerBound..<range.upperBound)
                     }
-                    print("test")
                     addCard(name: name, setCode: setCode, quantity: Int(quantity) ?? 1, isSideboard: isSideboard, newDeck: newDeck)
                 } else if previousline == "" {
                     print("sideboard start")
@@ -261,6 +282,19 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         }
         return card
     }
+    #if targetEnvironment(macCatalyst)
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = Bundle.main.loadNibNamed("CollectionSectionHeader", owner: self, options: nil)?[0] as! CollectionSectionHeaderView
+        view.frame = CGRect(x: 0 , y: 0, width: tableView.frame.width, height: 28)
+        if section != 2 {
+            view.addbutton.removeFromSuperview()
+        }
+        view.addbutton.addTarget(self, action: #selector(addButton), for: .touchUpInside)
+        view.backgroundColor = .clear   
+        view.title.text = sections[section][0]
+        return view
+    }
+    #endif
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
         if let indexPath = coordinator.destinationIndexPath {
             if indexPath.section == 2 {
@@ -411,13 +445,111 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            //StateCoordinator.shared.didSelectCollection(collection: "Search")
-            StateCoordinator.shared.didSelectTool(tool: "Search")
-        } else if indexPath.section == 2 {
-            StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row].objectID)
-        } else if indexPath.section == 1 {
-            StateCoordinator.shared.didSelectCollection(collection: cdCollections[indexPath.row].objectID)
+        //        if indexPath.section == 0 {
+        //            //StateCoordinator.shared.didSelectCollection(collection: "Search")
+        //            StateCoordinator.shared.didSelectTool(tool: "Search")
+        //        } else if indexPath.section == 2 {
+        //            StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row].objectID)
+        //        } else if indexPath.section == 1 {
+        //            StateCoordinator.shared.didSelectCollection(collection: cdCollections[indexPath.row].objectID)
+        //        }
+        //
+        if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
+            if indexPath.section == 0 {
+                //StateCoordinator.shared.didSelectCollection(collection: "Search")
+                self.navigationController?.pushViewController(CardListTableViewController.freshCardList(), animated: true)
+            } else if indexPath.section == 2 {
+                //StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row].objectID)
+                self.navigationController?.pushViewController(DeckTableViewController.freshDeck(deck: cdDecks[indexPath.row].objectID), animated: true)
+            } else if indexPath.section == 1 {
+                //StateCoordinator.shared.didSelectCollection(collection: cdCollections[indexPath.row].objectID)
+                self.navigationController?.pushViewController(CollectionTableViewController.freshCollection(collection: cdCollections[indexPath.row].objectID), animated: true)
+            }
+            //self.navigationController?.pushViewController(details, animated: true)
+        } else {
+            
+            if indexPath.section == 0 {
+                //StateCoordinator.shared.didSelectCollection(collection: "Search")
+                self.splitViewController?.setViewController(nil, for: .supplementary)
+                self.splitViewController?.setViewController(CardListTableViewController.freshCardList(), for: .supplementary)
+            } else if indexPath.section == 2 {
+                //StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row].objectID)
+                self.splitViewController?.setViewController(nil, for: .supplementary)
+                self.splitViewController?.setViewController(DeckTableViewController.freshDeck(deck: cdDecks[indexPath.row].objectID), for: .supplementary)
+                
+                self.splitViewController?.setViewController(nil, for: .secondary)
+                self.splitViewController?.setViewController(DeckStatsTableViewController.refreshDeckStats(id: cdDecks[indexPath.row].objectID), for: .secondary)
+                
+            } else if indexPath.section == 1 {
+                //StateCoordinator.shared.didSelectCollection(collection: cdCollections[indexPath.row].objectID)
+                self.splitViewController?.setViewController(nil, for: .supplementary)
+                self.splitViewController?.setViewController(CollectionTableViewController.freshCollection(collection: cdCollections[indexPath.row].objectID), for: .supplementary)
+            }
+        }
+    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var height: CGFloat = 40
+        #if targetEnvironment(macCatalyst)
+        height = 20
+        #endif
+        return height
+    }
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if indexPath.section == 2 {
+            
+            
+            let editAction = UIContextualAction(style: .normal, title: "Edit") {
+                (contextaction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+                
+                let deck = self.cdDecks[indexPath.row]
+                let storyboard = UIStoryboard(name: "EditDeck", bundle: nil)
+                guard let editDeckView = storyboard.instantiateInitialViewController() as? EditDeckTableViewController else {
+                    fatalError("Project config error - storyboard doesnt provide a EditDeckCard")
+                }
+                editDeckView.deck = deck
+                editDeckView.collectionsViewController = self
+                self.present(editDeckView, animated: true, completion: nil)
+                completionHandler(true)
+            }
+            editAction.backgroundColor = .gray
+            return UISwipeActionsConfiguration(actions: [editAction])
+        }
+        return nil
+    }
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let edit = UIAction(title: "Edit",
+                            image: UIImage(systemName: "pencil")) { _ in
+            let deck = self.cdDecks[indexPath.row]
+            let storyboard = UIStoryboard(name: "EditDeck", bundle: nil)
+            guard let editDeckView = storyboard.instantiateInitialViewController() as? EditDeckTableViewController else {
+                fatalError("Project config error - storyboard doesnt provide a EditDeckCard")
+            }
+            editDeckView.deck = deck
+            editDeckView.collectionsViewController = self
+            self.present(editDeckView, animated: true, completion: nil)
+            
+        }
+        
+        
+        let delete = UIAction(title: "Delete",
+                              image: UIImage(systemName: "trash.fill"),
+                              attributes: [.destructive]) { action in
+            CoreDataStack.handler.privateContext.delete(self.cdDecks[indexPath.row] as NSManagedObject)
+            do {
+                try CoreDataStack.handler.privateContext.save()
+            } catch {
+                print(error)
+            }
+            self.reloadDecksFromCoreData()
+            DispatchQueue.main.async {
+                
+                self.tableView.reloadData()
+            }
+        }
+        
+        return UIContextMenuConfiguration(identifier: nil,
+                                          previewProvider: nil) { _ in
+            UIMenu(title: "", children: [edit, delete])
         }
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -442,7 +574,48 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
             }
         }
     }
-
+    #if targetEnvironment(macCatalyst)
+    func setupNSToolbar()
+    {
+        if let app = UIApplication.shared.delegate as? AppDelegate, let window = app.window {
+            let toolbar = NSToolbar()
+            toolbar.delegate = self
+            window.windowScene?.titlebar?.toolbar = toolbar
+            window.windowScene?.titlebar?.titleVisibility = .hidden
+        }
+        
+    }
+    func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        return [NSToolbarItem.Identifier("add")]
+    }
+    
+    func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        return [NSToolbarItem.Identifier("add")]
+    }
+    
+    func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        
+        switch itemIdentifier {
+        case NSToolbarItem.Identifier("settings"):
+            let barButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(self.settings))
+            return NSToolbarItem(itemIdentifier: itemIdentifier, barButtonItem: barButtonItem)
+        case NSToolbarItem.Identifier("add"):
+            let barButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addButton(sender:)))
+            return NSToolbarItem(itemIdentifier: itemIdentifier, barButtonItem: barButtonItem)
+        default:
+            break
+        }
+        
+        return NSToolbarItem(itemIdentifier: itemIdentifier)
+    }
+    
+    @objc func nop(_ sender : NSObject)
+    {
+        
+    }
+    
+    #endif
+    
 }
 extension CollectionsTableViewController {
     static func freshCollectionsList() -> CollectionsTableViewController {

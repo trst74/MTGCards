@@ -79,6 +79,13 @@ class SetFilterTableViewController: UITableViewController, UISearchResultsUpdati
         
         return sets.count
     }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var height: CGFloat = 55.0
+        #if targetEnvironment(macCatalyst)
+        height = 40.0
+        #endif
+        return height
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "setCell", for: indexPath)
         let set: MTGSet

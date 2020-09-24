@@ -40,7 +40,13 @@ class SubTypeFilterTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var height: CGFloat = 55.0
+        #if targetEnvironment(macCatalyst)
+        height = 40.0
+        #endif
+        return height
+    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return types.count
     }

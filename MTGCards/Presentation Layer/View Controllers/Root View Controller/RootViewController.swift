@@ -47,6 +47,9 @@ class RootViewController: UIViewController {
     
     lazy var rootSplitView: UISplitViewController = {
         let split = freshSplitViewTemplate()
+        #if targetEnvironment(macCatalyst)
+        split.primaryBackgroundStyle = .sidebar
+        #endif
         split.preferredPrimaryColumnWidthFraction = rootSplitLargeFraction
         split.delegate = self
         return split
@@ -296,7 +299,7 @@ extension RootViewController {
             let navigation = primaryNavigation(subSplit)
             navigation.viewControllers = [fileList]
             //2
-            subSplit.preferredDisplayMode = .allVisible
+            subSplit.preferredDisplayMode = .oneBesideSecondary
             subSplit.preferredPrimaryColumnWidthFraction = rootSplitLargeFraction
             rootSplitView.preferredPrimaryColumnWidthFraction = rootSplitSmallFraction
             //3
@@ -313,7 +316,7 @@ extension RootViewController {
             let navigation = primaryNavigation(subSplit)
             navigation.viewControllers = [deck]
             //2
-            subSplit.preferredDisplayMode = .allVisible
+            subSplit.preferredDisplayMode = .oneBesideSecondary
             subSplit.preferredPrimaryColumnWidthFraction = rootSplitLargeFraction
             rootSplitView.preferredPrimaryColumnWidthFraction = rootSplitSmallFraction
             //3
@@ -337,9 +340,12 @@ extension RootViewController {
             let navigation = primaryNavigation(subSplit)
             navigation.viewControllers = [collection]
             //2
-            subSplit.preferredDisplayMode = .allVisible
+            subSplit.preferredDisplayMode = .oneBesideSecondary
             subSplit.preferredPrimaryColumnWidthFraction = rootSplitLargeFraction
             rootSplitView.preferredPrimaryColumnWidthFraction = rootSplitSmallFraction
+            //#if targetEnvironment(macCatalyst)
+            rootSplitView.primaryBackgroundStyle = .sidebar
+            //#endif
             //3
             showFileLevelPlaceholder(in: subSplit)
         } else {

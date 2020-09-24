@@ -11,10 +11,10 @@ import UIKit
 
 extension UIImage {
     
-   static func resizeImage(image: UIImage?, newWidth: CGFloat) -> UIImage? {
-    guard let oldImage = image else {
-        return image
-    }
+    static func resizeImage(image: UIImage?, newWidth: CGFloat) -> UIImage? {
+        guard let oldImage = image else {
+            return image
+        }
         let scale = newWidth / oldImage.size.width
         let newHeight = oldImage.size.height * scale
         UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))

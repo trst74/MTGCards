@@ -110,6 +110,13 @@ class EditDeckCardTableViewController: UITableViewController {
         }
         return UITableViewCell()
     }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var height: CGFloat = 55.0
+        #if targetEnvironment(macCatalyst)
+        height = 40.0
+        #endif
+        return height
+    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 4 {

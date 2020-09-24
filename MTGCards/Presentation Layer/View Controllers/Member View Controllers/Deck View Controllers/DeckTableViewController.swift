@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 import MobileCoreServices
+import UniformTypeIdentifiers
+import SwiftUI
 
 class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, UIContextMenuInteractionDelegate {
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
@@ -71,11 +73,15 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         tableView.tableFooterView = UIView()
         setUpSections()
         let importButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.down"), style: .plain, target: self, action: #selector(self.importDeck))
         self.navigationItem.setRightBarButton(importButton, animated: true)
         updateTitle()
+        for card in deck?.cards?.allObjects as! [DeckCard] {
+            print("\(card.quantity) \(String(describing: card.card?.name ?? "")) (\(card.card?.set.code ?? ""))")
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         if let nav = self.navigationController {
@@ -111,7 +117,12 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
     }
     @objc func showDeckStats(){
         if let id = deck?.objectID {
-            StateCoordinator.shared.didSelectDeckStats(d: id)
+            if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
+                self.navigationController?.pushViewController(DeckStatsTableViewController.refreshDeckStats(id: id), animated: true)
+            } else {
+                self.splitViewController?.setViewController(nil, for: .secondary)
+                self.splitViewController?.setViewController(DeckStatsTableViewController.refreshDeckStats(id: id), for: .secondary)
+            }
         }
     }
     private func updateTitle(){
@@ -134,7 +145,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
     }
     @objc private func importDeck(){
         print("import")
-        let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePlainText as String], in: .import)
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.text])
         documentPicker.delegate = self
         self.present(documentPicker, animated: true)
         updateTitle()
@@ -267,7 +278,11 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55
+        var height: CGFloat = 55.0
+        #if targetEnvironment(macCatalyst)
+        height = 50.0
+        #endif
+        return height
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -296,6 +311,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "deckCard", for: indexPath) as! DeckTableViewCell
+        cell.layer.borderWidth = 0
         var deckCard: DeckCard? = nil
         if indexPath.section == commanderSection {
             deckCard = commander[indexPath.row]
@@ -342,25 +358,68 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
                 colors += colors
             }
             cell.gradientView?.colors = colors
+            
+            if let card = deckCard?.card, let format = deck?.format {
+                if !checkCardLegality(card: card, legality: format) {
+                    cell.layer.borderWidth = 2
+                    cell.layer.borderColor = UIColor.red.cgColor
+                }
+            }
         }
         
         return cell
     }
+    private func checkCardLegality(card: Card, legality: String) -> Bool {
+        switch legality {
+        case "Standard":
+          return card.legalities?.standard == "Legal"
+        case "Pioneer":
+            return card.legalities?.pioneer == "Legal"
+        case "Modern":
+            return card.legalities?.modern == "Legal"
+        case "Legacy":
+            return card.legalities?.legacy == "Legal"
+        case "Vintage":
+            return card.legalities?.vintage == "Legal"
+        case "Commander":
+            return card.legalities?.commander == "Legal"
+        case "Frontier":
+            return card.legalities?.frontier == "Legal"
+        case "Pauper":
+            return card.legalities?.pauper == "Legal"
+        case "Penny":
+            return card.legalities?.penny == "Legal"
+        case "Duel":
+            return card.legalities?.duel == "Legal"
+        default:
+            return false
+        }
+    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var card: Card? = nil
         if indexPath.section == deckSection {
-            if let card = deckCards[indexPath.row].card {
-                StateCoordinator.shared.didSelectCard(id: card.objectID)
+            if let c = deckCards[indexPath.row].card {
+                card = c
             }
         } else if indexPath.section == sideboardSection {
-            if let card = sideboard[indexPath.row].card {
-                StateCoordinator.shared.didSelectCard(id: card.objectID)
+            if let c = sideboard[indexPath.row].card {
+                card = c
             }
         } else if indexPath.section == commanderSection {
-            if let card = commander[indexPath.row].card {
-                StateCoordinator.shared.didSelectCard(id: card.objectID)
+            if let c = commander[indexPath.row].card {
+                card = c
             }
         }
-        
+        if let card = card {
+            if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
+                let vc = UIHostingController(rootView: CardVC(card: card))
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                self.splitViewController?.setViewController(nil, for: .secondary)
+                let vc = UIHostingController(rootView: CardVC(card: card))
+                self.splitViewController?.setViewController(vc, for: .secondary)
+            }
+        }
     }
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let editAction = UIContextualAction(style: .normal, title: "Edit") {

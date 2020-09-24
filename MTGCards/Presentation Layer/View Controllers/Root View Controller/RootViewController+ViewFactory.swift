@@ -31,7 +31,7 @@ import UIKit
 extension RootViewController {
     func freshSplitViewTemplate() -> UISplitViewController {
         let split = UISplitViewController()
-        split.preferredDisplayMode = .allVisible
+        split.preferredDisplayMode = .oneBesideSecondary
         let navigation = UINavigationController()
         navigation.navigationBar.prefersLargeTitles = false
         navigation.navigationItem.largeTitleDisplayMode = .never

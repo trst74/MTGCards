@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import MobileCoreServices
+import SwiftUI
 
 class CardListTableViewController: UITableViewController, UISearchResultsUpdating, NSFetchedResultsControllerDelegate, UITableViewDragDelegate, UIContextMenuInteractionDelegate {
     
@@ -21,7 +22,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //self.tableView.register(CardListTableViewCell.self, forCellReuseIdentifier: "cardCell")
         tableView.keyboardDismissMode = .onDrag
         loadSavedData()
         navigationController?.navigationBar.prefersLargeTitles = false
@@ -39,6 +40,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         tableView.dragInteractionEnabled = true
         let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: #selector(self.filter))
         self.navigationItem.setRightBarButton(filterButton, animated: true)
+        
     }
     
     @objc func filter(){
@@ -114,7 +116,11 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55
+        var height: CGFloat = 55.0
+        #if targetEnvironment(macCatalyst)
+        height = 50.0
+        #endif
+        return height
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as! CardListTableViewCell
@@ -153,6 +159,18 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             }
             cell.gradientView?.colors = colors
         }
+        if card.frameEffects?.count ?? 0 > 0 {
+            if card.frameEffects?.count == 1 && (card.frameEffects?.allObjects[0] as? CardFrameEffect)?.effect == "legendary" {
+                cell.frameEffectIndicator.text = ""
+            } else {
+                print((card.frameEffects?.allObjects[0] as? CardFrameEffect)?.effect ?? "")
+                cell.frameEffectIndicator?.text = "✨"
+            }
+        } else if card.borderColor == "borderless" || card.isFullArt {
+            cell.frameEffectIndicator?.text = "✨"
+        } else {
+            cell.frameEffectIndicator?.text = ""
+        }
         return cell
     }
     
@@ -169,7 +187,14 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         return fetchRequest
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        StateCoordinator.shared.didSelectCard(id: fetchedResultsController.object(at: indexPath).objectID)
+        if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
+            let vc = UIHostingController(rootView: CardVC(card: fetchedResultsController.object(at: indexPath)))
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            self.splitViewController?.setViewController(nil, for: .secondary)
+            let vc = UIHostingController(rootView: CardVC(card: fetchedResultsController.object(at: indexPath)))
+            self.splitViewController?.setViewController(vc, for: .secondary)
+        }
     }
     
     func updateSearchResults(for searchController: UISearchController) {
