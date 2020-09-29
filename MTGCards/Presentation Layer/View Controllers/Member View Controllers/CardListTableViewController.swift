@@ -22,6 +22,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
     
     override func viewDidLoad() {
         super.viewDidLoad()
+ 
         //self.tableView.register(CardListTableViewCell.self, forCellReuseIdentifier: "cardCell")
         tableView.keyboardDismissMode = .onDrag
         loadSavedData()
@@ -42,7 +43,13 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         self.navigationItem.setRightBarButton(filterButton, animated: true)
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if let nav = self.navigationController {
+            nav.setToolbarHidden(true, animated: false)
+            
+        }
+    }
     @objc func filter(){
         let storyboard = UIStoryboard(name: "Filters", bundle: nil)
         guard let filtersVC = storyboard.instantiateInitialViewController() as? FiltersTableViewController else {

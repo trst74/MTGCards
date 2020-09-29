@@ -25,9 +25,9 @@ struct URLImage: View {
     }
     var body: some View {
         if let uiImage = self.imageLoader.downloadedImage {
-            return AnyView(Image(uiImage: uiImage).resizable().aspectRatio(contentMode: .fit).cornerRadius(20))
+            return AnyView(Image(uiImage: uiImage).resizable().aspectRatio(contentMode: .fit).cornerRadius(20).frame(maxWidth: .infinity))
         } else {
-            return AnyView(placeholder.resizable().aspectRatio(contentMode: .fit).frame(maxWidth: .infinity, alignment: .center))
+            return AnyView(placeholder.debugBorder(color: .red))
         }
     }
     

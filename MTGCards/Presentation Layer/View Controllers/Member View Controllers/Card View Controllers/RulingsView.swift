@@ -57,8 +57,7 @@ struct RulingsView: View {
                     } else if temp == "HR" || temp == "HW" {
                         width = 8
                     }
-                    var offset: CGFloat = -2
-                    result = result + Text(Image(uiImage: getImage(width: width, name: String(temp)))).baselineOffset(offset)
+                    result = result + Text(Image(uiImage: getImage(width: width, name: String(temp)))).baselineOffset(-2)
                     if pieces.count > 1 {
                         result = result + Text(String(pieces[1]))
                     }

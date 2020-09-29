@@ -142,8 +142,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/CardListTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -158,8 +158,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/CardListTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,8 +174,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/CardListTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -289,7 +289,7 @@
             startingLineNumber = "148"
             endingLineNumber = "148"
             landmarkName = "application(_:open:options:)"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -305,7 +305,7 @@
             startingLineNumber = "140"
             endingLineNumber = "140"
             landmarkName = "application(_:open:options:)"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -321,7 +321,7 @@
             startingLineNumber = "151"
             endingLineNumber = "151"
             landmarkName = "application(_:open:options:)"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -337,7 +337,7 @@
             startingLineNumber = "156"
             endingLineNumber = "156"
             landmarkName = "application(_:open:options:)"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -353,7 +353,7 @@
             startingLineNumber = "154"
             endingLineNumber = "154"
             landmarkName = "application(_:open:options:)"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -369,7 +369,7 @@
             startingLineNumber = "153"
             endingLineNumber = "153"
             landmarkName = "application(_:open:options:)"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

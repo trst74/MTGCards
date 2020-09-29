@@ -33,11 +33,7 @@ class FiltersTableViewController: UITableViewController {
         setCurrentFilters()
         tableView.tableFooterView = UIView()
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        if let nav = self.navigationController {
-            nav.setToolbarHidden(true, animated: true)
-        }
-    }
+
     override func viewWillAppear(_ animated: Bool) {
         let resetButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(resetFilters))
         let flexiableItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
