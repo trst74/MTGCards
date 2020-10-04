@@ -27,6 +27,8 @@ struct CardDetailsView: View {
             (Text(card.set.name ?? "Failure").font(.system(size: 10.0, weight: .thin)) + Text(" - ").font(.system(size: 10.0, weight: .thin)) + Text(card.rarity?.capitalized ?? "Failure").font(.system(size: 10.0, weight: .thin)))
                 .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))
             replaceSymbols(text: card.text ?? "")
+                .lineLimit(100)
+                .fixedSize(horizontal: false, vertical: true) 
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))

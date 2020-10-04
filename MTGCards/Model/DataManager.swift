@@ -70,7 +70,7 @@ public class DataManager {
         }
     }
     static func getSetList() -> SetList? {
-        let setListURL = URL(string: "https://mtgjson.com/json/SetList.json")
+        let setListURL = URL(string: "https://mtgjson.com/api/v5/SetList.json")
         let setList = try? SetList.init(fromURL: setListURL!)
         return setList
     }

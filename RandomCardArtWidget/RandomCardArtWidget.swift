@@ -26,7 +26,7 @@ struct Provider: TimelineProvider {
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for _ in 0 ..< 10 {
-            if entries.count >= 5 {
+            if entries.count >= 6 {
                 continue
             }
             if let url = URL(string: "https://api.scryfall.com/cards/random"){
@@ -41,7 +41,7 @@ struct Provider: TimelineProvider {
                     if let data = data, error == nil  {
                         if let uiimage = UIImage(data: data), let card = card {
                             
-                            let entryDate = Calendar.current.date(byAdding: .hour, value: entries.count, to: currentDate)!
+                            let entryDate = Calendar.current.date(byAdding: .minute, value: entries.count * 10, to: currentDate)!
                             var entry = SimpleEntry(date: entryDate)
                             entry.card = card
                             entry.image = uiimage
@@ -68,57 +68,63 @@ struct SimpleEntry: TimelineEntry {
 struct RandomCardArtWidgetEntryView : View {
     var placeholder = Image(systemName: "photo")
     var entry: SimpleEntry
+    let taskDateFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter
+    }()
     var body: some View {
-        
-        ZStack{
-            if let uiimage = entry.image {
-                AnyView(Image(uiImage: uiimage).resizable().aspectRatio(contentMode: .fill)
-                            .frame(minWidth: 0,
-                                   maxWidth: .infinity,
-                                   minHeight: 0,
-                                   maxHeight: .infinity,
-                                   alignment: .topLeading
-                            )
-                        //.scaledToFill()
-                )
-            } else {
-                AnyView(placeholder)
-            }
-            if let card = entry.card {
-                
-                GeometryReader{g in
-                    VStack{
-                        Spacer()
-                            .frame(minWidth: 0,
-                                   maxWidth: .infinity,
-                                   minHeight: 0,
-                                   maxHeight: .infinity,
-                                   alignment: .bottom
-                            )
-                        Text(card.name)
-                            
-                            .foregroundColor(Color(UIColor.label))
-                            .lineLimit(1)
-                            .font(.system(size: 20))
-                            .minimumScaleFactor(0.01)
-                            .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
-                            .frame(minWidth: 0,
-                                   maxWidth: .infinity
-                            )
-                            .background(Color(UIColor.systemBackground))
-                    }
+
+            ZStack{
+                if let uiimage = entry.image {
+                    AnyView(Image(uiImage: uiimage).resizable().aspectRatio(contentMode: .fill)
+                                .frame(minWidth: 0,
+                                       maxWidth: .infinity,
+                                       minHeight: 0,
+                                       maxHeight: .infinity,
+                                       alignment: .topLeading
+                                )
+                            //.scaledToFill()
+                    )
+                } else {
+                    AnyView(placeholder)
                 }
-                .widgetURL(URL(string: "com.roboticsnailsoftware.MTGCollection:card?scryfallID=\(card.id)"))
+                if let card = entry.card {
+                    
+                    GeometryReader{g in
+                        VStack{
+                            Spacer()
+                                .frame(minWidth: 0,
+                                       maxWidth: .infinity,
+                                       minHeight: 0,
+                                       maxHeight: .infinity,
+                                       alignment: .bottom
+                                )
+                            Text(card.name)
+                                
+                                .foregroundColor(Color(UIColor.label))
+                                .lineLimit(1)
+                                .font(.system(size: 20))
+                                .minimumScaleFactor(0.01)
+                                .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
+                                .frame(minWidth: 0,
+                                       maxWidth: .infinity
+                                )
+                                .background(Color(UIColor.systemBackground))
+                        }
+                    }
+                    .widgetURL(URL(string: "com.roboticsnailsoftware.MTGCollection:card?scryfallID=\(card.id)"))
+                }
+                
             }
-            
-        }
+
     }
 }
 
 @main
 struct RandomCardArtWidget: Widget {
     let kind: String = "RandomCardArtWidget"
-
+    
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             RandomCardArtWidgetEntryView(entry: entry)

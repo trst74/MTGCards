@@ -42,13 +42,13 @@ class PageTwoViewController: UIViewController {
         self.downloadButton.isEnabled = false
         let setlist = DataManager.getSetList()
         if let sl = setlist {
-            print(sl.count)
-            let setTotal = sl.count
+            print(sl.data.count)
+            let setTotal = sl.data.count
             var completed = 0
-            var failed = SetList()
-            var doubleFailed = SetList()
+            var failed: [Datum] = []
+            var doubleFailed: [Datum] = []
             DispatchQueue.global(qos: .default).async {
-                    for s in sl {
+                for s in sl.data {
                         DataManager.getSet(setCode: s.code) { success in
                             DispatchQueue.main.async {
                                 if success {

@@ -55,6 +55,12 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         //setupNSToolbar()
         #endif
     }
+    override func viewWillAppear(_ animated: Bool) {
+        if let nav = self.navigationController {
+            nav.setToolbarHidden(true, animated: false)
+            
+        }
+    }
     private func firstTimeOpened(){
         guard  let entity = NSEntityDescription.entity(forEntityName: "Collection", in:  CoreDataStack.handler.managedObjectContext) else {
             fatalError("Failed to decode Card")
@@ -64,6 +70,7 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         let wishlist = Collection.init(entity: entity, insertInto: CoreDataStack.handler.managedObjectContext)
         wishlist.name = "Wish List"
         CoreDataStack.handler.saveContext()
+        UserDefaultsHandler.setExcludeOnlineOnly(exclude: true)
     }
     @objc func addButton(sender: Any) {
         let menuAlert = UIAlertController(title: "Create Deck(s)", message: nil, preferredStyle: .actionSheet)

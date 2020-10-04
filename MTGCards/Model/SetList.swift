@@ -1,6 +1,8 @@
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse the JSON, add this file to your project and do:
 //
 //   let setList = try SetList(json)
+
 //
 // To read values from URLs:
 //
@@ -13,55 +15,23 @@
 
 import Foundation
 
-typealias SetList = [SetListElement]
-
-class SetListElement: Codable {
-    let code: String
-    let setMeta: SetMeta?
-    let name: String
-    let releaseDate: String
-    let type: String
+// MARK: - SetList
+class SetList: Codable {
+    let data: [Datum]
+    let meta: SetMeta
     
-    enum CodingKeys: String, CodingKey {
-        case code = "code"
-        case setMeta = "meta"
-        case name = "name"
-        case releaseDate = "releaseDate"
-        case type = "type"
-    }
-    
-    init(code: String, setMeta: SetMeta?, name: String, releaseDate: String, type: String) {
-        self.code = code
-        self.setMeta = setMeta
-        self.name = name
-        self.releaseDate = releaseDate
-        self.type = type
+    init(data: [Datum], meta: SetMeta) {
+        self.data = data
+        self.meta = meta
     }
 }
 
-class SetMeta: Codable {
-    let date: String
-    let version: String
-    
-    enum CodingKeys: String, CodingKey {
-        case date = "date"
-        case version = "version"
-    }
-    
-    init(date: String, version: String) {
-        self.date = date
-        self.version = version
-    }
-}
+// MARK: SetList convenience initializers and mutators
 
-
-
-// MARK: Convenience initializers and mutators
-
-extension SetListElement {
+extension SetList {
     convenience init(data: Data) throws {
-        let me = try newJSONDecoder().decode(SetListElement.self, from: data)
-        self.init(code: me.code, setMeta: me.setMeta, name: me.name, releaseDate: me.releaseDate, type: me.type)
+        let me = try newJSONDecoder().decode(SetList.self, from: data)
+        self.init(data: me.data, meta: me.meta)
     }
     
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -76,22 +46,149 @@ extension SetListElement {
     }
     
     func with(
-        code: String? = nil,
-        setMeta: SetMeta?? = nil,
-        name: String? = nil,
-        releaseDate: String? = nil,
-        type: String? = nil
-        ) -> SetListElement {
-        return SetListElement(
-            code: code ?? self.code,
-            setMeta: setMeta ?? self.setMeta,
-            name: name ?? self.name,
-            releaseDate: releaseDate ?? self.releaseDate,
-            type: type ?? self.type
+        data: [Datum]? = nil,
+        meta: SetMeta? = nil
+    ) -> SetList {
+        return SetList(
+            data: data ?? self.data,
+            meta: meta ?? self.meta
         )
+    }
+    
+    func jsonData() throws -> Data {
+        return try newJSONEncoder().encode(self)
+    }
+    
+    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
+        return String(data: try self.jsonData(), encoding: encoding)
     }
 }
 
+//
+// To read values from URLs:
+//
+//   let task = URLSession.shared.datumTask(with: url) { datum, response, error in
+//     if let datum = datum {
+//       ...
+//     }
+//   }
+//   task.resume()
+
+// MARK: - Datum
+class Datum: Codable {
+    let baseSetSize: Int
+    let code, name, releaseDate: String
+    let totalSetSize: Int
+    let type: TypeEnum
+    let parentCode: String?
+    let isPartialPreview: Bool?
+    
+    init(baseSetSize: Int, code: String, name: String, releaseDate: String, totalSetSize: Int, type: TypeEnum, parentCode: String?, isPartialPreview: Bool?) {
+        self.baseSetSize = baseSetSize
+        self.code = code
+        self.name = name
+        self.releaseDate = releaseDate
+        self.totalSetSize = totalSetSize
+        self.type = type
+        self.parentCode = parentCode
+        self.isPartialPreview = isPartialPreview
+    }
+}
+
+// MARK: Datum convenience initializers and mutators
+
+extension Datum {
+    convenience init(data: Data) throws {
+        let me = try newJSONDecoder().decode(Datum.self, from: data)
+        self.init(baseSetSize: me.baseSetSize, code: me.code, name: me.name, releaseDate: me.releaseDate, totalSetSize: me.totalSetSize, type: me.type, parentCode: me.parentCode, isPartialPreview: me.isPartialPreview)
+    }
+    
+    convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
+        guard let data = json.data(using: encoding) else {
+            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
+        }
+        try self.init(data: data)
+    }
+    
+    convenience init(fromURL url: URL) throws {
+        try self.init(data: try Data(contentsOf: url))
+    }
+    
+    func with(
+        baseSetSize: Int? = nil,
+        code: String? = nil,
+        name: String? = nil,
+        releaseDate: String? = nil,
+        totalSetSize: Int? = nil,
+        type: TypeEnum? = nil,
+        parentCode: String?? = nil,
+        isPartialPreview: Bool?? = nil
+    ) -> Datum {
+        return Datum(
+            baseSetSize: baseSetSize ?? self.baseSetSize,
+            code: code ?? self.code,
+            name: name ?? self.name,
+            releaseDate: releaseDate ?? self.releaseDate,
+            totalSetSize: totalSetSize ?? self.totalSetSize,
+            type: type ?? self.type,
+            parentCode: parentCode ?? self.parentCode,
+            isPartialPreview: isPartialPreview ?? self.isPartialPreview
+        )
+    }
+    
+    func jsonData() throws -> Data {
+        return try newJSONEncoder().encode(self)
+    }
+    
+    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
+        return String(data: try self.jsonData(), encoding: encoding)
+    }
+}
+
+enum TypeEnum: String, Codable {
+    case archenemy = "archenemy"
+    case box = "box"
+    case commander = "commander"
+    case core = "core"
+    case draftInnovation = "draft_innovation"
+    case duelDeck = "duel_deck"
+    case expansion = "expansion"
+    case fromTheVault = "from_the_vault"
+    case funny = "funny"
+    case masterpiece = "masterpiece"
+    case masters = "masters"
+    case memorabilia = "memorabilia"
+    case planechase = "planechase"
+    case premiumDeck = "premium_deck"
+    case promo = "promo"
+    case spellbook = "spellbook"
+    case starter = "starter"
+    case token = "token"
+    case treasureChest = "treasure_chest"
+    case vanguard = "vanguard"
+}
+
+//
+// To read values from URLs:
+//
+//   let task = URLSession.shared.metaTask(with: url) { meta, response, error in
+//     if let meta = meta {
+//       ...
+//     }
+//   }
+//   task.resume()
+
+// MARK: - Meta
+class SetMeta: Codable {
+    let date, version: String
+    
+    init(date: String, version: String) {
+        self.date = date
+        self.version = version
+    }
+}
+
+// MARK: Meta convenience initializers and mutators
 
 extension SetMeta {
     convenience init(data: Data) throws {
@@ -113,7 +210,7 @@ extension SetMeta {
     func with(
         date: String? = nil,
         version: String? = nil
-        ) -> SetMeta {
+    ) -> SetMeta {
         return SetMeta(
             date: date ?? self.date,
             version: version ?? self.version
@@ -129,30 +226,9 @@ extension SetMeta {
     }
 }
 
-extension Array where Element == SetList.Element {
-    init(data: Data) throws {
-        self = try newJSONDecoder().decode(SetList.self, from: data)
-    }
-    
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-    
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-    
-    func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
-    }
-    
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
-    }
-}
+// MARK: - Helper functions for creating encoders and decoders
+
+
 
 // MARK: - URLSession response handlers
 
