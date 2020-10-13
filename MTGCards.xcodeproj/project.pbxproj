@@ -23,6 +23,10 @@
 		EE1E1467223AFC6600A54747 /* DeckCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E1465223AFC6600A54747 /* DeckCard+CoreDataClass.swift */; };
 		EE1E1468223AFC6600A54747 /* DeckCard+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E1466223AFC6600A54747 /* DeckCard+CoreDataProperties.swift */; };
 		EE1E146A223AFFEA00A54747 /* DeckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E1469223AFFEA00A54747 /* DeckTableViewCell.swift */; };
+		EE244332252FECFA00B22885 /* RandomCardArtIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EE244331252FECFA00B22885 /* RandomCardArtIntent.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
+		EE24433B252FEDBB00B22885 /* RandomCardArtIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EE244331252FECFA00B22885 /* RandomCardArtIntent.intentdefinition */; };
+		EE2443962530075D00B22885 /* macOSCardArtIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EE2443732530037700B22885 /* macOSCardArtIntent.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
+		EE24439B2530075E00B22885 /* macOSCardArtIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EE2443732530037700B22885 /* macOSCardArtIntent.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		EE24B104223DB9700057610D /* Collection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE24B103223DB9700057610D /* Collection.storyboard */; };
 		EE24B106223DB9910057610D /* CollectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE24B105223DB9910057610D /* CollectionTableViewController.swift */; };
 		EE24B108223DB9F50057610D /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE24B107223DB9F50057610D /* CollectionTableViewCell.swift */; };
@@ -193,6 +197,8 @@
 		EE1E1465223AFC6600A54747 /* DeckCard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeckCard+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EE1E1466223AFC6600A54747 /* DeckCard+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeckCard+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EE1E1469223AFFEA00A54747 /* DeckTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckTableViewCell.swift; sourceTree = "<group>"; };
+		EE244331252FECFA00B22885 /* RandomCardArtIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = RandomCardArtIntent.intentdefinition; sourceTree = "<group>"; };
+		EE2443732530037700B22885 /* macOSCardArtIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = macOSCardArtIntent.intentdefinition; sourceTree = "<group>"; };
 		EE24B103223DB9700057610D /* Collection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Collection.storyboard; sourceTree = "<group>"; };
 		EE24B105223DB9910057610D /* CollectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewController.swift; sourceTree = "<group>"; };
 		EE24B107223DB9F50057610D /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -627,6 +633,8 @@
 				EEF33D3F251D55BF003D1856 /* RandomCardArtWidget.swift */,
 				EEF33D41251D55C1003D1856 /* Assets.xcassets */,
 				EEF33D43251D55C1003D1856 /* Info.plist */,
+				EE244331252FECFA00B22885 /* RandomCardArtIntent.intentdefinition */,
+				EE2443732530037700B22885 /* macOSCardArtIntent.intentdefinition */,
 			);
 			path = RandomCardArtWidget;
 			sourceTree = "<group>";
@@ -838,6 +846,7 @@
 				EE9246FB225A9EF80044F858 /* TypeFilterTableViewController.swift in Sources */,
 				EE924701225A9F990044F858 /* LegalityFilterTableViewController.swift in Sources */,
 				EE75E5F42284DF8300C23421 /* UpdateSet.swift in Sources */,
+				EE244332252FECFA00B22885 /* RandomCardArtIntent.intentdefinition in Sources */,
 				EE65339F249A9E8200489802 /* CardIdentifiers.swift in Sources */,
 				EE2B822521FD25C800306990 /* Meta.swift in Sources */,
 				EE6533A2249AAC2600489802 /* CardKeyword+CoreDataClass.swift in Sources */,
@@ -913,6 +922,7 @@
 				EE2B821D21FCAD5200306990 /* Ruling.swift in Sources */,
 				EEB0ADDA227A3C3400613C8C /* Backup.swift in Sources */,
 				EEBA1B82250939FC006DF743 /* RulingsView.swift in Sources */,
+				EE2443962530075D00B22885 /* macOSCardArtIntent.intentdefinition in Sources */,
 				EE35EDB123F627D4000254E7 /* Array+Custom.swift in Sources */,
 				EEF02F24223DAC11008F008B /* CollectionCard+CoreDataClass.swift in Sources */,
 				EE6533AB249BEEF800489802 /* EditDeckTableViewController.swift in Sources */,
@@ -942,6 +952,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEF33D52251D5654003D1856 /* RandomCard.swift in Sources */,
+				EE24433B252FEDBB00B22885 /* RandomCardArtIntent.intentdefinition in Sources */,
+				EE24439B2530075E00B22885 /* macOSCardArtIntent.intentdefinition in Sources */,
 				EEF33D40251D55BF003D1856 /* RandomCardArtWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

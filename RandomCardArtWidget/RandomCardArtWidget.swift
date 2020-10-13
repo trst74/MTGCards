@@ -8,19 +8,29 @@
 
 import WidgetKit
 import SwiftUI
+import Intents
 
-struct Provider: TimelineProvider {
+struct Provider: IntentTimelineProvider {
+
+
+    
+    typealias Entry = SimpleEntry
+    
+    typealias Intent = CardArtConfigIntent
+    
+
+    
     
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date())
     }
     
-    func getSnapshot( in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+    func getSnapshot(for configuration: CardArtConfigIntent, in context: Context, completion: @escaping (SimpleEntry) -> Void) {
         let entry = SimpleEntry(date: Date())
         completion(entry)
     }
     
-    func getTimeline( in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(for configuration: CardArtConfigIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
         
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
@@ -29,11 +39,19 @@ struct Provider: TimelineProvider {
             if entries.count >= 6 {
                 continue
             }
-            if let url = URL(string: "https://api.scryfall.com/cards/random"){
+            var urlString = "https://api.scryfall.com/cards/random?q=-is%3AToken"
+            if let type = configuration.type {
+                urlString += "+t%3A\(type)"
+            }
+            if let commander = configuration.isCommander, commander == 1 {
+                urlString += "+is%3Acommander+f%3Acommandervvv"
+            }
+            if let url = URL(string: urlString){
                 let card = try? RandomCard(fromURL: url)
                 
                 guard let imageURL = URL(string: card?.imageUris.artCrop ?? "") else {
-                    fatalError("ImageURL is not correct!")
+                   
+                    continue
                 }
                 
                 URLSession.shared.dataTask(with: imageURL) { data, response, error in
@@ -126,9 +144,10 @@ struct RandomCardArtWidget: Widget {
     let kind: String = "RandomCardArtWidget"
     
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        IntentConfiguration(kind: kind, intent: CardArtConfigIntent.self, provider: Provider()) { entry in
             RandomCardArtWidgetEntryView(entry: entry)
         }
+        .supportedFamilies([.systemSmall, .systemLarge])
         .configurationDisplayName("Random Card Art")
         .description("Art of a random MTG card. Click to open for card details.")
     }
