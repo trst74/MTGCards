@@ -59,27 +59,4 @@ class CoreDataStack {
     }
 }
 
-// MARK: Internal
-extension CoreDataStack {
-    
-    func saveContext ( ){
-        guard managedObjectContext.hasChanges else { return }
-        
-        do {
-            try managedObjectContext.save()
-           
-        } catch let nserror as NSError {
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-    }
-    func savePrivateContext() {
-        guard privateContext.hasChanges else { return }
-        
-        do {
-            try privateContext.save()
-            
-        } catch let nserror as NSError {
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-    }
-}
+

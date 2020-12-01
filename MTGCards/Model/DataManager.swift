@@ -53,9 +53,9 @@ public class DataManager {
             completion(false)
         }
     }
-    static func getSetUpdate(setCode: String) -> UpdateSet? {
+    static func getSetUpdate(setCode: String) -> NonCDMTGSet? {
         
-        let setURL = URL(string: "https://mtgjson.com/json/\(setCode).json")
+        let setURL = URL(string: "https://mtgjson.com/api/v5/\(setCode).json")
         do {
             let data = try Data(contentsOf: setURL!)
             let d = data
@@ -63,7 +63,7 @@ public class DataManager {
             let decoder = newJSONDecoder()
             
             
-            return try decoder.decode(UpdateSet.self, from: d)
+            return try decoder.decode(NonCDMTGSet.self, from: d)
         } catch {
             print(error)
             return nil
@@ -121,7 +121,7 @@ public class DataManager {
         request.sortDescriptors = [sortDescriptor]
         
         do {
-            let results = try CoreDataStack.handler.managedObjectContext.fetch(request)
+            let results = try CoreDataStack.handler.privateContext.fetch(request)
             return results
         } catch {
             print(error)

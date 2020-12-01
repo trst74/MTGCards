@@ -305,3 +305,41 @@ extension DataClass {
         return String(data: try self.jsonData(), encoding: encoding)
     }
 }
+class Translations: Codable {
+    let chineseSimplified: String?
+    let chineseTraditional: String?
+    let french: String?
+    let german: String?
+    let italian: String?
+    let japanese: String?
+    let korean: String?
+    let portugueseBrazil: String?
+    let russian: String?
+    let spanish: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case chineseSimplified = "Chinese Simplified"
+        case chineseTraditional = "Chinese Traditional"
+        case french = "French"
+        case german = "German"
+        case italian = "Italian"
+        case japanese = "Japanese"
+        case korean = "Korean"
+        case portugueseBrazil = "Portuguese (Brazil)"
+        case russian = "Russian"
+        case spanish = "Spanish"
+    }
+    
+    init(chineseSimplified: String, chineseTraditional: String, french: String, german: String, italian: String, japanese: String, korean: String, portugueseBrazil: String, russian: String, spanish: String) {
+        self.chineseSimplified = chineseSimplified
+        self.chineseTraditional = chineseTraditional
+        self.french = french
+        self.german = german
+        self.italian = italian
+        self.japanese = japanese
+        self.korean = korean
+        self.portugueseBrazil = portugueseBrazil
+        self.russian = russian
+        self.spanish = spanish
+    }
+}

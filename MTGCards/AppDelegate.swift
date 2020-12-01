@@ -60,6 +60,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    
     }
     @objc func add(){
+
+        var vc = self.window?.rootViewController as? TripleSplitViewController
+        vc?.addButton()
     }
     @objc func settings(){
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)

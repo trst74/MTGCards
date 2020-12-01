@@ -15,11 +15,13 @@ class TripleSplitViewController: UIViewController, UISplitViewControllerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         split.primaryBackgroundStyle = .sidebar
-        let sb = CollectionsTableViewController.freshCollectionsList()
+//        let sb = CollectionsTableViewController.freshCollectionsList()
+        let sb = SidebarCollectionViewController(collectionViewLayout: UICollectionViewCompositionalLayout.list(using: UICollectionLayoutListConfiguration(appearance: .sidebar)))
         split.setViewController(sb, for: .primary)
         split.delegate = self
         
-        let sb2 = CollectionsTableViewController.freshCollectionsList()
+//        let sb2 = CollectionsTableViewController.freshCollectionsList()
+        let sb2 = SidebarCollectionViewController(collectionViewLayout: UICollectionViewCompositionalLayout.list(using: UICollectionLayoutListConfiguration(appearance: .sidebarPlain)))
         let nav = UINavigationController()
         nav.title = "Collections"
         nav.viewControllers.append(sb2)
@@ -52,6 +54,26 @@ class TripleSplitViewController: UIViewController, UISplitViewControllerDelegate
         ])
         #endif
         //view.addSubview(nav.view)
+    }
+    override var keyCommands: [UIKeyCommand]? {
+        return [
+            UIKeyCommand(input: "S", modifierFlags: [.control, .shift], action: #selector(self.settings)),
+            UIKeyCommand(input: "A", modifierFlags: [.control], action: #selector(self.addButton))
+        ]
+    }
+    @objc func addButton(){
+        print("Add Button")
+        split.viewController(for: .primary)?.performSelector(onMainThread: #selector(addButton), with: nil, waitUntilDone: false)
+        split.viewController(for: .primary)
+    }
+    @objc func settings(){
+        let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+        guard let settingsVC = storyboard.instantiateInitialViewController() as? SettingsTableViewController else {
+            fatalError("Error going to settings")
+        }
+        //self.navigationController?.pushViewController(settingsVC, animated: true)
+        self.present(settingsVC, animated: true, completion: nil)
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         if UserDefaultsHandler.isFirstTimeOpening(){

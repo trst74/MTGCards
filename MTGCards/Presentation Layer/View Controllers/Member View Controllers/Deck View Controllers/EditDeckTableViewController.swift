@@ -10,7 +10,7 @@ import UIKit
 
 class EditDeckTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     var deck: Deck?
-    var collectionsViewController: CollectionsTableViewController?
+    var collectionsViewController: SidebarCollectionViewController?
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var deckName: UITextField!
     @IBOutlet weak var formatPicker: UIPickerView!
@@ -42,7 +42,7 @@ class EditDeckTableViewController: UITableViewController, UIPickerViewDelegate, 
             } catch {
                 print(error)
             }
-        self.collectionsViewController?.tableView.reloadData()
+        self.collectionsViewController?.createDataSource()
         self.dismiss(animated: true, completion: nil)
     }
     

@@ -100,6 +100,7 @@ class PageTwoViewController: UIViewController {
                         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                         self.doneButton.isEnabled = true
                         self.downloadLabel.text = "Done!"
+                        UserDefaultsHandler.setLastTimeUpdated(updateDate: Date())
                         self.present(alert, animated: true)
                     }
                     DispatchQueue.global(qos: .background).async {

@@ -11,16 +11,13 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
-
-
+    
+    
     
     typealias Entry = SimpleEntry
     
     typealias Intent = CardArtConfigIntent
-    
 
-    
-    
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date())
     }
@@ -50,7 +47,7 @@ struct Provider: IntentTimelineProvider {
                 let card = try? RandomCard(fromURL: url)
                 
                 guard let imageURL = URL(string: card?.imageUris.artCrop ?? "") else {
-                   
+                    
                     continue
                 }
                 
@@ -92,50 +89,36 @@ struct RandomCardArtWidgetEntryView : View {
         return formatter
     }()
     var body: some View {
-
-            ZStack{
-                if let uiimage = entry.image {
-                    AnyView(Image(uiImage: uiimage).resizable().aspectRatio(contentMode: .fill)
-                                .frame(minWidth: 0,
-                                       maxWidth: .infinity,
-                                       minHeight: 0,
-                                       maxHeight: .infinity,
-                                       alignment: .topLeading
-                                )
-                            //.scaledToFill()
-                    )
-                } else {
-                    AnyView(placeholder)
-                }
-                if let card = entry.card {
-                    
-                    GeometryReader{g in
-                        VStack{
-                            Spacer()
-                                .frame(minWidth: 0,
-                                       maxWidth: .infinity,
-                                       minHeight: 0,
-                                       maxHeight: .infinity,
-                                       alignment: .bottom
-                                )
-                            Text(card.name)
-                                
-                                .foregroundColor(Color(UIColor.label))
-                                .lineLimit(1)
-                                .font(.system(size: 20))
-                                .minimumScaleFactor(0.01)
-                                .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
-                                .frame(minWidth: 0,
-                                       maxWidth: .infinity
-                                )
-                                .background(Color(UIColor.systemBackground))
-                        }
-                    }
-                    .widgetURL(URL(string: "com.roboticsnailsoftware.MTGCollection:card?scryfallID=\(card.id)"))
-                }
-                
+        
+        VStack(spacing: 0) {
+            if let uiimage = entry.image {
+                AnyView(Image(uiImage: uiimage).resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(minWidth: 0,
+                                   maxWidth: .infinity,
+                                   minHeight: 0,
+                                   maxHeight: .infinity,
+                                   alignment: .center
+                            )
+                            .scaledToFill()
+                )
+            } else {
+                AnyView(placeholder)
             }
-
+            if let card = entry.card {
+                Text(card.name)
+                    
+                    .foregroundColor(Color(UIColor.label))
+                    .lineLimit(1)
+                    .font(.system(size: 20))
+                    .minimumScaleFactor(0.01)
+                    .padding(EdgeInsets(top: 4   , leading: 8, bottom: 4, trailing: 8))
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .background(Color(UIColor.systemBackground))
+                    .widgetURL(URL(string: "com.roboticsnailsoftware.MTGCollection:card?scryfallID=\(card.id)"))
+            }
+        }
+        .background(Color(UIColor.systemBackground))
     }
 }
 
@@ -157,5 +140,22 @@ struct RandomCardArtWidget_Previews: PreviewProvider {
     static var previews: some View {
         RandomCardArtWidgetEntryView(entry: SimpleEntry(date: Date()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
+    }
+}
+struct DebugBorder: ViewModifier {
+    let color: Color
+    
+    func body(content: Content) -> some View {
+        content.overlay(Rectangle().stroke(color))
+    }
+}
+
+extension View {
+    func debugBorder(color: Color = .blue) -> some View {
+        #if DEBUG
+        return self.overlay(Rectangle().stroke(color))
+        #else
+        return self
+        #endif
     }
 }

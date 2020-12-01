@@ -85,7 +85,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
     }
     override func viewWillDisappear(_ animated: Bool) {
         if let nav = self.navigationController {
-            nav.setToolbarHidden(true, animated: true)
+            nav.setToolbarHidden(true, animated: false)
         }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -94,7 +94,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
         //        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(applyFilters))
         let deckStatsButton = UIBarButtonItem(image: UIImage(systemName: "chart.bar.fill"), style: .plain, target: self, action: #selector(showDeckStats))
         if let nav = self.navigationController {
-            nav.setToolbarHidden(false, animated: true)
+            nav.setToolbarHidden(false, animated: false)
             toolbarItems = [deckStatsButton]
         }
     }

@@ -102,7 +102,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         
         guard let string = card.uuid, let data = string.data(using: .utf8) else { return [] }
         let itemProvider = NSItemProvider(item: data as NSData, typeIdentifier: kUTTypePlainText as String)
-        
+
         return [UIDragItem(itemProvider: itemProvider)]
     }
     func tableView(_ tableView: UITableView, itemsForAddingTo session: UIDragSession, at indexPath: IndexPath, point: CGPoint) -> [UIDragItem] {

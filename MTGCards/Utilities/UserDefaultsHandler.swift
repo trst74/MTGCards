@@ -15,6 +15,7 @@ class UserDefaultsHandler {
     static let CARDDATADOWNLOADED = "hasdatabeendownloaded"
     static let SELECTEDCARDIMAGEQUALITY = "selectedcardimagequality"
     static let EXCLUDEONLINEONLYCARDS = "excludeonlineonly"
+    static let LASTTIMEUPDATED = "lasttimeupdated"
     
     static func isFirstTimeOpening() -> Bool {
         let result = defaults.bool(forKey: HASOPENED)
@@ -41,5 +42,14 @@ class UserDefaultsHandler {
     }
     static func areOnlineOnlyCardsExcluded() -> Bool {
         return defaults.bool(forKey: EXCLUDEONLINEONLYCARDS)
+    }
+    static func getLastTimeUpdated() -> Date? {
+        if let temp = defaults.object(forKey: LASTTIMEUPDATED) as? Date {
+            return temp
+        }
+        return Date(timeIntervalSince1970: 0)
+    }
+    static func setLastTimeUpdated(updateDate: Date) {
+        defaults.setValue(updateDate, forKey: LASTTIMEUPDATED)
     }
 }

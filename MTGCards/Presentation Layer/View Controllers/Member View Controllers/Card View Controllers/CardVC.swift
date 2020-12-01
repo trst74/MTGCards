@@ -40,7 +40,7 @@ struct CardVC: View {
     var body: some View {
         GeometryReader { geometry in
             ScrollView{
-                VStack(alignment: .leading){
+                VStack(alignment: .center){
                     if geometry.size.width > 500 {
                         HStack(alignment: .top){
                             //GeometryReader { geometry in

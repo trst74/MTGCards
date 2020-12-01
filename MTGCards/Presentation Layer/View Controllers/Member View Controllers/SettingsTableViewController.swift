@@ -24,7 +24,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         updateFileInfoLabel()
         setImageQuality(quality: UserDefaultsHandler.selectedCardImageQuality())
         excludeOnlineSwitch.isOn = UserDefaultsHandler.areOnlineOnlyCardsExcluded()
@@ -87,13 +87,13 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        if section == 4 {
-//            return 60
-//        } else {
-//            return 30
-//        }
-//    }
+    //    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    //        if section == 4 {
+    //            return 60
+    //        } else {
+    //            return 30
+    //        }
+    //    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
@@ -102,27 +102,24 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
             return
         case 3:
             switch indexPath.row {
+            
             case 0:
-                if let url = URL(string: "https://www.raywenderlich.com/7212-multiple-uisplitviewcontroller-tutorial"){
-                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
-                }
-            case 1:
                 if let url = URL(string: "https://quicktype.io"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
-            case 2:
+            case 1:
                 if let url = URL(string: "https://mtgjson.com"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
-            case 3:
+            case 2:
                 if let url = URL(string: "https://medium.com/@andrea.prearo/working-with-codable-and-core-data-83983e77198e"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
-            case 4:
+            case 3:
                 if let url = URL(string: "https://medium.com/@sakhabaevegor/create-a-color-gradient-on-the-storyboard-18ccfd8158c2"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
-            case 5:
+            case 4:
                 if let url = URL(string: "https://swiftwithmajid.com/2019/08/14/building-barchart-with-shape-api-in-swiftui/"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
@@ -238,234 +235,634 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
     @IBAction func excludeSwitchChanged(_ sender: UISwitch) {
         UserDefaultsHandler.setExcludeOnlineOnly(exclude: sender.isOn)
     }
-//    @IBAction func manualUpdate(_ sender: Any) {
-//
-//        let decoder = newJSONDecoder()
-//        let managedObjectContext = CoreDataStack.handler.managedObjectContext
-//        managedObjectContext.persistentStoreCoordinator = CoreDataStack.handler.storeContainer.persistentStoreCoordinator
-//        guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext else {
-//            fatalError("Failed to retrieve context")
-//        }
-//        decoder.userInfo[codingUserInfoKeyManagedObjectContext] = managedObjectContext
-//        DispatchQueue.global(qos: .default).async {
-//            guard let setlist = DataManager.getSetList() else { return }
-//            let localSets = DataManager.getSets()
-//            for sourceSet in setlist.data {
-//                let localSet = localSets.first {
-//                    $0.code == sourceSet.code
-//                }
-//                if localSet == nil {
-//                    print("set missing locally: \(sourceSet.code)")
-//                    DataManager.getSet(setCode: sourceSet.code) { success in
-//                        CoreDataStack.handler.privateContext.parent?.reset()
-//                        CoreDataStack.handler.privateContext.reset()
-//                    }
-//                }
-//                if localSet?.meta?.date != sourceSet.setMeta?.date {
-//                    print("\(sourceSet.code ) local version: \(localSet?.meta?.date ?? "") || source version: \(sourceSet.setMeta?.date ?? "")")
-//
-//                    let setUpdate = DataManager.getSetUpdate(setCode: sourceSet.code)
-//
-//                    if let setUpdate = setUpdate {
-//                        let updateCards = setUpdate.cards
-//                        if let localSetCards = localSet?.cards.allObjects as? [Card]  {
-//                            //existing cards?
-//                            let existingCards = updateCards.filter {
-//                                let uuid = $0.uuid
-//                                return localSetCards.contains { $0.uuid == uuid }
-//                            }
-//                            for eCard in existingCards {
-//
-//                                let localCard = localSetCards.first {
-//                                    $0.uuid == eCard.uuid
-//                                }
-//                                if let localCard = localCard {
-//                                    //rulings
-//                                    localCard.removeFromRulings(localCard.rulings)
-//                                    do {
-//                                        let json = try eCard.rulings.jsonData()
-//                                        let newRulings = try decoder.decode([Ruling].self, from: json)
-//                                        newRulings.forEach { $0.card = localCard }
-//                                        if newRulings.count > 0 {
-//                                            localCard.addToRulings(NSSet.init(array: newRulings))
-//                                        }
-//                                    } catch {
-//                                        print(error)
-//                                    }
-//                                    //legalities
-//                                    localCard.legalities?.commander = eCard.legalities.commander
-//                                    localCard.legalities?.duel = eCard.legalities.duel
-//                                    localCard.legalities?.frontier = eCard.legalities.frontier
-//                                    localCard.legalities?.future = eCard.legalities.future
-//                                    localCard.legalities?.legacy = eCard.legalities.legacy
-//                                    localCard.legalities?.modern = eCard.legalities.modern
-//                                    localCard.legalities?.pauper = eCard.legalities.pauper
-//                                    localCard.legalities?.penny = eCard.legalities.penny
-//                                    localCard.legalities?.standard = eCard.legalities.standard
-//                                    localCard.legalities?.vintage = eCard.legalities.vintage
-//
-//                                    //types
-//                                    if let types = localCard.types {
-//                                        localCard.removeFromTypes(types)
-//                                    }
-//
-//                                    for type in eCard.types {
-//                                        guard  let entity = NSEntityDescription.entity(forEntityName: "CardType", in: managedObjectContext) else {
-//                                            fatalError("Failed to decode Card")
-//                                        }
-//                                        let tempType = CardType.init(entity: entity, insertInto: managedObjectContext)
-//                                        tempType.type = type
-//                                        tempType.card = localCard
-//                                        localCard.addToTypes(tempType)
-//                                    }
-//
-//                                    //coloridentity
-//                                    if let colors = localCard.colorIdentity {
-//                                        localCard.removeFromColorIdentity(colors)
-//                                    }
-//                                    for i in eCard.colorIdentity{
-//                                        guard  let entity = NSEntityDescription.entity(forEntityName: "ColorIdentity", in: managedObjectContext) else {
-//                                            fatalError("Failed to decode Card")
-//                                        }
-//                                        let tempColor = ColorIdentity.init(entity: entity, insertInto: managedObjectContext)
-//                                        tempColor.color = i
-//                                        tempColor.card = localCard
-//                                        localCard.addToColorIdentity(tempColor)
-//                                    }
-//                                    //card subtypes
-//                                    if let types = localCard.cardsubtypes {
-//                                        localCard.removeFromCardsubtypes(types)
-//                                    }
-//                                    for sub in eCard.subtypes {
-//                                        guard  let entity = NSEntityDescription.entity(forEntityName: "CardSubtype", in: managedObjectContext) else {
-//                                            fatalError("Failed to decode Card")
-//                                        }
-//                                        let tempsub = CardSubtype.init(entity: entity, insertInto: managedObjectContext)
-//                                        tempsub.subtype = sub
-//                                        tempsub.card = localCard
-//                                        localCard.addToCardsubtypes(tempsub)
-//                                    }
-//                                    //card super types
-//                                    if let types = localCard.cardsupertypes {
-//                                        localCard.removeFromCardsupertypes(types)
-//                                    }
-//                                    for superType in eCard.supertypes {
-//                                        guard  let entity = NSEntityDescription.entity(forEntityName: "CardSupertype", in: managedObjectContext) else {
-//                                            fatalError("Failed to decode Card")
-//                                        }
-//                                        let tempsub = CardSupertype.init(entity: entity, insertInto: managedObjectContext)
-//                                        tempsub.supertype = superType
-//                                        tempsub.card = localCard
-//                                        localCard.addToCardsupertypes(tempsub)
-//                                    }
-//                                    //card Data
-//                                    localCard.artist = eCard.artist
-//                                    localCard.borderColor = eCard.borderColor
-//                                    localCard.colors = eCard.colors
-//                                    localCard.convertedManaCost = Float(eCard.convertedManaCost ?? 0)
-//                                    localCard.flavorText = eCard.flavorText
-//                                    localCard.frameVersion = eCard.frameVersion
-//                                    localCard.hasFoil = eCard.hasFoil
-//                                    localCard.hasNonFoil = eCard.hasNonFoil
-//                                    localCard.layout = eCard.layout
-//                                    localCard.manaCost = eCard.manaCost
-//                                    localCard.multiverseID = Int32(eCard.multiverseID ?? 0)
-//                                    localCard.name = eCard.name
-//                                    localCard.number = eCard.number
-//                                    localCard.originalText = eCard.originalText
-//                                    localCard.originalType = eCard.originalType
-//                                    localCard.power = eCard.power
-//                                    localCard.printings = eCard.printings
-//                                    localCard.rarity = eCard.rarity
-//                                    localCard.scryfallID = eCard.scryfallID
-//                                    localCard.tcgplayerProductID = Int32(eCard.tcgplayerProductID ?? 0)
-//                                    localCard.text = eCard.text
-//                                    localCard.toughness = eCard.toughness
-//                                    localCard.type = eCard.type
-//                                    localCard.watermark = eCard.watermark
-//                                    localCard.names = eCard.names
-//                                    localCard.loyalty = eCard.loyalty
-//                                    localCard.faceConvertedManaCost = Float(eCard.faceConvertedManaCost ?? 0)
-//                                    localCard.side = eCard.side
-//                                    localCard.variations = eCard.variations
-//                                    localCard.starter = eCard.isStarter ?? false
-//                                    localCard.isReserved = eCard.isReserved ?? false
-//                                }
-//                            }
-//                            //new cards?
-//                            let newCards = updateCards.filter {
-//                                let uuid = $0.uuid
-//                                return !localSetCards.contains { $0.uuid == uuid }
-//                            }
-//
-//                            for card in newCards {
-//                                do {
-//                                    let c1 = try card.jsonData()
-//                                    let newCard = try decoder.decode(Card.self, from: c1)
-//                                    if let localSet = localSet {
-//                                        newCard.set = localSet
-//                                        localSet.cards.addingObjects(from: [newCard])
-//                                        let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeData as String)
-//                                        attributeSet.title = newCard.name
-//                                        attributeSet.contentDescription = newCard.set.name
-//
-//                                        if let uuid = newCard.uuid {
-//                                            let item = CSSearchableItem(uniqueIdentifier: "\(uuid)", domainIdentifier: "com.roboticsnailsoftware.MTGCollection", attributeSet: attributeSet)
-//                                            CSSearchableIndex.default().indexSearchableItems([item]) { error in
-//                                                if let error = error {
-//                                                    print("Indexing error: \(error.localizedDescription)")
-//                                                } else {
-//                                                    print("Search item successfully indexed!")
-//                                                }
-//                                            }
-//
-//                                        }
-//                                    }
-//                                } catch {
-//                                    print(error)
-//                                }
-//                            }
-//
-//                            //deleted cards?
-//                            let deletedCards = localSetCards.filter {
-//                                let uuid = $0.uuid
-//                                return !updateCards.contains { $0.uuid == uuid }
-//                            }
-//
-//                            for dcard in deletedCards {
-//                                managedObjectContext.delete(dcard)
-//                            }
-//                            //update set data
-//                            localSet?.baseSetSize = Int16(setUpdate.baseSetSize)
-//                            localSet?.block = setUpdate.block
-//                            localSet?.code = setUpdate.code
-//                            localSet?.isFoilOnly = setUpdate.isFoilOnly
-//                            localSet?.isOnlineOnly = setUpdate.isOnlineOnly
-//                            localSet?.meta?.date = setUpdate.meta.date
-//                            localSet?.meta?.version = setUpdate.meta.version
-//                            localSet?.mtgoCode = setUpdate.mtgoCode
-//                            localSet?.name = setUpdate.name
-//                            localSet?.releaseDate = setUpdate.releaseDate
-//                            localSet?.tcgplayerGroupID = Int16(setUpdate.tcgplayerGroupID ?? 0)
-//                            //tokens
-//                            localSet?.totalSetSize = Int16(setUpdate.totalSetSize)
-//                            localSet?.type = setUpdate.type
-//
-//                            do {
-//                                try managedObjectContext.save()
-//                            } catch {
-//                                print(error)
-//                            }
-//                        }
-//
-//                    }
-//                }
-//
-//            }
-//
-//        }
-//
-//    }
+    @IBAction func manualUpdate(_ sender: Any) {
+        print("manual Update")
+        if let updateDate = UserDefaultsHandler.getLastTimeUpdated() {
+            print("Last Update Date \(updateDate)")
+            
+            if let url = URL(string: "https://raw.githubusercontent.com/jmcsmith/jmcsmith.github.io/main/updates.json") {
+                var updates = try? Updates.init(fromURL: url)
+                if let updates = updates?.updates?.filter( {$0.date ?? Date() >= updateDate} ) {
+                    var compiledUpdate = Update(date: Date(), sets: [])
+                    for update in updates {
+                        print("\(update.date) : \(update.sets?.count) Sets")
+                        for set in update.sets ?? [] {
+                            
+                            var compiledSet = compiledUpdate.sets?.first(where: { $0.code == set.code } )
+                            if var compiledSet = compiledSet {
+                                if compiledSet.cardIDs?.count == 0 {
+                                    continue
+                                }
+                                for cardID in set.cardIDs ?? [] {
+                                    if (compiledSet.cardIDs ?? []).contains(cardID) {
+                                        continue
+                                    } else {
+                                        compiledSet.cardIDs?.append(cardID)
+                                    }
+                                }
+                            } else {
+                                compiledUpdate.sets?.append(set)
+                            }
+                        }
+                    }
+                    //apply updates
+                    ApplyUpdate(update: compiledUpdate)
+                }
+                
+            }
+        }
+    }
+    private func ApplyUpdate(update: Update) {
+        let decoder = newJSONDecoder()
+        let managedObjectContext = CoreDataStack.handler.privateContext
+        managedObjectContext.persistentStoreCoordinator = CoreDataStack.handler.storeContainer.persistentStoreCoordinator
+        guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext else {
+            fatalError("Failed to retrieve context")
+        }
+        decoder.userInfo[codingUserInfoKeyManagedObjectContext] = managedObjectContext
+        let fullUpdateSets = update.sets?.filter( { $0.cardIDs?.count == 0 } )
+        let partialUpdateSets = update.sets?.filter( { $0.cardIDs?.count ?? 0 > 0 } )
+        
+        DispatchQueue.global(qos: .default).async {
+            let localSets = DataManager.getSets()
+            for set in fullUpdateSets ?? [] {
+                print(set.code)
+                let localSet = localSets.first {
+                    $0.code == set.code
+                }
+                //new set
+                if localSet == nil {
+                    if let code = set.code {
+                        print("set missing locally: \(code)")
+                        DataManager.getSet(setCode: code) { success in
+                            CoreDataStack.handler.privateContext.parent?.reset()
+                            //CoreDataStack.handler.privateContext.reset()
+                        }
+                    }
+                } else {
+                    //update whole set
+                    if let code = set.code {
+                        let setUpdate = DataManager.getSetUpdate(setCode: code)
+                        
+                        if var setUpdate = setUpdate {
+                            let updateCards = setUpdate.data?.cards
+                            if let localSetCards = localSet?.cards.allObjects as? [Card]  {
+                                //existing cards?
+                                let existingCards = updateCards?.filter {
+                                    let uuid = $0.uuid
+                                    return localSetCards.contains { $0.uuid == uuid }
+                                }
+                                for eCard in existingCards ?? [] {
+                                    
+                                    let localCard = localSetCards.first {
+                                        $0.uuid == eCard.uuid
+                                    }
+                                    if let localCard = localCard {
+                                        //rulings
+                                        localCard.removeFromRulings(localCard.rulings)
+                                        do {
+                                            let json = try eCard.rulings?.jsonData()
+                                            if let json = json {
+                                                let newRulings = try decoder.decode([Ruling].self, from: json)
+                                                newRulings.forEach { $0.card = localCard }
+                                                if newRulings.count > 0 {
+                                                    localCard.addToRulings(NSSet.init(array: newRulings))
+                                                }
+                                            }
+                                        } catch {
+                                            print(error)
+                                        }
+                                        //legalities
+                                        localCard.legalities?.commander = eCard.legalities?.commander
+                                        localCard.legalities?.duel = eCard.legalities?.duel
+                                        //localCard.legalities?.frontier = eCard.legalities?.frontier
+                                        localCard.legalities?.future = eCard.legalities?.future
+                                        localCard.legalities?.legacy = eCard.legalities?.legacy
+                                        localCard.legalities?.modern = eCard.legalities?.modern
+                                        localCard.legalities?.pauper = eCard.legalities?.pauper
+                                        localCard.legalities?.penny = eCard.legalities?.penny
+                                        localCard.legalities?.standard = eCard.legalities?.standard
+                                        localCard.legalities?.vintage = eCard.legalities?.vintage
+                                        
+                                        //types
+                                        if let types = localCard.types {
+                                            localCard.removeFromTypes(types)
+                                        }
+                                        
+                                        for type in eCard.types ?? [] {
+                                            guard  let entity = NSEntityDescription.entity(forEntityName: "CardType", in: managedObjectContext) else {
+                                                fatalError("Failed to decode Card")
+                                            }
+                                            let tempType = CardType.init(entity: entity, insertInto: managedObjectContext)
+                                            tempType.type = type
+                                            tempType.card = localCard
+                                            localCard.addToTypes(tempType)
+                                        }
+                                        
+                                        //coloridentity
+                                        if let colors = localCard.colorIdentity {
+                                            localCard.removeFromColorIdentity(colors)
+                                        }
+                                        for i in eCard.colorIdentity ?? [] {
+                                            guard  let entity = NSEntityDescription.entity(forEntityName: "ColorIdentity", in: managedObjectContext) else {
+                                                fatalError("Failed to decode Card")
+                                            }
+                                            let tempColor = ColorIdentity.init(entity: entity, insertInto: managedObjectContext)
+                                            tempColor.color = i
+                                            tempColor.card = localCard
+                                            localCard.addToColorIdentity(tempColor)
+                                        }
+                                        //card subtypes
+                                        if let types = localCard.cardsubtypes {
+                                            localCard.removeFromCardsubtypes(types)
+                                        }
+                                        for sub in eCard.subtypes ?? [] {
+                                            guard  let entity = NSEntityDescription.entity(forEntityName: "CardSubtype", in: managedObjectContext) else {
+                                                fatalError("Failed to decode Card")
+                                            }
+                                            let tempsub = CardSubtype.init(entity: entity, insertInto: managedObjectContext)
+                                            tempsub.subtype = sub
+                                            tempsub.card = localCard
+                                            localCard.addToCardsubtypes(tempsub)
+                                        }
+                                        //card super types
+                                        if let types = localCard.cardsupertypes {
+                                            localCard.removeFromCardsupertypes(types)
+                                        }
+                                        for superType in eCard.supertypes ?? [] {
+                                            guard  let entity = NSEntityDescription.entity(forEntityName: "CardSupertype", in: managedObjectContext) else {
+                                                fatalError("Failed to decode Card")
+                                            }
+                                            let tempsub = CardSupertype.init(entity: entity, insertInto: managedObjectContext)
+                                            tempsub.supertype = superType
+                                            tempsub.card = localCard
+                                            localCard.addToCardsupertypes(tempsub)
+                                        }
+                                        //card Data
+                                        localCard.artist = eCard.artist
+                                        localCard.borderColor = eCard.borderColor
+                                        localCard.colors = eCard.colors
+                                        localCard.convertedManaCost = Float(eCard.convertedManaCost ?? 0)
+                                        localCard.flavorText = eCard.flavorText
+                                        localCard.frameVersion = eCard.frameVersion
+                                        localCard.hasFoil = eCard.hasFoil ?? false
+                                        localCard.hasNonFoil = eCard.hasNonFoil ?? false
+                                        localCard.layout = eCard.layout
+                                        localCard.manaCost = eCard.manaCost
+                                        localCard.multiverseID = Int32(eCard.identifiers?.multiverseID ?? "") ?? 0
+                                        localCard.name = eCard.name
+                                        localCard.number = eCard.number
+                                        localCard.originalText = eCard.originalText
+                                        localCard.originalType = eCard.originalType
+                                        localCard.power = eCard.power
+                                        localCard.printings = eCard.printings
+                                        localCard.rarity = eCard.rarity
+                                        localCard.scryfallID = eCard.identifiers?.scryfallID
+                                        localCard.tcgplayerProductID = Int32(eCard.identifiers?.tcgplayerProductID ?? "") ?? 0
+                                        localCard.text = eCard.text
+                                        localCard.toughness = eCard.toughness
+                                        localCard.type = eCard.type
+                                        localCard.watermark = eCard.watermark
+                                        //localCard.names = eCard.names
+                                        localCard.loyalty = eCard.loyalty
+                                        localCard.faceConvertedManaCost = Float(eCard.faceConvertedManaCost ?? 0)
+                                        localCard.side = eCard.side
+                                        localCard.variations = eCard.variations
+                                        //localCard.starter = eCard.isStarter ?? false
+                                        localCard.isReserved = eCard.isReserved ?? false
+                                    }
+                                }
+                                //new cards?
+                                let newCards = updateCards?.filter {
+                                    let uuid = $0.uuid
+                                    return !localSetCards.contains { $0.uuid == uuid }
+                                }
+                                
+                                for card in newCards ?? [] {
+                                    do {
+                                        let c1 = try card.jsonData()
+                                        let newCard = try decoder.decode(Card.self, from: c1)
+                                        if let localSet = localSet {
+                                            newCard.set = localSet
+                                            localSet.cards.addingObjects(from: [newCard])
+                                            let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeData as String)
+                                            attributeSet.title = newCard.name
+                                            attributeSet.contentDescription = newCard.set.name
+                                            
+                                            if let uuid = newCard.uuid {
+                                                let item = CSSearchableItem(uniqueIdentifier: "\(uuid)", domainIdentifier: "com.roboticsnailsoftware.MTGCollection", attributeSet: attributeSet)
+                                                CSSearchableIndex.default().indexSearchableItems([item]) { error in
+                                                    if let error = error {
+                                                        print("Indexing error: \(error.localizedDescription)")
+                                                    } else {
+                                                        print("Search item successfully indexed!")
+                                                    }
+                                                }
+                                                
+                                            }
+                                        }
+                                    } catch {
+                                        print(error)
+                                    }
+                                }
+                                
+                                //deleted cards?
+                                let deletedCards = localSetCards.filter {
+                                    let uuid = $0.uuid
+                                    return !(updateCards?.contains { $0.uuid == uuid } ?? false)
+                                }
+                                
+                                for dcard in deletedCards {
+                                    CoreDataStack.handler.privateContext.delete(dcard)
+                                }
+                                //update set data
+                                localSet?.baseSetSize = Int16(setUpdate.data?.baseSetSize ?? 0)
+                                localSet?.block = setUpdate.data?.block
+                                localSet?.code = setUpdate.data?.code
+                                localSet?.isFoilOnly = setUpdate.data?.isFoilOnly ?? false
+                                localSet?.isOnlineOnly = setUpdate.data?.isOnlineOnly ?? false
+                                localSet?.meta?.date = setUpdate.meta?.date
+                                localSet?.meta?.version = setUpdate.meta?.version
+                                localSet?.mtgoCode = setUpdate.data?.mtgoCode
+                                localSet?.name = setUpdate.data?.name
+                                localSet?.releaseDate = setUpdate.data?.releaseDate
+                                localSet?.tcgplayerGroupID = Int16(setUpdate.data?.tcgplayerGroupID ?? 0)
+                                //tokens
+                                localSet?.totalSetSize = Int16(setUpdate.data?.totalSetSize ?? 0)
+                                localSet?.type = setUpdate.data?.type
+                                
+                                do {
+                                    try CoreDataStack.handler.privateContext.save()
+                                } catch {
+                                    print(error)
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+                
+            }
+            for set in partialUpdateSets ?? [] {
+                print(set.code)
+                let localSet = localSets.first {
+                    $0.code == set.code
+                }
+                if let code = set.code {
+                    let setUpdate = DataManager.getSetUpdate(setCode: code)
+                    if let localSetCards = localSet?.cards.allObjects as? [Card]  {
+                        let localCardsToUpdate = localSetCards.filter( { (set.cardIDs?.contains($0.uuid ?? "") ?? false) } )
+                        let cardUpdates = setUpdate?.data?.cards?.filter( { set.cardIDs?.contains($0.uuid ?? "") ?? false } )
+                        for localCard in localCardsToUpdate {
+                            if let eCard = cardUpdates?.first(where: { $0.uuid == localCard.uuid } ) {
+                           
+                                //rulings
+                                localCard.removeFromRulings(localCard.rulings)
+                                do {
+                                    let json = try eCard.rulings?.jsonData()
+                                    if let json = json {
+                                        let newRulings = try decoder.decode([Ruling].self, from: json)
+                                        newRulings.forEach { $0.card = localCard }
+                                        if newRulings.count > 0 {
+                                            localCard.addToRulings(NSSet.init(array: newRulings))
+                                        }
+                                    }
+                                } catch {
+                                    print(error)
+                                }
+                                //legalities
+                                localCard.legalities?.commander = eCard.legalities?.commander
+                                localCard.legalities?.duel = eCard.legalities?.duel
+                                //localCard.legalities?.frontier = eCard.legalities?.frontier
+                                localCard.legalities?.future = eCard.legalities?.future
+                                localCard.legalities?.legacy = eCard.legalities?.legacy
+                                localCard.legalities?.modern = eCard.legalities?.modern
+                                localCard.legalities?.pauper = eCard.legalities?.pauper
+                                localCard.legalities?.penny = eCard.legalities?.penny
+                                localCard.legalities?.standard = eCard.legalities?.standard
+                                localCard.legalities?.vintage = eCard.legalities?.vintage
+                                
+                                //types
+                                if let types = localCard.types {
+                                    localCard.removeFromTypes(types)
+                                }
+                                
+                                for type in eCard.types ?? [] {
+                                    guard  let entity = NSEntityDescription.entity(forEntityName: "CardType", in: managedObjectContext) else {
+                                        fatalError("Failed to decode Card")
+                                    }
+                                    let tempType = CardType.init(entity: entity, insertInto: managedObjectContext)
+                                    tempType.type = type
+                                    tempType.card = localCard
+                                    localCard.addToTypes(tempType)
+                                }
+                                
+                                //coloridentity
+                                if let colors = localCard.colorIdentity {
+                                    localCard.removeFromColorIdentity(colors)
+                                }
+                                for i in eCard.colorIdentity ?? [] {
+                                    guard  let entity = NSEntityDescription.entity(forEntityName: "ColorIdentity", in: managedObjectContext) else {
+                                        fatalError("Failed to decode Card")
+                                    }
+                                    let tempColor = ColorIdentity.init(entity: entity, insertInto: managedObjectContext)
+                                    tempColor.color = i
+                                    tempColor.card = localCard
+                                    localCard.addToColorIdentity(tempColor)
+                                }
+                                //card subtypes
+                                if let types = localCard.cardsubtypes {
+                                    localCard.removeFromCardsubtypes(types)
+                                }
+                                for sub in eCard.subtypes ?? [] {
+                                    guard  let entity = NSEntityDescription.entity(forEntityName: "CardSubtype", in: managedObjectContext) else {
+                                        fatalError("Failed to decode Card")
+                                    }
+                                    let tempsub = CardSubtype.init(entity: entity, insertInto: managedObjectContext)
+                                    tempsub.subtype = sub
+                                    tempsub.card = localCard
+                                    localCard.addToCardsubtypes(tempsub)
+                                }
+                                //card super types
+                                if let types = localCard.cardsupertypes {
+                                    localCard.removeFromCardsupertypes(types)
+                                }
+                                for superType in eCard.supertypes ?? [] {
+                                    guard  let entity = NSEntityDescription.entity(forEntityName: "CardSupertype", in: managedObjectContext) else {
+                                        fatalError("Failed to decode Card")
+                                    }
+                                    let tempsub = CardSupertype.init(entity: entity, insertInto: managedObjectContext)
+                                    tempsub.supertype = superType
+                                    tempsub.card = localCard
+                                    localCard.addToCardsupertypes(tempsub)
+                                }
+                                //card Data
+                                localCard.artist = eCard.artist
+                                localCard.borderColor = eCard.borderColor
+                                localCard.colors = eCard.colors
+                                localCard.convertedManaCost = Float(eCard.convertedManaCost ?? 0)
+                                localCard.flavorText = eCard.flavorText
+                                localCard.frameVersion = eCard.frameVersion
+                                localCard.hasFoil = eCard.hasFoil ?? false
+                                localCard.hasNonFoil = eCard.hasNonFoil ?? false
+                                localCard.layout = eCard.layout
+                                localCard.manaCost = eCard.manaCost
+                                localCard.multiverseID = Int32(eCard.identifiers?.multiverseID ?? "") ?? 0
+                                localCard.name = eCard.name
+                                localCard.number = eCard.number
+                                localCard.originalText = eCard.originalText
+                                localCard.originalType = eCard.originalType
+                                localCard.power = eCard.power
+                                localCard.printings = eCard.printings
+                                localCard.rarity = eCard.rarity
+                                localCard.scryfallID = eCard.identifiers?.scryfallID
+                                localCard.tcgplayerProductID = Int32(eCard.identifiers?.tcgplayerProductID ?? "") ?? 0
+                                localCard.text = eCard.text
+                                localCard.toughness = eCard.toughness
+                                localCard.type = eCard.type
+                                localCard.watermark = eCard.watermark
+                                //localCard.names = eCard.names
+                                localCard.loyalty = eCard.loyalty
+                                localCard.faceConvertedManaCost = Float(eCard.faceConvertedManaCost ?? 0)
+                                localCard.side = eCard.side
+                                localCard.variations = eCard.variations
+                                //localCard.starter = eCard.isStarter ?? false
+                                localCard.isReserved = eCard.isReserved ?? false
+                            }
+                        }
+                    }
+                }
+            }
+            UserDefaultsHandler.setLastTimeUpdated(updateDate: Date())
+        }
+    }
+    //
+    //        let decoder = newJSONDecoder()
+    //        let managedObjectContext = CoreDataStack.handler.managedObjectContext
+    //        managedObjectContext.persistentStoreCoordinator = CoreDataStack.handler.storeContainer.persistentStoreCoordinator
+    //        guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext else {
+    //            fatalError("Failed to retrieve context")
+    //        }
+    //        decoder.userInfo[codingUserInfoKeyManagedObjectContext] = managedObjectContext
+    //        DispatchQueue.global(qos: .default).async {
+    //            guard let setlist = DataManager.getSetList() else { return }
+    //            let localSets = DataManager.getSets()
+    //            for sourceSet in setlist.data {
+    //                let localSet = localSets.first {
+    //                    $0.code == sourceSet.code
+    //                }
+    //                if localSet == nil {
+    //                    print("set missing locally: \(sourceSet.code)")
+    //                    DataManager.getSet(setCode: sourceSet.code) { success in
+    //                        CoreDataStack.handler.privateContext.parent?.reset()
+    //                        CoreDataStack.handler.privateContext.reset()
+    //                    }
+    //                }
+    //                if localSet?.meta?.date != sourceSet.setMeta?.date {
+    //                    print("\(sourceSet.code ) local version: \(localSet?.meta?.date ?? "") || source version: \(sourceSet.setMeta?.date ?? "")")
+    //
+    //                    let setUpdate = DataManager.getSetUpdate(setCode: sourceSet.code)
+    //
+    //                    if let setUpdate = setUpdate {
+    //                        let updateCards = setUpdate.cards
+    //                        if let localSetCards = localSet?.cards.allObjects as? [Card]  {
+    //                            //existing cards?
+    //                            let existingCards = updateCards.filter {
+    //                                let uuid = $0.uuid
+    //                                return localSetCards.contains { $0.uuid == uuid }
+    //                            }
+    //                            for eCard in existingCards {
+    //
+    //                                let localCard = localSetCards.first {
+    //                                    $0.uuid == eCard.uuid
+    //                                }
+    //                                if let localCard = localCard {
+    //                                    //rulings
+    //                                    localCard.removeFromRulings(localCard.rulings)
+    //                                    do {
+    //                                        let json = try eCard.rulings.jsonData()
+    //                                        let newRulings = try decoder.decode([Ruling].self, from: json)
+    //                                        newRulings.forEach { $0.card = localCard }
+    //                                        if newRulings.count > 0 {
+    //                                            localCard.addToRulings(NSSet.init(array: newRulings))
+    //                                        }
+    //                                    } catch {
+    //                                        print(error)
+    //                                    }
+    //                                    //legalities
+    //                                    localCard.legalities?.commander = eCard.legalities.commander
+    //                                    localCard.legalities?.duel = eCard.legalities.duel
+    //                                    localCard.legalities?.frontier = eCard.legalities.frontier
+    //                                    localCard.legalities?.future = eCard.legalities.future
+    //                                    localCard.legalities?.legacy = eCard.legalities.legacy
+    //                                    localCard.legalities?.modern = eCard.legalities.modern
+    //                                    localCard.legalities?.pauper = eCard.legalities.pauper
+    //                                    localCard.legalities?.penny = eCard.legalities.penny
+    //                                    localCard.legalities?.standard = eCard.legalities.standard
+    //                                    localCard.legalities?.vintage = eCard.legalities.vintage
+    //
+    //                                    //types
+    //                                    if let types = localCard.types {
+    //                                        localCard.removeFromTypes(types)
+    //                                    }
+    //
+    //                                    for type in eCard.types {
+    //                                        guard  let entity = NSEntityDescription.entity(forEntityName: "CardType", in: managedObjectContext) else {
+    //                                            fatalError("Failed to decode Card")
+    //                                        }
+    //                                        let tempType = CardType.init(entity: entity, insertInto: managedObjectContext)
+    //                                        tempType.type = type
+    //                                        tempType.card = localCard
+    //                                        localCard.addToTypes(tempType)
+    //                                    }
+    //
+    //                                    //coloridentity
+    //                                    if let colors = localCard.colorIdentity {
+    //                                        localCard.removeFromColorIdentity(colors)
+    //                                    }
+    //                                    for i in eCard.colorIdentity{
+    //                                        guard  let entity = NSEntityDescription.entity(forEntityName: "ColorIdentity", in: managedObjectContext) else {
+    //                                            fatalError("Failed to decode Card")
+    //                                        }
+    //                                        let tempColor = ColorIdentity.init(entity: entity, insertInto: managedObjectContext)
+    //                                        tempColor.color = i
+    //                                        tempColor.card = localCard
+    //                                        localCard.addToColorIdentity(tempColor)
+    //                                    }
+    //                                    //card subtypes
+    //                                    if let types = localCard.cardsubtypes {
+    //                                        localCard.removeFromCardsubtypes(types)
+    //                                    }
+    //                                    for sub in eCard.subtypes {
+    //                                        guard  let entity = NSEntityDescription.entity(forEntityName: "CardSubtype", in: managedObjectContext) else {
+    //                                            fatalError("Failed to decode Card")
+    //                                        }
+    //                                        let tempsub = CardSubtype.init(entity: entity, insertInto: managedObjectContext)
+    //                                        tempsub.subtype = sub
+    //                                        tempsub.card = localCard
+    //                                        localCard.addToCardsubtypes(tempsub)
+    //                                    }
+    //                                    //card super types
+    //                                    if let types = localCard.cardsupertypes {
+    //                                        localCard.removeFromCardsupertypes(types)
+    //                                    }
+    //                                    for superType in eCard.supertypes {
+    //                                        guard  let entity = NSEntityDescription.entity(forEntityName: "CardSupertype", in: managedObjectContext) else {
+    //                                            fatalError("Failed to decode Card")
+    //                                        }
+    //                                        let tempsub = CardSupertype.init(entity: entity, insertInto: managedObjectContext)
+    //                                        tempsub.supertype = superType
+    //                                        tempsub.card = localCard
+    //                                        localCard.addToCardsupertypes(tempsub)
+    //                                    }
+    //                                    //card Data
+    //                                    localCard.artist = eCard.artist
+    //                                    localCard.borderColor = eCard.borderColor
+    //                                    localCard.colors = eCard.colors
+    //                                    localCard.convertedManaCost = Float(eCard.convertedManaCost ?? 0)
+    //                                    localCard.flavorText = eCard.flavorText
+    //                                    localCard.frameVersion = eCard.frameVersion
+    //                                    localCard.hasFoil = eCard.hasFoil
+    //                                    localCard.hasNonFoil = eCard.hasNonFoil
+    //                                    localCard.layout = eCard.layout
+    //                                    localCard.manaCost = eCard.manaCost
+    //                                    localCard.multiverseID = Int32(eCard.multiverseID ?? 0)
+    //                                    localCard.name = eCard.name
+    //                                    localCard.number = eCard.number
+    //                                    localCard.originalText = eCard.originalText
+    //                                    localCard.originalType = eCard.originalType
+    //                                    localCard.power = eCard.power
+    //                                    localCard.printings = eCard.printings
+    //                                    localCard.rarity = eCard.rarity
+    //                                    localCard.scryfallID = eCard.scryfallID
+    //                                    localCard.tcgplayerProductID = Int32(eCard.tcgplayerProductID ?? 0)
+    //                                    localCard.text = eCard.text
+    //                                    localCard.toughness = eCard.toughness
+    //                                    localCard.type = eCard.type
+    //                                    localCard.watermark = eCard.watermark
+    //                                    localCard.names = eCard.names
+    //                                    localCard.loyalty = eCard.loyalty
+    //                                    localCard.faceConvertedManaCost = Float(eCard.faceConvertedManaCost ?? 0)
+    //                                    localCard.side = eCard.side
+    //                                    localCard.variations = eCard.variations
+    //                                    localCard.starter = eCard.isStarter ?? false
+    //                                    localCard.isReserved = eCard.isReserved ?? false
+    //                                }
+    //                            }
+    //                            //new cards?
+    //                            let newCards = updateCards.filter {
+    //                                let uuid = $0.uuid
+    //                                return !localSetCards.contains { $0.uuid == uuid }
+    //                            }
+    //
+    //                            for card in newCards {
+    //                                do {
+    //                                    let c1 = try card.jsonData()
+    //                                    let newCard = try decoder.decode(Card.self, from: c1)
+    //                                    if let localSet = localSet {
+    //                                        newCard.set = localSet
+    //                                        localSet.cards.addingObjects(from: [newCard])
+    //                                        let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeData as String)
+    //                                        attributeSet.title = newCard.name
+    //                                        attributeSet.contentDescription = newCard.set.name
+    //
+    //                                        if let uuid = newCard.uuid {
+    //                                            let item = CSSearchableItem(uniqueIdentifier: "\(uuid)", domainIdentifier: "com.roboticsnailsoftware.MTGCollection", attributeSet: attributeSet)
+    //                                            CSSearchableIndex.default().indexSearchableItems([item]) { error in
+    //                                                if let error = error {
+    //                                                    print("Indexing error: \(error.localizedDescription)")
+    //                                                } else {
+    //                                                    print("Search item successfully indexed!")
+    //                                                }
+    //                                            }
+    //
+    //                                        }
+    //                                    }
+    //                                } catch {
+    //                                    print(error)
+    //                                }
+    //                            }
+    //
+    //                            //deleted cards?
+    //                            let deletedCards = localSetCards.filter {
+    //                                let uuid = $0.uuid
+    //                                return !updateCards.contains { $0.uuid == uuid }
+    //                            }
+    //
+    //                            for dcard in deletedCards {
+    //                                managedObjectContext.delete(dcard)
+    //                            }
+    //                            //update set data
+    //                            localSet?.baseSetSize = Int16(setUpdate.baseSetSize)
+    //                            localSet?.block = setUpdate.block
+    //                            localSet?.code = setUpdate.code
+    //                            localSet?.isFoilOnly = setUpdate.isFoilOnly
+    //                            localSet?.isOnlineOnly = setUpdate.isOnlineOnly
+    //                            localSet?.meta?.date = setUpdate.meta.date
+    //                            localSet?.meta?.version = setUpdate.meta.version
+    //                            localSet?.mtgoCode = setUpdate.mtgoCode
+    //                            localSet?.name = setUpdate.name
+    //                            localSet?.releaseDate = setUpdate.releaseDate
+    //                            localSet?.tcgplayerGroupID = Int16(setUpdate.tcgplayerGroupID ?? 0)
+    //                            //tokens
+    //                            localSet?.totalSetSize = Int16(setUpdate.totalSetSize)
+    //                            localSet?.type = setUpdate.type
+    //
+    //                            do {
+    //                                try managedObjectContext.save()
+    //                            } catch {
+    //                                print(error)
+    //                            }
+    //                        }
+    //
+    //                    }
+    //                }
+    //
+    //            }
+    //
+    //        }
+    //
+    //    }
     
     @IBAction func backupPersonalData(_ sender: Any) {
         let path = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("myMTG.json")
