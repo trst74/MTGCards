@@ -141,7 +141,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
             case 3:
-                if let url = URL(string: "http://www.mymtg.app"){
+                if let url = URL(string: "https://roboticsnailsoftware.com/work/mymtg"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
             case 4:

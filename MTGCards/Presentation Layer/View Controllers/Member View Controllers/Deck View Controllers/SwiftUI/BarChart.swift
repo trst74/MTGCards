@@ -16,14 +16,14 @@ struct BarChart: View {
             if bars.isEmpty {
                 Text("There is no data to display.")
             } else {
-                VStack {
+               
                     BarsView(bars: bars)
                     
-                }
+                
                 .padding(.leading, 20)
                 .padding(.trailing, 20)
-                .padding(.top, 50)
-                .padding(.bottom, 50)
+                .padding(.top, 10)
+                //.padding(.bottom, 50)
             }
         }
     }
@@ -46,7 +46,7 @@ struct BarsView: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
+        //GeometryReader { geometry in
             HStack(alignment: .bottom, spacing: 0) {
                 ForEach(self.bars) { bar in
                     VStack {
@@ -54,7 +54,7 @@ struct BarsView: View {
                             .font(.subheadline)
                         Rectangle()
                             .fill(bar.color)
-                            .frame( height: CGFloat(bar.value) / CGFloat(self.max) * geometry.size.height)
+                            .frame( height: CGFloat(bar.value) / CGFloat(self.max) * 150)
                             .accessibility(label: Text(bar.label))
                             
                             .padding(.all, 5)
@@ -66,7 +66,7 @@ struct BarsView: View {
                     .padding(.bottom, 10)
                 }
             }
-        }
+//        }
     }
 }
 
@@ -97,7 +97,7 @@ struct LabelsView: View {
 }
 struct CMCTableView_Previews: PreviewProvider {
     static var previews: some View {
-        Group{
+        Group {
             BarChart(bars:
                 [Bar(id: UUID(), value: 2.2, label: "Plains", color: Color("Plains")),
                  Bar(id: UUID(), value: 8.2, label: "Islands",color: Color("Islands")),
@@ -105,6 +105,8 @@ struct CMCTableView_Previews: PreviewProvider {
                  Bar(id: UUID(), value: 6.0, label: "Mountains",color: Color("Mountains")),
                  Bar(id: UUID(), value: 4.2, label: "Forests",color: Color("Forests"))])
                 .environment(\.colorScheme, .dark)
+           
+            .previewDevice(PreviewDevice(rawValue: "iPhone 12 mini"))
             BarChart(bars:
                 [Bar(id: UUID(), value: 2.2, label: "Plains", color: Color("Plains")),
                  Bar(id: UUID(), value: 8.2, label: "Islands",color: Color("Islands")),
@@ -112,6 +114,7 @@ struct CMCTableView_Previews: PreviewProvider {
                  Bar(id: UUID(), value: 6.0, label: "Mountains",color: Color("Mountains")),
                  Bar(id: UUID(), value: 4.2, label: "Forests",color: Color("Forests"))])
                 .environment(\.colorScheme, .light)
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
         }
     }
 }

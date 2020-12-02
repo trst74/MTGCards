@@ -121,6 +121,7 @@
 		EEC91990223080DF004E52F5 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC9198F223080DF004E52F5 /* SettingsTableViewController.swift */; };
 		EED295D8256DD056003A1800 /* Updates.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED295D7256DD056003A1800 /* Updates.swift */; };
 		EED295E6256DE2BD003A1800 /* NonCDSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED295E5256DE2BD003A1800 /* NonCDSet.swift */; };
+		EED295ED25771364003A1800 /* DeckStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED295EC25771363003A1800 /* DeckStatsView.swift */; };
 		EEE7D56F225B6E0000FE4D1C /* ColorIdentity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE7D56D225B6E0000FE4D1C /* ColorIdentity+CoreDataClass.swift */; };
 		EEE7D570225B6E0000FE4D1C /* ColorIdentity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE7D56E225B6E0000FE4D1C /* ColorIdentity+CoreDataProperties.swift */; };
 		EEE7D587225B91DD00FE4D1C /* CardSubtype+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE7D585225B91DD00FE4D1C /* CardSubtype+CoreDataClass.swift */; };
@@ -305,6 +306,7 @@
 		EEC9198F223080DF004E52F5 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		EED295D7256DD056003A1800 /* Updates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updates.swift; sourceTree = "<group>"; };
 		EED295E5256DE2BD003A1800 /* NonCDSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonCDSet.swift; sourceTree = "<group>"; };
+		EED295EC25771363003A1800 /* DeckStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStatsView.swift; sourceTree = "<group>"; };
 		EEE7D56D225B6E0000FE4D1C /* ColorIdentity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorIdentity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EEE7D56E225B6E0000FE4D1C /* ColorIdentity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorIdentity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EEE7D585225B91DD00FE4D1C /* CardSubtype+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardSubtype+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 				EE0573D823FF342600316516 /* SunburstView.swift */,
 				EE0573DA23FF345B00316516 /* Sunburst.swift */,
 				EE37BA662494017A007885DF /* DeckLegalities.swift */,
+				EED295EC25771363003A1800 /* DeckStatsView.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -840,6 +843,7 @@
 				EE99E168243FBFC6008BEFAA /* Sharing.swift in Sources */,
 				EE2B821F21FCCA3900306990 /* Card.swift in Sources */,
 				EEB5D81F2205EBFF0070FF8B /* UIColor+Custom.swift in Sources */,
+				EED295ED25771364003A1800 /* DeckStatsView.swift in Sources */,
 				EE99E17424411856008BEFAA /* OnboardingPageViewController.swift in Sources */,
 				EE2B78CF21F009A600306990 /* PlaceholderViewController.swift in Sources */,
 				EE2B78D521F1518E00306990 /* SetList.swift in Sources */,

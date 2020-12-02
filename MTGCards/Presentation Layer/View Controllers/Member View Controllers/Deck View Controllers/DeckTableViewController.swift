@@ -117,11 +117,19 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
     }
     @objc func showDeckStats(){
         if let id = deck?.objectID {
+//            if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
+//                self.navigationController?.pushViewController(DeckStatsTableViewController.refreshDeckStats(id: id), animated: true)
+//            } else {
+//                self.splitViewController?.setViewController(nil, for: .secondary)
+//                self.splitViewController?.setViewController(DeckStatsTableViewController.refreshDeckStats(id: id), for: .secondary)
+//            }
             if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
-                self.navigationController?.pushViewController(DeckStatsTableViewController.refreshDeckStats(id: id), animated: true)
+                let vc = UIHostingController(rootView: DeckStatsView(deck: deck))
+                self.navigationController?.pushViewController(vc, animated: true)
             } else {
                 self.splitViewController?.setViewController(nil, for: .secondary)
-                self.splitViewController?.setViewController(DeckStatsTableViewController.refreshDeckStats(id: id), for: .secondary)
+                let vc = UIHostingController(rootView: DeckStatsView(deck: deck))
+                self.splitViewController?.setViewController(vc, for: .secondary)
             }
         }
     }
