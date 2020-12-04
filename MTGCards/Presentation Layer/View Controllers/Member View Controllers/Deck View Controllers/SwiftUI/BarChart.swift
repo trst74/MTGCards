@@ -60,7 +60,11 @@ struct BarsView: View {
                             .padding(.all, 5)
                         
                         Text(bar.label)
+                            //.rotationEffect(.degrees(-50), anchor: .topLeading)
                             .font(.subheadline)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.01)
+                            
                         
                     }
                     .padding(.bottom, 10)

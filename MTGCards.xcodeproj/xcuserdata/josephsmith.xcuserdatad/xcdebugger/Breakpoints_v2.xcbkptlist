@@ -30,8 +30,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/SidebarCollectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "548"
-            endingLineNumber = "548"
+            startingLineNumber = "551"
+            endingLineNumber = "551"
             landmarkName = "collectionView(_:performDropWith:)"
             landmarkType = "7">
             <Locations>
@@ -78,8 +78,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/SidebarCollectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "546"
-            endingLineNumber = "546"
+            startingLineNumber = "549"
+            endingLineNumber = "549"
             landmarkName = "collectionView(_:performDropWith:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/SidebarCollectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "553"
-            endingLineNumber = "553"
+            startingLineNumber = "556"
+            endingLineNumber = "556"
             landmarkName = "collectionView(_:performDropWith:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -324,8 +324,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/Deck View Controllers/SwiftUI/DeckStatsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "getRarityBars()"
             landmarkType = "7">
          </BreakpointContent>
@@ -340,8 +340,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/Deck View Controllers/SwiftUI/DeckStatsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -356,8 +356,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/Deck View Controllers/SwiftUI/DeckStatsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
             landmarkName = "createCMCBars()"
             landmarkType = "7">
          </BreakpointContent>
@@ -381,17 +381,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "ED023D11-BAD6-4E58-AECB-691FA77BAF72"
+            uuid = "912D01C4-C589-49F2-B461-7A3E507C6816"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/Deck View Controllers/SwiftUI/SunburstView.swift"
+            filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/Deck View Controllers/SwiftUI/DeckStatsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "body"
-            landmarkType = "24">
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "calculateTypes()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

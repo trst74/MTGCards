@@ -38,7 +38,6 @@ class TcgPlayerApi {
                         do {
                             let token = try decoder.decode(TcgToken.self, from: jsonData)
                             self.token = token
-                            print("token recieved: \(String(describing: self.token?.accessToken))")
                             completion(true)
                         } catch {
                             print(error)
@@ -71,7 +70,7 @@ class TcgPlayerApi {
         group.notify(queue: .main){
             let ids = cardIds.map({"\($0)"}).joined(separator: ",")
             if let url = URL(string: self.pricesURL + ids){
-                print(url)
+               
                 var request = URLRequest(url: url)
                 if let bearer = self.token?.accessToken {
                     request.setValue("bearer \(bearer)", forHTTPHeaderField: "Authorization")

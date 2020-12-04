@@ -18,7 +18,6 @@ public struct SunburstView: View {
     
     public var body: some View {
         var view = AnyView(Text("There is no data to display."))
-        print(sunburst.configuration.nodes.count)
         if sunburst.configuration.nodes.count > 0 {
             
             

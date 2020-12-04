@@ -28,7 +28,7 @@ struct DeckLegalities: View {
             
         }
     //.padding()
-        .background(Color(UIColor.systemBackground))
+        //.background(Color(UIColor.systemBackground))
     }
     
     init(formats: [Format]){
@@ -69,5 +69,8 @@ struct DeckLegalities_Previews: PreviewProvider {
         Format(name: "Duel", legality: "Legal"),
         ])
             .environment(\.colorScheme, .dark)
+     
+
     }
 }
+

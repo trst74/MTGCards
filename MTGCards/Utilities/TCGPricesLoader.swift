@@ -23,6 +23,25 @@ class TCGPricesLoader: ObservableObject {
         } 
         
     }
+    func getTotal(deck: Deck?) -> Double {
+        var total = 0.0
+        if let d = deck {
+            if let cards = d.cards {
+                for deckcard in (cards.allObjects as? [DeckCard] ?? []) {
+                    if let tcgid = deckcard.card?.tcgplayerProductID {
+                        var subtype = "Normal"
+                        if deckcard.isFoil {
+                            subtype = "Foil"
+                        }
+                        let cardprices = self.downloadedPrices?.results.first(where: {$0.productID == tcgid && $0.subTypeName == subtype})
+                        if let result = cardprices, let market = result.marketPrice {
+                            total += (market * Double(deckcard.quantity))
+                        }
+                    }
+                }
+            }
+        }
+        return total
+    }
 }
-
 

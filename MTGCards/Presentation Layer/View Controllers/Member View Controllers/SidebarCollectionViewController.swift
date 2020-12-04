@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import MobileCoreServices
 import UniformTypeIdentifiers
+import SwiftUI
 //#if !targetEnvironment(macCatalyst)
 //@objc protocol NSToolbarDelegate {
 //}
@@ -406,7 +407,9 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
                 self.splitViewController?.setViewController(DeckTableViewController.freshDeck(deck: cdDecks[indexPath.row-1].objectID), for: .supplementary)
                 
                 self.splitViewController?.setViewController(nil, for: .secondary)
-                self.splitViewController?.setViewController(DeckStatsTableViewController.refreshDeckStats(id: cdDecks[indexPath.row-1].objectID), for: .secondary)
+                //self.splitViewController?.setViewController(DeckStatsTableViewController.refreshDeckStats(id: cdDecks[indexPath.row-1].objectID), for: .secondary)
+                let vc = UIHostingController(rootView: DeckStatsView(deck: cdDecks[indexPath.row-1]))
+                self.splitViewController?.setViewController(vc, for: .secondary)
                 
             } else if indexPath.section == 1 {
                 //StateCoordinator.shared.didSelectCollection(collection: cdCollections[indexPath.row].objectID)
