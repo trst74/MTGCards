@@ -31,8 +31,11 @@ class PageTwoViewController: UIViewController {
     }
     @IBAction func done(_ sender: Any) {
         
-        self.dismiss(animated: true){
-            self.pageOne?.dismiss(animated: false, completion: nil)
+//        self.dismiss(animated: true){
+//            self.pageOne?.dismiss(animated: false, completion: nil)
+//        }
+        if let pageViewController = self.parent as? OnboardingPageViewController {
+            pageViewController.setViewControllers([pageViewController.pages[2]], direction: .forward, animated: true, completion: nil)
         }
     }
     func downloadSets(){
@@ -154,6 +157,7 @@ class PageTwoViewController: UIViewController {
                 }
             }
         }
+        UserDefaultsHandler.setLastTimeUpdated(updateDate: Date())
     }
 }
 

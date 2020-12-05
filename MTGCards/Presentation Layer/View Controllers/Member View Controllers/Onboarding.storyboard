@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Tma-yz-VIA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Tma-yz-VIA">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Onboarding Page View Controller-->
         <scene sceneID="R4H-61-FUE">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Tma-yz-VIA" customClass="OnboardingPageViewController" customModule="MTGCards" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Tma-yz-VIA" customClass="OnboardingPageViewController" customModule="My_MTG" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d0W-QZ-RGe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1524" y="741"/>
@@ -18,12 +19,12 @@
         <!--Page One View Controller-->
         <scene sceneID="kii-Te-i9N">
             <objects>
-                <viewController storyboardIdentifier="Page1" id="tFQ-Tl-UL0" customClass="PageOneViewController" customModule="MTGCards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Page1" id="tFQ-Tl-UL0" customClass="PageOneViewController" customModule="My_MTG" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eWh-xo-5FZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAt-NO-XTZ" customClass="RoundButton" customModule="MTGCards" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAt-NO-XTZ" customClass="RoundButton" customModule="My_MTG" customModuleProvider="target">
                                 <rect key="frame" x="20" y="577" width="335" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -44,14 +45,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="67"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just one more step!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ig9-hJ-Lna">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Almost there!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ig9-hJ-Lna">
                                 <rect key="frame" x="20" y="288" width="335" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="JNt-g7-spw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="JNt-g7-spw" firstAttribute="trailing" secondItem="ig9-hJ-Lna" secondAttribute="trailing" constant="20" id="7X8-er-PJe"/>
                             <constraint firstItem="ig9-hJ-Lna" firstAttribute="leading" secondItem="JNt-g7-spw" secondAttribute="leading" constant="20" id="Htv-o1-2vS"/>
@@ -64,7 +66,6 @@
                             <constraint firstItem="3SV-0i-ZuR" firstAttribute="centerX" secondItem="JNt-g7-spw" secondAttribute="centerX" id="gf3-St-zXD"/>
                             <constraint firstAttribute="bottom" secondItem="ZAt-NO-XTZ" secondAttribute="bottom" constant="40" id="yMF-ag-hKO"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="JNt-g7-spw"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JyK-oq-gsN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -74,12 +75,12 @@
         <!--Page Two View Controller-->
         <scene sceneID="1gK-QC-fNR">
             <objects>
-                <viewController storyboardIdentifier="Page2" id="IL5-oH-z6U" customClass="PageTwoViewController" customModule="MTGCards" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Page2" id="IL5-oH-z6U" customClass="PageTwoViewController" customModule="My_MTG" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0t8-pd-fuv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2h3-Mc-Bw6" customClass="RoundButton" customModule="MTGCards" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2h3-Mc-Bw6" customClass="RoundButton" customModule="My_MTG" customModuleProvider="target">
                                 <rect key="frame" x="20" y="285" width="335" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -93,14 +94,14 @@
                                     <action selector="downloadData:" destination="IL5-oH-z6U" eventType="touchUpInside" id="zwh-1w-ow9"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7n-cu-Lip" customClass="RoundButton" customModule="MTGCards" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7n-cu-Lip" customClass="RoundButton" customModule="My_MTG" customModuleProvider="target">
                                 <rect key="frame" x="20" y="577" width="335" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="dwg-xe-93s"/>
                                 </constraints>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Done"/>
+                                <state key="normal" title="Next"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="10"/>
@@ -136,11 +137,11 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9vW-e2-sgJ">
-                                <rect key="frame" x="20" y="335" width="335" height="2"/>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9vW-e2-sgJ">
+                                <rect key="frame" x="20" y="335" width="335" height="4"/>
                             </progressView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPH-eJ-YZ0">
-                                <rect key="frame" x="20" y="345" width="335" height="21"/>
+                                <rect key="frame" x="20" y="347" width="335" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Exg-GL-Iyt"/>
                                 </constraints>
@@ -149,7 +150,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="M4S-S1-ocE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="oPH-eJ-YZ0" firstAttribute="top" secondItem="9vW-e2-sgJ" secondAttribute="bottom" constant="8" id="2Ht-j5-Ahz"/>
                             <constraint firstItem="M4S-S1-ocE" firstAttribute="trailing" secondItem="9vW-e2-sgJ" secondAttribute="trailing" constant="20" id="7Sz-7g-Xb1"/>
@@ -170,7 +172,6 @@
                             <constraint firstItem="9vW-e2-sgJ" firstAttribute="top" secondItem="2h3-Mc-Bw6" secondAttribute="bottom" constant="20" id="oep-rP-DgH"/>
                             <constraint firstItem="BnT-MX-vRi" firstAttribute="centerX" secondItem="M4S-S1-ocE" secondAttribute="centerX" id="y1h-EB-Ro5"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="M4S-S1-ocE"/>
                     </view>
                     <connections>
                         <outlet property="doneButton" destination="u7n-cu-Lip" id="PUF-vk-wZ8"/>
@@ -181,7 +182,116 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L6m-dC-iyw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="28" y="738.98050974512751"/>
+            <point key="canvasLocation" x="130" y="749"/>
+        </scene>
+        <!--Notifications View Controller-->
+        <scene sceneID="7Jr-fK-Jjb">
+            <objects>
+                <viewController storyboardIdentifier="Notifications" id="GLN-xk-VTe" customClass="NotificationsViewController" customModule="My_MTG" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kWh-Dz-dWg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8W3-db-alt" customClass="RoundButton" customModule="My_MTG" customModuleProvider="target">
+                                <rect key="frame" x="20" y="578" width="335" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="yhf-A9-h1R"/>
+                                </constraints>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Done"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="done:" destination="GLN-xk-VTe" eventType="touchUpInside" id="jK5-Uu-9Wr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h1T-Ky-lZH" customClass="RoundButton" customModule="My_MTG" customModuleProvider="target">
+                                <rect key="frame" x="20" y="318.5" width="335" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Allow Notifications"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="notifications:" destination="GLN-xk-VTe" eventType="touchUpInside" id="cSt-xB-GUo"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oau-Sj-ETj">
+                                <rect key="frame" x="108" y="180.5" width="159" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAV-eB-5Ex">
+                                <rect key="frame" x="28" y="235.5" width="319" height="55"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">We use notifications to present alerts for updates and changes. 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Click below to Authorize Notifications.">
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="y66-m3-nF8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xAV-eB-5Ex" firstAttribute="top" secondItem="oau-Sj-ETj" secondAttribute="bottom" constant="20" id="9kP-sa-ckU"/>
+                            <constraint firstItem="h1T-Ky-lZH" firstAttribute="top" secondItem="xAV-eB-5Ex" secondAttribute="bottom" constant="28" id="LUu-r7-YfD"/>
+                            <constraint firstItem="h1T-Ky-lZH" firstAttribute="centerY" secondItem="y66-m3-nF8" secondAttribute="centerY" id="RS8-VK-QIq"/>
+                            <constraint firstItem="y66-m3-nF8" firstAttribute="trailing" secondItem="xAV-eB-5Ex" secondAttribute="trailing" constant="28" id="Seh-Ap-89d"/>
+                            <constraint firstItem="y66-m3-nF8" firstAttribute="trailing" secondItem="8W3-db-alt" secondAttribute="trailing" constant="20" id="VTS-pL-T1d"/>
+                            <constraint firstItem="oau-Sj-ETj" firstAttribute="centerX" secondItem="y66-m3-nF8" secondAttribute="centerX" id="WDz-kQ-bGA"/>
+                            <constraint firstItem="y66-m3-nF8" firstAttribute="bottom" secondItem="8W3-db-alt" secondAttribute="bottom" constant="39" id="Wte-SG-kJ4"/>
+                            <constraint firstItem="8W3-db-alt" firstAttribute="leading" secondItem="y66-m3-nF8" secondAttribute="leading" constant="20" id="cMH-SW-gsT"/>
+                            <constraint firstItem="xAV-eB-5Ex" firstAttribute="leading" secondItem="y66-m3-nF8" secondAttribute="leading" constant="28" id="lpY-H9-scV"/>
+                            <constraint firstItem="y66-m3-nF8" firstAttribute="trailing" secondItem="h1T-Ky-lZH" secondAttribute="trailing" constant="20" id="njh-zh-B9k"/>
+                            <constraint firstItem="h1T-Ky-lZH" firstAttribute="leading" secondItem="y66-m3-nF8" secondAttribute="leading" constant="20" id="pnp-YX-unt"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JMO-LH-73j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="805.60000000000002" y="748.87556221889065"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="2h3-Mc-Bw6">
+            <size key="intrinsicContentSize" width="141" height="30"/>
+        </designable>
+        <designable name="8W3-db-alt">
+            <size key="intrinsicContentSize" width="37" height="30"/>
+        </designable>
+        <designable name="ZAt-NO-XTZ">
+            <size key="intrinsicContentSize" width="38" height="34"/>
+        </designable>
+        <designable name="h1T-Ky-lZH">
+            <size key="intrinsicContentSize" width="128" height="30"/>
+        </designable>
+        <designable name="u7n-cu-Lip">
+            <size key="intrinsicContentSize" width="32" height="30"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

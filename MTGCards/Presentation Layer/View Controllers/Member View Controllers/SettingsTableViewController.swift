@@ -12,8 +12,10 @@ import MobileCoreServices
 import CoreServices
 import CoreSpotlight
 import StoreKit
+import UserNotifications
 
 class SettingsTableViewController: UITableViewController, UIDocumentPickerDelegate {
+    @IBOutlet weak var updateButton: UIButton!
     
     @IBOutlet weak var fileInfoLabel: UILabel!
     @IBOutlet weak var noImageSwitch: UISwitch!
@@ -235,8 +237,13 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
     @IBAction func excludeSwitchChanged(_ sender: UISwitch) {
         UserDefaultsHandler.setExcludeOnlineOnly(exclude: sender.isOn)
     }
-    @IBAction func manualUpdate(_ sender: Any) {
+    @IBAction func manualUpdate(_ sender: UIButton) {
         print("manual Update")
+        DispatchQueue.main.async {
+            self.updateButton.isEnabled = false
+            self.updateButton.setTitle("Updating", for: .normal)
+        }
+        
         if let updateDate = UserDefaultsHandler.getLastTimeUpdated() {
             print("Last Update Date \(updateDate)")
             
@@ -267,6 +274,8 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                     }
                     //apply updates
                     ApplyUpdate(update: compiledUpdate)
+                    
+                 
                 }
                 
             }
@@ -634,6 +643,40 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                 }
             }
             UserDefaultsHandler.setLastTimeUpdated(updateDate: Date())
+            print("Done update")
+            DispatchQueue.main.async {
+                self.updateButton.isEnabled = true
+                self.updateButton.setTitle("Update Card Data", for: .normal)
+            }
+            let notificationCenter = UNUserNotificationCenter.current()
+            
+//            let options: UNAuthorizationOptions = [.alert, .sound]
+//            notificationCenter.requestAuthorization(options: options) {
+//                (didAllow, error) in
+//                if !didAllow {
+//                    print("User has declined notifications")
+//                }
+//            }
+            
+            notificationCenter.getNotificationSettings { (settings) in
+                if settings.authorizationStatus != .authorized {
+                    // Notifications not allowed
+                } else {
+                    let content = UNMutableNotificationContent()
+                    content.title = "Update Finished"
+                    
+                    content.sound = UNNotificationSound.default
+                    
+                    // show this notification five seconds from now
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+                    
+                    // choose a random identifier
+                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                    
+                    // add our notification request
+                    UNUserNotificationCenter.current().add(request)
+                }
+            }
         }
     }
     //

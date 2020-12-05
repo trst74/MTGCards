@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pet-l8-cOj">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17504.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -502,6 +502,7 @@ Egor Sakhabaev - </string>
                         <outlet property="lowQualitySwitch" destination="iWU-eJ-LfW" id="owD-N6-U3m"/>
                         <outlet property="noImageSwitch" destination="s8R-V3-MVP" id="5MG-oV-ZcV"/>
                         <outlet property="normalQualitySwitch" destination="CMI-Xo-zvw" id="hxM-xz-1qP"/>
+                        <outlet property="updateButton" destination="fAX-MC-Fx4" id="zqk-IZ-zFi"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="agZ-rh-h6w" userLabel="First Responder" sceneMemberID="firstResponder"/>

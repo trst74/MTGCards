@@ -122,6 +122,7 @@
 		EED295D8256DD056003A1800 /* Updates.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED295D7256DD056003A1800 /* Updates.swift */; };
 		EED295E6256DE2BD003A1800 /* NonCDSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED295E5256DE2BD003A1800 /* NonCDSet.swift */; };
 		EED295ED25771364003A1800 /* DeckStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED295EC25771363003A1800 /* DeckStatsView.swift */; };
+		EED997BD257B19D40002F12E /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED997BC257B19D40002F12E /* NotificationsViewController.swift */; };
 		EEE7D56F225B6E0000FE4D1C /* ColorIdentity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE7D56D225B6E0000FE4D1C /* ColorIdentity+CoreDataClass.swift */; };
 		EEE7D570225B6E0000FE4D1C /* ColorIdentity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE7D56E225B6E0000FE4D1C /* ColorIdentity+CoreDataProperties.swift */; };
 		EEE7D587225B91DD00FE4D1C /* CardSubtype+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE7D585225B91DD00FE4D1C /* CardSubtype+CoreDataClass.swift */; };
@@ -307,6 +308,7 @@
 		EED295D7256DD056003A1800 /* Updates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updates.swift; sourceTree = "<group>"; };
 		EED295E5256DE2BD003A1800 /* NonCDSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonCDSet.swift; sourceTree = "<group>"; };
 		EED295EC25771363003A1800 /* DeckStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStatsView.swift; sourceTree = "<group>"; };
+		EED997BC257B19D40002F12E /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		EEE7D56D225B6E0000FE4D1C /* ColorIdentity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorIdentity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EEE7D56E225B6E0000FE4D1C /* ColorIdentity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorIdentity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EEE7D585225B91DD00FE4D1C /* CardSubtype+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardSubtype+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -494,6 +496,7 @@
 				EE27552A22340F0F006BD083 /* Onboarding.storyboard */,
 				EE99E17324411856008BEFAA /* OnboardingPageViewController.swift */,
 				EE0F62AA22341DC1003D8A8A /* PageOneViewController.swift */,
+				EED997BC257B19D40002F12E /* NotificationsViewController.swift */,
 				EE0F62A822341CD7003D8A8A /* PageTwoViewController.swift */,
 				EE2B78CC21F009A600306990 /* PlaceholderView.storyboard */,
 				EE2B78CD21F009A600306990 /* PlaceholderViewController.swift */,
@@ -937,6 +940,7 @@
 				EE2B821D21FCAD5200306990 /* Ruling.swift in Sources */,
 				EEB0ADDA227A3C3400613C8C /* Backup.swift in Sources */,
 				EEBA1B82250939FC006DF743 /* RulingsView.swift in Sources */,
+				EED997BD257B19D40002F12E /* NotificationsViewController.swift in Sources */,
 				EE2443962530075D00B22885 /* macOSCardArtIntent.intentdefinition in Sources */,
 				EE35EDB123F627D4000254E7 /* Array+Custom.swift in Sources */,
 				EEF02F24223DAC11008F008B /* CollectionCard+CoreDataClass.swift in Sources */,
