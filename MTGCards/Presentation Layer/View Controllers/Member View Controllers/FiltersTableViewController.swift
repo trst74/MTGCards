@@ -21,6 +21,7 @@ class FiltersTableViewController: UITableViewController {
     @IBOutlet weak var subTypeLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var isPromo: UISwitch!
+    @IBOutlet weak var keywordLabel: UILabel!
     
     var searchTableViewController: CardListTableViewController? = nil
     
@@ -80,7 +81,7 @@ class FiltersTableViewController: UITableViewController {
         superTypeLabel.text = Filters.current.getSelectedSuperTypesDescription()
         legalityLabel.text = Filters.current.getSelectedLegalitiesDescription()
         setLabel.text = Filters.current.getSelectedSetsDescription()
-        
+        keywordLabel.text = Filters.current.getSelectedKeywordsDescription()
         isPromo.isOn = Filters.current.isPromoSelected()
         
     }
@@ -129,6 +130,10 @@ class FiltersTableViewController: UITableViewController {
             let destination = segue.destination as! SetFilterTableViewController
             destination.filterController = self
             destination.title = "Set"
+        } else if segue.identifier == "keywordsFilter" {
+            let destination = segue.destination as! KeywordFilterTableViewController
+            destination.filterController = self
+            destination.title = "Keyword"
         }
         
     }

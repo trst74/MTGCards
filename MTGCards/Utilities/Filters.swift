@@ -17,6 +17,7 @@ class Filters {
     private var selectedSuperTypes: [String] = []
     private var selectedLegalities: [String] = []
     private var selectedColorIdentities: [String] = []
+    private var selectedKeywords: [String] = []
     private var isPromo: Bool = false
     
     func selectSet(setCode: String) {
@@ -36,6 +37,30 @@ class Filters {
     }
     func getSelectedSetsDescription() -> String {
         return selectedSets.formattedDescription()
+    }
+    
+    func selectKeyword(keyword: String){
+        if !isKeywordSelected(keyword: keyword){
+            selectedKeywords.append(keyword)
+        }
+    }
+    func deselectKeyword(keyword: String) {
+        if isKeywordSelected(keyword: keyword){
+            if let index = selectedKeywords.firstIndex(of: keyword) {
+                selectedKeywords.remove(at: index)
+            }
+        }
+    }
+    
+    
+    func isKeywordSelected(keyword: String) -> Bool {
+        return selectedKeywords.contains(keyword)
+    }
+    func getSelectedKeywordsDescription() -> String {
+        return selectedKeywords.formattedDescription()
+    }
+    func getSelectedKeywords() -> String {
+        return selectedKeywords.formattedDescription()
     }
     
     func selectType(type: String){
@@ -163,6 +188,10 @@ class Filters {
             predicates.append(predicate)
             
         }
+        if selectedKeywords.count > 0 {
+            let keywordsPredicate = NSPredicate(format: "ANY keywords.keyword  in %@", selectedKeywords)
+            predicates.append(keywordsPredicate)
+        }
         if selectedColorIdentities.count > 0 && Set(selectedColorIdentities).subtracting(["nC"]).count < 5 {
             let colors = ["W","U","B","R","G"]
             var identityPredicates: [NSPredicate] = []
@@ -203,6 +232,7 @@ class Filters {
         selectedLegalities = []
         selectedColorIdentities = []
         isPromo = false
+        selectedKeywords = []
     }
 }
 extension Array where Iterator.Element == String
