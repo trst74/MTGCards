@@ -23,6 +23,13 @@ class KeywordFilterTableViewController: UITableViewController {
             self.getKeywords()
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if let nav = self.navigationController {
+            nav.setToolbarHidden(true, animated: false)
+            
+        }
+    }
     func getKeywords(){
         let request = NSFetchRequest<CardKeyword>(entityName: "CardKeyword")
         let sortDescriptor = NSSortDescriptor(key: "keyword", ascending: true)

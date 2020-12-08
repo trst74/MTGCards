@@ -36,6 +36,13 @@ class SetFilterTableViewController: UITableViewController, UISearchResultsUpdati
             self.getSets()
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if let nav = self.navigationController {
+            nav.setToolbarHidden(true, animated: false)
+            
+        }
+    }
     func getSets(){
         let request = NSFetchRequest<MTGSet>(entityName: "MTGSet")
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)

@@ -23,6 +23,13 @@ class SubTypeFilterTableViewController: UITableViewController {
             self.getTypes()
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if let nav = self.navigationController {
+            nav.setToolbarHidden(true, animated: false)
+            
+        }
+    }
     func getTypes(){
         let request = NSFetchRequest<CardSubtype>(entityName: "CardSubtype")
         let sortDescriptor = NSSortDescriptor(key: "subtype", ascending: true)

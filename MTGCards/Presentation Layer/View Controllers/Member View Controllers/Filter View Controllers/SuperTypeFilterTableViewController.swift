@@ -23,6 +23,13 @@ class SuperTypeFilterTableViewController: UITableViewController {
             self.getTypes()
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if let nav = self.navigationController {
+            nav.setToolbarHidden(true, animated: false)
+            
+        }
+    }
     func getTypes(){
         let request = NSFetchRequest<CardSupertype>(entityName: "CardSupertype")
         let sortDescriptor = NSSortDescriptor(key: "supertype", ascending: true)

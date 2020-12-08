@@ -20,7 +20,13 @@ class LegalityFilterTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if let nav = self.navigationController {
+            nav.setToolbarHidden(true, animated: false)
+            
+        }
+    }
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
