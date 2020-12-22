@@ -456,15 +456,13 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
         reloadCollectionsFromCoreData()
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, String> { (cell, indexPath, item) in
             var content = UIListContentConfiguration.sidebarCell()
-            content.image = UIImage(named: "star")
             content.text = "\(item)"
-            content.imageProperties.tintColor = .green
             content.textProperties.numberOfLines = 2
             cell.contentConfiguration = content
         }
         
         let headerRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { (cell, indexPath, item) in
-            var content = UIListContentConfiguration.sidebarCell()
+            var content = UIListContentConfiguration.sidebarHeader()
             content.text = item.title
             content.textProperties.font = UIFont.preferredFont(forTextStyle: .headline)
             cell.contentConfiguration = content
@@ -475,11 +473,6 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
             
             if indexPath.item == 0 {
                 let cell = collectionView.dequeueConfiguredReusableCell(using: headerRegistration, for: indexPath, item: item)
-//                if indexPath.section == 2 {
-//                    let headerDisclosureOption = UICellAccessory.OutlineDisclosureOptions(style: .header)
-//                    cell.accessories = [.outlineDisclosure(options:headerDisclosureOption)]
-//                }
-                
                 return cell
             } else {
                 return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item.title)
@@ -494,6 +487,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
             sectionSnapshot.append([headerItem])
             if section == "Tools" {
                 sectionSnapshot.append([Item(title: "Search")], to: headerItem)
+                
             } else if section == "Collections" {
                 sectionSnapshot.append([Item(title: "Collection"), Item(title: "Wish List")], to: headerItem)
             } else {

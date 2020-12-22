@@ -21,7 +21,7 @@ class TripleSplitViewController: UIViewController, UISplitViewControllerDelegate
         split.delegate = self
         
 //        let sb2 = CollectionsTableViewController.freshCollectionsList()
-        let sb2 = SidebarCollectionViewController(collectionViewLayout: UICollectionViewCompositionalLayout.list(using: UICollectionLayoutListConfiguration(appearance: .sidebarPlain)))
+        let sb2 = SidebarCollectionViewController(collectionViewLayout: UICollectionViewCompositionalLayout.list(using: UICollectionLayoutListConfiguration(appearance: .insetGrouped)))
         let nav = UINavigationController()
         nav.title = "Collections"
         nav.viewControllers.append(sb2)
