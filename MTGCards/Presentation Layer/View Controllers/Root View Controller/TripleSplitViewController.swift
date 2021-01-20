@@ -15,13 +15,21 @@ class TripleSplitViewController: UIViewController, UISplitViewControllerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         split.primaryBackgroundStyle = .sidebar
-//        let sb = CollectionsTableViewController.freshCollectionsList()
-        let sb = SidebarCollectionViewController(collectionViewLayout: UICollectionViewCompositionalLayout.list(using: UICollectionLayoutListConfiguration(appearance: .sidebar)))
+        
+        var config = UICollectionLayoutListConfiguration(appearance: .sidebar)
+        config.headerMode = .supplementary
+        config.footerMode = .none
+        let list =  UICollectionViewCompositionalLayout.list(using: config)
+        let sb = SidebarCollectionViewController(collectionViewLayout: list)
+        
         split.setViewController(sb, for: .primary)
         split.delegate = self
         
-//        let sb2 = CollectionsTableViewController.freshCollectionsList()
-        let sb2 = SidebarCollectionViewController(collectionViewLayout: UICollectionViewCompositionalLayout.list(using: UICollectionLayoutListConfiguration(appearance: .insetGrouped)))
+        var config2 = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
+        config2.headerMode = .supplementary
+        config2.footerMode = .none
+        let list2 =  UICollectionViewCompositionalLayout.list(using: config2)
+        let sb2 = SidebarCollectionViewController(collectionViewLayout: list2)
         let nav = UINavigationController()
         nav.title = "Collections"
         nav.viewControllers.append(sb2)

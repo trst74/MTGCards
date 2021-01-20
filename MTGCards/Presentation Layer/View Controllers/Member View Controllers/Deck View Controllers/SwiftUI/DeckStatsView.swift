@@ -65,15 +65,15 @@ struct DeckStatsView: View {
             return []
         }
     }
-    var commander: DeckCard? {
+    var commanders: [DeckCard] {
         get {
             if let d = deck {
-                if let c = d.cards?.first(where: { ($0 as? DeckCard)?.isCommander == true }) as? DeckCard
+                if let c = d.cards?.filter({ ($0 as? DeckCard)?.isCommander == true }) as? [DeckCard]
                 {
                     return c
                 }
             }
-            return nil
+            return []
         }
     }
     
@@ -377,7 +377,16 @@ struct DeckStatsView: View {
             formats.append(Format(name: "Vintage", legality: "Not Legal"))
         }
         let commander = allCards.allSatisfy({ $0.card?.legalities?.commander == "Legal"})
-        if commander && self.commander != nil && self.sideboard.count == 0 && self.getCardCount() == 100 {
+        var commanderColorID: [String] = []
+        for com in self.commanders {
+            commanderColorID.append(contentsOf: com.card?.colorIdentity?.allObjects.compactMap({($0 as? ColorIdentity)?.color}) ?? [])
+        }
+        var otherColorID: [String] = []
+        for c in self.mainboard {
+            otherColorID.append(contentsOf: c.card?.colorIdentity?.allObjects.compactMap({($0 as? ColorIdentity)?.color}) ?? [])
+        }
+        let isColorIDValid = otherColorID.allSatisfy( {commanderColorID.contains($0)} )
+        if commander && (self.commanders.count > 0 && self.commanders.count < 3) && self.sideboard.count == 0 && self.getCardCount() == 100 && isColorIDValid {
             formats.append(Format(name: "Commmander", legality: "Legal"))
         } else {
             formats.append(Format(name: "Commander", legality: "Not Legal"))

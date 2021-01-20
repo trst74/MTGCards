@@ -9,18 +9,16 @@
 	<key>INIntentDefinitionNamespace</key>
 	<string>ivwnIV</string>
 	<key>INIntentDefinitionSystemVersion</key>
-	<string>20D5029f</string>
+	<string>20A5384c</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
-	<string>12C33</string>
+	<string>12B5025f</string>
 	<key>INIntentDefinitionToolsVersion</key>
-	<string>12.3</string>
+	<string>12.2</string>
 	<key>INIntents</key>
 	<array>
 		<dict>
 			<key>INIntentCategory</key>
 			<string>information</string>
-			<key>INIntentDescription</key>
-			<string>Art Config</string>
 			<key>INIntentDescriptionID</key>
 			<string>dtoF11</string>
 			<key>INIntentEligibleForWidgets</key>
