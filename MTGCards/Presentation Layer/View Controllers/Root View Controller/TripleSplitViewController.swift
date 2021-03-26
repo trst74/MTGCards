@@ -70,7 +70,6 @@ class TripleSplitViewController: UIViewController, UISplitViewControllerDelegate
         ]
     }
     @objc func addButton(){
-        print("Add Button")
         split.viewController(for: .primary)?.performSelector(onMainThread: #selector(addButton), with: nil, waitUntilDone: false)
         split.viewController(for: .primary)
     }
@@ -102,7 +101,6 @@ class TripleSplitViewController: UIViewController, UISplitViewControllerDelegate
 //    }
     func splitViewController(_ svc: UISplitViewController,
                              displayModeForExpandingToProposedDisplayMode proposedDisplayMode: UISplitViewController.DisplayMode) -> UISplitViewController.DisplayMode {
-        print(proposedDisplayMode.rawValue)
         
         return .twoBesideSecondary
     }

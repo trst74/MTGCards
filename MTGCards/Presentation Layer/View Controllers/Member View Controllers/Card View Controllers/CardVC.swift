@@ -259,7 +259,6 @@ struct CardVC: View {
         let fileManager = FileManager.default
         let filename = getDocumentsDirectory().appendingPathComponent("\(Key).png")
         if fileManager.fileExists(atPath: filename.path) {
-            print("loaded from cache")
             return UIImage(contentsOfFile: filename.path)
         }
         return nil

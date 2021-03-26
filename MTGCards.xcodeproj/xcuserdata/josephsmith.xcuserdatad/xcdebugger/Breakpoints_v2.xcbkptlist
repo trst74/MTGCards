@@ -30,8 +30,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/SidebarCollectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "563"
-            endingLineNumber = "563"
+            startingLineNumber = "531"
+            endingLineNumber = "531"
             landmarkName = "collectionView(_:performDropWith:)"
             landmarkType = "7">
             <Locations>
@@ -78,8 +78,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/SidebarCollectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "561"
-            endingLineNumber = "561"
+            startingLineNumber = "529"
+            endingLineNumber = "529"
             landmarkName = "collectionView(_:performDropWith:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/SidebarCollectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "568"
-            endingLineNumber = "568"
+            startingLineNumber = "536"
+            endingLineNumber = "536"
             landmarkName = "collectionView(_:performDropWith:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -148,8 +148,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/SettingsTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "manualUpdate(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -164,8 +164,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/SettingsTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "276"
-            endingLineNumber = "276"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "manualUpdate(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -180,8 +180,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/SettingsTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "484"
-            endingLineNumber = "484"
+            startingLineNumber = "474"
+            endingLineNumber = "474"
             landmarkName = "ApplyUpdate(update:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -196,8 +196,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/SettingsTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "504"
-            endingLineNumber = "504"
+            startingLineNumber = "494"
+            endingLineNumber = "494"
             landmarkName = "ApplyUpdate(update:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -212,8 +212,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/SettingsTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "450"
-            endingLineNumber = "450"
+            startingLineNumber = "440"
+            endingLineNumber = "440"
             landmarkName = "ApplyUpdate(update:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -228,8 +228,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/SettingsTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "324"
-            endingLineNumber = "324"
+            startingLineNumber = "314"
+            endingLineNumber = "314"
             landmarkName = "ApplyUpdate(update:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -244,8 +244,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/SettingsTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
             landmarkName = "ApplyUpdate(update:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -260,8 +260,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/SettingsTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "506"
-            endingLineNumber = "506"
+            startingLineNumber = "496"
+            endingLineNumber = "496"
             landmarkName = "ApplyUpdate(update:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -308,8 +308,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/SettingsTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "485"
-            endingLineNumber = "485"
+            startingLineNumber = "475"
+            endingLineNumber = "475"
             landmarkName = "ApplyUpdate(update:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -500,8 +500,8 @@
             filePath = "MTGCards/Presentation Layer/View Controllers/Member View Controllers/SidebarCollectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "447"
-            endingLineNumber = "447"
+            startingLineNumber = "411"
+            endingLineNumber = "411"
             landmarkName = "createLayout()"
             landmarkType = "7">
          </BreakpointContent>

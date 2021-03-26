@@ -27,7 +27,6 @@ class EditDeckCardTableViewController: UITableViewController, UITextFieldDelegat
         super.viewWillDisappear(animated)
         
         if self.isMovingFromParent {
-            print("save")
             saveDeckCard()
         }
     }

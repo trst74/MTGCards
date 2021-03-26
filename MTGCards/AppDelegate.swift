@@ -100,7 +100,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if userActivity.activityType == CSSearchableItemActionType {
             if let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
-                print(uniqueIdentifier)
                 var card: Card?
                 let request = NSFetchRequest<Card>(entityName: "Card")
                 request.predicate = NSPredicate(format: "uuid == %@", uniqueIdentifier)

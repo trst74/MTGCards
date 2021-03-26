@@ -152,21 +152,18 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
         print("share")
     }
     @objc private func importDeck(){
-        print("import")
         let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.text])
         documentPicker.delegate = self
         self.present(documentPicker, animated: true)
         updateTitle()
     }
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        print(urls)
         importFile(url: urls[0])
     }
     private func importFile(url: URL){
         do {
             let contents = try String.init(contentsOf: url)
             let lines = contents.components(separatedBy: CharacterSet.newlines)
-            print(lines.count)
             var previousline = ""
             var isSideboard = false
             for line in lines {
@@ -190,10 +187,8 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
                     while let range = setCode.range(of: ")") {
                         setCode.removeSubrange(range.lowerBound..<range.upperBound)
                     }
-                    print("test")
                     addCard(name: name, setCode: setCode, quantity: Int(quantity) ?? 1, isSideboard: isSideboard)
                 } else if previousline == "" {
-                    print("sideboard start")
                     isSideboard = true
                 }
                 previousline = line

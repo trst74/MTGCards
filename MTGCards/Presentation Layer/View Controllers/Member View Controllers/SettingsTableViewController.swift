@@ -43,7 +43,6 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
             for filename in filelist {
                 if filename.contains(".png") {
                     do {
-                        print(filename)
                         try fileManager.removeItem(at: getDocumentsDirectory().appendingPathComponent(filename))
                     } catch let error {
                         print("Error: \(error.localizedDescription)")
@@ -57,8 +56,6 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
     }
     func updateFileInfoLabel() {
         let fileInfo = getFileCountAndSize()
-        print("Count: \(fileInfo.count)")
-        print("Size: \(fileInfo.size / 1000000.0)")
         fileInfoLabel.text = "\(fileInfo.count) files, using \(fileInfo.size / 1000000.0) MBs"
     }
     func getFileCountAndSize() -> (count: Int, size: Double) {
@@ -171,7 +168,6 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
             let paths = getDocumentsDirectory().appendingPathComponent(dir)
             try! fileManager.createDirectory(at: paths, withIntermediateDirectories: true, attributes: nil)
             let filename = getDocumentsDirectory().appendingPathComponent("\(dir)/\(Key).png")
-            print(filename)
             try? data.write(to: filename)
         }
     }
@@ -238,21 +234,17 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
         UserDefaultsHandler.setExcludeOnlineOnly(exclude: sender.isOn)
     }
     @IBAction func manualUpdate(_ sender: UIButton) {
-        print("manual Update")
         DispatchQueue.main.async {
             self.updateButton.isEnabled = false
             self.updateButton.setTitle("Updating", for: .normal)
         }
         
         if let updateDate = UserDefaultsHandler.getLastTimeUpdated() {
-            print("Last Update Date \(updateDate)")
-            
             if let url = URL(string: "https://raw.githubusercontent.com/jmcsmith/jmcsmith.github.io/main/updates.json") {
                 let updates = try? Updates.init(fromURL: url)
                 if let updates = updates?.updates?.filter( {$0.date ?? Date() >= updateDate} ) {
                     var compiledUpdate = Update(date: Date(), sets: [])
                     for update in updates {
-                        print("\(update.date) : \(update.sets?.count) Sets")
                         for set in update.sets ?? [] {
                             
                             let compiledSet = compiledUpdate.sets?.first(where: { $0.code == set.code } )
@@ -295,14 +287,12 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
         DispatchQueue.global(qos: .default).async {
             let localSets = DataManager.getSets()
             for set in fullUpdateSets ?? [] {
-                print(set.code)
                 let localSet = localSets.first {
                     $0.code == set.code
                 }
                 //new set
                 if localSet == nil {
                     if let code = set.code {
-                        print("set missing locally: \(code)")
                         DataManager.getSet(setCode: code) { success in
                             CoreDataStack.handler.privateContext.parent?.reset()
                             //CoreDataStack.handler.privateContext.reset()
@@ -513,7 +503,6 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                 
             }
             for set in partialUpdateSets ?? [] {
-                print(set.code)
                 let localSet = localSets.first {
                     $0.code == set.code
                 }

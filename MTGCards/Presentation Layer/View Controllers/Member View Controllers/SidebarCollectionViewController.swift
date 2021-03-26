@@ -39,10 +39,10 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
     //var style: UICollectionLayoutListConfiguration.Appearance = .plain
     var dataSource: UICollectionViewDiffableDataSource<HeaderItem, Item>! = nil
     
-//    convenience init(style: UICollectionLayoutListConfiguration.Appearance) {
-//        self.init()
-//        self.style = style
-//    }
+    //    convenience init(style: UICollectionLayoutListConfiguration.Appearance) {
+    //        self.init()
+    //        self.style = style
+    //    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +62,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
             firstTimeOpened()
         }
         createDataSource()
-
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         
@@ -206,7 +206,6 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
                 let pasteboard = UIPasteboard.general
                 if let string = pasteboard.string {
                     let lines = string.components(separatedBy: CharacterSet.newlines)
-                    print(lines.count)
                     var previousline = ""
                     var isSideboard = false
                     for line in lines {
@@ -230,10 +229,8 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
                             while let range = setCode.range(of: ")") {
                                 setCode.removeSubrange(range.lowerBound..<range.upperBound)
                             }
-                            print("test")
                             self.addCard(name: name, setCode: setCode, quantity: Int(quantity) ?? 1, isSideboard: isSideboard, newDeck: newDeck)
                         } else if previousline == "" {
-                            print("sideboard start")
                             isSideboard = true
                         }
                         previousline = line
@@ -259,7 +256,6 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
         self.present(documentPicker, animated: true)
     }
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        print(urls)
         for url in urls {
             importFile(url: url)
         }
@@ -276,7 +272,6 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
             let contents = try String.init(contentsOf: url)
             
             let lines = contents.components(separatedBy: CharacterSet.newlines)
-            print(lines.count)
             var previousline = ""
             var isSideboard = false
             for line in lines {
@@ -302,7 +297,6 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
                     }
                     addCard(name: name, setCode: setCode, quantity: Int(quantity) ?? 1, isSideboard: isSideboard, newDeck: newDeck)
                 } else if previousline == "" {
-                    print("sideboard start")
                     isSideboard = true
                 }
                 previousline = line
@@ -323,7 +317,8 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
         
     }
     private func addCard(name: String, setCode: String, quantity: Int, isSideboard: Bool, newDeck: Deck){
-        let card = getCard(name: name, setCode: setCode)
+        let card = DataManager.getCard(name: name, setCode: setCode)
+        //let card = getCard(name: name, setCode: setCode)
         if let card = card {
             guard  let entity = NSEntityDescription.entity(forEntityName: "DeckCard", in:  CoreDataStack.handler.privateContext) else {
                 fatalError("Failed to decode Card")
@@ -335,38 +330,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
             newDeck.addToCards(deckCard)
         }
     }
-    private func getCard(name: String, setCode: String) -> Card? {
-        var card: Card?
-        let request = NSFetchRequest<Card>(entityName: "Card")
-        let predicate1 = NSPredicate(format: "name == %@", name.trimmingCharacters(in: CharacterSet.whitespaces))
-        let predicate2 = NSPredicate(format: "set.code == %@", setCode)
-        var predicates = [predicate1]
-        
-        if setCode != "" {
-            predicates.append(predicate2)
-        } else {
-            predicates.append(NSPredicate(format: "set.type != %@", "promo"))
-        }
-        if UserDefaultsHandler.areOnlineOnlyCardsExcluded() {
-            let onlineOnlyPredicate = NSPredicate(format: "set.isOnlineOnly == false")
-            predicates.append(onlineOnlyPredicate)
-        }
-        
-        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-        request.predicate = compound
-        let sortDescriptor = NSSortDescriptor(key: "set.releaseDate", ascending: false)
-        request.sortDescriptors = [sortDescriptor]
-        do {
-            let results = try CoreDataStack.handler.privateContext.fetch(request)
-            if results.count > 0 {
-                card = results[0]
-            }
-        } catch {
-            print(error)
-            card = nil
-        }
-        return card
-    }
+
     @objc func settings(){
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
         guard let settingsVC = storyboard.instantiateInitialViewController() as? SettingsTableViewController else {
@@ -438,10 +402,10 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
     
     private func configureHierarchy() {
         collectionView.collectionViewLayout = createLayout()
-//        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
-//        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        view.addSubview(collectionView)
-//        collectionView.delegate = self
+        //        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
+        //        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        //        view.addSubview(collectionView)
+        //        collectionView.delegate = self
     }
     private func createLayout() -> UICollectionViewLayout {
         var config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
@@ -521,39 +485,43 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
     }
     
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        let edit = UIAction(title: "Edit",
-                            image: UIImage(systemName: "pencil")) { _ in
-            let deck = self.cdDecks[indexPath.row-1]
-            let storyboard = UIStoryboard(name: "EditDeck", bundle: nil)
-            guard let editDeckView = storyboard.instantiateInitialViewController() as? EditDeckTableViewController else {
-                fatalError("Project config error - storyboard doesnt provide a EditDeckCard")
-            }
-            editDeckView.deck = deck
-            editDeckView.collectionsViewController = self
-            self.present(editDeckView, animated: true, completion: nil)
-            
-        }
-        
-        
-        let delete = UIAction(title: "Delete",
-                              image: UIImage(systemName: "trash.fill"),
-                              attributes: [.destructive]) { action in
-            CoreDataStack.handler.privateContext.delete(self.cdDecks[indexPath.row-1] as NSManagedObject)
-            do {
-                try CoreDataStack.handler.privateContext.save()
-            } catch {
-                print(error)
-            }
-            self.reloadDecksFromCoreData()
-            DispatchQueue.main.async {
+        if indexPath.section == 2 {
+            let edit = UIAction(title: "Edit",
+                                image: UIImage(systemName: "pencil")) { _ in
+                let deck = self.cdDecks[indexPath.row]
+                let storyboard = UIStoryboard(name: "EditDeck", bundle: nil)
+                guard let editDeckView = storyboard.instantiateInitialViewController() as? EditDeckTableViewController else {
+                    fatalError("Project config error - storyboard doesnt provide a EditDeckCard")
+                }
+                editDeckView.deck = deck
+                editDeckView.collectionsViewController = self
+                self.present(editDeckView, animated: true, completion: nil)
                 
-                self.createDataSource()
             }
-        }
-        
-        return UIContextMenuConfiguration(identifier: nil,
-                                          previewProvider: nil) { _ in
-            UIMenu(title: "", children: [edit, delete])
+            
+            
+            let delete = UIAction(title: "Delete",
+                                  image: UIImage(systemName: "trash.fill"),
+                                  attributes: [.destructive]) { action in
+                CoreDataStack.handler.privateContext.delete(self.cdDecks[indexPath.row] as NSManagedObject)
+                do {
+                    try CoreDataStack.handler.privateContext.save()
+                } catch {
+                    print(error)
+                }
+                self.reloadDecksFromCoreData()
+                DispatchQueue.main.async {
+                    
+                    self.createDataSource()
+                }
+            }
+            
+            return UIContextMenuConfiguration(identifier: nil,
+                                              previewProvider: nil) { _ in
+                UIMenu(title: "", children: [edit, delete])
+            }
+        } else {
+            return nil
         }
     }
     
@@ -563,9 +531,9 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
                 coordinator.session.loadObjects(ofClass: NSString.self) { items in
                     guard let strings = items as? [String] else { return }
                     for string in strings {
-                        print(string)
-                        let deck = self.cdDecks[indexPath.row-1]
-                        let card = self.getCard(byUUID: string)
+                        let deck = self.cdDecks[indexPath.row]
+                        let card = DataManager.getCard(byUUID: string)
+                        //let card = self.getCard(byUUID: string)
                         let results = deck.cards?.filter {
                             if let deckCard = $0 as? DeckCard {
                                 return deckCard.card == card
@@ -585,7 +553,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
                                 let deckCard = DeckCard.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
                                 deckCard.card = card
                                 deckCard.quantity = 1
-                                self.cdDecks[indexPath.row-1].addToCards(deckCard)
+                                self.cdDecks[indexPath.row].addToCards(deckCard)
                                 do {
                                     try CoreDataStack.handler.privateContext.save()
                                 } catch {
@@ -600,7 +568,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
                     guard let strings = items as? [String] else { return }
                     for string in strings {
                         print(string)
-                        let card = self.getCard(byUUID: string)
+                        let card = DataManager.getCard(byUUID: string)
                         
                         if let card = card {
                             guard  let entity = NSEntityDescription.entity(forEntityName: "CollectionCard", in:  CoreDataStack.handler.privateContext) else {
@@ -609,7 +577,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
                             let collectionCard = CollectionCard.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
                             collectionCard.card = card
                             collectionCard.quantity = 1
-                            self.cdCollections[indexPath.row-1].addToCards(collectionCard)
+                            self.cdCollections[indexPath.row].addToCards(collectionCard)
                             do {
                                 try CoreDataStack.handler.privateContext.save()
                             } catch {
@@ -626,22 +594,22 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
         
     }
     
-    private func getCard(byUUID: String) -> Card? {
-        var card: Card?
-        let request = NSFetchRequest<Card>(entityName: "Card")
-        request.predicate = NSPredicate(format: "uuid == %@", byUUID)
-        do {
-            let results = try CoreDataStack.handler.privateContext.fetch(request)
-            if results.count > 1 {
-                print("Too many items with uuid \(byUUID)")
-            } else {
-                card = results[0]
-            }
-        } catch {
-            print(error)
-            card = nil
-        }
-        return card
-    }
+//    private func getCard(byUUID: String) -> Card? {
+//        var card: Card?
+//        let request = NSFetchRequest<Card>(entityName: "Card")
+//        request.predicate = NSPredicate(format: "uuid == %@", byUUID)
+//        do {
+//            let results = try CoreDataStack.handler.privateContext.fetch(request)
+//            if results.count > 1 {
+//                print("Too many items with uuid \(byUUID)")
+//            } else {
+//                card = results[0]
+//            }
+//        } catch {
+//            print(error)
+//            card = nil
+//        }
+//        return card
+//    }
 }
 

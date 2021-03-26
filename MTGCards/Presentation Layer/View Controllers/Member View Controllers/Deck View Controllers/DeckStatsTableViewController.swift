@@ -106,9 +106,9 @@ class DeckStatsTableViewController: UITableViewController {
         var cardids = deckCards.map{
             $0.card?.tcgplayerProductID
         }.compactMap { $0 }
-        print("With 0s: \(cardids)")
+
         cardids.removeAll(where: {$0 == 0})
-        print("Without 0s: \(cardids)")
+
         TcgPlayerApi.handler.getPrices(for: cardids) { prices in
             for deckcard in self.allCards {
                 if let tcgid = deckcard.card?.tcgplayerProductID {
@@ -122,7 +122,7 @@ class DeckStatsTableViewController: UITableViewController {
                     }
                 }
             }
-            print(total)
+
             self.tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.detailTextLabel?.text = total.currencyUS
         }
         
@@ -390,7 +390,6 @@ class DeckStatsTableViewController: UITableViewController {
         let unique = CMCs.removingDuplicates().sorted()
         for cmc in unique {
             bars.append(Bar(id: UUID(), value: Double(CMCs.filter { $0 == cmc}.count), label: "\(cmc)", color: .gray))
-            print(cmc)
         }
         return bars
     }

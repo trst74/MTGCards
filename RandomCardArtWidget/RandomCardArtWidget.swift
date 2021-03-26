@@ -52,7 +52,6 @@ struct Provider: IntentTimelineProvider {
                 }
                 
                 URLSession.shared.dataTask(with: imageURL) { data, response, error in
-                    print(imageURL)
                     if let data = data, error == nil  {
                         if let uiimage = UIImage(data: data), let card = card {
                             

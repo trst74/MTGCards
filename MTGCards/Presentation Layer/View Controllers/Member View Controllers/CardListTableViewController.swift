@@ -183,7 +183,6 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             if card.frameEffects?.count == 1 && (card.frameEffects?.allObjects[0] as? CardFrameEffect)?.effect == "legendary" {
                 cell.frameEffectIndicator.text = ""
             } else {
-                print((card.frameEffects?.allObjects[0] as? CardFrameEffect)?.effect ?? "")
                 cell.frameEffectIndicator?.text = "✨"
             }
         } else if card.borderColor == "borderless" || card.isFullArt {
@@ -231,7 +230,6 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
     }
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            print("shaken")
             let total = fetchedResultsController.sections![0].numberOfObjects
             let random = Int.random(in: 0 ..< total)
             
@@ -323,7 +321,6 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         let fileManager = FileManager.default
         let filename = getDocumentsDirectory().appendingPathComponent("\(Key).png")
         if fileManager.fileExists(atPath: filename.path) {
-            print("loaded from cache")
             return UIImage(contentsOfFile: filename.path)
         }
         return nil

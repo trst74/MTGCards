@@ -45,7 +45,6 @@ class PageTwoViewController: UIViewController {
         self.downloadButton.isEnabled = false
         let setlist = DataManager.getSetList()
         if let sl = setlist {
-            print(sl.data.count)
             let setTotal = sl.data.count
             var completed = 0
             var failed: [Datum] = []
@@ -58,7 +57,6 @@ class PageTwoViewController: UIViewController {
                                     //save
                                     completed += 1
                                     let percent = Float(completed)/Float(setTotal)
-                                    print("\(Int(percent*100))%")
                                     self.downloadProgress.setProgress(percent, animated: true)
                                     self.downloadLabel.text = "\(Int(percent*100))%"
                                     if completed == setTotal {
@@ -82,7 +80,6 @@ class PageTwoViewController: UIViewController {
                                     //save
                                     completed += 1
                                     let percent = Float(completed)/Float(setTotal)
-                                    print("\(Int(percent*100))%")
                                     self.downloadProgress.setProgress(percent, animated: true)
                                     self.downloadLabel.text = "\(Int(percent*100))%"
                                     if completed == setTotal {

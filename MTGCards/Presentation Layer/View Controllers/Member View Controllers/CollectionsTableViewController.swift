@@ -135,7 +135,6 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
                 let pasteboard = UIPasteboard.general
                 if let string = pasteboard.string {
                     let lines = string.components(separatedBy: CharacterSet.newlines)
-                    print(lines.count)
                     var previousline = ""
                     var isSideboard = false
                     for line in lines {
@@ -159,10 +158,8 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
                             while let range = setCode.range(of: ")") {
                                 setCode.removeSubrange(range.lowerBound..<range.upperBound)
                             }
-                            print("test")
                             self.addCard(name: name, setCode: setCode, quantity: Int(quantity) ?? 1, isSideboard: isSideboard, newDeck: newDeck)
                         } else if previousline == "" {
-                            print("sideboard start")
                             isSideboard = true
                         }
                         previousline = line
@@ -188,7 +185,6 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
         self.present(documentPicker, animated: true)
     }
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        print(urls)
         for url in urls {
             importFile(url: url)
         }
@@ -205,7 +201,6 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
             let contents = try String.init(contentsOf: url)
             
             let lines = contents.components(separatedBy: CharacterSet.newlines)
-            print(lines.count)
             var previousline = ""
             var isSideboard = false
             for line in lines {
@@ -231,7 +226,6 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
                     }
                     addCard(name: name, setCode: setCode, quantity: Int(quantity) ?? 1, isSideboard: isSideboard, newDeck: newDeck)
                 } else if previousline == "" {
-                    print("sideboard start")
                     isSideboard = true
                 }
                 previousline = line
@@ -574,7 +568,6 @@ class CollectionsTableViewController: UITableViewController, UITableViewDropDele
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            print("delete")
             CoreDataStack.handler.privateContext.delete(cdDecks[indexPath.row] as NSManagedObject)
             do {
                 try CoreDataStack.handler.privateContext.save()

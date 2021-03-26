@@ -31,7 +31,6 @@ public class DataManager {
                 do {
                     try autoreleasepool {
                         let set = try decoder.decode(MTGSet.self, from: d)
-                        print("\(setCode): \(set.cards.count)")
                     }
                     do {
                         try managedObjectContext.save()
@@ -107,6 +106,38 @@ public class DataManager {
             if results.count > 1 {
                 print("Too many items with uuid \(byUUID)")
             } else {
+                card = results[0]
+            }
+        } catch {
+            print(error)
+            card = nil
+        }
+        return card
+    }
+    static func getCard(name: String, setCode: String) -> Card? {
+        var card: Card?
+        let request = NSFetchRequest<Card>(entityName: "Card")
+        let predicate1 = NSPredicate(format: "name == %@", name.trimmingCharacters(in: CharacterSet.whitespaces))
+        let predicate2 = NSPredicate(format: "set.code == %@", setCode)
+        var predicates = [predicate1]
+        
+        if setCode != "" {
+            predicates.append(predicate2)
+        } else {
+            predicates.append(NSPredicate(format: "set.type != %@", "promo"))
+        }
+        if UserDefaultsHandler.areOnlineOnlyCardsExcluded() {
+            let onlineOnlyPredicate = NSPredicate(format: "set.isOnlineOnly == false")
+            predicates.append(onlineOnlyPredicate)
+        }
+        
+        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        request.predicate = compound
+        let sortDescriptor = NSSortDescriptor(key: "set.releaseDate", ascending: false)
+        request.sortDescriptors = [sortDescriptor]
+        do {
+            let results = try CoreDataStack.handler.privateContext.fetch(request)
+            if results.count > 0 {
                 card = results[0]
             }
         } catch {

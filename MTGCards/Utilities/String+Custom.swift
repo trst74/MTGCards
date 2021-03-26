@@ -46,7 +46,6 @@ extension String {
                         let url = part[range]
                         let attributedString = NSMutableAttributedString(string: part)
                         attributedString.addAttribute(.link, value: url, range: nsRange(from: range))
-                        print(url)
                         result.append(attributedString)
                     }
                 } else {
