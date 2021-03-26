@@ -21,6 +21,7 @@ struct RulingsView: View {
                 VStack{
                     replaceSymbols(text: ruling.text ?? "")
                         .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))
                     Text("\((ruling.date!).toDate() ?? Date(), formatter: Self.taskDateFormat)")
@@ -28,6 +29,7 @@ struct RulingsView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))
                 }
+                
                 .padding(.init(top: 8.0, leading: 16.0, bottom: 8.0, trailing: 16.0))
                 .background(Color(UIColor.secondarySystemBackground))
                 .cornerRadius(10)

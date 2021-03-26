@@ -50,11 +50,6 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
         if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
             self.title = "Collections"
         }
-        #if targetEnvironment(macCatalyst)
-        self.navigationController?.navigationBar.isHidden = true
-        //setupNSToolbar()
-        #endif
-        //navigationItem.title = "Collections"
         
         #if !targetEnvironment(macCatalyst)
         self.navigationItem.setRightBarButton(addBarButton, animated: true)
@@ -62,24 +57,25 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
         self.navigationItem.setLeftBarButton(settingsButton, animated: true)
         #endif
         
-        
         //first open
         if UserDefaultsHandler.isFirstTimeOpening(){
             firstTimeOpened()
         }
-        //configureHierarchy()
         createDataSource()
-        #if targetEnvironment(macCatalyst)
-        
-        self.additionalSafeAreaInsets = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
-        self.navigationController?.navigationBar.isHidden = true
-        //setupNSToolbar()
-        #endif
+
     }
     override func viewWillAppear(_ animated: Bool) {
         
         if let nav = self.navigationController {
+            #if !targetEnvironment(macCatalyst)
             nav.setToolbarHidden(true, animated: false)
+            #else
+            nav.navigationBar.isHidden = true
+            self.additionalSafeAreaInsets = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+            nav.setToolbarHidden(false, animated: false)
+            nav.isToolbarHidden = false
+            nav.toolbar.setItems([addBarButton], animated: false)
+            #endif
             
         }
     }
@@ -410,7 +406,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
                 
                 self.splitViewController?.setViewController(nil, for: .secondary)
                 //self.splitViewController?.setViewController(DeckStatsTableViewController.refreshDeckStats(id: cdDecks[indexPath.row-1].objectID), for: .secondary)
-                let vc = UIHostingController(rootView: DeckStatsView(deck: cdDecks[indexPath.row-1]))
+                let vc = UIHostingController(rootView: DeckStatsView(deck: cdDecks[indexPath.row]))
                 self.splitViewController?.setViewController(vc, for: .secondary)
                 
             } else if indexPath.section == 1 {

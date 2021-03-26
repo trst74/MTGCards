@@ -45,6 +45,7 @@ class Card: NSManagedObject, Codable {
     @NSManaged var uuid: String?
     @NSManaged var watermark: String?
     @NSManaged var names: [String]?
+    @NSManaged var otherFaceIds: [String]?
     @NSManaged var loyalty: String?
     @NSManaged var faceConvertedManaCost: Float
     @NSManaged var side: String?
@@ -98,6 +99,7 @@ class Card: NSManagedObject, Codable {
         case uuid = "uuid"
         case watermark = "watermark"
         case names = "names"
+        case otherFaceIds = "otherFaceIds"
         case loyalty = "loyalty"
         case faceConvertedManaCost = "faceConvertedManaCost"
         case side = "side"
@@ -215,6 +217,7 @@ class Card: NSManagedObject, Codable {
         self.uuid = try container.decodeIfPresent(String.self, forKey: .uuid)
         self.watermark = try container.decodeIfPresent(String.self, forKey: .watermark)
         self.names = try container.decodeIfPresent([String].self, forKey: .names)
+        self.otherFaceIds = try container.decodeIfPresent([String].self, forKey: .otherFaceIds)
         self.loyalty = try container.decodeIfPresent(String.self, forKey: .loyalty)
         if let face =  try container.decodeIfPresent(Float.self, forKey: .faceConvertedManaCost) {
             self.faceConvertedManaCost = face
@@ -290,6 +293,7 @@ class Card: NSManagedObject, Codable {
         try container.encode(uuid, forKey: .uuid)
         try container.encode(watermark, forKey: .watermark)
         try container.encode(names, forKey: .names)
+        try container.encode(otherFaceIds, forKey: .otherFaceIds)
         try container.encode(loyalty, forKey: .loyalty)
         try container.encode(faceConvertedManaCost, forKey: .faceConvertedManaCost)
         try container.encode(side, forKey: .side)
@@ -445,3 +449,4 @@ extension Card {
     @NSManaged public func removeFromFrameEffects(_ values: NSSet)
 
 }
+

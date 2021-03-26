@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CardVC: View {
     
-    public var card: Card
+    @State public var card: Card
     private var cardLegalities: [Format] {
         get {
             var leg: [Format] = []
@@ -35,6 +35,21 @@ struct CardVC: View {
             return []
         }
     }
+    private var effectiveNane: String {
+        get {
+            if let name = card.name {
+                if name.contains("//") {
+                    let parts = name.components(separatedBy: " // ")
+                    if card.side == "a" {
+                        return parts.first ?? ""
+                    } else {
+                        return parts[1]
+                    }
+                }
+            }
+            return card.name ?? ""
+        }
+    }
     @State var showingShare = false
     
     var body: some View {
@@ -43,11 +58,33 @@ struct CardVC: View {
                 VStack(alignment: .center){
                     if geometry.size.width > 500 {
                         HStack(alignment: .top){
-                            //GeometryReader { geometry in
-                            loadImage()
-                                //.frame( height: geometry.size.width * 1.392857142857143)
-                                //.frame(minWidth: 0, maxWidth: .infinity, minHeight: 35, maxHeight: .infinity, alignment: .center)
-                            //}
+                            ZStack {
+                                loadImage()
+                                if card.otherFaceIds?.count ?? 0 > 0 {
+                                    VStack {
+                                        //Spacer()
+                                        HStack{
+                                            Spacer()
+                                            Button(action: {
+                                                if let otherside = DataManager.getCard(byUUID: card.otherFaceIds?[0] ?? "")
+                                                {
+                                                    card = otherside
+                                                }
+                                            }) {
+                                                Image(systemName: "arrow.uturn.left")
+                                            }
+                                            .padding()
+                                            .background(Color(UIColor.secondarySystemBackground))
+                                            .cornerRadius(10)
+                                            .shadow(color: Color.black.opacity(0.3),
+                                                    radius: 3,
+                                                    x: 3,
+                                                    y: 3)
+                                        }
+                                        .padding()
+                                    }
+                                }
+                            }
                             VStack{
                                 CardDetailsView(card: card)
                                 PricesView(cardIDs: [card.tcgplayerProductID], card: card)
@@ -61,6 +98,7 @@ struct CardVC: View {
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .padding(.init(top: 6.0, leading: 4.0, bottom: 0, trailing: 0))
                                     RulingsView(rulings: rulings)
+                                        
                                 }
                             }
                             VStack{
@@ -73,10 +111,35 @@ struct CardVC: View {
                     }
                     else {
                         //GeometryReader { geometry in
+                        ZStack {
                             loadImage()
-                                //.frame( minHeight: geometry.size.width * 1.392857142857143)
-                            //.frame(minWidth: 0, maxWidth: .infinity, minHeight: 35, maxHeight: .infinity, alignment: .center)
-                        //}
+                            if card.otherFaceIds?.count ?? 0 > 0 {
+                                VStack {
+                                    //Spacer()
+                                    HStack{
+                                        Spacer()
+                                        Button(action: {
+                                            if let otherside = DataManager.getCard(byUUID: card.otherFaceIds?[0] ?? "")
+                                            {
+                                                card = otherside
+                                            }
+                                        }) {
+                                            Image(systemName: "arrow.uturn.left")
+                                        }
+                                        .padding()
+                                        .background(Color(UIColor.secondarySystemBackground))
+                                        .cornerRadius(10)
+                                        .shadow(color: Color.black.opacity(0.3),
+                                                radius: 3,
+                                                x: 3,
+                                                y: 3)
+                                        
+                                    }
+                                    .padding()
+                                }
+                                
+                            }
+                        }
                         CardDetailsView(card: card)
                         PricesView(cardIDs: [card.tcgplayerProductID], card: card)
                         if rulings.count > 0 {
@@ -94,7 +157,7 @@ struct CardVC: View {
                 }
                 .padding(.init(top: 8.0, leading: 16.0, bottom: 8.0, trailing: 16.0))
             }
-            .navigationTitle(Text("\(card.name ?? "")"))
+            .navigationTitle(Text("\(self.effectiveNane)"))
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button(action: {
@@ -151,7 +214,7 @@ struct CardVC: View {
     }
     func shareURL(url: URL) {
         UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true, completion: nil)
-       
+        
         let av = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }

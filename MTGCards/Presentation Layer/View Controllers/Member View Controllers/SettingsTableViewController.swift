@@ -248,14 +248,14 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
             print("Last Update Date \(updateDate)")
             
             if let url = URL(string: "https://raw.githubusercontent.com/jmcsmith/jmcsmith.github.io/main/updates.json") {
-                var updates = try? Updates.init(fromURL: url)
+                let updates = try? Updates.init(fromURL: url)
                 if let updates = updates?.updates?.filter( {$0.date ?? Date() >= updateDate} ) {
                     var compiledUpdate = Update(date: Date(), sets: [])
                     for update in updates {
                         print("\(update.date) : \(update.sets?.count) Sets")
                         for set in update.sets ?? [] {
                             
-                            var compiledSet = compiledUpdate.sets?.first(where: { $0.code == set.code } )
+                            let compiledSet = compiledUpdate.sets?.first(where: { $0.code == set.code } )
                             if var compiledSet = compiledSet {
                                 if compiledSet.cardIDs?.count == 0 {
                                     continue
@@ -313,7 +313,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                     if let code = set.code {
                         let setUpdate = DataManager.getSetUpdate(setCode: code)
                         
-                        if var setUpdate = setUpdate {
+                        if let setUpdate = setUpdate {
                             let updateCards = setUpdate.data?.cards
                             if let localSetCards = localSet?.cards.allObjects as? [Card]  {
                                 //existing cards?

@@ -48,12 +48,12 @@ struct CardDetailsView: View {
                     Text("Reserved")
                 }
             }
-            
             .padding(.init(top: 2.0, leading: 4.0, bottom: 2.0, trailing: 0))
         }
         .padding(.init(top: 8.0, leading: 16.0, bottom: 8.0, trailing: 16.0))
         .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(10)
+
     }
     func replaceSymbols(text: String) -> some View {
         var result = Text("")

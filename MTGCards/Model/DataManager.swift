@@ -98,7 +98,7 @@ public class DataManager {
         }
         return []
     }
-    static private func getCard(byUUID: String) -> Card? {
+    static func getCard(byUUID: String) -> Card? {
         var card: Card?
         let request = NSFetchRequest<Card>(entityName: "Card")
         request.predicate = NSPredicate(format: "uuid == %@", byUUID)

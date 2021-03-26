@@ -132,7 +132,20 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as! CardListTableViewCell
         let card = fetchedResultsController.object(at: indexPath)
-        cell.title?.text = card.name
+        var effectiveName = "";
+        if let name = card.name {
+            if name.contains("//") {
+                let parts = name.components(separatedBy: " // ")
+                if card.side == "a" {
+                    effectiveName = parts.first ?? ""
+                } else {
+                    effectiveName = parts[1]
+                }
+            } else {
+                effectiveName = card.name ?? ""
+            }
+        }
+        cell.title?.text = effectiveName
         cell.subtitle?.text = card.set.name
         cell.backgroundColor = nil
         if let colorIdentities = card.colorIdentity?.allObjects as? [ColorIdentity] {
