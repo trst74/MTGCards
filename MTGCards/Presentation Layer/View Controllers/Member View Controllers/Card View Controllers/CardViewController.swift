@@ -308,9 +308,7 @@ class CardViewController: UIViewController, UIGestureRecognizerDelegate, UIDragI
                         CSSearchableIndex.default().indexSearchableItems([item]) { error in
                             if let error = error {
                                 print("Indexing error: \(error.localizedDescription)")
-                            } else {
-                                print("Search item successfully indexed!")
-                            }
+                            } 
                         }
                     }
                 }

@@ -124,25 +124,19 @@ class PageTwoViewController: UIViewController {
                                 CSSearchableIndex.default().indexSearchableItems(itemsToAdd) { error in
                                     if let error = error {
                                         print("Indexing error: \(error.localizedDescription)")
-                                    } else {
-                                        print("Search item successfully indexed!")
                                     }
                                 }
                                 let secondItems = Array(items[30001..<items.count])
                                 CSSearchableIndex.default().indexSearchableItems(secondItems) { error in
                                     if let error = error {
                                         print("Indexing error: \(error.localizedDescription)")
-                                    } else {
-                                        print("Search item successfully indexed!")
                                     }
                                 }
                             } else {
                                 CSSearchableIndex.default().indexSearchableItems(items) { error in
                                     if let error = error {
                                         print("Indexing error: \(error.localizedDescription)")
-                                    } else {
-                                        print("Search item successfully indexed!")
-                                    }
+                                    } 
                                 }
                             }
                         } catch {
