@@ -17,7 +17,7 @@ struct Provider: IntentTimelineProvider {
     typealias Entry = SimpleEntry
     
     typealias Intent = CardArtConfigIntent
-
+    
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date())
     }

@@ -96,13 +96,14 @@ class TripleSplitViewController: UIViewController, UISplitViewControllerDelegate
             UserDefaultsHandler.setHasOpened(opened: true)
         }
     }
+
 //    func splitViewController(_ svc: UISplitViewController, topColumnForCollapsingToProposedTopColumn proposedTopColumn: UISplitViewController.Column) -> UISplitViewController.Column {
 //        return .supplementary
 //    }
-    func splitViewController(_ svc: UISplitViewController,
-                             displayModeForExpandingToProposedDisplayMode proposedDisplayMode: UISplitViewController.DisplayMode) -> UISplitViewController.DisplayMode {
-        
-        return .twoBesideSecondary
-    }
+//    func splitViewController(_ svc: UISplitViewController,
+//                             displayModeForExpandingToProposedDisplayMode proposedDisplayMode: UISplitViewController.DisplayMode) -> UISplitViewController.DisplayMode {
+//
+//        return .twoBesideSecondary
+//    }
     
 }
