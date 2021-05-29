@@ -2,8 +2,7 @@
 //  Collection+CoreDataProperties.swift
 //  MTGCards
 //
-//  Created by Joseph Smith on 4/10/20.
-//  Copyright © 2020 Robotic Snail Software. All rights reserved.
+//  Created by Joseph Smith on 5/29/21.
 //
 //
 
@@ -18,6 +17,7 @@ extension Collection {
     }
 
     @NSManaged public var name: String?
+    @NSManaged public var uuid: UUID?
     @NSManaged public var cards: NSSet?
 
 }
@@ -36,5 +36,9 @@ extension Collection {
 
     @objc(removeCards:)
     @NSManaged public func removeFromCards(_ values: NSSet)
+
+}
+
+extension Collection : Identifiable {
 
 }

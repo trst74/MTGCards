@@ -7,9 +7,10 @@
 
 import UIKit
 import CoreData
+import SwiftUI
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
 
 
@@ -111,6 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+   
 
 }
 

@@ -2,8 +2,7 @@
 //  Deck+CoreDataProperties.swift
 //  MTGCards
 //
-//  Created by Joseph Smith on 4/10/20.
-//  Copyright © 2020 Robotic Snail Software. All rights reserved.
+//  Created by Joseph Smith on 5/29/21.
 //
 //
 
@@ -19,6 +18,7 @@ extension Deck {
 
     @NSManaged public var format: String?
     @NSManaged public var name: String?
+    @NSManaged public var uuid: UUID?
     @NSManaged public var cards: NSSet?
 
 }
@@ -37,5 +37,9 @@ extension Deck {
 
     @objc(removeCards:)
     @NSManaged public func removeFromCards(_ values: NSSet)
+
+}
+
+extension Deck : Identifiable {
 
 }

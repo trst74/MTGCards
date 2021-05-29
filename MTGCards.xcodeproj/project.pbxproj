@@ -8,7 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		EE0BECAC26584532006A0C43 /* RandomCardArtWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EE564F54263B7B9D0036625A /* RandomCardArtWidget.intentdefinition */; };
-		EE41CF4A2661916000665129 /* MTGCards.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF482661916000665129 /* MTGCards.xcdatamodeld */; };
+		EE41CF4C2661936E00665129 /* MTGCards.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF482661916000665129 /* MTGCards.xcdatamodeld */; };
+		EE41CF4F2662AA9600665129 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF4E2662AA9600665129 /* SearchResultsView.swift */; };
+		EE41CF542662C03000665129 /* Collection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF502662C02F00665129 /* Collection+CoreDataClass.swift */; };
+		EE41CF552662C03000665129 /* Collection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF512662C02F00665129 /* Collection+CoreDataProperties.swift */; };
+		EE41CF562662C03000665129 /* Deck+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF522662C02F00665129 /* Deck+CoreDataClass.swift */; };
+		EE41CF572662C03000665129 /* Deck+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF532662C02F00665129 /* Deck+CoreDataProperties.swift */; };
 		EE4F54FC263773F400D4205D /* CardListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4F54FB263773F400D4205D /* CardListTableViewController.swift */; };
 		EE564F26263B76FD0036625A /* CardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE564F25263B76FD0036625A /* CardVC.swift */; };
 		EE564F28263B772F0036625A /* CardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE564F27263B772F0036625A /* CardListTableViewCell.swift */; };
@@ -59,16 +64,12 @@
 		EEBA872126377AEB0006C597 /* CardType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA871B26377AEB0006C597 /* CardType+CoreDataProperties.swift */; };
 		EEBA873326377B290006C597 /* ColorIdentity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA872326377B270006C597 /* ColorIdentity+CoreDataClass.swift */; };
 		EEBA873426377B290006C597 /* Legalities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA872426377B270006C597 /* Legalities.swift */; };
-		EEBA873626377B290006C597 /* Deck+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA872626377B280006C597 /* Deck+CoreDataProperties.swift */; };
 		EEBA873726377B290006C597 /* ColorIdentity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA872726377B280006C597 /* ColorIdentity+CoreDataProperties.swift */; };
 		EEBA873826377B290006C597 /* DeckCard+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA872826377B280006C597 /* DeckCard+CoreDataProperties.swift */; };
 		EEBA873926377B290006C597 /* CollectionCard+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA872926377B280006C597 /* CollectionCard+CoreDataProperties.swift */; };
-		EEBA873A26377B290006C597 /* Collection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA872A26377B280006C597 /* Collection+CoreDataClass.swift */; };
-		EEBA873B26377B290006C597 /* Collection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA872B26377B280006C597 /* Collection+CoreDataProperties.swift */; };
 		EEBA873C26377B290006C597 /* DeckCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA872C26377B280006C597 /* DeckCard+CoreDataClass.swift */; };
 		EEBA873D26377B290006C597 /* ForeignDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA872D26377B280006C597 /* ForeignDatum.swift */; };
 		EEBA873F26377B290006C597 /* CollectionCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA872F26377B290006C597 /* CollectionCard+CoreDataClass.swift */; };
-		EEBA874126377B290006C597 /* Deck+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA873126377B290006C597 /* Deck+CoreDataClass.swift */; };
 		EEBA874D26377B730006C597 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA874226377B720006C597 /* Token.swift */; };
 		EEBA874E26377B730006C597 /* MTGSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA874326377B720006C597 /* MTGSet.swift */; };
 		EEBA874F26377B730006C597 /* TcgToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA874426377B720006C597 /* TcgToken.swift */; };
@@ -154,6 +155,11 @@
 
 /* Begin PBXFileReference section */
 		EE41CF492661916000665129 /* MTGCards.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MTGCards.xcdatamodel; sourceTree = "<group>"; };
+		EE41CF4E2662AA9600665129 /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
+		EE41CF502662C02F00665129 /* Collection+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		EE41CF512662C02F00665129 /* Collection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		EE41CF522662C02F00665129 /* Deck+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		EE41CF532662C02F00665129 /* Deck+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		EE4F54FB263773F400D4205D /* CardListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListTableViewController.swift; sourceTree = "<group>"; };
 		EE564F25263B76FD0036625A /* CardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardVC.swift; sourceTree = "<group>"; };
 		EE564F27263B772F0036625A /* CardListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListTableViewCell.swift; sourceTree = "<group>"; };
@@ -206,16 +212,12 @@
 		EEBA871B26377AEB0006C597 /* CardType+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CardType+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EEBA872326377B270006C597 /* ColorIdentity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ColorIdentity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EEBA872426377B270006C597 /* Legalities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Legalities.swift; sourceTree = "<group>"; };
-		EEBA872626377B280006C597 /* Deck+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EEBA872726377B280006C597 /* ColorIdentity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ColorIdentity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EEBA872826377B280006C597 /* DeckCard+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DeckCard+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EEBA872926377B280006C597 /* CollectionCard+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionCard+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		EEBA872A26377B280006C597 /* Collection+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+CoreDataClass.swift"; sourceTree = "<group>"; };
-		EEBA872B26377B280006C597 /* Collection+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EEBA872C26377B280006C597 /* DeckCard+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DeckCard+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EEBA872D26377B280006C597 /* ForeignDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForeignDatum.swift; sourceTree = "<group>"; };
 		EEBA872F26377B290006C597 /* CollectionCard+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionCard+CoreDataClass.swift"; sourceTree = "<group>"; };
-		EEBA873126377B290006C597 /* Deck+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EEBA874226377B720006C597 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		EEBA874326377B720006C597 /* MTGSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTGSet.swift; sourceTree = "<group>"; };
 		EEBA874426377B720006C597 /* TcgToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TcgToken.swift; sourceTree = "<group>"; };
@@ -298,9 +300,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE41CF4D2662AA7F00665129 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				EE41CF4E2662AA9600665129 /* SearchResultsView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		EE4F54F62637739D00D4205D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EE41CF4D2662AA7F00665129 /* Search */,
 				EE564F65263B7E260036625A /* CardList.storyboard */,
 				EE564F24263B76E90036625A /* Card */,
 				EE564F27263B772F0036625A /* CardListTableViewCell.swift */,
@@ -407,7 +418,6 @@
 		EEBA86A5263779370006C597 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				EE564F43263B7ABE0036625A /* Deck+Backup.swift */,
 				EE564F41263B7A9B0036625A /* Backup.swift */,
 				EEBA870C26377A5A0006C597 /* Card.swift */,
 				EEBA871126377AB80006C597 /* CardFrameEffect+CoreDataClass.swift */,
@@ -421,14 +431,15 @@
 				EEBA871A26377AEA0006C597 /* CardSupertype+CoreDataProperties.swift */,
 				EEBA871726377AEA0006C597 /* CardType+CoreDataClass.swift */,
 				EEBA871B26377AEB0006C597 /* CardType+CoreDataProperties.swift */,
-				EEBA872A26377B280006C597 /* Collection+CoreDataClass.swift */,
-				EEBA872B26377B280006C597 /* Collection+CoreDataProperties.swift */,
+				EE41CF502662C02F00665129 /* Collection+CoreDataClass.swift */,
+				EE41CF512662C02F00665129 /* Collection+CoreDataProperties.swift */,
 				EEBA872F26377B290006C597 /* CollectionCard+CoreDataClass.swift */,
 				EEBA872926377B280006C597 /* CollectionCard+CoreDataProperties.swift */,
 				EEBA872326377B270006C597 /* ColorIdentity+CoreDataClass.swift */,
 				EEBA872726377B280006C597 /* ColorIdentity+CoreDataProperties.swift */,
-				EEBA873126377B290006C597 /* Deck+CoreDataClass.swift */,
-				EEBA872626377B280006C597 /* Deck+CoreDataProperties.swift */,
+				EE564F43263B7ABE0036625A /* Deck+Backup.swift */,
+				EE41CF522662C02F00665129 /* Deck+CoreDataClass.swift */,
+				EE41CF532662C02F00665129 /* Deck+CoreDataProperties.swift */,
 				EEBA872C26377B280006C597 /* DeckCard+CoreDataClass.swift */,
 				EEBA872826377B280006C597 /* DeckCard+CoreDataProperties.swift */,
 				EEBA8785263781320006C597 /* Filters.swift */,
@@ -661,7 +672,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEBA875326377B730006C597 /* Ruling.swift in Sources */,
-				EEBA874126377B290006C597 /* Deck+CoreDataClass.swift in Sources */,
 				EEBA875426377B730006C597 /* TcgPrices.swift in Sources */,
 				EEBA877A263780130006C597 /* DataModel.swift in Sources */,
 				EEBA873C26377B290006C597 /* DeckCard+CoreDataClass.swift in Sources */,
@@ -677,9 +687,11 @@
 				EE564F26263B76FD0036625A /* CardVC.swift in Sources */,
 				EEBA877E263780130006C597 /* Sunburst.swift in Sources */,
 				EEBA869E263778430006C597 /* PageOneViewController.swift in Sources */,
+				EE41CF4F2662AA9600665129 /* SearchResultsView.swift in Sources */,
 				EEBA877C263780130006C597 /* IfLetView.swift in Sources */,
 				EEBA871E26377AEB0006C597 /* CardSubtype+CoreDataClass.swift in Sources */,
 				EE564F2D263B77F60036625A /* PricesView.swift in Sources */,
+				EE41CF552662C03000665129 /* Collection+CoreDataProperties.swift in Sources */,
 				EEBA875226377B730006C597 /* Meta.swift in Sources */,
 				EECA46A226378635003469FE /* KeywordFilterTableViewController.swift in Sources */,
 				EEBA874E26377B730006C597 /* MTGSet.swift in Sources */,
@@ -700,6 +712,7 @@
 				EEBA872026377AEB0006C597 /* CardSupertype+CoreDataProperties.swift in Sources */,
 				EE564F3C263B7A150036625A /* TCGPricesLoader.swift in Sources */,
 				EEBA873926377B290006C597 /* CollectionCard+CoreDataProperties.swift in Sources */,
+				EE41CF572662C03000665129 /* Deck+CoreDataProperties.swift in Sources */,
 				EE564F28263B772F0036625A /* CardListTableViewCell.swift in Sources */,
 				EEBA8786263781320006C597 /* Filters.swift in Sources */,
 				EE564F3A263B79E30036625A /* SafariActivity.swift in Sources */,
@@ -713,7 +726,6 @@
 				EEBA871D26377AEB0006C597 /* CardType+CoreDataClass.swift in Sources */,
 				EEBA873D26377B290006C597 /* ForeignDatum.swift in Sources */,
 				EE564F2E263B77F60036625A /* CardDetailsView.swift in Sources */,
-				EEBA873B26377B290006C597 /* Collection+CoreDataProperties.swift in Sources */,
 				EE564F38263B79970036625A /* Array+Custom.swift in Sources */,
 				EEBA876A26377F470006C597 /* DeckStatsTableViewController.swift in Sources */,
 				EECA46A526378635003469FE /* SuperTypeFilterTableViewController.swift in Sources */,
@@ -723,13 +735,13 @@
 				EEBA873426377B290006C597 /* Legalities.swift in Sources */,
 				EEBA871526377AB80006C597 /* CardFrameEffect+CoreDataProperties.swift in Sources */,
 				EEBA871F26377AEB0006C597 /* CardSubtype+CoreDataProperties.swift in Sources */,
+				EE41CF562662C03000665129 /* Deck+CoreDataClass.swift in Sources */,
 				EEBA871C26377AEB0006C597 /* CardSupertype+CoreDataClass.swift in Sources */,
 				EEBA8689263776B00006C597 /* TripleSplitViewController.swift in Sources */,
 				EECA46BB263787D1003469FE /* DeckCardCommanderTableViewCell.swift in Sources */,
 				EEBA876326377EEA0006C597 /* DeckTableViewController.swift in Sources */,
-				EE41CF4A2661916000665129 /* MTGCards.xcdatamodeld in Sources */,
+				EE41CF4C2661936E00665129 /* MTGCards.xcdatamodeld in Sources */,
 				EEBA871326377AB80006C597 /* CardIdentifiers.swift in Sources */,
-				EEBA873626377B290006C597 /* Deck+CoreDataProperties.swift in Sources */,
 				EECA46A626378635003469FE /* TypeFilterTableViewController.swift in Sources */,
 				EEBA873826377B290006C597 /* DeckCard+CoreDataProperties.swift in Sources */,
 				EEBA877D263780130006C597 /* BarChart.swift in Sources */,
@@ -739,6 +751,7 @@
 				EECA46B6263787D1003469FE /* DeckCardFoilTableViewCell.swift in Sources */,
 				EECA46B9263787D1003469FE /* DeckCardSideboardTableViewCell.swift in Sources */,
 				EEBA868B263776F80006C597 /* SidebarCollectionViewController.swift in Sources */,
+				EE41CF542662C03000665129 /* Collection+CoreDataClass.swift in Sources */,
 				EE564F46263B7AE10036625A /* String+Custom.swift in Sources */,
 				EEBA875726377B730006C597 /* SetList.swift in Sources */,
 				EEBA8784263780CA0006C597 /* NumberFormatters.swift in Sources */,
@@ -747,7 +760,6 @@
 				EECA46BD263787D1003469FE /* EditDeckCardTableViewController.swift in Sources */,
 				EEBA8777263780130006C597 /* SunburstView.swift in Sources */,
 				EEBA86902637774D0006C597 /* PlaceholderViewController.swift in Sources */,
-				EEBA873A26377B290006C597 /* Collection+CoreDataClass.swift in Sources */,
 				EE4F54FC263773F400D4205D /* CardListTableViewController.swift in Sources */,
 				EEBA875B26377BD70006C597 /* CardKeyword+CoreDataClass.swift in Sources */,
 				EEBA876D26377FA30006C597 /* CollectionTableViewCell.swift in Sources */,
@@ -808,7 +820,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.MTGCards2.RandomCardArtWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.MTGCards.RandomCardArtWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
@@ -833,7 +845,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.MTGCards2.RandomCardArtWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.MTGCards.RandomCardArtWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
@@ -893,7 +905,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -948,7 +960,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

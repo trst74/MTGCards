@@ -77,8 +77,10 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
         }
         let collection = Collection.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
         collection.name = "Collection"
+        collection.uuid = UUID()
         let wishlist = Collection.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
         wishlist.name = "Wish List"
+        wishlist.uuid = UUID()
         do {
             try CoreDataStack.handler.privateContext.save()
         } catch  {
@@ -161,6 +163,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
                 }
                 let newDeck = Deck.init(entity: entity, insertInto: CoreDataStack.handler.managedObjectContext)
                 newDeck.name = name
+                newDeck.uuid = UUID()
                 try? CoreDataStack.handler.managedObjectContext.save()
                 self.reloadDecksFromCoreData()
                 DispatchQueue.main.async {
@@ -186,6 +189,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
                 }
                 let newDeck = Deck.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
                 newDeck.name = name
+                newDeck.uuid = UUID()
                 //get clipboard
                 let pasteboard = UIPasteboard.general
                 if let string = pasteboard.string {
@@ -252,6 +256,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
             let newDeck = Deck.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
             let name = url.absoluteURL.deletingPathExtension().lastPathComponent
             newDeck.name = name
+            newDeck.uuid = UUID()
             _ = url.startAccessingSecurityScopedResource()
             let contents = try String.init(contentsOf: url)
             
@@ -332,7 +337,12 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
         if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
             if indexPath.section == 0 {
                 //StateCoordinator.shared.didSelectCollection(collection: "Search")
+                if indexPath.item == 0 {
                 self.navigationController?.pushViewController(CardListTableViewController.freshCardList(), animated: true)
+                } else {
+                    let vc = UIHostingController(rootView: SearchResultsView().environment(\.managedObjectContext, CoreDataStack.handler.privateContext))
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
             } else if indexPath.section == 2 {
                 //StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row].objectID)
                 self.navigationController?.pushViewController(DeckTableViewController.freshDeck(deck: cdDecks[indexPath.row].objectID), animated: true)
@@ -452,7 +462,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
         for headerItem in sectionItems {
             
             if headerItem.title == "Tools" {
-                dataSourceSnapshot.appendItems([Item(title: "Search")], toSection: headerItem)
+                dataSourceSnapshot.appendItems([Item(title: "Search"), Item(title: "New Search")], toSection: headerItem)
                 
             } else if headerItem.title == "Collections" {
                 dataSourceSnapshot.appendItems([Item(title: "Collection"), Item(title: "Wish List")], toSection: headerItem)

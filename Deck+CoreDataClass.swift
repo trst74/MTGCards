@@ -2,8 +2,7 @@
 //  Deck+CoreDataClass.swift
 //  MTGCards
 //
-//  Created by Joseph Smith on 3/14/19.
-//  Copyright © 2019 Robotic Snail Software. All rights reserved.
+//  Created by Joseph Smith on 5/29/21.
 //
 //
 

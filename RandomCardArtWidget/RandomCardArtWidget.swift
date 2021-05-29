@@ -114,7 +114,7 @@ struct RandomCardArtWidgetEntryView : View {
                     .padding(EdgeInsets(top: 4   , leading: 12, bottom: 4, trailing: 12))
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .background(Color(UIColor.systemBackground))
-                    .widgetURL(URL(string: "com.roboticsnailsoftware.MTGCollection:card?scryfallID=\(card.id)"))
+                    .widgetURL(URL(string: "com.roboticsnailsoftware.MTGCollection:card?scryfallID=\(card.id)&source=cardArtWidget"))
             }
         }
         .background(Color(UIColor.systemBackground))
