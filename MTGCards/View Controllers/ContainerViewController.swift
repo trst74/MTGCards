@@ -1,21 +1,24 @@
 //
-//  TripleSplitViewController.swift
+//  ContainerViewController.swift
 //  MTGCards
 //
-//  Created by Joseph Smith on 8/31/20.
-//  Copyright © 2020 Robotic Snail Software. All rights reserved.
+//  Created by Joseph Smith on 6/2/21.
 //
 
 import UIKit
+import CoreData
 
-class TripleSplitViewController: UIViewController, UISplitViewControllerDelegate {
-    
-    var split = UISplitViewController(style: .tripleColumn)
-    
+class ContainerViewController: UIViewController, UISplitViewControllerDelegate {
+    let split = UISplitViewController(style: .tripleColumn)
     override func viewDidLoad() {
         super.viewDidLoad()
-        split.primaryBackgroundStyle = .sidebar
         
+        self.addChild(split)
+        self.view.addSubview(split.view)
+        split.view.frame = self.view.bounds
+        split.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        split.didMove(toParent: self)
+        split.primaryBackgroundStyle = .sidebar
         
         var config = UICollectionLayoutListConfiguration(appearance: .sidebar)
         config.headerMode = .supplementary
@@ -42,27 +45,16 @@ class TripleSplitViewController: UIViewController, UISplitViewControllerDelegate
         let sec = PlaceholderViewController.freshPlaceholderController(message: "Select a Card, Deck, or Collection to get started.")
         split.setViewController(sec, for: .secondary)
         
-        
-        //split.show(.primary)
-        split.preferredDisplayMode = .automatic
+        #if targetEnvironment(macCatalyst)
+        split.preferredDisplayMode = .twoBesideSecondary
+        #else
+        split.preferredDisplayMode = .oneBesideSecondary
+        #endif
         split.preferredSplitBehavior = .tile
         split.showsSecondaryOnlyButton = false
         split.preferredPrimaryColumnWidthFraction = 0.2
         split.preferredSupplementaryColumnWidthFraction = 0.3
-        #if targetEnvironment(macCatalyst)
-        split.view.translatesAutoresizingMaskIntoConstraints = false
-        #endif
-        view.addSubview(split.view)
-        #if targetEnvironment(macCatalyst)
-        let margins = view.safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-            split.view.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
-            split.view.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
-            split.view.topAnchor.constraint(equalTo: margins.topAnchor, constant: -30.0),
-            split.view.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
-        ])
-        #endif
-        //view.addSubview(nav.view)
+        // Do any additional setup after loading the view.
     }
     override var keyCommands: [UIKeyCommand]? {
         return [
@@ -83,6 +75,16 @@ class TripleSplitViewController: UIViewController, UISplitViewControllerDelegate
         self.present(settingsVC, animated: true, completion: nil)
         
     }
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
     override func viewDidAppear(_ animated: Bool) {
         if UserDefaultsHandler.isFirstTimeOpening(){
             //onbarding
@@ -94,10 +96,23 @@ class TripleSplitViewController: UIViewController, UISplitViewControllerDelegate
             self.present(pageOne, animated: true, completion: nil)
             //create collection and wish list
             UserDefaultsHandler.setSelectedCardImageQuality(quality: "high")
+            
+            guard  let entity = NSEntityDescription.entity(forEntityName: "Collection", in:  CoreDataStack.handler.privateContext) else {
+                fatalError("Failed to decode Card")
+            }
+            let collection = Collection.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
+            collection.name = "Collection"
+            collection.uuid = UUID()
+            let wishlist = Collection.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
+            wishlist.name = "Wish List"
+            wishlist.uuid = UUID()
+            do {
+                try CoreDataStack.handler.privateContext.save()
+            } catch  {
+                print(error)
+            }
+            UserDefaultsHandler.setExcludeOnlineOnly(exclude: true)
             UserDefaultsHandler.setHasOpened(opened: true)
         }
     }
-
-
-    
 }

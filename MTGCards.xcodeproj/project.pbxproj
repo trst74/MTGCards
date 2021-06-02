@@ -14,6 +14,7 @@
 		EE41CF552662C03000665129 /* Collection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF512662C02F00665129 /* Collection+CoreDataProperties.swift */; };
 		EE41CF562662C03000665129 /* Deck+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF522662C02F00665129 /* Deck+CoreDataClass.swift */; };
 		EE41CF572662C03000665129 /* Deck+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF532662C02F00665129 /* Deck+CoreDataProperties.swift */; };
+		EE41CF792666CD8600665129 /* MainSplitViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF782666CD8500665129 /* MainSplitViewViewController.swift */; };
 		EE4F54FC263773F400D4205D /* CardListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4F54FB263773F400D4205D /* CardListTableViewController.swift */; };
 		EE564F26263B76FD0036625A /* CardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE564F25263B76FD0036625A /* CardVC.swift */; };
 		EE564F28263B772F0036625A /* CardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE564F27263B772F0036625A /* CardListTableViewCell.swift */; };
@@ -106,6 +107,7 @@
 		EEBA8786263781320006C597 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA8785263781320006C597 /* Filters.swift */; };
 		EEBA8789263781540006C597 /* Filters.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBA8787263781540006C597 /* Filters.storyboard */; };
 		EEBA878A263781540006C597 /* FiltersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA8788263781540006C597 /* FiltersTableViewController.swift */; };
+		EEBB0EDB266827F800189166 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBB0EDA266827F800189166 /* ContainerViewController.swift */; };
 		EECA46A226378635003469FE /* KeywordFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECA469E26378635003469FE /* KeywordFilterTableViewController.swift */; };
 		EECA46A326378635003469FE /* LegalityFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECA469C26378635003469FE /* LegalityFilterTableViewController.swift */; };
 		EECA46A426378635003469FE /* SubTypeFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECA469F26378635003469FE /* SubTypeFilterTableViewController.swift */; };
@@ -160,6 +162,7 @@
 		EE41CF512662C02F00665129 /* Collection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		EE41CF522662C02F00665129 /* Deck+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		EE41CF532662C02F00665129 /* Deck+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		EE41CF782666CD8500665129 /* MainSplitViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewViewController.swift; sourceTree = "<group>"; };
 		EE4F54FB263773F400D4205D /* CardListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListTableViewController.swift; sourceTree = "<group>"; };
 		EE564F25263B76FD0036625A /* CardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardVC.swift; sourceTree = "<group>"; };
 		EE564F27263B772F0036625A /* CardListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListTableViewCell.swift; sourceTree = "<group>"; };
@@ -254,6 +257,7 @@
 		EEBA8785263781320006C597 /* Filters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
 		EEBA8787263781540006C597 /* Filters.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Filters.storyboard; sourceTree = "<group>"; };
 		EEBA8788263781540006C597 /* FiltersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersTableViewController.swift; sourceTree = "<group>"; };
+		EEBB0EDA266827F800189166 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		EECA469C26378635003469FE /* LegalityFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalityFilterTableViewController.swift; sourceTree = "<group>"; };
 		EECA469D26378635003469FE /* SetFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFilterTableViewController.swift; sourceTree = "<group>"; };
 		EECA469E26378635003469FE /* KeywordFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordFilterTableViewController.swift; sourceTree = "<group>"; };
@@ -329,6 +333,8 @@
 				EEBA868A263776F80006C597 /* SidebarCollectionViewController.swift */,
 				EEBA876E26377FDA0006C597 /* SwiftUI */,
 				EEBA8688263776B00006C597 /* TripleSplitViewController.swift */,
+				EE41CF782666CD8500665129 /* MainSplitViewViewController.swift */,
+				EEBB0EDA266827F800189166 /* ContainerViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -696,8 +702,10 @@
 				EECA46A226378635003469FE /* KeywordFilterTableViewController.swift in Sources */,
 				EEBA874E26377B730006C597 /* MTGSet.swift in Sources */,
 				EEBA873726377B290006C597 /* ColorIdentity+CoreDataProperties.swift in Sources */,
+				EE41CF792666CD8600665129 /* MainSplitViewViewController.swift in Sources */,
 				EECA46AA2637868D003469FE /* NotificationsViewController.swift in Sources */,
 				EED485C92616AF7F002A7795 /* AppDelegate.swift in Sources */,
+				EEBB0EDB266827F800189166 /* ContainerViewController.swift in Sources */,
 				EEBA8780263780500006C597 /* TcgPlayerApi.swift in Sources */,
 				EEBA876726377F200006C597 /* CollectionTableViewController.swift in Sources */,
 				EEBA875526377B730006C597 /* Updates.swift in Sources */,

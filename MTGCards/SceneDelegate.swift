@@ -21,21 +21,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
      
         
-        if #available(iOS 14, *) {
-            if window?.traitCollection.userInterfaceIdiom == .pad {
-                let splitViewController = TripleSplitViewController()
-                window?.rootViewController = splitViewController
-                
-            }
-        }
-        
+//        if #available(iOS 14, *) {
+//            if window?.traitCollection.userInterfaceIdiom == .pad {
+//                let splitViewController = TripleSplitViewController()
+//                window?.rootViewController = splitViewController
+//
+//            }
+//        }
+//
         #if targetEnvironment(macCatalyst)
         guard let windowScene = scene as? UIWindowScene else { return }
-        
+
         let toolbar = NSToolbar(identifier: "main")
         toolbar.delegate = toolbarDelegate
         toolbar.displayMode = .iconOnly
-        
+
         if let titlebar = windowScene.titlebar {
             titlebar.titleVisibility = .hidden
             titlebar.toolbar?.isVisible = false

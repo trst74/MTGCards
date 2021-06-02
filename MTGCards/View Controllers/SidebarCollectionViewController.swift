@@ -35,7 +35,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
     var search = ["Tools", "Search"]
     
     var addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButton))
-
+    
     var dataSource: UICollectionViewDiffableDataSource<HeaderItem, Item>! = nil
     
     override func viewDidLoad() {
@@ -49,8 +49,6 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
         self.navigationItem.setRightBarButton(addBarButton, animated: true)
         let settingsButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(self.settings))
         self.navigationItem.setLeftBarButton(settingsButton, animated: true)
-        #else
-        self.additionalSafeAreaInsets = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
         #endif
         
         
@@ -63,31 +61,11 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
             self.toolbarItems = [addBarButton]
             #endif
         }
-        //first open
-        if UserDefaultsHandler.isFirstTimeOpening(){
-            firstTimeOpened()
-        }
+
         createDataSource()
         
     }
 
-    private func firstTimeOpened(){
-        guard  let entity = NSEntityDescription.entity(forEntityName: "Collection", in:  CoreDataStack.handler.privateContext) else {
-            fatalError("Failed to decode Card")
-        }
-        let collection = Collection.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
-        collection.name = "Collection"
-        collection.uuid = UUID()
-        let wishlist = Collection.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
-        wishlist.name = "Wish List"
-        wishlist.uuid = UUID()
-        do {
-            try CoreDataStack.handler.privateContext.save()
-        } catch  {
-            print(error)
-        }
-        UserDefaultsHandler.setExcludeOnlineOnly(exclude: true)
-    }
     
     private func reloadDecksFromCoreData(){
         let request = NSFetchRequest<Deck>(entityName: "Deck")
@@ -319,7 +297,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
             newDeck.addToCards(deckCard)
         }
     }
-
+    
     @objc func settings(){
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
         guard let settingsVC = storyboard.instantiateInitialViewController() as? SettingsTableViewController else {
@@ -338,7 +316,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
             if indexPath.section == 0 {
                 //StateCoordinator.shared.didSelectCollection(collection: "Search")
                 if indexPath.item == 0 {
-                self.navigationController?.pushViewController(CardListTableViewController.freshCardList(), animated: true)
+                    self.navigationController?.pushViewController(CardListTableViewController.freshCardList(), animated: true)
                 } else {
                     let vc = UIHostingController(rootView: SearchResultsView().environment(\.managedObjectContext, CoreDataStack.handler.privateContext))
                     self.navigationController?.pushViewController(vc, animated: true)
@@ -370,7 +348,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
             } else if indexPath.section == 1 {
                 //StateCoordinator.shared.didSelectCollection(collection: cdCollections[indexPath.row].objectID)
                 self.splitViewController?.setViewController(nil, for: .supplementary)
-                self.splitViewController?.setViewController(CollectionTableViewController.freshCollection(collection: cdCollections[indexPath.row].objectID), for: .supplementary)
+               self.splitViewController?.setViewController(CollectionTableViewController.freshCollection(collection: cdCollections[indexPath.row].objectID), for: .supplementary)
             }
         }
     }
@@ -462,7 +440,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
         for headerItem in sectionItems {
             
             if headerItem.title == "Tools" {
-                dataSourceSnapshot.appendItems([Item(title: "Search"), Item(title: "New Search")], toSection: headerItem)
+                dataSourceSnapshot.appendItems([Item(title: "Search")], toSection: headerItem)
                 
             } else if headerItem.title == "Collections" {
                 dataSourceSnapshot.appendItems([Item(title: "Collection"), Item(title: "Wish List")], toSection: headerItem)
