@@ -86,7 +86,7 @@ class CollectionTableViewController: UITableViewController, UIContextMenuInterac
             }
             cell.gradientView?.colors = colors
         }
-        
+        cell.selectionStyle = .none
         return cell
     }
     

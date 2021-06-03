@@ -332,9 +332,13 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
         } else {
             
             if indexPath.section == 0 {
-                //StateCoordinator.shared.didSelectCollection(collection: "Search")
+                if indexPath.item == 0 {
                 self.splitViewController?.setViewController(nil, for: .supplementary)
                 self.splitViewController?.setViewController(CardListTableViewController.freshCardList(), for: .supplementary)
+                } else {
+                    let vc = UIHostingController(rootView: SearchResultsView().environment(\.managedObjectContext, CoreDataStack.handler.privateContext))
+                    self.splitViewController?.setViewController(vc, for: .supplementary)
+                }
             } else if indexPath.section == 2 {
                 //StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row].objectID)
                 self.splitViewController?.setViewController(nil, for: .supplementary)
@@ -440,7 +444,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
         for headerItem in sectionItems {
             
             if headerItem.title == "Tools" {
-                dataSourceSnapshot.appendItems([Item(title: "Search")], toSection: headerItem)
+                dataSourceSnapshot.appendItems([Item(title: "Search"),Item(title: "SwiftUI Search")], toSection: headerItem)
                 
             } else if headerItem.title == "Collections" {
                 dataSourceSnapshot.appendItems([Item(title: "Collection"), Item(title: "Wish List")], toSection: headerItem)

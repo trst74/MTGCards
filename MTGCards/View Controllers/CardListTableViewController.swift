@@ -22,7 +22,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
     
     override func viewDidLoad() {
         super.viewDidLoad()
- 
+        self.tableView.insetsContentViewsToSafeArea = true
         //self.tableView.register(CardListTableViewCell.self, forCellReuseIdentifier: "cardCell")
         tableView.keyboardDismissMode = .onDrag
         loadSavedData()
@@ -190,16 +190,8 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         } else {
             cell.frameEffectIndicator?.text = ""
         }
+        cell.selectionStyle = .none
         return cell
-    }
-    
-    func gradient(frame: CGRect, with colors: [CGColor]) -> CAGradientLayer {
-        let layer = CAGradientLayer()
-        layer.frame = frame
-        layer.startPoint = CGPoint(x: 0, y: 0.5)
-        layer.endPoint = CGPoint(x: 1, y: 0.5)
-        layer.colors = colors
-        return layer
     }
     private func createFetchRequest() -> NSFetchRequest<Card> {
         let fetchRequest: NSFetchRequest<Card> = NSFetchRequest<Card>(entityName: "Card")

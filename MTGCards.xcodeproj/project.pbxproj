@@ -108,6 +108,7 @@
 		EEBA8789263781540006C597 /* Filters.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBA8787263781540006C597 /* Filters.storyboard */; };
 		EEBA878A263781540006C597 /* FiltersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA8788263781540006C597 /* FiltersTableViewController.swift */; };
 		EEBB0EDB266827F800189166 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBB0EDA266827F800189166 /* ContainerViewController.swift */; };
+		EEBB0EDD2669357600189166 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBB0EDC2669357600189166 /* SearchBar.swift */; };
 		EECA46A226378635003469FE /* KeywordFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECA469E26378635003469FE /* KeywordFilterTableViewController.swift */; };
 		EECA46A326378635003469FE /* LegalityFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECA469C26378635003469FE /* LegalityFilterTableViewController.swift */; };
 		EECA46A426378635003469FE /* SubTypeFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECA469F26378635003469FE /* SubTypeFilterTableViewController.swift */; };
@@ -258,6 +259,7 @@
 		EEBA8787263781540006C597 /* Filters.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Filters.storyboard; sourceTree = "<group>"; };
 		EEBA8788263781540006C597 /* FiltersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersTableViewController.swift; sourceTree = "<group>"; };
 		EEBB0EDA266827F800189166 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		EEBB0EDC2669357600189166 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		EECA469C26378635003469FE /* LegalityFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalityFilterTableViewController.swift; sourceTree = "<group>"; };
 		EECA469D26378635003469FE /* SetFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFilterTableViewController.swift; sourceTree = "<group>"; };
 		EECA469E26378635003469FE /* KeywordFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordFilterTableViewController.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 		EE41CF4D2662AA7F00665129 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				EEBB0EDC2669357600189166 /* SearchBar.swift */,
 				EE41CF4E2662AA9600665129 /* SearchResultsView.swift */,
 			);
 			path = Search;
@@ -315,26 +318,26 @@
 		EE4F54F62637739D00D4205D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				EE41CF4D2662AA7F00665129 /* Search */,
-				EE564F65263B7E260036625A /* CardList.storyboard */,
 				EE564F24263B76E90036625A /* Card */,
+				EE564F65263B7E260036625A /* CardList.storyboard */,
 				EE564F27263B772F0036625A /* CardListTableViewCell.swift */,
 				EE4F54FB263773F400D4205D /* CardListTableViewController.swift */,
 				EEBA876426377F1F0006C597 /* Collection.storyboard */,
 				EEBA876C26377FA30006C597 /* CollectionTableViewCell.swift */,
 				EEBA876526377F200006C597 /* CollectionTableViewController.swift */,
+				EEBB0EDA266827F800189166 /* ContainerViewController.swift */,
 				EECA46AD26378783003469FE /* Deck */,
 				EECA46A82637863F003469FE /* Filter */,
+				EE41CF782666CD8500665129 /* MainSplitViewViewController.swift */,
 				EEBA8696263778200006C597 /* Onboarding */,
 				EEBA8691263777B90006C597 /* PlaceholderView.storyboard */,
 				EEBA868F2637774D0006C597 /* PlaceholderViewController.swift */,
+				EE41CF4D2662AA7F00665129 /* Search */,
 				EEBA875C26377C590006C597 /* Settings.storyboard */,
 				EEBA875D26377C590006C597 /* SettingsTableViewController.swift */,
 				EEBA868A263776F80006C597 /* SidebarCollectionViewController.swift */,
 				EEBA876E26377FDA0006C597 /* SwiftUI */,
 				EEBA8688263776B00006C597 /* TripleSplitViewController.swift */,
-				EE41CF782666CD8500665129 /* MainSplitViewViewController.swift */,
-				EEBB0EDA266827F800189166 /* ContainerViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -678,6 +681,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEBA875326377B730006C597 /* Ruling.swift in Sources */,
+				EEBB0EDD2669357600189166 /* SearchBar.swift in Sources */,
 				EEBA875426377B730006C597 /* TcgPrices.swift in Sources */,
 				EEBA877A263780130006C597 /* DataModel.swift in Sources */,
 				EEBA873C26377B290006C597 /* DeckCard+CoreDataClass.swift in Sources */,
@@ -828,7 +832,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.MTGCards.RandomCardArtWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollection.RandomCardArtWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
@@ -853,7 +857,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.MTGCards.RandomCardArtWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollection.RandomCardArtWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = YES;
@@ -990,12 +994,11 @@
 				DEVELOPMENT_TEAM = JANZDS5D43;
 				INFOPLIST_FILE = MTGCards/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.MTGCards;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
@@ -1015,12 +1018,11 @@
 				DEVELOPMENT_TEAM = JANZDS5D43;
 				INFOPLIST_FILE = MTGCards/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.MTGCards;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roboticsnailsoftware.MTGCollection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
