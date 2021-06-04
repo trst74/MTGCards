@@ -109,6 +109,7 @@
 		EEBA878A263781540006C597 /* FiltersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA8788263781540006C597 /* FiltersTableViewController.swift */; };
 		EEBB0EDB266827F800189166 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBB0EDA266827F800189166 /* ContainerViewController.swift */; };
 		EEBB0EDD2669357600189166 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBB0EDC2669357600189166 /* SearchBar.swift */; };
+		EEBB0EE1266AB07700189166 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBB0EE0266AB07700189166 /* LaunchScreen.storyboard */; };
 		EECA46A226378635003469FE /* KeywordFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECA469E26378635003469FE /* KeywordFilterTableViewController.swift */; };
 		EECA46A326378635003469FE /* LegalityFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECA469C26378635003469FE /* LegalityFilterTableViewController.swift */; };
 		EECA46A426378635003469FE /* SubTypeFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECA469F26378635003469FE /* SubTypeFilterTableViewController.swift */; };
@@ -129,7 +130,6 @@
 		EED485CB2616AF7F002A7795 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED485CA2616AF7F002A7795 /* SceneDelegate.swift */; };
 		EED485D02616AF7F002A7795 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EED485CE2616AF7F002A7795 /* Main.storyboard */; };
 		EED485D52616AF82002A7795 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EED485D42616AF82002A7795 /* Assets.xcassets */; };
-		EED485D82616AF82002A7795 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EED485D62616AF82002A7795 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -260,6 +260,7 @@
 		EEBA8788263781540006C597 /* FiltersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersTableViewController.swift; sourceTree = "<group>"; };
 		EEBB0EDA266827F800189166 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		EEBB0EDC2669357600189166 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		EEBB0EE0266AB07700189166 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EECA469C26378635003469FE /* LegalityFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalityFilterTableViewController.swift; sourceTree = "<group>"; };
 		EECA469D26378635003469FE /* SetFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFilterTableViewController.swift; sourceTree = "<group>"; };
 		EECA469E26378635003469FE /* KeywordFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordFilterTableViewController.swift; sourceTree = "<group>"; };
@@ -281,7 +282,6 @@
 		EED485CA2616AF7F002A7795 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		EED485CF2616AF7F002A7795 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EED485D42616AF82002A7795 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EED485D72616AF82002A7795 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EED485D92616AF82002A7795 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EED485E02616AF8B002A7795 /* MTGCards.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MTGCards.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -542,11 +542,11 @@
 		EED485C72616AF7F002A7795 /* MTGCards */ = {
 			isa = PBXGroup;
 			children = (
+				EEBB0EE0266AB07700189166 /* LaunchScreen.storyboard */,
 				EE564F3D263B7A220036625A /* APIs */,
 				EED485C82616AF7F002A7795 /* AppDelegate.swift */,
 				EED485D42616AF82002A7795 /* Assets.xcassets */,
 				EED485D92616AF82002A7795 /* Info.plist */,
-				EED485D62616AF82002A7795 /* LaunchScreen.storyboard */,
 				EED485CE2616AF7F002A7795 /* Main.storyboard */,
 				EEBA86A5263779370006C597 /* Model */,
 				EED485E02616AF8B002A7795 /* MTGCards.entitlements */,
@@ -648,13 +648,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEBA876626377F200006C597 /* Collection.storyboard in Resources */,
-				EED485D82616AF82002A7795 /* LaunchScreen.storyboard in Resources */,
 				EEBA869D263778430006C597 /* Onboarding.storyboard in Resources */,
 				EED485D52616AF82002A7795 /* Assets.xcassets in Resources */,
 				EEBA875E26377C590006C597 /* Settings.storyboard in Resources */,
 				EE564F66263B7E260036625A /* CardList.storyboard in Resources */,
 				EECA46BA263787D1003469FE /* EditDeckCard.storyboard in Resources */,
 				EED485D02616AF7F002A7795 /* Main.storyboard in Resources */,
+				EEBB0EE1266AB07700189166 /* LaunchScreen.storyboard in Resources */,
 				EEBA876226377EEA0006C597 /* Deck.storyboard in Resources */,
 				EEBA8692263777B90006C597 /* PlaceholderView.storyboard in Resources */,
 				EEBA8789263781540006C597 /* Filters.storyboard in Resources */,
@@ -803,14 +803,6 @@
 				EED485CF2616AF7F002A7795 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		EED485D62616AF82002A7795 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EED485D72616AF82002A7795 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

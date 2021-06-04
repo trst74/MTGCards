@@ -162,7 +162,6 @@ struct CardVC: View {
                             ZStack {
                                 if UserDefaultsHandler.SELECTEDCARDIMAGEQUALITY != "none" {
                                     loadImage()
-                                        //.frame(minWidth: 0, maxWidth: 300, minHeight: 0, alignment: .center)
                                     if card.otherFaceIds?.count ?? 0 > 0 {
                                         VStack {
                                             //Spacer()
@@ -298,6 +297,7 @@ struct CardVC: View {
         if let tcg = card.tcgplayerPurchaseURL {
             alert.addAction(UIAlertAction(title: "TCGPlayer", style: .default, handler: { action in
                 //self.shareText(text: tcg, self.shareButton)
+                print(tcg)
             }))
         }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
@@ -306,7 +306,7 @@ struct CardVC: View {
         }))
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            let popover = alert.popoverPresentationController
+            //let popover = alert.popoverPresentationController
             //popover?.sourceView =
             keyWindow?.rootViewController?.present(alert, animated: true)
         } else {
