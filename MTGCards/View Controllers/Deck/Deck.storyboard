@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nm6-AZ-Pv4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nm6-AZ-Pv4">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17124"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,20 +11,20 @@
         <!--Deck Table View Controller-->
         <scene sceneID="bn4-ik-ZPc">
             <objects>
-                <tableViewController id="nm6-AZ-Pv4" customClass="DeckTableViewController" customModule="My_MTG_v5" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="nm6-AZ-Pv4" customClass="DeckTableViewController" customModule="MTGCards" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6dT-Em-dUj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="deckCard" rowHeight="55" id="psE-Sw-EXi" customClass="DeckTableViewCell" customModule="My_MTG_v5" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="55"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="deckCard" rowHeight="55" id="psE-Sw-EXi" customClass="DeckTableViewCell" customModule="MTGCards" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="24.5" width="375" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="psE-Sw-EXi" id="jGX-fE-3DS">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T1E-kO-KUa" customClass="GradientView" customModule="My_MTG_v5" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T1E-kO-KUa" customClass="GradientView" customModule="MTGCards" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pk-S1-ef9">
@@ -67,13 +68,14 @@
                                             </constraints>
                                         </view>
                                     </subviews>
+                                    <viewLayoutGuide key="safeArea" id="eSE-GP-CCw"/>
+                                    <constraints>
+                                        <constraint firstItem="T1E-kO-KUa" firstAttribute="centerX" secondItem="eSE-GP-CCw" secondAttribute="centerX" id="6cd-G0-R3i"/>
+                                        <constraint firstItem="T1E-kO-KUa" firstAttribute="height" secondItem="eSE-GP-CCw" secondAttribute="height" id="6qd-PG-iOI"/>
+                                        <constraint firstItem="T1E-kO-KUa" firstAttribute="width" secondItem="eSE-GP-CCw" secondAttribute="width" id="xjT-ce-wS3"/>
+                                        <constraint firstItem="T1E-kO-KUa" firstAttribute="centerY" secondItem="eSE-GP-CCw" secondAttribute="centerY" id="ynH-bO-wsT"/>
+                                    </constraints>
                                 </tableViewCellContentView>
-                                <constraints>
-                                    <constraint firstItem="T1E-kO-KUa" firstAttribute="height" secondItem="psE-Sw-EXi" secondAttribute="height" id="8TM-RQ-MR9"/>
-                                    <constraint firstItem="T1E-kO-KUa" firstAttribute="centerX" secondItem="psE-Sw-EXi" secondAttribute="centerX" id="Ro4-uJ-hEs"/>
-                                    <constraint firstItem="T1E-kO-KUa" firstAttribute="width" secondItem="psE-Sw-EXi" secondAttribute="width" id="W19-kd-ieC"/>
-                                    <constraint firstItem="T1E-kO-KUa" firstAttribute="centerY" secondItem="psE-Sw-EXi" secondAttribute="centerY" id="e2e-b7-Fck"/>
-                                </constraints>
                                 <connections>
                                     <outlet property="gradientView" destination="T1E-kO-KUa" id="Uvk-ZF-njm"/>
                                     <outlet property="quantity" destination="kZq-P7-Ym0" id="n4m-sp-QsI"/>

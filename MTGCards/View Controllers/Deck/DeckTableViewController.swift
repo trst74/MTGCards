@@ -79,9 +79,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
         let importButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.down"), style: .plain, target: self, action: #selector(self.importDeck))
         self.navigationItem.setRightBarButton(importButton, animated: true)
         updateTitle()
-//        for card in deck?.cards?.allObjects as! [DeckCard] {
-//            print("\(card.quantity) \(String(describing: card.card?.name ?? "")) (\(card.card?.set.code ?? ""))")
-//        }
+        printDeckList()
     }
     override func viewWillDisappear(_ animated: Bool) {
         if let nav = self.navigationController {
@@ -369,7 +367,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
                 }
             }
         }
-        
+        cell.selectionStyle = .none
         return cell
     }
     private func checkCardLegality(card: Card, legality: String) -> Bool {
@@ -631,6 +629,11 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
     private func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
+    }
+    private func printDeckList(){
+        for deckCard in deckCards {
+            print("\(deckCard.quantity ) \(deckCard.card?.name ?? "") (\(deckCard.card?.set.code ?? ""))")
+        }
     }
 }
 extension DeckTableViewController {

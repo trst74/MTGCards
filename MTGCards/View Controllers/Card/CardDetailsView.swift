@@ -32,13 +32,21 @@ struct CardDetailsView: View {
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))
+            Text(card.flavorText ?? "")
+                .font(.subheadline)
+                .fontWeight(.light)
+                .italic()
+                .lineLimit(100)
+                .fixedSize(horizontal: false, vertical: true)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))
+       
             HStack{
                 Text(card.artist ?? "Failure").italic()
                     .frame(maxWidth: .infinity, alignment: .leading)
-                
                 if card.power != nil && card.toughness != nil {
                     Text("\(card.power!)/\(card.toughness!)")
-                        .frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 
                 
@@ -50,6 +58,7 @@ struct CardDetailsView: View {
             }
             .padding(.init(top: 2.0, leading: 4.0, bottom: 2.0, trailing: 0))
         }
+        .fixedSize(horizontal: false, vertical: true)
         .padding(.init(top: 8.0, leading: 16.0, bottom: 8.0, trailing: 16.0))
         .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(10)
