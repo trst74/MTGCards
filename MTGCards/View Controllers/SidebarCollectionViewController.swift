@@ -444,7 +444,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
         for headerItem in sectionItems {
             
             if headerItem.title == "Tools" {
-                dataSourceSnapshot.appendItems([Item(title: "Search"),Item(title: "SwiftUI Search")], toSection: headerItem)
+                dataSourceSnapshot.appendItems([Item(title: "Search")], toSection: headerItem)
                 
             } else if headerItem.title == "Collections" {
                 dataSourceSnapshot.appendItems([Item(title: "Collection"), Item(title: "Wish List")], toSection: headerItem)

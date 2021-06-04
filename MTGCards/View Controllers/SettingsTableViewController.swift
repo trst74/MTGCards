@@ -97,23 +97,15 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
             switch indexPath.row {
             
             case 0:
-                if let url = URL(string: "https://quicktype.io"){
-                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
-                }
-            case 1:
                 if let url = URL(string: "https://mtgjson.com"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
+            case 1:
+                if let url = URL(string: "https://www.tcgplayer.com"){
+                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
+                }
             case 2:
-                if let url = URL(string: "https://medium.com/@andrea.prearo/working-with-codable-and-core-data-83983e77198e"){
-                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
-                }
-            case 3:
-                if let url = URL(string: "https://medium.com/@sakhabaevegor/create-a-color-gradient-on-the-storyboard-18ccfd8158c2"){
-                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
-                }
-            case 4:
-                if let url = URL(string: "https://swiftwithmajid.com/2019/08/14/building-barchart-with-shape-api-in-swiftui/"){
+                if let url = URL(string: "https://scryfall.com"){
                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                 }
             default:
