@@ -83,48 +83,56 @@ struct DeckStatsView: View {
             $0.card?.tcgplayerProductID
         }.compactMap { $0 }
         ids.removeAll(where: {$0 == 0})
-        self.pricesLoader.load(cardIds: ids)
+        if deckCards.count > 0 {
+            self.pricesLoader.load(cardIds: ids)
+        }
     }
     
     var body: some View {
         GeometryReader { geometry in
-        ScrollView{
-            VStack(alignment: .leading) {
-                VStack(alignment: .center) {
-                    Text("Rarity Breakdown")
-                        .padding(.top)
-                    BarChart(bars: getRarityBars())
-                        .onAppear {
-                            calculateRarities()
+            ScrollView{
+                VStack(alignment: .leading) {
+                    VStack(alignment: .center) {
+                        Text("Rarity Breakdown")
+                            .padding(.top)
+                        BarChart(bars: getRarityBars())
+                            .onAppear {
+                                calculateRarities()
+                            }
+                            .padding(.bottom)
+                    }
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .cornerRadius(10)
+                    VStack(alignment: .center) {
+                        Text("Cost")
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .padding(.top)
+                            .padding(.bottom, 5)
+                        if deckCards.count > 0 {
+                            Text(self.pricesLoader.getTotal(deck: self.deck).currency)
+                                .font(.title)
+                                .padding(.bottom)
+                        } else {
+                            Text(0.00.currency)
+                                .font(.title)
+                                .padding(.bottom)
                         }
-                        .padding(.bottom)
-                }
-                .background(Color(UIColor.secondarySystemBackground))
-                .cornerRadius(10)
-                VStack(alignment: .center) {
-                    Text("Cost")
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .padding(.top)
-                        .padding(.bottom, 5)
-                    Text(self.pricesLoader.getTotal(deck: self.deck).currency)
-                        .font(.title)
-                        .padding(.bottom)
-                }
-                .background(Color(UIColor.secondarySystemBackground))
-                .cornerRadius(10)
-                VStack(alignment: .center) {
-                    Text("CMC")
-                        .padding(.top)
-                    BarChart(bars: createCMCBars())
-                        .onAppear {
-                            calculateCMCs()
-                        }
-                        .padding(.bottom)
-                }
-                .background(Color(UIColor.secondarySystemBackground))
-                .cornerRadius(10)
-               
-                
+                    }
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .cornerRadius(10)
+                    VStack(alignment: .center) {
+                        Text("CMC")
+                            .padding(.top)
+                        BarChart(bars: createCMCBars())
+                            .onAppear {
+                                calculateCMCs()
+                            }
+                            .padding(.bottom)
+                    }
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .cornerRadius(10)
+                    
+                    
                     if geometry.size.width > 600 {
                         HStack {
                             ColorsView(deckCards: deckCards)
@@ -136,20 +144,27 @@ struct DeckStatsView: View {
                         ColorsView(deckCards: deckCards)
                         TypesView(deckCards: deckCards)
                     }
-                
-                VStack {
-                    Text("Legalities")
-                        .padding(.top)
-                    DeckLegalities(formats: calculateLegalities())
-                        .padding([.bottom, .leading, .trailing])
+                    
+                    VStack {
+                        Text("Legalities")
+                            .padding(.top)
+                        if deckCards.count > 0 {
+                            DeckLegalities(formats: calculateLegalities())
+                                .padding([.bottom, .leading, .trailing])
+                        } else {
+                            Text("There is no data to display.")
+                                .italic()
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                        }
+                    }
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .cornerRadius(10)
+                    
                 }
-                .background(Color(UIColor.secondarySystemBackground))
-                .cornerRadius(10)
-                
+                .padding()
             }
-            .padding()
-        }
-        .navigationTitle(Text("Stats"))
+            .navigationTitle(Text("Stats"))
         }
     }
     private func calculateTypes() {
@@ -505,87 +520,90 @@ struct TypesView: View {
             Text("Types")
                 .padding(.top)
             HStack (alignment: .center) {
-                SunburstView(configuration: createSunburstConfigForType())
+                SunburstView(configuration: createSunburstConfigForType(deckCards: deckCards))
                     .onAppear {
                         calculateTypes()
                     }
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, idealHeight: 200, maxHeight: .infinity, alignment: .center)
                     .padding([.bottom, .leading])
-                VStack(alignment: .leading) {
-                    HStack {
-                        Circle()
-                            .foregroundColor(.blue)
-                            .frame(width: 15, height: 15, alignment: .center)
-                        Text("Land - \(cardTypes.land.description)")
-                            .font(.system(size: 10))
+                if deckCards.count > 0 {
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Circle()
+                                .foregroundColor(.blue)
+                                .frame(width: 15, height: 15, alignment: .center)
+                            Text("Land - \(cardTypes.land.description)")
+                                .font(.system(size: 10))
+                        }
+                        HStack {
+                            Circle()
+                                .foregroundColor(.green)
+                                .frame(width: 15, height: 15, alignment: .center)
+                            Text("Creature - \(cardTypes.creature.description)")
+                                .font(.system(size: 10))
+                        }
+                        HStack {
+                            Circle()
+                                .foregroundColor(.gray)
+                                .frame(width: 15, height: 15, alignment: .center)
+                            Text("Artifact - \(cardTypes.artifact.description)")
+                                .font(.system(size: 10))
+                        }
+                        HStack {
+                            Circle()
+                                .foregroundColor(.orange)
+                                .frame(width: 15, height: 15, alignment: .center)
+                            Text("Enchantment - \(cardTypes.enchantment.description)")
+                                .font(.system(size: 10))
+                        }
+                        HStack {
+                            Circle()
+                                .foregroundColor(.red)
+                                .frame(width: 15, height: 15, alignment: .center)
+                            Text("Instant - \(cardTypes.instant.description)")
+                                .font(.system(size: 10))
+                        }
+                        HStack {
+                            Circle()
+                                .foregroundColor(.yellow)
+                                .frame(width: 15, height: 15, alignment: .center)
+                            Text("Sorcery - \(cardTypes.sorcery.description)")
+                                .font(.system(size: 10))
+                        }
+                        HStack {
+                            Circle()
+                                .foregroundColor(.black)
+                                .frame(width: 15, height: 15, alignment: .center)
+                            Text("Planeswalker - \(cardTypes.planeswalker.description)")
+                                .font(.system(size: 10))
+                        }
                     }
-                    HStack {
-                        Circle()
-                            .foregroundColor(.green)
-                            .frame(width: 15, height: 15, alignment: .center)
-                        Text("Creature - \(cardTypes.creature.description)")
-                            .font(.system(size: 10))
-                    }
-                    HStack {
-                        Circle()
-                            .foregroundColor(.gray)
-                            .frame(width: 15, height: 15, alignment: .center)
-                        Text("Artifact - \(cardTypes.artifact.description)")
-                            .font(.system(size: 10))
-                    }
-                    HStack {
-                        Circle()
-                            .foregroundColor(.orange)
-                            .frame(width: 15, height: 15, alignment: .center)
-                        Text("Enchantment - \(cardTypes.enchantment.description)")
-                            .font(.system(size: 10))
-                    }
-                    HStack {
-                        Circle()
-                            .foregroundColor(.red)
-                            .frame(width: 15, height: 15, alignment: .center)
-                        Text("Instant - \(cardTypes.instant.description)")
-                            .font(.system(size: 10))
-                    }
-                    HStack {
-                        Circle()
-                            .foregroundColor(.yellow)
-                            .frame(width: 15, height: 15, alignment: .center)
-                        Text("Sorcery - \(cardTypes.sorcery.description)")
-                            .font(.system(size: 10))
-                    }
-                    HStack {
-                        Circle()
-                            .foregroundColor(.black)
-                            .frame(width: 15, height: 15, alignment: .center)
-                        Text("Planeswalker - \(cardTypes.planeswalker.description)")
-                            .font(.system(size: 10))
-                    }
+                    .frame(minWidth: 0, maxWidth: 150, minHeight: 0,  maxHeight: .infinity, alignment: .leading)
+                    
+                    .padding(.bottom)
                 }
-                .frame(minWidth: 0, maxWidth: 150, minHeight: 0,  maxHeight: .infinity, alignment: .leading)
-
-                .padding(.bottom)
             }
         }
         
         .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(10)
     }
-    private func createSunburstConfigForType() -> SunburstConfiguration {
+    private func createSunburstConfigForType(deckCards: [DeckCard]) -> SunburstConfiguration {
         
         
         
         var configuration = SunburstConfiguration(nodes: [])
         
-        configuration = SunburstConfiguration(nodes: [Node(name: cardTypes.land.description, value: Double(cardTypes.land), backgroundColor: .blue ),
-                                                      Node(name: cardTypes.creature.description, value: Double(cardTypes.creature), backgroundColor: .green ),
-                                                      Node(name: cardTypes.artifact.description, value: Double(cardTypes.artifact), backgroundColor: .gray ),
-                                                      Node(name: cardTypes.enchantment.description, value: Double(cardTypes.enchantment), backgroundColor: .orange ),
-                                                      Node(name: cardTypes.instant.description, value: Double(cardTypes.instant), backgroundColor: .red ),
-                                                      Node(name: cardTypes.sorcery.description, value: Double(cardTypes.sorcery), backgroundColor: .yellow ),
-                                                      Node(name: cardTypes.planeswalker.description, value: Double(cardTypes.planeswalker), backgroundColor: .black )
-        ], calculationMode: .parentIndependent(totalValue: Double(cardTypes.total)))
-        
+        if deckCards.count > 0 {
+            configuration = SunburstConfiguration(nodes: [Node(name: cardTypes.land.description, value: Double(cardTypes.land), backgroundColor: .blue ),
+                                                          Node(name: cardTypes.creature.description, value: Double(cardTypes.creature), backgroundColor: .green ),
+                                                          Node(name: cardTypes.artifact.description, value: Double(cardTypes.artifact), backgroundColor: .gray ),
+                                                          Node(name: cardTypes.enchantment.description, value: Double(cardTypes.enchantment), backgroundColor: .orange ),
+                                                          Node(name: cardTypes.instant.description, value: Double(cardTypes.instant), backgroundColor: .red ),
+                                                          Node(name: cardTypes.sorcery.description, value: Double(cardTypes.sorcery), backgroundColor: .yellow ),
+                                                          Node(name: cardTypes.planeswalker.description, value: Double(cardTypes.planeswalker), backgroundColor: .black )
+            ], calculationMode: .parentIndependent(totalValue: Double(cardTypes.total)))
+        }
         return configuration
     }
     private func calculateTypes() {

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EE0BECAC26584532006A0C43 /* RandomCardArtWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EE564F54263B7B9D0036625A /* RandomCardArtWidget.intentdefinition */; };
 		EE41CF4C2661936E00665129 /* MTGCards.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF482661916000665129 /* MTGCards.xcdatamodeld */; };
 		EE41CF4F2662AA9600665129 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF4E2662AA9600665129 /* SearchResultsView.swift */; };
 		EE41CF542662C03000665129 /* Collection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF502662C02F00665129 /* Collection+CoreDataClass.swift */; };
@@ -37,7 +36,6 @@
 		EE564F53263B7B9D0036625A /* RandomCardArtWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE564F52263B7B9D0036625A /* RandomCardArtWidget.swift */; };
 		EE564F56263B7B9E0036625A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE564F55263B7B9E0036625A /* Assets.xcassets */; };
 		EE564F58263B7B9E0036625A /* RandomCardArtWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EE564F54263B7B9D0036625A /* RandomCardArtWidget.intentdefinition */; settings = {ATTRIBUTES = (codegen, ); }; };
-		EE564F5C263B7B9E0036625A /* RandomCardArtWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EE564F4B263B7B9D0036625A /* RandomCardArtWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EE564F64263B7D3E0036625A /* RandomCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE564F62263B7BBA0036625A /* RandomCard.swift */; };
 		EE564F66263B7E260036625A /* CardList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE564F65263B7E260036625A /* CardList.storyboard */; };
 		EE68B742261FCE0800BCD15F /* ToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE68B741261FCE0800BCD15F /* ToolbarDelegate.swift */; };
@@ -110,6 +108,8 @@
 		EEBB0EDB266827F800189166 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBB0EDA266827F800189166 /* ContainerViewController.swift */; };
 		EEBB0EDD2669357600189166 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBB0EDC2669357600189166 /* SearchBar.swift */; };
 		EEBB0EE1266AB07700189166 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBB0EE0266AB07700189166 /* LaunchScreen.storyboard */; };
+		EEBB0EE2266AC20700189166 /* RandomCardArtWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EE564F4B263B7B9D0036625A /* RandomCardArtWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EEBB0EE6266AC57100189166 /* RandomCardArtWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EE564F54263B7B9D0036625A /* RandomCardArtWidget.intentdefinition */; };
 		EECA46A226378635003469FE /* KeywordFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECA469E26378635003469FE /* KeywordFilterTableViewController.swift */; };
 		EECA46A326378635003469FE /* LegalityFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECA469C26378635003469FE /* LegalityFilterTableViewController.swift */; };
 		EECA46A426378635003469FE /* SubTypeFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECA469F26378635003469FE /* SubTypeFilterTableViewController.swift */; };
@@ -133,7 +133,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EE564F5A263B7B9E0036625A /* PBXContainerItemProxy */ = {
+		EEBB0EE3266AC20700189166 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EED485BD2616AF7F002A7795 /* Project object */;
 			proxyType = 1;
@@ -143,13 +143,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		EE564F61263B7B9E0036625A /* Embed App Extensions */ = {
+		EEBB0EE5266AC20700189166 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				EE564F5C263B7B9E0036625A /* RandomCardArtWidgetExtension.appex in Embed App Extensions */,
+				EEBB0EE2266AC20700189166 /* RandomCardArtWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -476,7 +476,6 @@
 				EEBA8775263780120006C597 /* BarChart.swift */,
 				EEBA8772263780120006C597 /* DataModel.swift */,
 				EEBA8771263780120006C597 /* DeckLegalities.swift */,
-				EEBA8773263780120006C597 /* DeckStatsView.swift */,
 				EEBA8774263780120006C597 /* IfLetView.swift */,
 				EEBA8776263780130006C597 /* Sunburst.swift */,
 				EEBA876F263780120006C597 /* SunburstView.swift */,
@@ -515,6 +514,7 @@
 				EEBA876826377F470006C597 /* DeckStatsTableViewController.swift */,
 				EECA46AB26378770003469FE /* DeckTableViewCell.swift */,
 				EEBA876126377EEA0006C597 /* DeckTableViewController.swift */,
+				EEBA8773263780120006C597 /* DeckStatsView.swift */,
 			);
 			path = Deck;
 			sourceTree = "<group>";
@@ -586,12 +586,12 @@
 				EED485C12616AF7F002A7795 /* Sources */,
 				EED485C22616AF7F002A7795 /* Frameworks */,
 				EED485C32616AF7F002A7795 /* Resources */,
-				EE564F61263B7B9E0036625A /* Embed App Extensions */,
+				EEBB0EE5266AC20700189166 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				EE564F5B263B7B9E0036625A /* PBXTargetDependency */,
+				EEBB0EE4266AC20700189166 /* PBXTargetDependency */,
 			);
 			name = MTGCards;
 			productName = MTGCards;
@@ -726,6 +726,7 @@
 				EEBA873926377B290006C597 /* CollectionCard+CoreDataProperties.swift in Sources */,
 				EE41CF572662C03000665129 /* Deck+CoreDataProperties.swift in Sources */,
 				EE564F28263B772F0036625A /* CardListTableViewCell.swift in Sources */,
+				EEBB0EE6266AC57100189166 /* RandomCardArtWidget.intentdefinition in Sources */,
 				EEBA8786263781320006C597 /* Filters.swift in Sources */,
 				EE564F3A263B79E30036625A /* SafariActivity.swift in Sources */,
 				EEBA875126377B730006C597 /* NonCDSet.swift in Sources */,
@@ -781,7 +782,6 @@
 				EEBA874F26377B730006C597 /* TcgToken.swift in Sources */,
 				EE564F42263B7A9B0036625A /* Backup.swift in Sources */,
 				EEBA869C263778430006C597 /* OnboardingPageViewController.swift in Sources */,
-				EE0BECAC26584532006A0C43 /* RandomCardArtWidget.intentdefinition in Sources */,
 				EE564F30263B78440036625A /* URLImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -789,10 +789,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EE564F5B263B7B9E0036625A /* PBXTargetDependency */ = {
+		EEBB0EE4266AC20700189166 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EE564F4A263B7B9D0036625A /* RandomCardArtWidgetExtension */;
-			targetProxy = EE564F5A263B7B9E0036625A /* PBXContainerItemProxy */;
+			targetProxy = EEBB0EE3266AC20700189166 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -977,7 +977,6 @@
 		EED485DD2616AF82002A7795 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MTGCards/MTGCards.entitlements;
@@ -1001,7 +1000,6 @@
 		EED485DE2616AF82002A7795 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MTGCards/MTGCards.entitlements;

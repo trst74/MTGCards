@@ -106,7 +106,7 @@ struct CardVC: View {
                                 ZStack {
                                     if UserDefaultsHandler.SELECTEDCARDIMAGEQUALITY != "none" {
                                         loadImage()
-                                            .frame(minWidth: 0, maxWidth: 300, minHeight: 0, alignment: .center)
+                                            .frame(minWidth: 0, maxWidth: 390, minHeight: 0, alignment: .center)
                                         if card.otherFaceIds?.count ?? 0 > 0 {
                                             VStack {
                                                 //Spacer()

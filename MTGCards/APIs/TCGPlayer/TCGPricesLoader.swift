@@ -16,7 +16,6 @@ class TCGPricesLoader: ObservableObject {
     let objectWillChange = PassthroughSubject<TCGPricesLoader?, Never>()
     
     func load(cardIds: [Int32]) {
-        
         TcgPlayerApi.handler.getPrices(for: cardIds) { prices in
             self.downloadedPrices = prices
             self.objectWillChange.send(self)

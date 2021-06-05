@@ -15,6 +15,9 @@ struct BarChart: View {
         Group {
             if bars.isEmpty {
                 Text("There is no data to display.")
+                    .italic()
+                    .frame(maxWidth: .infinity)
+                    .padding()
             } else {
                
                     BarsView(bars: bars)
