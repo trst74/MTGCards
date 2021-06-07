@@ -102,7 +102,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         
         guard let string = card.uuid, let data = string.data(using: .utf8) else { return [] }
         let itemProvider = NSItemProvider(item: data as NSData, typeIdentifier: kUTTypePlainText as String)
-
+        
         return [UIDragItem(itemProvider: itemProvider)]
     }
     func tableView(_ tableView: UITableView, itemsForAddingTo session: UIDragSession, at indexPath: IndexPath, point: CGPoint) -> [UIDragItem] {
@@ -215,90 +215,100 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             return
         }
         if text.count > 2 {
-            predicate = NSPredicate(format: "name contains[c] %@", text)
+            if text.contains(":"){
+                let range = NSRange(location: 0, length: text.utf16.count)
+                let regex = try! NSRegularExpression(pattern: #"(?:[^\s"]+|"[^"]*")+"#)
+                let matches = regex.matches(in: text, options: [], range: range)
+                for match in matches {
+                    let r = match.range
+                    print(text.substring(with: r) ?? "")
+                }
+            } else {
+                predicate = NSPredicate(format: "name contains[c] %@", text)
+            }
             loadSavedData()
         }
         return
     }
-
+    
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         return nil
     }
     override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let addTo = UIAction(title: "Add To...",
                              image: UIImage(systemName: "plus")) { action in
-                                let card = self.fetchedResultsController.object(at: indexPath)
-                                let alert = UIAlertController(title: "Add To", message: nil, preferredStyle: .actionSheet)
-                                
-                                if let popoverController = alert.popoverPresentationController {
-                                    popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
-                                    popoverController.sourceView = tableView.cellForRow(at: indexPath)
-                                }
-                                let addToCollection = UIAlertAction(title: "Collection", style: .default, handler: { action in
-                                    DataManager.addCardToCollection(id: card.objectID)
-                                })
-                                alert.addAction(addToCollection)
-                                let addToWishList = UIAlertAction(title: "Wish List", style: .default, handler: { action in
-                                    DataManager.addCardToWishList(id: card.objectID)
-                                })
-                                alert.addAction(addToWishList)
-                                let addToDeck = UIAlertAction(title: "Deck...", style: .default, handler: { action in
-                                    self.present(Sharing.addToDeckMenu(id: card.objectID, sourceView: tableView.cellForRow(at: indexPath)), animated: true)
-                                })
-                                alert.addAction(addToDeck)
-                                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-                                    self.dismiss(animated: true, completion: nil)
-                                }))
-                                if let popoverController = alert.popoverPresentationController {
-                                    popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
-                                    popoverController.sourceView = tableView.cellForRow(at: indexPath)
-                                }
-                                self.present(alert, animated: true, completion: nil)
-                                
+            let card = self.fetchedResultsController.object(at: indexPath)
+            let alert = UIAlertController(title: "Add To", message: nil, preferredStyle: .actionSheet)
+            
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
+                popoverController.sourceView = tableView.cellForRow(at: indexPath)
+            }
+            let addToCollection = UIAlertAction(title: "Collection", style: .default, handler: { action in
+                DataManager.addCardToCollection(id: card.objectID)
+            })
+            alert.addAction(addToCollection)
+            let addToWishList = UIAlertAction(title: "Wish List", style: .default, handler: { action in
+                DataManager.addCardToWishList(id: card.objectID)
+            })
+            alert.addAction(addToWishList)
+            let addToDeck = UIAlertAction(title: "Deck...", style: .default, handler: { action in
+                self.present(Sharing.addToDeckMenu(id: card.objectID, sourceView: tableView.cellForRow(at: indexPath)), animated: true)
+            })
+            alert.addAction(addToDeck)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
+                popoverController.sourceView = tableView.cellForRow(at: indexPath)
+            }
+            self.present(alert, animated: true, completion: nil)
+            
         }
         let share = UIAction(title: "Share",
                              image: UIImage(systemName: "square.and.arrow.up")) { action in
-                                let card = self.fetchedResultsController.object(at: indexPath)
-                                
-                                let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-                                let imageAction = UIAlertAction(title: "Image", style: .default, handler: { action in
-                                    if let uuid = card.uuid {
-                                        if let image = self.getImage(Key: uuid) {
-                                            self.present(Sharing.shareImage(image: image, self.tableView.cellForRow(at: indexPath)?.contentView), animated: true)
-                                        }
-                                    }
-                                    
-                                })
-                                imageAction.setValue(UIImage(systemName: "photo"), forKey: "image")
-                                imageAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
-                                alert.addAction(imageAction)
-                                if card.multiverseID > 0 {
-                                    alert.addAction(UIAlertAction(title: "Gatherer", style: .default, handler: { action in
-                                        if let url = URL(string:  "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=\(card.multiverseID)"){
-                                            self.present(Sharing.shareUrl(url: url, self.tableView.cellForRow(at: indexPath)?.contentView), animated: true)
-                                        }
-                                    }))
-                                }
-                                if let tcg = card.tcgplayerPurchaseURL {
-                                    alert.addAction(UIAlertAction(title: "TCGPlayer", style: .default, handler: { action in
-                                        //self.shareText(text: tcg)
-                                        if let url = URL(string:  tcg){
-                                            self.present(Sharing.shareUrl(url: url, self.tableView.cellForRow(at: indexPath)), animated: true)
-                                        }
-                                    }))
-                                }
-                                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-                                    self.dismiss(animated: true, completion: nil)
-                                }))
-                                if let popoverController = alert.popoverPresentationController {
-                                    popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
-                                    popoverController.sourceView = tableView.cellForRow(at: indexPath)
-                                }
-                                self.present(alert, animated: true, completion: nil)
+            let card = self.fetchedResultsController.object(at: indexPath)
+            
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let imageAction = UIAlertAction(title: "Image", style: .default, handler: { action in
+                if let uuid = card.uuid {
+                    if let image = self.getImage(Key: uuid) {
+                        self.present(Sharing.shareImage(image: image, self.tableView.cellForRow(at: indexPath)?.contentView), animated: true)
+                    }
+                }
+                
+            })
+            imageAction.setValue(UIImage(systemName: "photo"), forKey: "image")
+            imageAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+            alert.addAction(imageAction)
+            if card.multiverseID > 0 {
+                alert.addAction(UIAlertAction(title: "Gatherer", style: .default, handler: { action in
+                    if let url = URL(string:  "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=\(card.multiverseID)"){
+                        self.present(Sharing.shareUrl(url: url, self.tableView.cellForRow(at: indexPath)?.contentView), animated: true)
+                    }
+                }))
+            }
+            if let tcg = card.tcgplayerPurchaseURL {
+                alert.addAction(UIAlertAction(title: "TCGPlayer", style: .default, handler: { action in
+                    //self.shareText(text: tcg)
+                    if let url = URL(string:  tcg){
+                        self.present(Sharing.shareUrl(url: url, self.tableView.cellForRow(at: indexPath)), animated: true)
+                    }
+                }))
+            }
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
+                popoverController.sourceView = tableView.cellForRow(at: indexPath)
+            }
+            self.present(alert, animated: true, completion: nil)
         }
         return UIContextMenuConfiguration(identifier: nil,
                                           previewProvider: nil) { _ in
-                                            UIMenu(title: "", children: [addTo, share])
+            UIMenu(title: "", children: [addTo, share])
         }
     }
     func getImage(Key: String) -> UIImage? {
@@ -324,3 +334,4 @@ extension CardListTableViewController {
         return filelist
     }
 }
+

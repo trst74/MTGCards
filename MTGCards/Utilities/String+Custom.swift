@@ -75,3 +75,9 @@ extension StringProtocol where Index == String.Index {
         return NSRange(range, in: self)
     }
 }
+extension String {
+    func substring(with nsrange: NSRange) -> Substring? {
+        guard let range = Range(nsrange, in: self) else { return nil }
+        return self[range]
+    }
+}
