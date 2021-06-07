@@ -9,7 +9,12 @@
 import SwiftUI
 
 struct CardVC: View {
-    
+    let keyWindow = UIApplication.shared.connectedScenes
+        .filter({$0.activationState == .foregroundActive})
+        .map({$0 as? UIWindowScene})
+        .compactMap({$0})
+        .first?.windows
+        .filter({$0.isKeyWindow}).first
     @State public var card: Card
     private var cardLegalities: [Format] {
         get {
@@ -162,6 +167,13 @@ struct CardVC: View {
                             ZStack {
                                 if UserDefaultsHandler.SELECTEDCARDIMAGEQUALITY != "none" {
                                     loadImage()
+                                        .onTapGesture {
+                                            
+                                        }
+                                        .onLongPressGesture {
+                                            shareImage()
+                                            print("Long pressed!")
+                                        }
                                     if card.otherFaceIds?.count ?? 0 > 0 {
                                         VStack {
                                             //Spacer()
@@ -191,6 +203,14 @@ struct CardVC: View {
                                 }
                             }
                             CardDetailsView(card: card)
+                                .onTapGesture {
+                                    
+                                }
+                                .onLongPressGesture {
+                                    var con = Sharing.shareText(text: card.text ?? "", nil)
+                                    keyWindow?.rootViewController?.present(con, animated: true, completion: nil)
+                                    print("Long pressed!")
+                                }
                             PricesView(cardIDs: [card.tcgplayerProductID], card: card)
                             if rulings.count > 0 {
                                 Text("Rulings").bold()

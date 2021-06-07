@@ -318,8 +318,8 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
                 if indexPath.item == 0 {
                     self.navigationController?.pushViewController(CardListTableViewController.freshCardList(), animated: true)
                 } else {
-                    let vc = UIHostingController(rootView: SearchResultsView().environment(\.managedObjectContext, CoreDataStack.handler.privateContext))
-                    self.navigationController?.pushViewController(vc, animated: true)
+//                    let vc = UIHostingController(rootView: SearchResultsView().environment(\.managedObjectContext, CoreDataStack.handler.privateContext))
+//                    self.navigationController?.pushViewController(vc, animated: true)
                 }
             } else if indexPath.section == 2 {
                 //StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row].objectID)
@@ -336,8 +336,8 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
                 self.splitViewController?.setViewController(nil, for: .supplementary)
                 self.splitViewController?.setViewController(CardListTableViewController.freshCardList(), for: .supplementary)
                 } else {
-                    let vc = UIHostingController(rootView: SearchResultsView().environment(\.managedObjectContext, CoreDataStack.handler.privateContext))
-                    self.splitViewController?.setViewController(vc, for: .supplementary)
+//                    let vc = UIHostingController(rootView: SearchResultsView().environment(\.managedObjectContext, CoreDataStack.handler.privateContext))
+//                    self.splitViewController?.setViewController(vc, for: .supplementary)
                 }
             } else if indexPath.section == 2 {
                 //StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row].objectID)

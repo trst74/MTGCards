@@ -39,18 +39,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         builder.remove(menu: .format)
         builder.remove(menu: .toolbar)
         
-        let addCommand  = UIKeyCommand(input: "A", modifierFlags: [.control], action: #selector(self.add), discoverabilityTitle: "Add...")
-        addCommand.title = "Add..."
+        //let addCommand  = UIKeyCommand(input: "A", modifierFlags: [.control], action: #selector(self.add), discoverabilityTitle: "Add...")
+        let addCommand = UIKeyCommand(title: "Add...", image: nil, action: #selector(self.add), input: "A", modifierFlags: [.control], propertyList: nil, alternates: [], discoverabilityTitle: "Add...", attributes: [], state: .on)
+        //addCommand.title = "Add..."
         let addMenu = UIMenu(title: "Add...", image: nil, identifier: UIMenu.Identifier("add"), options: .displayInline, children: [addCommand])
         builder.insertChild(addMenu, atStartOfMenu: .file)
         
-        let settingsCommand = UIKeyCommand(input: "S", modifierFlags: [.control, .shift], action: #selector(self.settings), discoverabilityTitle: "Settings")
-        settingsCommand.title = "Settings"
+        let settingsCommand = UIKeyCommand(title: "Settings", image: nil, action: #selector(self.settings), input: "S", modifierFlags: [.control, .shift], propertyList: nil, alternates: [], discoverabilityTitle: "Settings", attributes: [], state: .on)
         let settingsMenu = UIMenu(title: "Settings", image: nil, identifier: UIMenu.Identifier("settings"), options: .displayInline, children: [settingsCommand])
         builder.insertSibling(settingsMenu, afterMenu: addMenu.identifier)
         
-        let hideMaster  = UIKeyCommand(input: "L", modifierFlags: [.command, .control], action: #selector(self.toggleSidebar), discoverabilityTitle: "Hide/Show Sidebar")
-        hideMaster.title = "Toggle Sidebar"
+        let hideMaster  = UIKeyCommand(title: "Toggle Sidebar", image: nil, action: #selector(self.toggleSidebar), input: "L", modifierFlags: [.command, .control], propertyList: nil, alternates: [], discoverabilityTitle: "Toggle Sidebar", attributes: [], state: .on)
         let hideMasterMenu = UIMenu(title: "Toggle Sidebar", image: nil, identifier: UIMenu.Identifier("toggleSidebar"), options: .displayInline, children: [hideMaster])
         builder.insertChild(hideMasterMenu, atStartOfMenu: .view)
     }

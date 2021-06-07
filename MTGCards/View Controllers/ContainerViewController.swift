@@ -58,13 +58,13 @@ class ContainerViewController: UIViewController, UISplitViewControllerDelegate {
     }
     override var keyCommands: [UIKeyCommand]? {
         return [
-            UIKeyCommand(input: "S", modifierFlags: [.control, .shift], action: #selector(self.settings)),
-            UIKeyCommand(input: "A", modifierFlags: [.control], action: #selector(self.addButton))
+            
+            UIKeyCommand(title: "Settings", image: nil, action: #selector(self.settings), input: "S", modifierFlags: [.control, .shift], propertyList: nil, alternates: [], discoverabilityTitle: "Settings", attributes: [], state: .on),
+            UIKeyCommand(title: "Add...", image: nil, action: #selector(self.addButton), input: "A", modifierFlags: [.control], propertyList: nil, alternates: [], discoverabilityTitle: "Add...", attributes: [], state: .on)
         ]
     }
     @objc func addButton(){
         split.viewController(for: .primary)?.performSelector(onMainThread: #selector(addButton), with: nil, waitUntilDone: false)
-        split.viewController(for: .primary)
     }
     @objc func settings(){
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
@@ -115,4 +115,5 @@ class ContainerViewController: UIViewController, UISplitViewControllerDelegate {
             UserDefaultsHandler.setHasOpened(opened: true)
         }
     }
+
 }

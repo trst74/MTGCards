@@ -30,7 +30,7 @@ public class DataManager {
             managedObjectContext.perform {
                 do {
                     try autoreleasepool {
-                        let set = try decoder.decode(MTGSet.self, from: d)
+                        let _ = try decoder.decode(MTGSet.self, from: d)
                     }
                     do {
                         try managedObjectContext.save()

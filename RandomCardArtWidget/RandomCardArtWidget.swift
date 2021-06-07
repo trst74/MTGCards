@@ -36,7 +36,7 @@ struct Provider: IntentTimelineProvider {
             if entries.count >= 6 {
                 continue
             }
-            var urlString = "https://api.scryfall.com/cards/random?q=-is%3AToken"
+            var urlString = "https://api.scryfall.com/cards/random?q=-is%3AToken+-t%3Ascheme+-t%3Aemblem"
             if let type = configuration.type {
                 urlString += "+t%3A\(type)"
             }

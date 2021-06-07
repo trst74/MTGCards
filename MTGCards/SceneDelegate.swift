@@ -78,7 +78,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let userInfo = notification.request.content.userInfo
+        //let userInfo = notification.request.content.userInfo
         completionHandler([.banner,.sound])
     }
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -111,7 +111,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
                             card = results[0]
                             if let card = card {
                                 #if targetEnvironment(macCatalyst)
-                                if let t = keyWindow?.rootViewController as? TripleSplitViewController {
+                                if let t = keyWindow?.rootViewController as? ContainerViewController {
                                     if !(t.split.traitCollection.horizontalSizeClass == .regular) {
                                         let vc = UIHostingController(rootView: CardVC(card: card))
                                         let nav = t.split.viewController(for: .compact) as? UINavigationController
@@ -124,7 +124,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
                                     }
                                 }
                                 #else
-                                if let t = self.window?.rootViewController as? TripleSplitViewController {
+                                if let t = self.window?.rootViewController as? ContainerViewController {
                                     if !(t.split.traitCollection.horizontalSizeClass == .regular) {
                                         let vc = UIHostingController(rootView: CardVC(card: card))
                                         let nav = t.split.viewController(for: .compact) as? UINavigationController

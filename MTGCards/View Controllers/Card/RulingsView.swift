@@ -9,6 +9,12 @@
 import SwiftUI
 
 struct RulingsView: View {
+    let keyWindow = UIApplication.shared.connectedScenes
+        .filter({$0.activationState == .foregroundActive})
+        .map({$0 as? UIWindowScene})
+        .compactMap({$0})
+        .first?.windows
+        .filter({$0.isKeyWindow}).first
     var rulings: [Ruling]
     static let taskDateFormat: DateFormatter = {
         let formatter = DateFormatter()
@@ -24,7 +30,7 @@ struct RulingsView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))
-                    Text("\((ruling.date!).toDate() ?? Date(), formatter: Self.taskDateFormat)")
+                    Text("\((ruling.date!).toDate() ?? Date(), formatter:Self.taskDateFormat)")
                         .font(.system(size: 10.0, weight: .thin))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))
@@ -33,6 +39,14 @@ struct RulingsView: View {
                 .padding(.init(top: 8.0, leading: 16.0, bottom: 8.0, trailing: 16.0))
                 .background(Color(UIColor.secondarySystemBackground))
                 .cornerRadius(10)
+                .onTapGesture {
+                    
+                }
+                .onLongPressGesture {
+                    let con = Sharing.shareText(text: "\(Self.taskDateFormat.string(from: ruling.date?.toDate() ?? Date())) : \(ruling.text ?? "")" , nil)
+                    keyWindow?.rootViewController?.present(con, animated: true, completion: nil)
+                    print("Long pressed!")
+                }
             }
             
         }

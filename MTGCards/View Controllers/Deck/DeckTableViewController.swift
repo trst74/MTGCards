@@ -73,7 +73,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         tableView.tableFooterView = UIView()
         setUpSections()
         let importButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.down"), style: .plain, target: self, action: #selector(self.importDeck))
@@ -114,21 +114,13 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
         }
     }
     @objc func showDeckStats(){
-        if let id = deck?.objectID {
-//            if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
-//                self.navigationController?.pushViewController(DeckStatsTableViewController.refreshDeckStats(id: id), animated: true)
-//            } else {
-//                self.splitViewController?.setViewController(nil, for: .secondary)
-//                self.splitViewController?.setViewController(DeckStatsTableViewController.refreshDeckStats(id: id), for: .secondary)
-//            }
-            if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
-                let vc = UIHostingController(rootView: DeckStatsView(deck: deck))
-                self.navigationController?.pushViewController(vc, animated: true)
-            } else {
-                self.splitViewController?.setViewController(nil, for: .secondary)
-                let vc = UIHostingController(rootView: DeckStatsView(deck: deck))
-                self.splitViewController?.setViewController(vc, for: .secondary)
-            }
+        if !(self.splitViewController?.traitCollection.horizontalSizeClass == .regular) {
+            let vc = UIHostingController(rootView: DeckStatsView(deck: deck))
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            self.splitViewController?.setViewController(nil, for: .secondary)
+            let vc = UIHostingController(rootView: DeckStatsView(deck: deck))
+            self.splitViewController?.setViewController(vc, for: .secondary)
         }
     }
     private func updateTitle(){
@@ -373,7 +365,7 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
     private func checkCardLegality(card: Card, legality: String) -> Bool {
         switch legality {
         case "Standard":
-          return card.legalities?.standard == "Legal"
+            return card.legalities?.standard == "Legal"
         case "Pioneer":
             return card.legalities?.pioneer == "Legal"
         case "Modern":
@@ -451,121 +443,121 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
     override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let edit = UIAction(title: "Edit",
                             image: UIImage(systemName: "pencil")) { _ in
-                                let deckcard = self.getDeckcardForIndexPath(indexPath: indexPath)
-                                let storyboard = UIStoryboard(name: "EditDeckCard", bundle: nil)
-                                guard let editDeckCardView = storyboard.instantiateInitialViewController() as? EditDeckCardTableViewController else {
-                                    fatalError("Project config error - storyboard doesnt provide a EditDeckCard")
-                                }
-                                if let deckcard = deckcard {
-                                    editDeckCardView.deckCard = deckcard
-                                }
-                                editDeckCardView.deckViewController = self
-                                self.navigationController?.pushViewController(editDeckCardView, animated: true)
-                                
+            let deckcard = self.getDeckcardForIndexPath(indexPath: indexPath)
+            let storyboard = UIStoryboard(name: "EditDeckCard", bundle: nil)
+            guard let editDeckCardView = storyboard.instantiateInitialViewController() as? EditDeckCardTableViewController else {
+                fatalError("Project config error - storyboard doesnt provide a EditDeckCard")
+            }
+            if let deckcard = deckcard {
+                editDeckCardView.deckCard = deckcard
+            }
+            editDeckCardView.deckViewController = self
+            self.navigationController?.pushViewController(editDeckCardView, animated: true)
+            
         }
         let addTo = UIAction(title: "Add To...",
                              image: UIImage(systemName: "plus")) { action in
-                                let deckcard = self.getDeckcardForIndexPath(indexPath: indexPath)
-                                let alert = UIAlertController(title: "Add To", message: nil, preferredStyle: .actionSheet)
-                                
-                                if let popoverController = alert.popoverPresentationController {
-                                    popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
-                                    popoverController.sourceView = tableView.cellForRow(at: indexPath)
-                                    //popoverController.sourceRect = tableView.cellForRow(at: indexPath)?.bounds
-                                }
-                                
-                                let addToCollection = UIAlertAction(title: "Collection", style: .default, handler: { action in
-                                    if let id = deckcard?.card?.objectID {
-                                        DataManager.addCardToCollection(id: id)
-                                    }
-                                })
-                                alert.addAction(addToCollection)
-                                let addToWishList = UIAlertAction(title: "Wish List", style: .default, handler: { action in
-                                    if let id = deckcard?.card?.objectID {
-                                        DataManager.addCardToWishList(id: id)
-                                    }
-                                })
-                                alert.addAction(addToWishList)
-                                let addToDeck = UIAlertAction(title: "Deck...", style: .default, handler: { action in
-                                    if let id = deckcard?.card?.objectID {
-                                        self.presentAddToDeckMenu(id: id, sourceView: tableView.cellForRow(at: indexPath))
-                                    }
-                                })
-                                alert.addAction(addToDeck)
-                                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-                                    
-                                    self.dismiss(animated: true, completion: nil)
-                                }))
-                                if let popoverController = alert.popoverPresentationController {
-                                    popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
-                                    popoverController.sourceView = tableView.cellForRow(at: indexPath)
-                                    //popoverController.sourceRect = tableView.cellForRow(at: indexPath)?.bounds
-                                }
-                                self.present(alert, animated: true, completion: nil)
-                                
+            let deckcard = self.getDeckcardForIndexPath(indexPath: indexPath)
+            let alert = UIAlertController(title: "Add To", message: nil, preferredStyle: .actionSheet)
+            
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
+                popoverController.sourceView = tableView.cellForRow(at: indexPath)
+                //popoverController.sourceRect = tableView.cellForRow(at: indexPath)?.bounds
+            }
+            
+            let addToCollection = UIAlertAction(title: "Collection", style: .default, handler: { action in
+                if let id = deckcard?.card?.objectID {
+                    DataManager.addCardToCollection(id: id)
+                }
+            })
+            alert.addAction(addToCollection)
+            let addToWishList = UIAlertAction(title: "Wish List", style: .default, handler: { action in
+                if let id = deckcard?.card?.objectID {
+                    DataManager.addCardToWishList(id: id)
+                }
+            })
+            alert.addAction(addToWishList)
+            let addToDeck = UIAlertAction(title: "Deck...", style: .default, handler: { action in
+                if let id = deckcard?.card?.objectID {
+                    self.presentAddToDeckMenu(id: id, sourceView: tableView.cellForRow(at: indexPath))
+                }
+            })
+            alert.addAction(addToDeck)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                
+                self.dismiss(animated: true, completion: nil)
+            }))
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
+                popoverController.sourceView = tableView.cellForRow(at: indexPath)
+                //popoverController.sourceRect = tableView.cellForRow(at: indexPath)?.bounds
+            }
+            self.present(alert, animated: true, completion: nil)
+            
         }
         let share = UIAction(title: "Share",
                              image: UIImage(systemName: "square.and.arrow.up")) { action in
-                                let deckcard = self.getDeckcardForIndexPath(indexPath: indexPath)
-                                
-                                let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-                                let imageAction = UIAlertAction(title: "Image", style: .default, handler: { action in
-                                    if let uuid = deckcard?.card?.uuid {
-                                        if let image = self.getImage(Key: uuid) {
-                                            self.shareImage(image: image, popupView: self.tableView.cellForRow(at: indexPath))
-                                        }
-                                    }
-                                    
-                                })
-                                imageAction.setValue(UIImage(systemName: "photo"), forKey: "image")
-                                imageAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
-                                alert.addAction(imageAction)
-                                if let multiverseid = deckcard?.card?.multiverseID, multiverseid > 0 {
-                                    alert.addAction(UIAlertAction(title: "Gatherer", style: .default, handler: { action in
-                                        if let url = URL(string:  "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=\(multiverseid)"){
-                                            self.shareUrl(url: url, popupView: self.tableView.cellForRow(at: indexPath))
-                                        }
-                                    }))
-                                }
-                                if let tcg = deckcard?.card?.tcgplayerPurchaseURL {
-                                    alert.addAction(UIAlertAction(title: "TCGPlayer", style: .default, handler: { action in
-                                        //self.shareText(text: tcg)
-                                        if let url = URL(string:  tcg){
-                                            self.shareUrl(url: url, popupView: self.tableView.cellForRow(at: indexPath))
-                                        }
-                                        
-                                    }))
-                                }
-                                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-                                    
-                                    self.dismiss(animated: true, completion: nil)
-                                }))
-                                if let popoverController = alert.popoverPresentationController {
-                                    popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
-                                    popoverController.sourceView = tableView.cellForRow(at: indexPath)
-                                    //popoverController.sourceRect = tableView.cellForRow(at: indexPath)?.bounds
-                                }
-                                self.present(alert, animated: true, completion: nil)
+            let deckcard = self.getDeckcardForIndexPath(indexPath: indexPath)
+            
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let imageAction = UIAlertAction(title: "Image", style: .default, handler: { action in
+                if let uuid = deckcard?.card?.uuid {
+                    if let image = self.getImage(Key: uuid) {
+                        self.shareImage(image: image, popupView: self.tableView.cellForRow(at: indexPath))
+                    }
+                }
+                
+            })
+            imageAction.setValue(UIImage(systemName: "photo"), forKey: "image")
+            imageAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+            alert.addAction(imageAction)
+            if let multiverseid = deckcard?.card?.multiverseID, multiverseid > 0 {
+                alert.addAction(UIAlertAction(title: "Gatherer", style: .default, handler: { action in
+                    if let url = URL(string:  "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=\(multiverseid)"){
+                        self.shareUrl(url: url, popupView: self.tableView.cellForRow(at: indexPath))
+                    }
+                }))
+            }
+            if let tcg = deckcard?.card?.tcgplayerPurchaseURL {
+                alert.addAction(UIAlertAction(title: "TCGPlayer", style: .default, handler: { action in
+                    //self.shareText(text: tcg)
+                    if let url = URL(string:  tcg){
+                        self.shareUrl(url: url, popupView: self.tableView.cellForRow(at: indexPath))
+                    }
+                    
+                }))
+            }
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                
+                self.dismiss(animated: true, completion: nil)
+            }))
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
+                popoverController.sourceView = tableView.cellForRow(at: indexPath)
+                //popoverController.sourceRect = tableView.cellForRow(at: indexPath)?.bounds
+            }
+            self.present(alert, animated: true, completion: nil)
         }
         
         let delete = UIAction(title: "Delete",
                               image: UIImage(systemName: "trash.fill"),
                               attributes: [.destructive]) { action in
-                                let card = self.getDeckcardForIndexPath(indexPath: indexPath)
-                                if let card = card {
-                                    DataManager.removeCardFromDeck(cardId: card.objectID)
-                                    if let id = self.deck?.objectID {
-                                        self.deck = CoreDataStack.handler.privateContext.object(with: id) as? Deck
-                                    }
-                                    DispatchQueue.main.async {
-                                        self.tableView.reloadData()
-                                    }
-                                }
+            let card = self.getDeckcardForIndexPath(indexPath: indexPath)
+            if let card = card {
+                DataManager.removeCardFromDeck(cardId: card.objectID)
+                if let id = self.deck?.objectID {
+                    self.deck = CoreDataStack.handler.privateContext.object(with: id) as? Deck
+                }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
         }
         
         return UIContextMenuConfiguration(identifier: nil,
                                           previewProvider: nil) { _ in
-                                            UIMenu(title: "", children: [edit,addTo, share, delete])
+            UIMenu(title: "", children: [edit,addTo, share, delete])
         }
     }
     func presentAddToDeckMenu(id: NSManagedObjectID, sourceView: UITableViewCell?){
