@@ -13,7 +13,6 @@
 		EE41CF552662C03000665129 /* Collection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF512662C02F00665129 /* Collection+CoreDataProperties.swift */; };
 		EE41CF562662C03000665129 /* Deck+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF522662C02F00665129 /* Deck+CoreDataClass.swift */; };
 		EE41CF572662C03000665129 /* Deck+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF532662C02F00665129 /* Deck+CoreDataProperties.swift */; };
-		EE41CF792666CD8600665129 /* MainSplitViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE41CF782666CD8500665129 /* MainSplitViewViewController.swift */; };
 		EE4F54FC263773F400D4205D /* CardListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4F54FB263773F400D4205D /* CardListTableViewController.swift */; };
 		EE564F26263B76FD0036625A /* CardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE564F25263B76FD0036625A /* CardVC.swift */; };
 		EE564F28263B772F0036625A /* CardListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE564F27263B772F0036625A /* CardListTableViewCell.swift */; };
@@ -39,7 +38,6 @@
 		EE564F64263B7D3E0036625A /* RandomCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE564F62263B7BBA0036625A /* RandomCard.swift */; };
 		EE564F66263B7E260036625A /* CardList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE564F65263B7E260036625A /* CardList.storyboard */; };
 		EE68B742261FCE0800BCD15F /* ToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE68B741261FCE0800BCD15F /* ToolbarDelegate.swift */; };
-		EEBA8689263776B00006C597 /* TripleSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA8688263776B00006C597 /* TripleSplitViewController.swift */; };
 		EEBA868B263776F80006C597 /* SidebarCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA868A263776F80006C597 /* SidebarCollectionViewController.swift */; };
 		EEBA86902637774D0006C597 /* PlaceholderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA868F2637774D0006C597 /* PlaceholderViewController.swift */; };
 		EEBA8692263777B90006C597 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBA8691263777B90006C597 /* PlaceholderView.storyboard */; };
@@ -164,7 +162,6 @@
 		EE41CF512662C02F00665129 /* Collection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		EE41CF522662C02F00665129 /* Deck+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		EE41CF532662C02F00665129 /* Deck+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		EE41CF782666CD8500665129 /* MainSplitViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewViewController.swift; sourceTree = "<group>"; };
 		EE4F54FB263773F400D4205D /* CardListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListTableViewController.swift; sourceTree = "<group>"; };
 		EE564F25263B76FD0036625A /* CardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardVC.swift; sourceTree = "<group>"; };
 		EE564F27263B772F0036625A /* CardListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListTableViewCell.swift; sourceTree = "<group>"; };
@@ -193,7 +190,6 @@
 		EE564F62263B7BBA0036625A /* RandomCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomCard.swift; sourceTree = "<group>"; };
 		EE564F65263B7E260036625A /* CardList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CardList.storyboard; sourceTree = "<group>"; };
 		EE68B741261FCE0800BCD15F /* ToolbarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDelegate.swift; sourceTree = "<group>"; };
-		EEBA8688263776B00006C597 /* TripleSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripleSplitViewController.swift; sourceTree = "<group>"; };
 		EEBA868A263776F80006C597 /* SidebarCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarCollectionViewController.swift; sourceTree = "<group>"; };
 		EEBA868F2637774D0006C597 /* PlaceholderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderViewController.swift; sourceTree = "<group>"; };
 		EEBA8691263777B90006C597 /* PlaceholderView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlaceholderView.storyboard; sourceTree = "<group>"; };
@@ -326,15 +322,12 @@
 				EEBB0EDA266827F800189166 /* ContainerViewController.swift */,
 				EECA46AD26378783003469FE /* Deck */,
 				EECA46A82637863F003469FE /* Filter */,
-				EE41CF782666CD8500665129 /* MainSplitViewViewController.swift */,
 				EEBA8696263778200006C597 /* Onboarding */,
 				EEBA8691263777B90006C597 /* PlaceholderView.storyboard */,
 				EEBA868F2637774D0006C597 /* PlaceholderViewController.swift */,
 				EE41CF4D2662AA7F00665129 /* Search */,
 				EEBEF42E267039E80073EFEB /* Settings */,
 				EEBA868A263776F80006C597 /* SidebarCollectionViewController.swift */,
-				EEBA876E26377FDA0006C597 /* SwiftUI */,
-				EEBA8688263776B00006C597 /* TripleSplitViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -466,20 +459,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		EEBA876E26377FDA0006C597 /* SwiftUI */ = {
-			isa = PBXGroup;
-			children = (
-				EEBA8770263780120006C597 /* ArcView.swift */,
-				EEBA8775263780120006C597 /* BarChart.swift */,
-				EEBA8772263780120006C597 /* DataModel.swift */,
-				EEBA8771263780120006C597 /* DeckLegalities.swift */,
-				EEBA8774263780120006C597 /* IfLetView.swift */,
-				EEBA8776263780130006C597 /* Sunburst.swift */,
-				EEBA876F263780120006C597 /* SunburstView.swift */,
-			);
-			path = SwiftUI;
-			sourceTree = "<group>";
-		};
 		EEBEF42A267039A00073EFEB /* Card List */ = {
 			isa = PBXGroup;
 			children = (
@@ -510,6 +489,23 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		EEBEF42F26704C5E0073EFEB /* DeckStats */ = {
+			isa = PBXGroup;
+			children = (
+				EEBA8774263780120006C597 /* IfLetView.swift */,
+				EEBA876926377F470006C597 /* DeckStats.storyboard */,
+				EEBA876826377F470006C597 /* DeckStatsTableViewController.swift */,
+				EEBA8773263780120006C597 /* DeckStatsView.swift */,
+				EEBA8770263780120006C597 /* ArcView.swift */,
+				EEBA8775263780120006C597 /* BarChart.swift */,
+				EEBA8772263780120006C597 /* DataModel.swift */,
+				EEBA8771263780120006C597 /* DeckLegalities.swift */,
+				EEBA8776263780130006C597 /* Sunburst.swift */,
+				EEBA876F263780120006C597 /* SunburstView.swift */,
+			);
+			path = DeckStats;
+			sourceTree = "<group>";
+		};
 		EECA46A82637863F003469FE /* Filter */ = {
 			isa = PBXGroup;
 			children = (
@@ -528,14 +524,12 @@
 		EECA46AD26378783003469FE /* Deck */ = {
 			isa = PBXGroup;
 			children = (
+				EEBEF42F26704C5E0073EFEB /* DeckStats */,
 				EEBA876026377EEA0006C597 /* Deck.storyboard */,
 				EECA46B3263787D0003469FE /* DeckCardCommanderTableViewCell.swift */,
 				EECA46AE263787D0003469FE /* DeckCardFoilTableViewCell.swift */,
 				EECA46B4263787D1003469FE /* DeckCardQuantityTableViewCell.swift */,
 				EECA46B1263787D0003469FE /* DeckCardSideboardTableViewCell.swift */,
-				EEBA876926377F470006C597 /* DeckStats.storyboard */,
-				EEBA876826377F470006C597 /* DeckStatsTableViewController.swift */,
-				EEBA8773263780120006C597 /* DeckStatsView.swift */,
 				EECA46AB26378770003469FE /* DeckTableViewCell.swift */,
 				EEBA876126377EEA0006C597 /* DeckTableViewController.swift */,
 				EECA46AF263787D0003469FE /* EditDeck.storyboard */,
@@ -734,7 +728,6 @@
 				EECA46A226378635003469FE /* KeywordFilterTableViewController.swift in Sources */,
 				EEBA874E26377B730006C597 /* MTGSet.swift in Sources */,
 				EEBA873726377B290006C597 /* ColorIdentity+CoreDataProperties.swift in Sources */,
-				EE41CF792666CD8600665129 /* MainSplitViewViewController.swift in Sources */,
 				EECA46AA2637868D003469FE /* NotificationsViewController.swift in Sources */,
 				EED485C92616AF7F002A7795 /* AppDelegate.swift in Sources */,
 				EEBB0EDB266827F800189166 /* ContainerViewController.swift in Sources */,
@@ -778,7 +771,6 @@
 				EEBA871F26377AEB0006C597 /* CardSubtype+CoreDataProperties.swift in Sources */,
 				EE41CF562662C03000665129 /* Deck+CoreDataClass.swift in Sources */,
 				EEBA871C26377AEB0006C597 /* CardSupertype+CoreDataClass.swift in Sources */,
-				EEBA8689263776B00006C597 /* TripleSplitViewController.swift in Sources */,
 				EECA46BB263787D1003469FE /* DeckCardCommanderTableViewCell.swift in Sources */,
 				EEBA876326377EEA0006C597 /* DeckTableViewController.swift in Sources */,
 				EE41CF4C2661936E00665129 /* MTGCards.xcdatamodeld in Sources */,
