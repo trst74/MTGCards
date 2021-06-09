@@ -110,6 +110,7 @@
 		EEBB0EE1266AB07700189166 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBB0EE0266AB07700189166 /* LaunchScreen.storyboard */; };
 		EEBB0EE2266AC20700189166 /* RandomCardArtWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EE564F4B263B7B9D0036625A /* RandomCardArtWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EEBB0EE6266AC57100189166 /* RandomCardArtWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EE564F54263B7B9D0036625A /* RandomCardArtWidget.intentdefinition */; };
+		EEBEF42C267039C50073EFEB /* SearchInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBEF42B267039C50073EFEB /* SearchInfoView.swift */; };
 		EECA46A226378635003469FE /* KeywordFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECA469E26378635003469FE /* KeywordFilterTableViewController.swift */; };
 		EECA46A326378635003469FE /* LegalityFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECA469C26378635003469FE /* LegalityFilterTableViewController.swift */; };
 		EECA46A426378635003469FE /* SubTypeFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECA469F26378635003469FE /* SubTypeFilterTableViewController.swift */; };
@@ -261,6 +262,7 @@
 		EEBB0EDA266827F800189166 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		EEBB0EDC2669357600189166 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		EEBB0EE0266AB07700189166 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EEBEF42B267039C50073EFEB /* SearchInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchInfoView.swift; path = "MTGCards/View Controllers/SearchInfoView.swift"; sourceTree = SOURCE_ROOT; };
 		EECA469C26378635003469FE /* LegalityFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalityFilterTableViewController.swift; sourceTree = "<group>"; };
 		EECA469D26378635003469FE /* SetFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFilterTableViewController.swift; sourceTree = "<group>"; };
 		EECA469E26378635003469FE /* KeywordFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordFilterTableViewController.swift; sourceTree = "<group>"; };
@@ -319,12 +321,8 @@
 			isa = PBXGroup;
 			children = (
 				EE564F24263B76E90036625A /* Card */,
-				EE564F65263B7E260036625A /* CardList.storyboard */,
-				EE564F27263B772F0036625A /* CardListTableViewCell.swift */,
-				EE4F54FB263773F400D4205D /* CardListTableViewController.swift */,
-				EEBA876426377F1F0006C597 /* Collection.storyboard */,
-				EEBA876C26377FA30006C597 /* CollectionTableViewCell.swift */,
-				EEBA876526377F200006C597 /* CollectionTableViewController.swift */,
+				EEBEF42A267039A00073EFEB /* Card List */,
+				EEBEF42D267039CE0073EFEB /* Collections */,
 				EEBB0EDA266827F800189166 /* ContainerViewController.swift */,
 				EECA46AD26378783003469FE /* Deck */,
 				EECA46A82637863F003469FE /* Filter */,
@@ -333,8 +331,7 @@
 				EEBA8691263777B90006C597 /* PlaceholderView.storyboard */,
 				EEBA868F2637774D0006C597 /* PlaceholderViewController.swift */,
 				EE41CF4D2662AA7F00665129 /* Search */,
-				EEBA875C26377C590006C597 /* Settings.storyboard */,
-				EEBA875D26377C590006C597 /* SettingsTableViewController.swift */,
+				EEBEF42E267039E80073EFEB /* Settings */,
 				EEBA868A263776F80006C597 /* SidebarCollectionViewController.swift */,
 				EEBA876E26377FDA0006C597 /* SwiftUI */,
 				EEBA8688263776B00006C597 /* TripleSplitViewController.swift */,
@@ -346,9 +343,9 @@
 			isa = PBXGroup;
 			children = (
 				EE564F2B263B77F60036625A /* CardDetailsView.swift */,
+				EE564F25263B76FD0036625A /* CardVC.swift */,
 				EE564F2A263B77F50036625A /* PricesView.swift */,
 				EE564F29263B77F50036625A /* RulingsView.swift */,
-				EE564F25263B76FD0036625A /* CardVC.swift */,
 			);
 			path = Card;
 			sourceTree = "<group>";
@@ -483,6 +480,36 @@
 			path = SwiftUI;
 			sourceTree = "<group>";
 		};
+		EEBEF42A267039A00073EFEB /* Card List */ = {
+			isa = PBXGroup;
+			children = (
+				EE564F65263B7E260036625A /* CardList.storyboard */,
+				EE564F27263B772F0036625A /* CardListTableViewCell.swift */,
+				EE4F54FB263773F400D4205D /* CardListTableViewController.swift */,
+				EEBEF42B267039C50073EFEB /* SearchInfoView.swift */,
+			);
+			path = "Card List";
+			sourceTree = "<group>";
+		};
+		EEBEF42D267039CE0073EFEB /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				EEBA876426377F1F0006C597 /* Collection.storyboard */,
+				EEBA876C26377FA30006C597 /* CollectionTableViewCell.swift */,
+				EEBA876526377F200006C597 /* CollectionTableViewController.swift */,
+			);
+			path = Collections;
+			sourceTree = "<group>";
+		};
+		EEBEF42E267039E80073EFEB /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				EEBA875C26377C590006C597 /* Settings.storyboard */,
+				EEBA875D26377C590006C597 /* SettingsTableViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		EECA46A82637863F003469FE /* Filter */ = {
 			isa = PBXGroup;
 			children = (
@@ -501,20 +528,20 @@
 		EECA46AD26378783003469FE /* Deck */ = {
 			isa = PBXGroup;
 			children = (
+				EEBA876026377EEA0006C597 /* Deck.storyboard */,
 				EECA46B3263787D0003469FE /* DeckCardCommanderTableViewCell.swift */,
 				EECA46AE263787D0003469FE /* DeckCardFoilTableViewCell.swift */,
 				EECA46B4263787D1003469FE /* DeckCardQuantityTableViewCell.swift */,
 				EECA46B1263787D0003469FE /* DeckCardSideboardTableViewCell.swift */,
+				EEBA876926377F470006C597 /* DeckStats.storyboard */,
+				EEBA876826377F470006C597 /* DeckStatsTableViewController.swift */,
+				EEBA8773263780120006C597 /* DeckStatsView.swift */,
+				EECA46AB26378770003469FE /* DeckTableViewCell.swift */,
+				EEBA876126377EEA0006C597 /* DeckTableViewController.swift */,
 				EECA46AF263787D0003469FE /* EditDeck.storyboard */,
 				EECA46B2263787D0003469FE /* EditDeckCard.storyboard */,
 				EECA46B5263787D1003469FE /* EditDeckCardTableViewController.swift */,
 				EECA46B0263787D0003469FE /* EditDeckTableViewController.swift */,
-				EEBA876026377EEA0006C597 /* Deck.storyboard */,
-				EEBA876926377F470006C597 /* DeckStats.storyboard */,
-				EEBA876826377F470006C597 /* DeckStatsTableViewController.swift */,
-				EECA46AB26378770003469FE /* DeckTableViewCell.swift */,
-				EEBA876126377EEA0006C597 /* DeckTableViewController.swift */,
-				EEBA8773263780120006C597 /* DeckStatsView.swift */,
 			);
 			path = Deck;
 			sourceTree = "<group>";
@@ -692,6 +719,7 @@
 				EECA46AC26378770003469FE /* DeckTableViewCell.swift in Sources */,
 				EECA46A726378635003469FE /* SetFilterTableViewController.swift in Sources */,
 				EEBA873326377B290006C597 /* ColorIdentity+CoreDataClass.swift in Sources */,
+				EEBEF42C267039C50073EFEB /* SearchInfoView.swift in Sources */,
 				EEBA875626377B730006C597 /* ScryfallCard.swift in Sources */,
 				EECA46B8263787D1003469FE /* EditDeckTableViewController.swift in Sources */,
 				EE564F26263B76FD0036625A /* CardVC.swift in Sources */,

@@ -49,9 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let settingsMenu = UIMenu(title: "Settings", image: nil, identifier: UIMenu.Identifier("settings"), options: .displayInline, children: [settingsCommand])
         builder.insertSibling(settingsMenu, afterMenu: addMenu.identifier)
         
-        let hideMaster  = UIKeyCommand(title: "Toggle Sidebar", image: nil, action: #selector(self.toggleSidebar), input: "L", modifierFlags: [.command, .control], propertyList: nil, alternates: [], discoverabilityTitle: "Toggle Sidebar", attributes: [], state: .on)
-        let hideMasterMenu = UIMenu(title: "Toggle Sidebar", image: nil, identifier: UIMenu.Identifier("toggleSidebar"), options: .displayInline, children: [hideMaster])
-        builder.insertChild(hideMasterMenu, atStartOfMenu: .view)
+//        let hideMaster  = UIKeyCommand(title: "Toggle Sidebar", image: nil, action: #selector(self.toggleSidebar), input: "L", modifierFlags: [.command, .control], propertyList: nil, alternates: [], discoverabilityTitle: "Toggle Sidebar", attributes: [], state: .on)
+//        let hideMasterMenu = UIMenu(title: "Toggle Sidebar", image: nil, identifier: UIMenu.Identifier("toggleSidebar"), options: .displayInline, children: [hideMaster])
+//        builder.insertChild(hideMasterMenu, atStartOfMenu: .view)
     }
 
     @objc func toggleSidebar() {

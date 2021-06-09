@@ -11,13 +11,14 @@ import CoreData
 import MobileCoreServices
 import SwiftUI
 
-class CardListTableViewController: UITableViewController, UISearchResultsUpdating, NSFetchedResultsControllerDelegate, UITableViewDragDelegate, UIContextMenuInteractionDelegate {
+class CardListTableViewController: UITableViewController, UISearchResultsUpdating, NSFetchedResultsControllerDelegate, UITableViewDragDelegate, UIContextMenuInteractionDelegate, UISearchBarDelegate {
     
     
     var fetchedResultsController: NSFetchedResultsController<Card>!
     var cardlist: [Card] = []
     var filteredCardList: [Card] = []
-    
+    var oldSearch = ""
+    var typedPredicates: [NSPredicate] = []
     var predicate: NSPredicate?
     
     override func viewDidLoad() {
@@ -34,6 +35,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             search.searchBar.placeholder = "Search"
             search.searchResultsUpdater = self
             search.hidesNavigationBarDuringPresentation = false
+            search.searchBar.delegate = self
             navigationItem.searchController = search
             self.navigationItem.hidesSearchBarWhenScrolling = false
         }
@@ -41,6 +43,8 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
         tableView.dragInteractionEnabled = true
         let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: #selector(self.filter))
         self.navigationItem.setRightBarButton(filterButton, animated: true)
+        let infoButton = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(self.info))
+        self.navigationItem.setLeftBarButton(infoButton, animated: true)
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +53,10 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             nav.setToolbarHidden(true, animated: false)
             
         }
+    }
+    @objc func info(){
+        let info = UIHostingController(rootView: SearchInfoView())
+        self.navigationController?.pushViewController(info, animated: true)
     }
     @objc func filter(){
         let storyboard = UIStoryboard(name: "Filters", bundle: nil)
@@ -124,9 +132,9 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height: CGFloat = 55.0
-        #if targetEnvironment(macCatalyst)
+#if targetEnvironment(macCatalyst)
         height = 50.0
-        #endif
+#endif
         return height
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -207,33 +215,94 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             self.splitViewController?.setViewController(vc, for: .secondary)
         }
     }
-    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            removeOldFilters()
+        }
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        removeOldFilters()
+    }
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text, text.count > 0 else {
             predicate = nil
             loadSavedData()
             return
         }
-        if text.count > 2 {
-            if text.contains(":"){
-                let range = NSRange(location: 0, length: text.utf16.count)
-                let regex = try! NSRegularExpression(pattern: #"(?:[^\s"]+|"[^"]*")+"#)
-                let matches = regex.matches(in: text, options: [], range: range)
-                for match in matches {
-                    let r = match.range
-                    print(text.substring(with: r) ?? "")
+        removeOldFilters()
+        //parse current text and add filters
+        let regex = try! NSRegularExpression(pattern: #"(?:[^\s"]+|"[^"]*")+"#)
+        let range = NSRange(location: 0, length: text.utf16.count)
+        let matches = regex.matches(in: text, options: [], range: range)
+        for match in matches {
+            let query = text.substring(with: match.range) ?? ""
+            let parts = query.components(separatedBy: ":")
+            if parts.count > 1 && parts[1] != "" {
+                switch parts[0].uppercased() {
+                case "T":
+                    Filters.current.selectSubType(type: parts[1].capitalized)
+                case "C":
+                    for c in parts[1] {
+                        Filters.current.selectColorIdentity(color: String(c).uppercased())
+                    }
+                case "E":
+                    Filters.current.selectSet(setCode: parts[1].uppercased())
+                case "F":
+                    if ["PAUPER","BRAWL","COMMANDER","DUEL","FRONTIER","LEGACY","MODERN","PENNY","STANDARD","VINTAGE"].contains(parts[1].uppercased()) {
+                        Filters.current.selectLegality(legality: parts[1])
+                    }
+                case "IS":
+                    if parts[1].uppercased() == "PROMO" {
+                        Filters.current.setIsPromo(promo: true)
+                    }
+                default: break
                 }
-            } else {
-                predicate = NSPredicate(format: "name contains[c] %@", text)
+                
             }
-            loadSavedData()
+            else {
+                predicate = NSPredicate(format: "name contains[c] %@", parts[0])
+            }
         }
+        
+        oldSearch = text
+        loadSavedData()
         return
     }
-    
-    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-        return nil
+func removeOldFilters() {
+    let regex = try! NSRegularExpression(pattern: #"(?:[^\s"]+|"[^"]*")+"#)
+    //parse old text and remove filters
+    let oldRange = NSRange(location: 0, length: oldSearch.utf16.count)
+    let oldMatches = regex.matches(in: oldSearch, options: [], range: oldRange)
+    for match in oldMatches {
+        let query = oldSearch.substring(with: match.range) ?? ""
+        let parts = query.components(separatedBy: ":")
+        if parts.count > 1 {
+            switch parts[0].uppercased() {
+            case "T":
+                Filters.current.deselectSubType(type: parts[1].capitalized)
+            case "C":
+                for c in parts[1] {
+                    Filters.current.deselectColorIdentity(color: String(c).uppercased())
+                }
+            case "E":
+                Filters.current.deselectSet(setCode: parts[1].uppercased())
+            case "F":
+                if ["PAUPER","BRAWL","COMMANDER","DUEL","FRONTIER","LEGACY","MODERN","PENNY","STANDARD","VINTAGE"].contains(parts[1].uppercased()) {
+                    Filters.current.deselectLegality(legality: parts[1])
+                }
+            case "IS":
+                if parts[1].uppercased() == "PROMO" {
+                    Filters.current.setIsPromo(promo: false)
+                }
+            default: break
+            }
+        }
     }
+    predicate = nil
+}
+func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+    return nil
+}
     override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let addTo = UIAction(title: "Add To...",
                              image: UIImage(systemName: "plus")) { action in
@@ -311,14 +380,14 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             UIMenu(title: "", children: [addTo, share])
         }
     }
-    func getImage(Key: String) -> UIImage? {
-        let fileManager = FileManager.default
-        let filename = getDocumentsDirectory().appendingPathComponent("\(Key).png")
-        if fileManager.fileExists(atPath: filename.path) {
-            return UIImage(contentsOfFile: filename.path)
-        }
-        return nil
+func getImage(Key: String) -> UIImage? {
+    let fileManager = FileManager.default
+    let filename = getDocumentsDirectory().appendingPathComponent("\(Key).png")
+    if fileManager.fileExists(atPath: filename.path) {
+        return UIImage(contentsOfFile: filename.path)
     }
+    return nil
+}
     private func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]

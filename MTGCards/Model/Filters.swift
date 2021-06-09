@@ -159,6 +159,9 @@ class Filters {
     func isPromoSelected() -> Bool {
         return isPromo
     }
+    func setIsPromo(promo: Bool) {
+        isPromo = promo
+    }
     
     func getPredicates() -> [NSPredicate] {
         var predicates: [NSPredicate] = []

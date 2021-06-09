@@ -130,6 +130,7 @@ struct RandomCardArtWidget: Widget {
             RandomCardArtWidgetEntryView(entry: entry)
         }
         .supportedFamilies([.systemSmall, .systemLarge])
+        
         .configurationDisplayName("Random Card Art")
         .description("Art of a random MTG card. Click to open for card details.")
     }

@@ -207,7 +207,7 @@ struct CardVC: View {
                                     
                                 }
                                 .onLongPressGesture {
-                                    var con = Sharing.shareText(text: card.text ?? "", nil)
+                                    let con = Sharing.shareText(text: card.text ?? "", nil)
                                     keyWindow?.rootViewController?.present(con, animated: true, completion: nil)
                                     print("Long pressed!")
                                 }
