@@ -28,7 +28,7 @@ struct CardDetailsView: View {
                 .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))
             replaceSymbols(text: card.text ?? "")
                 .lineLimit(100)
-                .fixedSize(horizontal: false, vertical: true) 
+                .fixedSize(horizontal: false, vertical: true)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))
@@ -41,7 +41,7 @@ struct CardDetailsView: View {
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))
-       
+            
             HStack{
                 Text(card.artist ?? "Failure").italic()
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -62,7 +62,7 @@ struct CardDetailsView: View {
         .padding(.init(top: 8.0, leading: 16.0, bottom: 8.0, trailing: 16.0))
         .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(10)
-
+        
     }
     func replaceSymbols(text: String) -> some View {
         var result = Text("")
@@ -76,9 +76,9 @@ struct CardDetailsView: View {
                         temp.removeSubrange(range.lowerBound..<range.upperBound)
                     }
                     var width = 17
-                    #if targetEnvironment(macCatalyst)
+#if targetEnvironment(macCatalyst)
                     width = 15
-                    #endif
+#endif
                     if temp == "100" {
                         width = 32
                     } else if temp == "1000000" {
@@ -95,15 +95,14 @@ struct CardDetailsView: View {
                 result = result + Text(part)
             }
         }
-        
         return result
     }
     func getImage(width: Int, name: String) -> UIImage {
         let image = UIImage(named: name)
         var height = 17
-        #if targetEnvironment(macCatalyst)
+#if targetEnvironment(macCatalyst)
         height = 15
-        #endif
+#endif
         let sizeChange = CGSize(width: width, height: height)
         let hasAlpha = true
         let scale: CGFloat = 0.0

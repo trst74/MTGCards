@@ -79,10 +79,30 @@ struct RulingsView: View {
                     }
                 }
             } else {
-                result = result + Text(part)
+                let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+                let matches = detector.matches(in: part, options: [], range: NSRange(location: 0, length: part.utf16.count))
+                if matches.count > 0 {
+                    for match in matches {
+                        guard let range = Range(match.range, in: part) else { continue }
+                        let url = part[range]
+                        let attributedString = NSMutableAttributedString(string: part)
+                        attributedString.addAttribute(.link, value: url, range: match.range)
+                        
+                        if #available(iOS 15, *) {
+                            var astring = AttributedString(part)
+                            let url = part.substring(with: match.range) ?? ""
+                            let range = astring.range(of: url)!
+                            astring[range].link = URL(string: String(url))
+                            result = result + Text(astring)
+                        } else {
+                            result = result + Text(part)
+                        }
+                    }
+                } else {
+                    result = result + Text(part)
+                }
             }
         }
-        
         return result
     }
     func getImage(width: Int, name: String) -> UIImage {
