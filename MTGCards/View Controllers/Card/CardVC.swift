@@ -64,116 +64,15 @@ struct CardVC: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var body: some View {
-        if idiom == .phone ||  horizontalSizeClass == .compact {
-            return AnyView(gReader()
-                            .actionSheet(isPresented: $showSheet, content: {
-                                
-                                var sheet: ActionSheet = ActionSheet(title: Text("temp"))
-                                if optionsMenu == .share {
-                                    sheet = ActionSheet(title: Text("Share"), message: Text(""), buttons: [
-                                        .default(
-                                            Text("Image"),
-                                            action: {
-                                                shareImage()
-                                                print("Share Image")
-                                            }
-                                        ),
-                                        .cancel()
-                                    ] )
-                                }
-                                else if optionsMenu == .add {
-                                    sheet =  ActionSheet(title: Text("Add"), message: Text("Add this card to a Deck or Collection"), buttons: [
-                                        .default(
-                                            Text("Deck"),
-                                            action: {
-                                                print("Share Image")
-                                            }
-                                        ),
-                                        .cancel()
-                                    ] )
-                                }
-                                return sheet
-                            })
-                           
-            )
-        }
-        else {
-            return AnyView(gReader())
-        }
-    }
-    func gReader() -> some View {
-        return AnyView(
-            GeometryReader { geometry in
-                ScrollView{
-                    VStack(alignment: .center){
-                        if geometry.size.width > 500 {
-                            HStack(alignment: .top){
-                                ZStack {
-                                    if UserDefaultsHandler.SELECTEDCARDIMAGEQUALITY != "none" {
-                                        loadImage()
-                                            .frame(minWidth: 0, maxWidth: 390, minHeight: 0, alignment: .center)
-                                        if card.otherFaceIds?.count ?? 0 > 0 {
-                                            VStack {
-                                                //Spacer()
-                                                HStack{
-                                                    Spacer()
-                                                    Button(action: {
-                                                        if let otherside = DataManager.getCard(byUUID: card.otherFaceIds?[0] ?? "")
-                                                        {
-                                                            card = otherside
-                                                        }
-                                                    }) {
-                                                        Image(systemName: "arrow.uturn.left")
-                                                    }
-                                                    .padding()
-                                                    .background(Color(UIColor.secondarySystemBackground))
-                                                    .cornerRadius(10)
-                                                    .shadow(color: Color.black.opacity(0.3),
-                                                            radius: 3,
-                                                            x: 3,
-                                                            y: 3)
-                                                }
-                                                .padding()
-                                            }
-                                        }
-                                    }
-                                }
-                                VStack{
-                                    CardDetailsView(card: card)
-                                    PricesView(cardIDs: [card.tcgplayerProductID], card: card)
-                                }
-                                
-                            }
-                            HStack(alignment: .top){
-                                if rulings.count > 0 {
-                                    VStack{
-                                        Text("Rulings").bold()
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .padding(.init(top: 6.0, leading: 4.0, bottom: 0, trailing: 0))
-                                        RulingsView(rulings: rulings)
-                                        
-                                    }
-                                }
-                                VStack{
-                                    Text("Legalities").bold()
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .padding(.init(top: 6.0, leading: 4.0, bottom: 0, trailing: 0))
-                                    DeckLegalities(formats: self.cardLegalities)
-                                }
-                            }
-                        }
-                        else {
-                            //GeometryReader { geometry in
+        GeometryReader { geometry in
+            ScrollView{
+                VStack(alignment: .center){
+                    if geometry.size.width > 500 {
+                        HStack(alignment: .top){
                             ZStack {
                                 if UserDefaultsHandler.SELECTEDCARDIMAGEQUALITY != "none" {
                                     loadImage()
-                                        .onTapGesture {
-                                            
-                                        }
-                                        .onLongPressGesture {
-                                            shareImage()
-                                            print("Long pressed!")
-                                        }
+                                        .frame(minWidth: 0, maxWidth: 390, minHeight: 0, alignment: .center)
                                     if card.otherFaceIds?.count ?? 0 > 0 {
                                         VStack {
                                             //Spacer()
@@ -194,56 +93,184 @@ struct CardVC: View {
                                                         radius: 3,
                                                         x: 3,
                                                         y: 3)
-                                                
                                             }
                                             .padding()
                                         }
-                                        
                                     }
                                 }
                             }
-                            CardDetailsView(card: card)
-                                .onTapGesture {
+                            VStack{
+                                CardDetailsView(card: card)
+                                PricesView(cardIDs: [card.tcgplayerProductID], card: card)
+                            }
+                            
+                        }
+                        HStack(alignment: .top){
+                            if rulings.count > 0 {
+                                VStack{
+                                    Text("Rulings").bold()
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.init(top: 6.0, leading: 4.0, bottom: 0, trailing: 0))
+                                    RulingsView(rulings: rulings)
                                     
                                 }
-                                .onLongPressGesture {
-                                    let con = Sharing.shareText(text: card.text ?? "", nil)
-                                    keyWindow?.rootViewController?.present(con, animated: true, completion: nil)
-                                    print("Long pressed!")
-                                }
-                            PricesView(cardIDs: [card.tcgplayerProductID], card: card)
-                            if rulings.count > 0 {
-                                Text("Rulings").bold()
+                            }
+                            VStack{
+                                Text("Legalities").bold()
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.init(top: 6.0, leading: 4.0, bottom: 0, trailing: 0))
-                                RulingsView(rulings: rulings)
+                                DeckLegalities(formats: self.cardLegalities)
                             }
-                            Text("Legalities").bold()
+                        }
+                    }
+                    else {
+                        //GeometryReader { geometry in
+                        ZStack {
+                            if UserDefaultsHandler.SELECTEDCARDIMAGEQUALITY != "none" {
+                                loadImage()
+                                    .onTapGesture {
+                                        
+                                    }
+                                    .onLongPressGesture {
+                                        shareImage()
+                                        print("Long pressed!")
+                                    }
+                                if card.otherFaceIds?.count ?? 0 > 0 {
+                                    VStack {
+                                        //Spacer()
+                                        HStack{
+                                            Spacer()
+                                            Button(action: {
+                                                if let otherside = DataManager.getCard(byUUID: card.otherFaceIds?[0] ?? "")
+                                                {
+                                                    card = otherside
+                                                }
+                                            }) {
+                                                Image(systemName: "arrow.uturn.left")
+                                            }
+                                            .padding()
+                                            .background(Color(UIColor.secondarySystemBackground))
+                                            .cornerRadius(10)
+                                            .shadow(color: Color.black.opacity(0.3),
+                                                    radius: 3,
+                                                    x: 3,
+                                                    y: 3)
+                                            
+                                        }
+                                        .padding()
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        CardDetailsView(card: card)
+                            .onTapGesture {
+                                
+                            }
+                            .onLongPressGesture {
+                                let con = Sharing.shareText(text: card.text ?? "", nil)
+                                keyWindow?.rootViewController?.present(con, animated: true, completion: nil)
+                                print("Long pressed!")
+                            }
+                        PricesView(cardIDs: [card.tcgplayerProductID], card: card)
+                        if rulings.count > 0 {
+                            Text("Rulings").bold()
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.init(top: 6.0, leading: 4.0, bottom: 0, trailing: 0))
-                            DeckLegalities(formats: self.cardLegalities)
+                            RulingsView(rulings: rulings)
                         }
-                        
+                        Text("Legalities").bold()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.init(top: 6.0, leading: 4.0, bottom: 0, trailing: 0))
+                        DeckLegalities(formats: self.cardLegalities)
                     }
-                    .padding(.init(top: 8.0, leading: 16.0, bottom: 8.0, trailing: 16.0))
+                    
                 }
-                .navigationTitle(Text("\(self.effectiveNane)"))
-                .toolbar {
-                    ToolbarItem(placement: .bottomBar) {
-                        shareButton()
-                    }
-                    ToolbarItem(placement: .bottomBar) {
-                        Spacer()
-                    }
-                    ToolbarItem(placement: .bottomBar) {
-                        addButton()
-                    }
-                }
-                
-                
+                .padding(.init(top: 8.0, leading: 16.0, bottom: 8.0, trailing: 16.0))
             }
-        )
+            .navigationTitle(Text("\(self.effectiveNane)"))
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    Button(action: {
+                        optionsMenu = .share
+                        self.showSheet.toggle()
+                    }, label: {
+                        Image(systemName: "square.and.arrow.up")
+                    })
+                        .actionSheet(isPresented: $showSheet, content: {
+                            
+                            var sheet: ActionSheet = ActionSheet(title: Text("temp"))
+                            if optionsMenu == .share {
+                                sheet = ActionSheet(title: Text("Share"), message: Text(""), buttons: [
+                                    .default(
+                                        Text("Image"),
+                                        action: {
+                                    shareImage()
+                                    print("Share Image")
+                                }
+                                    ),
+                                    .cancel()
+                                ] )
+                            }
+                            else if optionsMenu == .add {
+                                sheet =  ActionSheet(title: Text("Add"), message: Text("Add this card to a Deck or Collection"), buttons: [
+                                    .default(
+                                        Text("Deck"),
+                                        action: {
+                                    
+                                    print("Share Image")
+                                }
+                                    ),
+                                    .cancel()
+                                ] )
+                            }
+                            return sheet
+                        })
+                }
+                ToolbarItem(placement: .bottomBar) {
+                    Spacer()
+                }
+                ToolbarItem(placement: .bottomBar) {
+                    Button(action: {
+                        optionsMenu = .add
+                        self.showSheet.toggle()
+                    }, label: {
+                        Image(systemName: "plus")
+                    })
+                        .actionSheet(isPresented: $showSheet, content: {
+                            
+                            var sheet: ActionSheet = ActionSheet(title: Text("temp"))
+                            if optionsMenu == .share {
+                                sheet = ActionSheet(title: Text("Share"), message: Text(""), buttons: [
+                                    .default(
+                                        Text("Image"),
+                                        action: {
+                                    shareImage()
+                                    print("Share Image")
+                                }
+                                    ),
+                                    .cancel()
+                                ] )
+                            }
+                            else if optionsMenu == .add {
+                                sheet =  ActionSheet(title: Text("Add"), message: Text("Add this card to a Deck or Collection"), buttons: [
+                                    .default(
+                                        Text("Deck"),
+                                        action: {
+                                    print("Share Image")
+                                }
+                                    ),
+                                    .cancel()
+                                ] )
+                            }
+                            return sheet
+                        }
+                        )
+                }
+            }
+        }
     }
+    
     func shareButton() -> some View {
         if idiom == .phone ||  horizontalSizeClass == .compact {
             return AnyView(Button(action: {
@@ -259,7 +286,7 @@ struct CardVC: View {
             }, label: {
                 Image(systemName: "square.and.arrow.up")
             })
-            .popover(isPresented: $showpop, content: {
+                            .popover(isPresented: $showpop, content: {
                 if optionsMenu == .share {
                     Text("Test Share")
                 }
@@ -284,7 +311,7 @@ struct CardVC: View {
             }, label: {
                 Image(systemName: "plus")
             })
-            .popover(isPresented: $showpop, content: {
+                            .popover(isPresented: $showpop, content: {
                 if optionsMenu == .share {
                     Text("Test Share")
                 }

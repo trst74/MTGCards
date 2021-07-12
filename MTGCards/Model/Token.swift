@@ -21,11 +21,14 @@ class Token: NSManagedObject, Codable {
     @NSManaged var reverseRelated: [String]?
     @NSManaged var scryfallID: String?
     @NSManaged var text: String?
+    @NSManaged var flavorText: String?
     @NSManaged var toughness: String?
     @NSManaged var type: String?
     @NSManaged var uuid: String?
     @NSManaged var watermark: String?
     @NSManaged var set: MTGSet
+    private var identifiers: CardIdentifiers?
+    @NSManaged var side: String?
 
     enum CodingKeys: String, CodingKey {
         case artist = "artist"
@@ -42,12 +45,13 @@ class Token: NSManagedObject, Codable {
         case type = "type"
         case uuid = "uuid"
         case watermark = "watermark"
+        case identifiers = "identifiers"
+        case side = "side"
+        case flavorText = "flavorText"
+
     }
     required convenience init(from decoder: Decoder) throws {
-//         let managedObjectContext = CoreDataStack.handler.privateContext
-//        guard let entity = NSEntityDescription.entity(forEntityName: "Token", in: managedObjectContext) else {
-//                fatalError("Failed to decode Token")
-//        }
+
         guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,
             let managedObjectContext = decoder.userInfo[codingUserInfoKeyManagedObjectContext] as? NSManagedObjectContext,
             let entity = NSEntityDescription.entity(forEntityName: "Token", in: managedObjectContext) else {
@@ -56,6 +60,7 @@ class Token: NSManagedObject, Codable {
         self.init(entity: entity, insertInto: managedObjectContext)
 
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.identifiers = try container.decodeIfPresent(CardIdentifiers.self, forKey: .identifiers)
         self.artist = try container.decodeIfPresent(String.self, forKey: .artist)
         self.borderColor = try container.decodeIfPresent(String.self, forKey: .borderColor)
         self.colorIdentity = try container.decodeIfPresent([String].self, forKey: .colorIdentity)
@@ -64,12 +69,14 @@ class Token: NSManagedObject, Codable {
         self.number = try container.decodeIfPresent(String.self, forKey: .number)
         self.power = try container.decodeIfPresent(String.self, forKey: .power)
         self.reverseRelated = try container.decodeIfPresent([String].self, forKey: .reverseRelated)
-        self.scryfallID = try container.decodeIfPresent(String.self, forKey: .scryfallID)
+        self.scryfallID = identifiers?.scryfallID
         self.text = try container.decodeIfPresent(String.self, forKey: .text)
+        self.flavorText = try container.decodeIfPresent(String.self, forKey: .flavorText)
         self.toughness = try container.decodeIfPresent(String.self, forKey: .toughness)
         self.type = try container.decodeIfPresent(String.self, forKey: .type)
         self.uuid = try container.decodeIfPresent(String.self, forKey: .uuid)
         self.watermark = try container.decodeIfPresent(String.self, forKey: .watermark)
+        self.side = try container.decodeIfPresent(String.self, forKey: .side)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -89,20 +96,5 @@ class Token: NSManagedObject, Codable {
         try container.encode(uuid, forKey: .uuid)
         try container.encode(watermark, forKey: .watermark)
     }
-//    init(artist: String?, borderColor: String?, colorIdentity: [String]?, colors: [String]?, name: String?, number: String?, power: String?, reverseRelated: [String]?, scryfallID: String?, text: String?, toughness: String?, type: String?, uuid: String?, watermark: String?) {
-//        self.artist = artist
-//        self.borderColor = borderColor
-//        self.colorIdentity = colorIdentity
-//        self.colors = colors
-//        self.name = name
-//        self.number = number
-//        self.power = power
-//        self.reverseRelated = reverseRelated
-//        self.scryfallID = scryfallID
-//        self.text = text
-//        self.toughness = toughness
-//        self.type = type
-//        self.uuid = uuid
-//        self.watermark = watermark
-//    }
+
 }

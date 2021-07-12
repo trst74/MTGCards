@@ -1,38 +1,33 @@
 //
-//  CardDetailsView.swift
+//  TokenDetailsView.swift
 //  MTGCards
 //
-//  Created by Joseph Smith on 9/9/20.
-//  Copyright © 2020 Robotic Snail Software. All rights reserved.
+//  Created by Joseph Smith on 7/12/21.
 //
 
 import SwiftUI
 
-struct CardDetailsView: View {
-    var card: Card
-    var reserved: Bool {
-        get {
-            if card.isReserved {
-                return true
-            }
-            return false
-        }
-    }
+struct TokenDetailsView: View {
+    var token: Token
     var body: some View {
-        VStack{
-            replaceSymbols(text: card.manaCost ?? "")
+        VStack {
+            if token.type != "Card" {
+                Text(token.type ?? "Failure")
+                    .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))
+            }
+            Text(token.set.name ?? "Failure").font(.system(size: 10.0, weight: .thin))
+                .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))
-            Text(card.type ?? "Failure")
-                .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))
-            (Text(card.set.name ?? "Failure").font(.system(size: 10.0, weight: .thin)) + Text(" - ").font(.system(size: 10.0, weight: .thin)) + Text(card.rarity?.capitalized ?? "Failure").font(.system(size: 10.0, weight: .thin)))
-                .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))
-            replaceSymbols(text: card.text ?? "")
+            if token.text != nil && token.text != "" {
+            replaceSymbols(text: token.text ?? "")
                 .lineLimit(100)
                 .fixedSize(horizontal: false, vertical: true)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))
-            Text(card.flavorText ?? "")
+            }
+            if let flavor = token.flavorText {
+            Text(flavor)
                 .font(.subheadline)
                 .fontWeight(.light)
                 .italic()
@@ -41,34 +36,27 @@ struct CardDetailsView: View {
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.init(top: 2.0, leading: 0, bottom: 2.0, trailing: 0))
-            
+            }
             HStack{
-                Text(card.artist ?? "Failure").italic()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                if card.power != nil && card.toughness != nil {
-                    Text("\(card.power!)/\(card.toughness!)")
+                if let artist = token.artist {
+                    Text(artist).italic()
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                
-                
-            }
-            HStack {
-                if card.isReserved {
-                    Text("Reserved")
+                if token.power != nil && token.toughness != nil {
+                    Text("\(token.power!)/\(token.toughness!)")
                 }
             }
-            .padding(.init(top: 2.0, leading: 4.0, bottom: 2.0, trailing: 0))
         }
         .fixedSize(horizontal: false, vertical: true)
         .padding(.init(top: 8.0, leading: 16.0, bottom: 8.0, trailing: 16.0))
         .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(10)
-        
     }
     func replaceSymbols(text: String) -> some View {
-//        for keyword in card.keywords! {
-//            let k = keyword as! CardKeyword
-//            print(k.keyword)
-//        }
+        //        for keyword in card.keywords! {
+        //            let k = keyword as! CardKeyword
+        //            print(k.keyword)
+        //        }
         var result = Text("")
         let parts = text.components(separatedBy: "{")
         for part in parts {
@@ -116,6 +104,4 @@ struct CardDetailsView: View {
         UIGraphicsEndImageContext()
         return scaledImage!
     }
-    
 }
-

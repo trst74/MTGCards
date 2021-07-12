@@ -38,6 +38,10 @@
 		EE564F64263B7D3E0036625A /* RandomCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE564F62263B7BBA0036625A /* RandomCard.swift */; };
 		EE564F66263B7E260036625A /* CardList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE564F65263B7E260036625A /* CardList.storyboard */; };
 		EE68B742261FCE0800BCD15F /* ToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE68B741261FCE0800BCD15F /* ToolbarDelegate.swift */; };
+		EEB793C02697821A00FCCDA0 /* TokenListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB793BF2697821A00FCCDA0 /* TokenListTableViewController.swift */; };
+		EEB793C2269783CB00FCCDA0 /* TokenList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEB793C1269783CB00FCCDA0 /* TokenList.storyboard */; };
+		EEB793C5269CD72C00FCCDA0 /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB793C4269CD72C00FCCDA0 /* TokenView.swift */; };
+		EEB793C7269CD81C00FCCDA0 /* TokenDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB793C6269CD81C00FCCDA0 /* TokenDetailsView.swift */; };
 		EEBA868B263776F80006C597 /* SidebarCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA868A263776F80006C597 /* SidebarCollectionViewController.swift */; };
 		EEBA86902637774D0006C597 /* PlaceholderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBA868F2637774D0006C597 /* PlaceholderViewController.swift */; };
 		EEBA8692263777B90006C597 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBA8691263777B90006C597 /* PlaceholderView.storyboard */; };
@@ -190,6 +194,10 @@
 		EE564F62263B7BBA0036625A /* RandomCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomCard.swift; sourceTree = "<group>"; };
 		EE564F65263B7E260036625A /* CardList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CardList.storyboard; sourceTree = "<group>"; };
 		EE68B741261FCE0800BCD15F /* ToolbarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDelegate.swift; sourceTree = "<group>"; };
+		EEB793BF2697821A00FCCDA0 /* TokenListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenListTableViewController.swift; sourceTree = "<group>"; };
+		EEB793C1269783CB00FCCDA0 /* TokenList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TokenList.storyboard; sourceTree = "<group>"; };
+		EEB793C4269CD72C00FCCDA0 /* TokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenView.swift; sourceTree = "<group>"; };
+		EEB793C6269CD81C00FCCDA0 /* TokenDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDetailsView.swift; sourceTree = "<group>"; };
 		EEBA868A263776F80006C597 /* SidebarCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarCollectionViewController.swift; sourceTree = "<group>"; };
 		EEBA868F2637774D0006C597 /* PlaceholderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderViewController.swift; sourceTree = "<group>"; };
 		EEBA8691263777B90006C597 /* PlaceholderView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlaceholderView.storyboard; sourceTree = "<group>"; };
@@ -328,6 +336,8 @@
 				EE41CF4D2662AA7F00665129 /* Search */,
 				EEBEF42E267039E80073EFEB /* Settings */,
 				EEBA868A263776F80006C597 /* SidebarCollectionViewController.swift */,
+				EEB793C3269CD30B00FCCDA0 /* Token */,
+				EEB793BE2697811200FCCDA0 /* Token List */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -379,6 +389,24 @@
 				EE564F57263B7B9E0036625A /* Info.plist */,
 			);
 			path = RandomCardArtWidget;
+			sourceTree = "<group>";
+		};
+		EEB793BE2697811200FCCDA0 /* Token List */ = {
+			isa = PBXGroup;
+			children = (
+				EEB793BF2697821A00FCCDA0 /* TokenListTableViewController.swift */,
+				EEB793C1269783CB00FCCDA0 /* TokenList.storyboard */,
+			);
+			path = "Token List";
+			sourceTree = "<group>";
+		};
+		EEB793C3269CD30B00FCCDA0 /* Token */ = {
+			isa = PBXGroup;
+			children = (
+				EEB793C4269CD72C00FCCDA0 /* TokenView.swift */,
+				EEB793C6269CD81C00FCCDA0 /* TokenDetailsView.swift */,
+			);
+			path = Token;
 			sourceTree = "<group>";
 		};
 		EEBA8693263777FB0006C597 /* Utilities */ = {
@@ -672,6 +700,7 @@
 				EEBA869D263778430006C597 /* Onboarding.storyboard in Resources */,
 				EED485D52616AF82002A7795 /* Assets.xcassets in Resources */,
 				EEBA875E26377C590006C597 /* Settings.storyboard in Resources */,
+				EEB793C2269783CB00FCCDA0 /* TokenList.storyboard in Resources */,
 				EE564F66263B7E260036625A /* CardList.storyboard in Resources */,
 				EECA46BA263787D1003469FE /* EditDeckCard.storyboard in Resources */,
 				EED485D02616AF7F002A7795 /* Main.storyboard in Resources */,
@@ -776,9 +805,11 @@
 				EE41CF4C2661936E00665129 /* MTGCards.xcdatamodeld in Sources */,
 				EEBA871326377AB80006C597 /* CardIdentifiers.swift in Sources */,
 				EECA46A626378635003469FE /* TypeFilterTableViewController.swift in Sources */,
+				EEB793C7269CD81C00FCCDA0 /* TokenDetailsView.swift in Sources */,
 				EEBA873826377B290006C597 /* DeckCard+CoreDataProperties.swift in Sources */,
 				EEBA877D263780130006C597 /* BarChart.swift in Sources */,
 				EEBA878A263781540006C597 /* FiltersTableViewController.swift in Sources */,
+				EEB793C5269CD72C00FCCDA0 /* TokenView.swift in Sources */,
 				EEBA86A0263778B00006C597 /* RoundButton.swift in Sources */,
 				EEBA874D26377B730006C597 /* Token.swift in Sources */,
 				EECA46B6263787D1003469FE /* DeckCardFoilTableViewCell.swift in Sources */,
@@ -792,6 +823,7 @@
 				EE564F32263B785F0036625A /* ImageLoader.swift in Sources */,
 				EECA46BD263787D1003469FE /* EditDeckCardTableViewController.swift in Sources */,
 				EEBA8777263780130006C597 /* SunburstView.swift in Sources */,
+				EEB793C02697821A00FCCDA0 /* TokenListTableViewController.swift in Sources */,
 				EEBA86902637774D0006C597 /* PlaceholderViewController.swift in Sources */,
 				EE4F54FC263773F400D4205D /* CardListTableViewController.swift in Sources */,
 				EEBA875B26377BD70006C597 /* CardKeyword+CoreDataClass.swift in Sources */,

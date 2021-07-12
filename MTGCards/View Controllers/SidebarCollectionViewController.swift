@@ -45,27 +45,27 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
             self.title = "Collections"
         }
         
-        #if !targetEnvironment(macCatalyst)
+#if !targetEnvironment(macCatalyst)
         self.navigationItem.setRightBarButton(addBarButton, animated: true)
         let settingsButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(self.settings))
         self.navigationItem.setLeftBarButton(settingsButton, animated: true)
-        #endif
+#endif
         
         
         if let nav = self.navigationController {
-            #if !targetEnvironment(macCatalyst)
+#if !targetEnvironment(macCatalyst)
             nav.setToolbarHidden(true, animated: false)
-            #else
+#else
             nav.navigationBar.isHidden = true
             nav.setToolbarHidden(false, animated: false)
             self.toolbarItems = [addBarButton]
-            #endif
+#endif
         }
-
+        
         createDataSource()
         
     }
-
+    
     
     private func reloadDecksFromCoreData(){
         let request = NSFetchRequest<Deck>(entityName: "Deck")
@@ -121,9 +121,9 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
         menuAlert.addAction(UIAlertAction(title: "New Deck(s) from File(s)", style: .default, handler: {action in  self.addDecksFromFiles()}))
         menuAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         menuAlert.popoverPresentationController?.barButtonItem = addBarButton
-        #if targetEnvironment(macCatalyst)
+#if targetEnvironment(macCatalyst)
         menuAlert.popoverPresentationController?.sourceView = collectionView.cellForItem(at: IndexPath(row: 0, section: 2))?.contentView
-        #endif
+#endif
         self.present(menuAlert, animated: true)
     }
     func addBlankDeck(){
@@ -318,8 +318,9 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
                 if indexPath.item == 0 {
                     self.navigationController?.pushViewController(CardListTableViewController.freshCardList(), animated: true)
                 } else {
-//                    let vc = UIHostingController(rootView: SearchResultsView().environment(\.managedObjectContext, CoreDataStack.handler.privateContext))
-//                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.navigationController?.pushViewController(TokenListTableViewController.freshTokenList(), animated: true)
+                    //                    let vc = UIHostingController(rootView: SearchResultsView().environment(\.managedObjectContext, CoreDataStack.handler.privateContext))
+                    //                    self.navigationController?.pushViewController(vc, animated: true)
                 }
             } else if indexPath.section == 2 {
                 //StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row].objectID)
@@ -333,11 +334,13 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
             
             if indexPath.section == 0 {
                 if indexPath.item == 0 {
-                self.splitViewController?.setViewController(nil, for: .supplementary)
-                self.splitViewController?.setViewController(CardListTableViewController.freshCardList(), for: .supplementary)
+                    self.splitViewController?.setViewController(nil, for: .supplementary)
+                    self.splitViewController?.setViewController(CardListTableViewController.freshCardList(), for: .supplementary)
                 } else {
-//                    let vc = UIHostingController(rootView: SearchResultsView().environment(\.managedObjectContext, CoreDataStack.handler.privateContext))
-//                    self.splitViewController?.setViewController(vc, for: .supplementary)
+                    //                    let vc = UIHostingController(rootView: SearchResultsView().environment(\.managedObjectContext, CoreDataStack.handler.privateContext))
+                    //                    self.splitViewController?.setViewController(vc, for: .supplementary)
+                    self.splitViewController?.setViewController(nil, for: .supplementary)
+                    self.splitViewController?.setViewController(TokenListTableViewController.freshTokenList(), for: .supplementary)
                 }
             } else if indexPath.section == 2 {
                 //StateCoordinator.shared.didSelectDeck(d: cdDecks[indexPath.row].objectID)
@@ -352,7 +355,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
             } else if indexPath.section == 1 {
                 //StateCoordinator.shared.didSelectCollection(collection: cdCollections[indexPath.row].objectID)
                 self.splitViewController?.setViewController(nil, for: .supplementary)
-               self.splitViewController?.setViewController(CollectionTableViewController.freshCollection(collection: cdCollections[indexPath.row].objectID), for: .supplementary)
+                self.splitViewController?.setViewController(CollectionTableViewController.freshCollection(collection: cdCollections[indexPath.row].objectID), for: .supplementary)
             }
         }
     }
@@ -378,10 +381,6 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
     
     private func configureHierarchy() {
         collectionView.collectionViewLayout = createLayout()
-        //        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
-        //        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        //        view.addSubview(collectionView)
-        //        collectionView.delegate = self
     }
     private func createLayout() -> UICollectionViewLayout {
         var config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
@@ -444,7 +443,7 @@ class SidebarCollectionViewController: UICollectionViewController, UIDocumentPic
         for headerItem in sectionItems {
             
             if headerItem.title == "Tools" {
-                dataSourceSnapshot.appendItems([Item(title: "Search")], toSection: headerItem)
+                dataSourceSnapshot.appendItems([Item(title: "Search"), Item(title: "Tokens")], toSection: headerItem)
                 
             } else if headerItem.title == "Collections" {
                 dataSourceSnapshot.appendItems([Item(title: "Collection"), Item(title: "Wish List")], toSection: headerItem)

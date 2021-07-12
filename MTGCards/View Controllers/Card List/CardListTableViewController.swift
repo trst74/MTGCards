@@ -239,14 +239,24 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
             let parts = query.components(separatedBy: ":")
             if parts.count > 1 && parts[1] != "" {
                 switch parts[0].uppercased() {
-                case "T":
-                    Filters.current.selectSubType(type: parts[1].capitalized)
+                case "T",
+                    "-T":
+                    if parts[0].starts(with: "-") {
+                        Filters.current.negateSet(setCode: parts[1].capitalized)
+                    } else {
+                        Filters.current.selectSubType(type: parts[1].capitalized)
+                    }
                 case "C":
                     for c in parts[1] {
                         Filters.current.selectColorIdentity(color: String(c).uppercased())
                     }
-                case "E":
-                    Filters.current.selectSet(setCode: parts[1].uppercased())
+                case "E",
+                    "-E":
+                    if parts[0].starts(with: "-") {
+                        Filters.current.negateSet(setCode: parts[1].uppercased())
+                    } else {
+                        Filters.current.selectSet(setCode: parts[1].uppercased())
+                    }
                 case "F":
                     if ["PAUPER","BRAWL","COMMANDER","DUEL","FRONTIER","LEGACY","MODERN","PENNY","STANDARD","VINTAGE"].contains(parts[1].uppercased()) {
                         Filters.current.selectLegality(legality: parts[1])
@@ -254,6 +264,13 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
                 case "IS":
                     if parts[1].uppercased() == "PROMO" {
                         Filters.current.setIsPromo(promo: true)
+                    }
+                case "K",
+                    "-K":
+                    if parts[0].starts(with: "-") {
+                        Filters.current.negateKeyword(keyword: parts[1].capitalized)
+                    } else {
+                        Filters.current.selectKeyword(keyword: parts[1].capitalized)
                     }
                 default: break
                 }
@@ -278,14 +295,25 @@ func removeOldFilters() {
         let parts = query.components(separatedBy: ":")
         if parts.count > 1 {
             switch parts[0].uppercased() {
-            case "T":
-                Filters.current.deselectSubType(type: parts[1].capitalized)
+            case "T",
+                "-T":
+                if parts[0].starts(with: "-") {
+                    Filters.current.denegateSet(setCode: parts[1].capitalized)
+                } else {
+                    Filters.current.deselectSubType(type: parts[1].capitalized)
+                }
             case "C":
                 for c in parts[1] {
                     Filters.current.deselectColorIdentity(color: String(c).uppercased())
                 }
-            case "E":
-                Filters.current.deselectSet(setCode: parts[1].uppercased())
+            case "E",
+                "-E":
+                if parts[0].starts(with: "-") {
+                    Filters.current.denegateSet(setCode: parts[1].uppercased())
+                } else {
+                    Filters.current.deselectSet(setCode: parts[1].uppercased())
+                }
+                
             case "F":
                 if ["PAUPER","BRAWL","COMMANDER","DUEL","FRONTIER","LEGACY","MODERN","PENNY","STANDARD","VINTAGE"].contains(parts[1].uppercased()) {
                     Filters.current.deselectLegality(legality: parts[1])
@@ -293,6 +321,13 @@ func removeOldFilters() {
             case "IS":
                 if parts[1].uppercased() == "PROMO" {
                     Filters.current.setIsPromo(promo: false)
+                }
+            case "K",
+                "-K":
+                if parts[0].starts(with: "-") {
+                    Filters.current.denegateKeyword(keyword: parts[1].capitalized)
+                } else {
+                    Filters.current.deselectKeyword(keyword: parts[1].capitalized)
                 }
             default: break
             }
