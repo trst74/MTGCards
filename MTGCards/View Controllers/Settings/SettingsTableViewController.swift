@@ -326,6 +326,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                                         localCard.legalities?.penny = eCard.legalities?.penny
                                         localCard.legalities?.standard = eCard.legalities?.standard
                                         localCard.legalities?.vintage = eCard.legalities?.vintage
+                                        localCard.legalities?.historic = eCard.legalities?.historic
                                         
                                         //types
                                         if let types = localCard.types {
@@ -521,6 +522,7 @@ class SettingsTableViewController: UITableViewController, UIDocumentPickerDelega
                                 localCard.legalities?.penny = eCard.legalities?.penny
                                 localCard.legalities?.standard = eCard.legalities?.standard
                                 localCard.legalities?.vintage = eCard.legalities?.vintage
+                                localCard.legalities?.historic = eCard.legalities?.historic
                                 
                                 //types
                                 if let types = localCard.types {

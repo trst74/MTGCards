@@ -24,6 +24,7 @@ class Legalities: NSManagedObject, Codable {
     @NSManaged var  future: String?
     @NSManaged var  standard: String?
     @NSManaged var pioneer: String?
+    @NSManaged var historic: String?
     
     enum CodingKeys: String, CodingKey {
         case the1V1 = "1v1"
@@ -39,6 +40,7 @@ class Legalities: NSManagedObject, Codable {
         case standard = "standard"
         case vintage = "vintage"
         case pioneer = "pioneer"
+        case historic = "historic"
     }
     required convenience init(from decoder: Decoder) throws {
         //        let managedObjectContext = CoreDataStack.handler.privateContext
@@ -66,6 +68,7 @@ class Legalities: NSManagedObject, Codable {
         self.future = try container.decodeIfPresent(String.self, forKey: .future)
         self.standard = try container.decodeIfPresent(String.self, forKey: .standard)
         self.pioneer = try container.decodeIfPresent(String.self, forKey: .pioneer)
+        self.historic = try container.decodeIfPresent(String.self, forKey: .historic)
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -83,6 +86,7 @@ class Legalities: NSManagedObject, Codable {
         try container.encode(future, forKey: .future)
         try container.encode(standard, forKey: .standard)
         try container.encode(pioneer, forKey: .pioneer)
+        try container.encode(historic, forKey: .historic)
     }
     public func getLegalitiesCollection() -> [Legality] {
         var results: [Legality] = []
@@ -90,6 +94,11 @@ class Legalities: NSManagedObject, Codable {
             results.append(Legality(format: "Standard", legality: standard))
         } else {
             results.append(Legality(format: "Standard", legality: "Not Legal"))
+        }
+        if let historic = historic {
+            results.append(Legality(format: "Historic", legality: historic))
+        } else {
+            results.append(Legality(format: "Historic", legality: "Not Legal"))
         }
         if let duel = pioneer {
             results.append(Legality(format: "Pioneer", legality: duel))

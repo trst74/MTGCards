@@ -258,7 +258,7 @@ class CardListTableViewController: UITableViewController, UISearchResultsUpdatin
                         Filters.current.selectSet(setCode: parts[1].uppercased())
                     }
                 case "F":
-                    if ["PAUPER","BRAWL","COMMANDER","DUEL","FRONTIER","LEGACY","MODERN","PENNY","STANDARD","VINTAGE"].contains(parts[1].uppercased()) {
+                    if ["PAUPER","BRAWL","COMMANDER","DUEL","FRONTIER","LEGACY","MODERN","PENNY","STANDARD","VINTAGE","HISTORIC"].contains(parts[1].uppercased()) {
                         Filters.current.selectLegality(legality: parts[1])
                     }
                 case "IS":
@@ -315,7 +315,7 @@ func removeOldFilters() {
                 }
                 
             case "F":
-                if ["PAUPER","BRAWL","COMMANDER","DUEL","FRONTIER","LEGACY","MODERN","PENNY","STANDARD","VINTAGE"].contains(parts[1].uppercased()) {
+                if ["PAUPER","BRAWL","COMMANDER","DUEL","FRONTIER","LEGACY","MODERN","PENNY","STANDARD","VINTAGE", "HISTORIC"].contains(parts[1].uppercased()) {
                     Filters.current.deselectLegality(legality: parts[1])
                 }
             case "IS":

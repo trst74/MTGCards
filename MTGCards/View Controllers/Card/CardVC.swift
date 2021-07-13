@@ -20,6 +20,7 @@ struct CardVC: View {
         get {
             var leg: [Format] = []
             leg.append(Format(name: "Standard", legality: card.legalities?.standard ?? "Not Legal"))
+            leg.append(Format(name: "Historic", legality: card.legalities?.historic ?? "Not Legal"))
             leg.append(Format(name: "Pioneer", legality: card.legalities?.pioneer ?? "Not Legal"))
             leg.append(Format(name: "Modern", legality: card.legalities?.modern ?? "Not Legal"))
             leg.append(Format(name: "Legacy", legality: card.legalities?.legacy ?? "Not Legal"))

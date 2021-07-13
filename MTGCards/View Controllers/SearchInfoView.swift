@@ -87,7 +87,7 @@ struct SearchInfoView: View {
                         .padding(.bottom, 6)
                     Text("Use f: or F:")
                         .lineLimit(0)
-                    Text("Valid formats are: Brawl, Commander, Duel, Frontier, Legacy, Modern, Pauper, Penny, Standard, and Vintage.")
+                    Text("Valid formats are: Brawl, Commander, Duel, Frontier, Legacy, Modern, Pauper, Penny, Standard, Historic, and Vintage.")
                         .font(.subheadline)
                         .italic()
                         .multilineTextAlignment(.center)

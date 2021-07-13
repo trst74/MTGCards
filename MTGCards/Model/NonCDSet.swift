@@ -877,6 +877,7 @@ extension NonCDCard {
             legalities?.penny != card.legalities?.penny ||
             legalities?.pioneer != card.legalities?.pioneer ||
             legalities?.standard != card.legalities?.standard ||
+            legalities?.historic != card.legalities?.historic ||
             legalities?.vintage != card.legalities?.vintage ||
             identifiers?.cardKingdomFoilID != card.identifiers?.cardKingdomFoilID ||
             identifiers?.cardKingdomID != card.identifiers?.cardKingdomID ||

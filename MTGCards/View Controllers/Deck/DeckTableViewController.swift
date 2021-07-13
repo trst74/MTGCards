@@ -384,6 +384,8 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
             return card.legalities?.penny == "Legal"
         case "Duel":
             return card.legalities?.duel == "Legal"
+        case "Historic":
+            return card.legalities?.historic == "Legal"
         default:
             return false
         }

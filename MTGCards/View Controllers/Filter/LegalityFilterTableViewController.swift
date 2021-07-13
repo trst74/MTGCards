@@ -12,7 +12,7 @@ import CoreData
 class LegalityFilterTableViewController: UITableViewController {
     var filterController: FiltersTableViewController? = nil
     
-    var legalities: [String] = ["Brawl","Commander","Duel","Frontier","Legacy","Modern","Pauper","Penny", "Standard", "Vintage"]
+    var legalities: [String] = ["Brawl","Commander","Duel","Frontier","Legacy","Modern","Pauper","Penny", "Standard","Historic", "Vintage"]
     var selectedLegalities: [String] = []
     
 

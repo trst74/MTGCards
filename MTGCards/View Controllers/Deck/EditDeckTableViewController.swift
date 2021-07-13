@@ -15,7 +15,7 @@ class EditDeckTableViewController: UITableViewController, UIPickerViewDelegate, 
     @IBOutlet weak var deckName: UITextField!
     @IBOutlet weak var formatPicker: UIPickerView!
     
-    var formats = ["","Standard","Pioneer","Modern","Legacy", "Vintage","Commander","Frontier","Pauper","Penny","Duel"]
+    var formats = ["","Standard","Historic","Pioneer","Modern","Legacy", "Vintage","Commander","Frontier","Pauper","Penny","Duel"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

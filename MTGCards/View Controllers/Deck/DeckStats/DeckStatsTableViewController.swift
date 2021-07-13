@@ -169,6 +169,12 @@ class DeckStatsTableViewController: UITableViewController {
         } else {
             formats.append(Format(name: "Standard", legality: "Not Legal"))
         }
+        let historic = allCards.allSatisfy({ $0.card?.legalities?.historic == "Legal"})
+        if historic {
+            formats.append(Format(name: "Historic", legality: "Legal"))
+        } else {
+            formats.append(Format(name: "Historic", legality: "Not Legal"))
+        }
         let pioneer = allCards.allSatisfy({ $0.card?.legalities?.pioneer == "Legal"})
         if pioneer {
             formats.append(Format(name: "Pioneer", legality: "Legal"))
@@ -223,6 +229,7 @@ class DeckStatsTableViewController: UITableViewController {
         } else {
             formats.append(Format(name: "Duel", legality: "Not Legal"))
         }
+   
         return formats
     }
     private func calculateCMCs(){
