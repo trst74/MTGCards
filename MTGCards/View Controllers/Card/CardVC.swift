@@ -57,8 +57,8 @@ struct CardVC: View {
         }
     }
     @State var showSheet = false
+    @State var showShare = false
     @State var showpop = false
-    @State var optionsMenu: OptionsMenu = .share
     
     enum OptionsMenu { case share, add }
     var idiom = UIDevice.current.userInterfaceIdiom
@@ -193,16 +193,14 @@ struct CardVC: View {
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button(action: {
-                        optionsMenu = .share
-                        self.showSheet.toggle()
+                     
+                        self.showShare.toggle()
                     }, label: {
                         Image(systemName: "square.and.arrow.up")
                     })
-                        .actionSheet(isPresented: $showSheet, content: {
+                        .actionSheet(isPresented: $showShare, content: {
                             
-                            var sheet: ActionSheet = ActionSheet(title: Text("temp"))
-                            if optionsMenu == .share {
-                                sheet = ActionSheet(title: Text("Share"), message: Text(""), buttons: [
+                        ActionSheet(title: Text("Share"), message: Text(""), buttons: [
                                     .default(
                                         Text("Image"),
                                         action: {
@@ -213,48 +211,21 @@ struct CardVC: View {
                                     .cancel()
                                 ] )
                             }
-                            else if optionsMenu == .add {
-                                sheet =  ActionSheet(title: Text("Add"), message: Text("Add this card to a Deck or Collection"), buttons: [
-                                    .default(
-                                        Text("Deck"),
-                                        action: {
-                                    
-                                    print("Share Image")
-                                }
-                                    ),
-                                    .cancel()
-                                ] )
-                            }
-                            return sheet
-                        })
+                            )
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Spacer()
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Button(action: {
-                        optionsMenu = .add
+                    
                         self.showSheet.toggle()
                     }, label: {
                         Image(systemName: "plus")
                     })
                         .actionSheet(isPresented: $showSheet, content: {
                             
-                            var sheet: ActionSheet = ActionSheet(title: Text("temp"))
-                            if optionsMenu == .share {
-                                sheet = ActionSheet(title: Text("Share"), message: Text(""), buttons: [
-                                    .default(
-                                        Text("Image"),
-                                        action: {
-                                    shareImage()
-                                    print("Share Image")
-                                }
-                                    ),
-                                    .cancel()
-                                ] )
-                            }
-                            else if optionsMenu == .add {
-                                sheet =  ActionSheet(title: Text("Add"), message: Text("Add this card to a Deck or Collection"), buttons: [
+                           ActionSheet(title: Text("Add"), message: Text("Add this card to a Deck or Collection"), buttons: [
                                     .default(
                                         Text("Deck"),
                                         action: {
@@ -264,64 +235,14 @@ struct CardVC: View {
                                     .cancel()
                                 ] )
                             }
-                            return sheet
-                        }
+                          
+                        
                         )
                 }
             }
         }
     }
     
-    func shareButton() -> some View {
-        if idiom == .phone ||  horizontalSizeClass == .compact {
-            return AnyView(Button(action: {
-                optionsMenu = .share
-                self.showSheet.toggle()
-            }, label: {
-                Image(systemName: "square.and.arrow.up")
-            }))
-        } else {
-            return AnyView(Button(action: {
-                optionsMenu = .share
-                self.showpop.toggle()
-            }, label: {
-                Image(systemName: "square.and.arrow.up")
-            })
-                            .popover(isPresented: $showpop, content: {
-                if optionsMenu == .share {
-                    Text("Test Share")
-                }
-                else if optionsMenu == .add {
-                    Text("Test add")
-                }
-            }))
-        }
-    }
-    func addButton() -> some View {
-        if idiom == .phone ||  horizontalSizeClass == .compact {
-            return AnyView(Button(action: {
-                optionsMenu = .add
-                self.showSheet.toggle()
-            }, label: {
-                Image(systemName: "plus")
-            }))
-        } else {
-            return AnyView(Button(action: {
-                optionsMenu = .add
-                self.showpop.toggle()
-            }, label: {
-                Image(systemName: "plus")
-            })
-                            .popover(isPresented: $showpop, content: {
-                if optionsMenu == .share {
-                    Text("Test Share")
-                }
-                else if optionsMenu == .add {
-                    Text("Test add")
-                }
-            }))
-        }
-    }
     func share(){
         let keyWindow = UIApplication.shared.connectedScenes
             .filter({$0.activationState == .foregroundActive})

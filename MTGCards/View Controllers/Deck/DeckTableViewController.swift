@@ -12,7 +12,10 @@ import MobileCoreServices
 import UniformTypeIdentifiers
 import SwiftUI
 
-class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, UIContextMenuInteractionDelegate {
+class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, UIContextMenuInteractionDelegate, UITableViewDropDelegate {
+    
+    
+    
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         return nil
     }
@@ -80,6 +83,10 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
         self.navigationItem.setRightBarButton(importButton, animated: true)
         updateTitle()
         printDeckList()
+        
+        tableView.dragInteractionEnabled = true
+        
+        tableView.dropDelegate = self
     }
     override func viewWillDisappear(_ animated: Bool) {
         if let nav = self.navigationController {
@@ -272,9 +279,9 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height: CGFloat = 55.0
-        #if targetEnvironment(macCatalyst)
+#if targetEnvironment(macCatalyst)
         height = 50.0
-        #endif
+#endif
         return height
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -628,6 +635,77 @@ class DeckTableViewController: UITableViewController, UIDocumentPickerDelegate, 
         for deckCard in deckCards {
             print("\(deckCard.quantity ) \(deckCard.card?.name ?? "") (\(deckCard.card?.set.code ?? ""))")
         }
+    }
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+
+            coordinator.session.loadObjects(ofClass: NSString.self) { items in
+                guard let strings = items as? [String] else { return }
+                for string in strings {
+                    let card = DataManager.getCard(byUUID: string)
+                    //let card = self.getCard(byUUID: string)
+                    let results = self.deck?.cards?.filter {
+                        if let deckCard = $0 as? DeckCard {
+                            return deckCard.card == card
+                        }
+                        return false
+                    }
+                    let section = coordinator.destinationIndexPath?.section ?? 0
+                        
+                    if results?.count ?? 0 > 0 {
+                        if let found: DeckCard = results?[0] as? DeckCard {
+                            if found.isSideboard && section != self.sideboardSection {
+                                if let card = card {
+                                    self.addCardToDeck(card: card)
+                                }
+                            } else {
+                                found.quantity += 1
+                            }
+                            try? CoreDataStack.handler.managedObjectContext.save()
+                            self.tableView.reloadData()
+                        }
+                    } else {
+                        if let card = card {
+                            guard  let entity = NSEntityDescription.entity(forEntityName: "DeckCard", in:  CoreDataStack.handler.privateContext) else {
+                                fatalError("Failed to decode Card")
+                            }
+                            let deckCard = DeckCard.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
+                            deckCard.card = card
+                            deckCard.quantity = 1
+                            if section == self.commanderSection {
+                                deckCard.isCommander = true
+                            }
+                            if section == self.sideboardSection {
+                                deckCard.isSideboard = true
+                            }
+                            self.deck?.addToCards(deckCard)
+                            do {
+                                try CoreDataStack.handler.privateContext.save()
+                                self.tableView.reloadData()
+                            } catch {
+                                print(error)
+                            }
+                        }
+                    }
+                
+            }
+        }
+    }
+    private func addCardToDeck(card: Card){
+        
+        guard  let entity = NSEntityDescription.entity(forEntityName: "DeckCard", in:  CoreDataStack.handler.privateContext) else {
+            fatalError("Failed to decode Card")
+        }
+        let deckCard = DeckCard.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
+        deckCard.card = card
+        deckCard.quantity = 1
+        self.deck?.addToCards(deckCard)
+        do {
+            try CoreDataStack.handler.privateContext.save()
+            self.tableView.reloadData()
+        } catch {
+            print(error)
+        }
+        
     }
 }
 extension DeckTableViewController {

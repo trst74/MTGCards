@@ -10,7 +10,33 @@ import UIKit
 import CoreData
 import SwiftUI
 
-class CollectionTableViewController: UITableViewController, UIContextMenuInteractionDelegate {
+class CollectionTableViewController: UITableViewController, UIContextMenuInteractionDelegate, UITableViewDropDelegate {
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        coordinator.session.loadObjects(ofClass: NSString.self) { items in
+            guard let strings = items as? [String] else { return }
+            for string in strings {
+                print(string)
+                let card = DataManager.getCard(byUUID: string)
+                
+                if let card = card {
+                    guard  let entity = NSEntityDescription.entity(forEntityName: "CollectionCard", in:  CoreDataStack.handler.privateContext) else {
+                        fatalError("Failed to decode Card")
+                    }
+                    let collectionCard = CollectionCard.init(entity: entity, insertInto: CoreDataStack.handler.privateContext)
+                    collectionCard.card = card
+                    collectionCard.quantity = 1
+                    self.collection?.addToCards(collectionCard)
+                    do {
+                        try CoreDataStack.handler.privateContext.save()
+                        self.tableView.reloadData()
+                    } catch {
+                        print(error)
+                    }
+                }
+            }
+        }
+    }
+    
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         return nil
     }
@@ -36,6 +62,9 @@ class CollectionTableViewController: UITableViewController, UIContextMenuInterac
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
+        tableView.dragInteractionEnabled = true
+        
+        tableView.dropDelegate = self
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

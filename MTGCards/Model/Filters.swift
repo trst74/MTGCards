@@ -242,11 +242,11 @@ class Filters {
         if negatedKeywords.count > 0 {
             //let negatedkeywordsPredicate = NSPredicate(format: "NOT (SOME keywords.keyword in %@)", negatedKeywords)
             //predicates.append(negatedkeywordsPredicate)
-            let negatedkeywordsPredicate = NSPredicate(format: "NOT All keywords.keyword  in %@", ["Flying", "Haste"])
-            let test = NSPredicate(format: "keywords.@count == 0")
-            let test2 = NSPredicate(format: "SUBQUERY(keywords, $k, $k.keyword in %@).@count < 1", negatedKeywords)
-       
-            predicates.append(NSCompoundPredicate(orPredicateWithSubpredicates: [test, test2]))
+//            let negatedkeywordsPredicate = NSPredicate(format: "NOT All keywords.keyword  in %@", ["Flying", "Haste"])
+//            let test = NSPredicate(format: "keywords.@count == 0")
+//            let test2 = NSPredicate(format: "SUBQUERY(keywords, $k, $k.keyword in %@).@count < 1", negatedKeywords)
+//       
+//            predicates.append(NSCompoundPredicate(orPredicateWithSubpredicates: [test, test2]))
         }
         if selectedColorIdentities.count > 0 && Set(selectedColorIdentities).subtracting(["nC"]).count < 5 {
             let colors = ["W","U","B","R","G"]
